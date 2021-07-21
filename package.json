@@ -1,0 +1,34 @@
+{
+  "name": "ecommerce-boutique-revamp",
+  "version": "1.0.0",
+  "description": "fec!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rfe4-ouray/ecommerce-boutique-revamp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rfe4-ouray/ecommerce-boutique-revamp/issues"
+  },
+  "homepage": "https://github.com/rfe4-ouray/ecommerce-boutique-revamp#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.14.8",
+    "axios": "^0.21.1",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.2.2",
+    "chai": "^4.3.4",
+    "live-server": "^1.2.1",
+    "mocha": "^9.0.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.0",
+    "webpack": "^5.45.1",
+    "webpack-dev": "^1.1.1"
+  }
+}
