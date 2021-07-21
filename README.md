@@ -1,6 +1,6 @@
 # Project Catwalk
 
-> Client's outdated customer-facing retail web-portal has become significantly outdated and has been proven to be hurting sales numbers.   Project Catwalk comprises a complete redesign of the retail portal designed to address this concern and modernize the site.	
+> Client's outdated customer-facing retail web-portal has become significantly outdated and has been proven to be hurting sales numbers.   Project Catwalk comprises a complete redesign of the retail portal designed to address this concern and modernize the site.
 
 ## Related Projects
 
@@ -17,7 +17,7 @@
 
 ## Usage
 
-> Some usage instructions
+> Some usage instructions FILL ME IN
 
 ## Requirements
 
