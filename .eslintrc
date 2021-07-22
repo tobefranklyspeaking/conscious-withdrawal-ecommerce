@@ -1,4 +1,7 @@
 {
+  "plugins": [
+    "react-hooks"
+  ],
   "extends": ["airbnb-base"],
   "env": {
     "node": true,

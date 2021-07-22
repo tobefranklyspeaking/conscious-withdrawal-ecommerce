@@ -45,6 +45,7 @@
     - does it filter reviews
     - does it highlight inline
 -------------------------------------------------------------------
+-Franks
 | Questions & Answers
   | Questions List
     - By default how are these sorted - by helpfulness
