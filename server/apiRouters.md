@@ -1,4 +1,3 @@
-
 --------------------PRODUCTS--------------------
 List Products
   GET /products
