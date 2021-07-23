@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styled from "styled-components";
 import axios from 'axios';
+import Dropdown from './components/shared/Dropdown.js'
 
 const Header = styled.div`
   height: 70px;
@@ -33,6 +34,7 @@ const App = () => {
           <p key={i}>{product.description}</p>
         ))}
       </div>
+      <Dropdown options={['yes', 'no']} title="dropdown" />
     </div>
   );
 }

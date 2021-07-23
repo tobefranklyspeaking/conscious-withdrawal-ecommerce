@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const Dropdown = ({ options, title }) => {
   const [opt, setOpt] = useState(options);
   const [isOpen, setOpen] = useState(false);
+  const [choice, setChoice] = useState('');
 
   const Wrapper = styled.div`
     display: flex;
@@ -15,8 +16,7 @@ const Dropdown = ({ options, title }) => {
 
   const Button = styled.button`
     background: transparent;
-    border-radius: .25rem;
-    border: 2px solid black;
+    border: 1px solid black;
     padding: 0.25rem 1rem;
     margin: 0 auto;
     height: 50%;
