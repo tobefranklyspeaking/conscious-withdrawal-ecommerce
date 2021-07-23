@@ -5,14 +5,14 @@ import QandA from '../q&a/QandA.js';
 import Ratings from '../ratings-reviews/Ratings-reviews.js';
 import Related from '../related-items/Related-items.js';
 
-const Shared = () => {
+const Shared = ({current}) => {
   return (
     <>
-      <NavBar/>
-      <Overview/>
-      <QandA/>
-      <Ratings/>
-      <Related/>
+      <NavBar current={current}/>
+      <Overview current={current}/>
+      <QandA current={current}/>
+      <Ratings current={current}/>
+      <Related current={current}/>
     </>
   )
 }
