@@ -2,12 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styled from "styled-components";
 import axios from 'axios';
-
-const Header = styled.div`
-  height: 70px;
-  width: 100%;
-  background-color: #757473;
-`;
+import NavBar from './components/shared/navBar.js';
 
 const App = () => {
   const [text, updateText] = useState('');
@@ -24,9 +19,7 @@ const App = () => {
 
   return (
     <div>
-      <Header>Logo Here</Header>
-      <div>
-      </div>
+      <NavBar />
       <div>
         <h1>Hello {text}!</h1>
         {products.map((product, i) => (
