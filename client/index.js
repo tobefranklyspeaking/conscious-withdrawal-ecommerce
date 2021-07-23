@@ -8,12 +8,12 @@ import Shared from './components/shared/shared.jsx'
 const App = () => {
 
   /**********************Not needed at this time***********************/
-  const [text, updateText] = useState('');
-  const [products, updateProducts] = useState([]);
+  const [currentProduct, updateCurrent] = useState({});
+
   useEffect(async () => {
     try {
-      let res = await axios.get('/products');
-      updateProducts(res.data);
+      let res = await axios.get('/products/19094');
+      updateCurrent(res.data);
       console.log('successful get');
     } catch (err) {
       console.error(err)
@@ -23,12 +23,9 @@ const App = () => {
 
   return (
     <div>
-      <Shared />
+      <Shared current={currentProduct}/>
       <div>
-        <h1>Hello {text}!</h1>
-        {products.map((product, i) => (
-          <p key={i}>{product.description}</p>
-        ))}
+        {currentProduct.id}
       </div>
     </div>
   );
