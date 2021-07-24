@@ -1,7 +1,7 @@
 {
   "name": "ecommerce-boutique-revamp",
   "version": "1.0.0",
-  "description": "fec!",
+  "description": "Front end design of an ecommerce website",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
@@ -12,41 +12,40 @@
     "type": "git",
     "url": "git+https://github.com/rfe4-ouray/ecommerce-boutique-revamp.git"
   },
-  "author": "",
+  "author": "Team Ouray",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rfe4-ouray/ecommerce-boutique-revamp/issues"
   },
   "homepage": "https://github.com/rfe4-ouray/ecommerce-boutique-revamp#readme",
   "devDependencies": {
-    "@babel/preset-env": "^7.12.1",
-    "@babel/preset-react": "^7.12.5",
     "@babel/cli": "^7.14.8",
     "@babel/core": "^7.14.8",
     "@babel/plugin-transform-runtime": "^7.14.5",
+    "@babel/preset-env": "^7.14.8",
+    "@babel/preset-react": "^7.14.5",
     "babel": "^6.23.0",
     "babel-loader": "^8.2.1",
+    "eslint": "^5.16.0 || ^6.8.0 || ^7.2.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-hackreactor": "github:reactorcore/eslint-config-hackreactor",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4 || ^3 || ^2.3.0 || ^1.7.0",
+    "nodemon": "^2.0.12",
     "source-map-loader": "^3.0.0",
     "webpack": "^5.45.1",
     "webpack-cli": "^4.7.2",
     "webpack-dev": "^1.1.1"
   },
   "dependencies": {
-    "@babel/preset-env": "^7.14.8",
-    "@babel/preset-react": "^7.14.5",
     "axios": "^0.21.1",
-    "eslint": "^7.31.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-hackreactor": "github:reactorcore/eslint-config-hackreactor",
-    "eslint-plugin-import": "^2.23.4",
-    "jest": "^27.0.6",
-    "live-server": "^1.2.1",
     "express": "^4.17.1",
-    "nodemon": "^2.0.12",
+    "jest": "^27.0.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "styled-components": "^5.3.0",
-    "webpack": "^5.45.1",
-    "webpack-dev": "^1.1.1"
+    "react-icons": "^4.2.0",
+    "styled-components": "^5.3.0"
   }
 }
