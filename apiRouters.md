@@ -96,7 +96,7 @@ Report Answer
   PUT /qa/answers/:answer_id/report
     answer_id	integer	Required ID of the answer to update
 
---------------------Questions & Answers--------------------
+--------------------Cart--------------------
 Get Cart
   GET /cart
 Add to Cart

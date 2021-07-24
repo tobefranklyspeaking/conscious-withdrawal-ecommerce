@@ -11,10 +11,6 @@ const SearchBarStyle = styled.input`
   color: white;
 `;
 
-// const icon = styled.img`
-
-// `;
-
 const SearchBar = () => {
   return (
     <>
@@ -23,6 +19,5 @@ const SearchBar = () => {
     </>
   )
 }
-//need to create actual searchbar component
 
 export default SearchBar;

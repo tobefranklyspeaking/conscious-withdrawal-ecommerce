@@ -16,10 +16,10 @@ app.all('/*', (req, res) => {
     data: req.data || null
   })
     .then((response) => {
-      console.log('success with server request');
+      console.log('success with API request');
       res.status(200).send(response.data);
     }).catch(err => {
-      console.log('server error', req.url);
+      console.log('server to API error', req.url);
       res.status(400).send(err);
     });
 })
