@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { CgSearch } from 'react-icons/cg';
 
@@ -12,10 +12,14 @@ const SearchBarStyle = styled.input`
 `;
 
 const SearchBar = () => {
+  const [search, updateSearch] = useState('');
+
   return (
     <>
-      <SearchBarStyle/>
-      <CgSearch style={{color:'white'}}/>
+      <form>
+        <SearchBarStyle type='text' value={search} onChange={e => updateSearch(e)} style={{ color: 'white' }} />
+        <CgSearch onClick={Query()} />
+      </form>
     </>
   )
 }

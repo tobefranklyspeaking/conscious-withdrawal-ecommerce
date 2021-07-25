@@ -1,17 +1,17 @@
 import axios from 'axios';
 
 
-const Query = (relativeUrl) => {
+const Query = (queryUrl, queryMethod, queryData) => {
   axios({
-    url: relativeUrl,
-    method: method,
-    data: requestData
+    url: queryUrl,
+    method: queryMethod,
+    data: queryData
   })
     .then((response) => {
-      console.log('success with query request');
+      console.log('success with front end query');
       res.status(200).send('success with query');
     }).catch(err => {
-      console.log('query error', req.data);
+      console.log('front end query error');
       res.status(400).send(err);
     });
 }

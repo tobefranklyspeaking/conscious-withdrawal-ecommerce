@@ -16,10 +16,10 @@ app.all('/*', (req, res) => {
     data: req.data || null
   })
     .then((response) => {
-      console.log('success with API request');
+      console.log('success with backend query');
       res.status(200).send(response.data);
     }).catch(err => {
-      console.log('server to API error', req.url);
+      console.log('failure with backend query');
       res.status(400).send(err);
     });
 })
