@@ -10,9 +10,9 @@ const Shared = () => {
     <>
       <NavBar/>
       <Overview/>
+      <Related/>
       <QandA/>
       <Ratings/>
-      <Related/>
     </>
   )
 }

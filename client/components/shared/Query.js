@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const Query = (queryUrl, queryMethod, queryData) => {
+const Query = (queryUrl, queryMethod, queryParams) => {
   axios({
     url: queryUrl,
     method: queryMethod,
-    data: queryData
+    data: queryParams
   })
     .then((response) => {
       console.log('success with front end query');

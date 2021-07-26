@@ -19,27 +19,28 @@ border: 0;
 padding-bottom: 0;
 `;
 
-// This will be the live results filtered
-const Text = styled.div`
+const Filtered = styled.div`
   height: auto;
   width: auto;
-  padding: 10px;
+  padding: 5px;
   background-color: white;
-  border: 2px solid black;
-  border-top: 0;
 `;
+
+const List = styled.div`
+  height: auto;
+  max-height 300px;
+  overflow-y: scroll;
+`;
+
 
 const SearchBar = () => {
   const [search, setSearch] = useState('');
   const [allProducts, setAllProducts] = useState([]);
-  const [allSuggestions, setAllSuggestions] = useState(allProducts);
 
   useEffect(async () => {
     await axios.get('/products/?count=1100')
       .then(response => {
         setAllProducts(response.data);
-        setAllSuggestions(response.data);
-        console.log(response.data);
       })
       .catch(err => console.log(`Error in SearchBar useEffect: ${err}`));
   }, [])
@@ -51,7 +52,7 @@ const SearchBar = () => {
   }
 
   const onChange = (searchText) => {
-    setSearch(searchText);
+    setSearch(searchText.toLowerCase());
   }
 
   return (
@@ -65,10 +66,9 @@ const SearchBar = () => {
         <span>
           <CgSearch style={{ size: 18, color: 'white' }} onClick={() => handleClick()} />
         </span>
-      </div>
-      <div>
+      <List>
         {
-          allSuggestions.filter(text => {
+          allProducts.filter(text => {
             if (search.length > 2) {
               if (text.category.toLowerCase().indexOf(search) !== -1 || text.description.toLowerCase().indexOf(search) !== -1 || text.name.toLowerCase().indexOf(search) !== -1) {
                 return true;
@@ -79,11 +79,12 @@ const SearchBar = () => {
           }).map((value) => {
             return (
               <div key={value.id}>
-                <Text>{value.name}</Text>
+                <Filtered>{value.name}</Filtered>
               </div>
             )
           })
         }
+      </List>
       </div>
     </>
   )

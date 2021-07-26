@@ -4,6 +4,7 @@ import styled from 'styled-components';
 //em or vh
 const NavStyle = styled.header`
   height: 6.5vh;
+  min-height: 40px;
   max-width: 1280px;
   background-color: #555555;
   display: flex;

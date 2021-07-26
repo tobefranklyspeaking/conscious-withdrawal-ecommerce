@@ -1,6 +1,7 @@
 import React, {useStat, useEffect} from 'react';
 import styled from "styled-components";
 import { CgSearch } from 'react-icons/cg';
+import QASearch from './subcomponents/QuestionSearch.js';
 
 const QandAStyle = styled.div`
   background-color: LightGray;
@@ -15,7 +16,7 @@ const QandA = () => {
     <>
       <QandAStyle>
         <div>Questions and Answers</div>
-        <input></input>
+        <QASearch/>
         <div>
           <span>
             Question: Does this work?
