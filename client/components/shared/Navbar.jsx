@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBar from './Searchbar.jsx'
+import SearchBar from './NavSearchbar.jsx'
 import styled from 'styled-components';
 //em or vh
 const NavStyle = styled.header`
@@ -7,6 +7,7 @@ const NavStyle = styled.header`
   max-width: 1280px;
   background-color: #555555;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
   margin-left: auto;

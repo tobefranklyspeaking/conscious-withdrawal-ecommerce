@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 const Query = (queryUrl, queryMethod, queryData) => {
   axios({
     url: queryUrl,

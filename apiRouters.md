@@ -13,19 +13,6 @@ Related Products
   GET /products/:product_id/related
     product_id	integer	Required ID of the Product requested
 
-const prodrouter = (type, prodId) {
-
-  if (type === 'list') {
-    return `/products`
-  } else if (type === 'info') {
-    return `/products/${prodId}`
-  } else if (type === 'styles') {
-    return `/products/${prodId}`
-  } else if (type === 'related') {
-    return `/products/${prodId}`
-  }
-
-}
 
 --------------------Reviews--------------------
 List Reviews
@@ -54,6 +41,7 @@ Mark Review as Helpful
 Report Review
   PUT /reviews/:review_id/report
     review_id	integer	Required ID of the review to update
+
 
 --------------------Questions & Answers--------------------
 List Questions
@@ -96,9 +84,18 @@ Report Answer
   PUT /qa/answers/:answer_id/report
     answer_id	integer	Required ID of the answer to update
 
+
 --------------------Cart--------------------
 Get Cart
   GET /cart
 Add to Cart
   POST /cart
     sku_id	int	ID for the product being added to the cart
+
+
+--------------------Interaction with items--------------------
+Log an Interaction
+  POST /interactions
+    element	string	Required. Selector for the element which was clicked
+    widget	string	Required. Name of the module/widget in which the click occured
+    time	string	Required. Time the interaction occurred
