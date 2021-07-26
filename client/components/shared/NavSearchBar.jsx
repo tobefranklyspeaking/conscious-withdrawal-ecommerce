@@ -66,17 +66,24 @@ const SearchBar = () => {
           <CgSearch style={{ size: 18, color: 'white' }} onClick={() => handleClick()} />
         </span>
       </div>
-      <b/>
       <div>
-        {allSuggestions.map((value) => {
-          if (search.length > 2) {
+        {
+          allSuggestions.filter(text => {
+            if (search.length > 2) {
+              if (text.category.toLowerCase().indexOf(search) !== -1 || text.description.toLowerCase().indexOf(search) !== -1 || text.name.toLowerCase().indexOf(search) !== -1) {
+                return true;
+              } else {
+                return false
+              }
+            }
+          }).map((value) => {
             return (
               <div key={value.id}>
-              <Text>{value.name}</Text>
-            </div>
-          )
+                <Text>{value.name}</Text>
+              </div>
+            )
+          })
         }
-      })}
       </div>
     </>
   )
