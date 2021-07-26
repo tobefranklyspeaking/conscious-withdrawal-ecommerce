@@ -16,8 +16,7 @@ const SearchButton = styled.button`
 width: 33px;
 height: 33px;
 border: 0;
-
-  padding-bottom: 0;
+padding-bottom: 0;
 `;
 
 // This will be the live results filtered
@@ -67,15 +66,18 @@ const SearchBar = () => {
           <CgSearch style={{ size: 18, color: 'white' }} onClick={() => handleClick()} />
         </span>
       </div>
-      <Text>{allProducts.map((value, i) => {
-        if (search.length > 3) {
-          return (
-            <div key={value.id}>
+      <b/>
+      <div>
+        {allSuggestions.map((value) => {
+          if (search.length > 2) {
+            return (
+              <div key={value.id}>
               <Text>{value.name}</Text>
             </div>
           )
         }
-      })}</Text>
+      })}
+      </div>
     </>
   )
 }
