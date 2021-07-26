@@ -1,1 +1,1 @@
-const API_KEY: "FILL ME IN";
+module.exports = "FILL ME IN";
