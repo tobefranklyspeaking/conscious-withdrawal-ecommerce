@@ -1,14 +1,20 @@
 /*
 * @jest-environment jsdom
 */
-const React = require('react');
-const ReactDOM = require('react-dom');
-const Dropdown = require('../../client/components/shared/Dropdown');
-const ReviewDropdown = require('../../client/components/shared/ReviewDropdown');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Dropdown from '../../client/components/shared/Dropdown.jsx'
+import ReviewDropdown from '../../client/components/shared/ReviewDropdown.jsx';
 
-it('should render without crashing', () => {
+it('Dropdown should render without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<Dropdown />, div);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+it('ReviewDropdown should render without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<ReviewDropdown />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 

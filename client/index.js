@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from 'axios';
 // import NavBar from './components/shared/Navbar.jsx';
 import Dropdown from './components/shared/Dropdown.jsx';
-import ReviewDropdown from './components/shared/Review-Dropdown.jsx';
+import ReviewDropdown from './components/shared/ReviewDropdown.jsx';
 import Shared from './components/shared/shared.jsx';
 
 const App = () => {
