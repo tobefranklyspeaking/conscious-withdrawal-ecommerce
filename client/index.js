@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import styled from "styled-components";
 import axios from 'axios';
 // import NavBar from './components/shared/Navbar.jsx';
-import Dropdown from './components/shared/Dropdown.jsx'
-import Shared from './components/shared/shared.jsx'
+import Dropdown from './components/shared/Dropdown.jsx';
+import ReviewDropdown from './components/shared/Review-Dropdown.jsx';
+import Shared from './components/shared/shared.jsx';
 
 const App = () => {
 
@@ -28,7 +29,6 @@ const App = () => {
       <div>
         {currentProduct.id}
       </div>
-      <Dropdown options={['yes', 'no']} title="dropdown" />
     </div>
   );
 }
