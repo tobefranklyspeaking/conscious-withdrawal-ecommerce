@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
 const Dropdown = ({ options, title }) => {
   //setting state
@@ -19,42 +20,25 @@ const Dropdown = ({ options, title }) => {
     background: transparent;
     border: 1px solid black;
     padding: 0.25rem 1rem;
-    margin: 0 auto;
+    margin: .1rem auto;
     height: 50%;
     width: 75%;
   `;
 
   return (
     <Wrapper>
-      <Button onClick={(e) => {setOpen(!isOpen)}}>{title}</Button>
+    {/*title button -> switches to choice */}
+      <Button onClick={(e) => setOpen(!isOpen)}>
+    {choice.length ? choice : title}
+    </Button>
+    {/*iterates over options array and generates a button for each */}
       {isOpen && options.map((option, i) => (
-        <Button key={i} onClick={(e) => setChoice(option)}>{option}</Button>
+        <Button key={i} onClick={(e) => {setChoice(option); setOpen(!isOpen)}}>
+        {option}
+        </Button>
       ))}
     </Wrapper>
   );
 };
 
-class classDropdown extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      options: props.options,
-      isOpen: false,
-      choice: ''
-    }
-    this.clickHandler = this.clickHandler.bind(this);
-  }
-
-  clickHandler(e) {
-    this.setState({
-      choice: e.target.value
-    })
-  }
-
-  render() {
-    return (<div>
-      <button onClick={this.clickHandler}></button>
-    </div>);
-  }
-}
 export default Dropdown;
