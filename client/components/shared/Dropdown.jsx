@@ -19,17 +19,20 @@ const Dropdown = ({ options, title }) => {
   const Button = styled.button`
     background: transparent;
     border: 1px solid black;
-    padding: 0.25rem 1rem;
-    margin: .1rem auto;
-    height: 50%;
-    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    height: 3rem;
+    width: 8rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem;
   `;
 
   return (
     <Wrapper>
     {/*title button -> switches to choice */}
       <Button onClick={(e) => setOpen(!isOpen)}>
-    {choice.length ? choice : title}
+    {choice.length ? choice : title}{isOpen ? <FaAngleUp size="1rem"/> : <FaAngleDown size="1rem"/> }
     </Button>
     {/*iterates over options array and generates a button for each */}
       {isOpen && options.map((option, i) => (
