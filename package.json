@@ -57,5 +57,8 @@
       "@babel/preset-react",
       "@babel/preset-env"
     ]
+  },
+  "jest": {
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   }
 }
