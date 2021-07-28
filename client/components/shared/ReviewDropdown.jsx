@@ -2,32 +2,33 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
+//styling component elements
+const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  position: absolute;
+  justify-content: space-around;
+  width: 8rem;
+`;
+const Button = styled.button`
+  border: none;
+  background: transparent;
+  margin: 0 auto;
+  display: flex;
+  height: 2rem;
+  width: 6rem;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: .5rem;
+  font-weight: 700;
+`;
+
 const ReviewDropdown = ({ options, title }) => {
   //setting state
   const [opt, setOpt] = useState(options);
   const [isOpen, setOpen] = useState(false);
   const [choice, setChoice] = useState('');
 
-  //styling component elements
-  const Wrapper = styled.div`
-    display: flex;
-    flex-flow: column nowrap;
-    position: absolute;
-    justify-content: space-around;
-    width: 8rem;
-  `;
-  const Button = styled.button`
-    border: none;
-    background: transparent;
-    margin: 0 auto;
-    display: flex;
-    height: 2rem;
-    width: 6rem;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: .5rem;
-    font-weight: 700;
-  `;
 
   return (
     <Wrapper>
