@@ -8,7 +8,7 @@ const RelatedStyle = styled.div`
   margin-right: auto;
 `;
 
-const Related = () => {
+const RelatedProducts = () => {
 
   return (
     <>
@@ -20,4 +20,4 @@ const Related = () => {
   );
 }
 
-export default Related;
+export default RelatedProducts;
