@@ -28,7 +28,7 @@ const Filtered = styled.div`
 
 const List = styled.div`
   height: auto;
-  max-height 300px;
+  max-height: 300px;
   overflow-y: scroll;
 `;
 
@@ -66,25 +66,25 @@ const SearchBar = () => {
         <span>
           <CgSearch style={{ size: 18, color: 'white' }} onClick={() => handleClick()} />
         </span>
-      <List>
-        {
-          allProducts.filter(text => {
-            if (search.length > 2) {
-              if (text.category.toLowerCase().indexOf(search) !== -1 || text.description.toLowerCase().indexOf(search) !== -1 || text.name.toLowerCase().indexOf(search) !== -1) {
-                return true;
-              } else {
-                return false
+        <List>
+          {
+            allProducts.filter(text => {
+              if (search.length > 2) {
+                if (text.category.toLowerCase().indexOf(search) !== -1 || text.description.toLowerCase().indexOf(search) !== -1 || text.name.toLowerCase().indexOf(search) !== -1) {
+                  return true;
+                } else {
+                  return false
+                }
               }
-            }
-          }).map((value) => {
-            return (
-              <div key={value.id}>
-                <Filtered>{value.name}</Filtered>
-              </div>
-            )
-          })
-        }
-      </List>
+            }).map((value) => {
+              return (
+                <div key={value.id}>
+                  <Filtered>{value.name}</Filtered>
+                </div>
+              )
+            })
+          }
+        </List>
       </div>
     </>
   )
