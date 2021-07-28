@@ -14,5 +14,3 @@ const StyledStar = styled(starSVG)`
 `;
 
 export default () => <StyledStar />
-
-// export default Star;
