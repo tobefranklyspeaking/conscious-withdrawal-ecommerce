@@ -31,6 +31,7 @@ const List = styled.div`
 const QASearch = () => {
   const [search, setSearch] = useState('');
   const [allQuestions, setAllQuestions] = useState([]);
+  const [filteredQA, setFilteredQA] = useState([]);
 
   useEffect(async (productId) => {
     productId=19089;
