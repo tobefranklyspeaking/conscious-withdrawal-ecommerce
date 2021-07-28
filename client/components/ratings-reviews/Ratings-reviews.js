@@ -38,7 +38,7 @@ const Ratings = ({ current }) => {
 
   useEffect(() => {
     const getReviews = async () => {
-      let res = await axios.get(`/reviews?product_id=${current.id}&sort=${sort}`);
+      let res = await axios.get(`/reviews?product_id=${current.id}&sort=${sort}&count=1000`);
       setReviews(res.data.results);
       setCurrentReview(res.data.results[0]);
       console.log('successful get current id: ', res.data.results);
