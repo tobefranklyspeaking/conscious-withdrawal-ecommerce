@@ -3,7 +3,7 @@ import moment from 'moment';
 
 const Blocks = (props) => {
   const [moreAnswers, setMoreAnswers] = useState(true);
-  console.log
+
   const Questions = (question) => {
     return (
       <div key={question.question_id}>
@@ -24,6 +24,7 @@ const Blocks = (props) => {
 
   const Answers = (answer) => {
     console.log(moreAnswers, Object.keys(answer.answers));
+    //template tag html
     // if (Object.keys(answer.answers) > 1 && moreAnswers === true) {
     //   return (
     //     <div key={each}>
@@ -35,7 +36,8 @@ const Blocks = (props) => {
     //     </div>
     //   )
     // } else if (moreAnswers === false) {
-      return Object.keys(answer.answers)
+      return (
+        Object.keys(answer.answers)
         .sort((each, next) => {
           let a = answer.answers[each].helpfulness;
           let b = answer.answers[next].helpfulness;
@@ -61,7 +63,9 @@ const Blocks = (props) => {
               <div>No answers at this time</div>
             )
           }
+          <button>Load more answers</button>
         })
+      )
     // } else {
     //   return <div>No answers to question.</div>
     // }
