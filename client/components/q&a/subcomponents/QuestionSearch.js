@@ -34,14 +34,14 @@ const QASearch = () => {
   const [filteredQA, setFilteredQA] = useState([]);
 
   useEffect(async (productId) => {
-    productId=19089;
+    productId=19089; // <------ need to remove and update to be used with current product
     await axios.get(`/qa/questions/?product_id=${productId}`)
       .then(response => {
         console.log(response.data.results);
         setAllQuestions(response.data.results);
       })
       .catch(err => console.log(`Error in QuestionSearch useEffect: ${err}`));
-  }, [ 19089 ])
+  }, [])
 
   const handleClick = async () => {
     // This will allow the user to submit search
@@ -66,6 +66,8 @@ const QASearch = () => {
         {
           allQuestions.filter(text => {
               if (search.length > 2 && text.question_body.toLowerCase().indexOf(search)) {
+                debugger;
+                console.log(text.answers);
                 for (let item in text.answers) {
                   if (text.answers[item].body) {
                     return (

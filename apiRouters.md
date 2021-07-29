@@ -52,7 +52,7 @@ List Questions
 Answers List
   GET /qa/questions/:question_id/answers
     Parameters
-      question_id	integer	Required ID of the question for wich answers are needed
+      question_id	integer	Required ID of the question for which answers are needed
     Query Parameters
       page	integer	Selects the page of results to return. Default 1.
       count	integer	Specifies how many results per page to return. Default 5.
