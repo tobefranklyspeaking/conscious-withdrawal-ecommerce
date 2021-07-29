@@ -27,6 +27,7 @@ const Blocks = (props) => {
           //     }
           //   }
           //   A: {props.answers[0].body}
+
         }
       </div>
     )
