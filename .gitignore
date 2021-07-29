@@ -20,4 +20,3 @@ config.js
 # Example:
 # client/env/config.js
 /public/bundle.js
-failedcode.js
