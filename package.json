@@ -1,7 +1,7 @@
 {
   "name": "ecommerce-boutique-revamp",
   "version": "1.0.0",
-  "description": "fec!",
+  "description": "Front end design of an ecommerce website",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/rfe4-ouray/ecommerce-boutique-revamp.git"
   },
-  "author": "",
+  "author": "Team Ouray",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rfe4-ouray/ecommerce-boutique-revamp/issues"
@@ -35,8 +35,6 @@
     "webpack-dev": "^1.1.1"
   },
   "dependencies": {
-    "@babel/preset-env": "^7.14.8",
-    "@babel/preset-react": "^7.14.5",
     "axios": "^0.21.1",
     "babel-jest": "^27.0.6",
     "eslint": "^7.31.0",
