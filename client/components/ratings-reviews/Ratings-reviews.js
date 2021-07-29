@@ -25,6 +25,8 @@ const Review = styled.div`
 display: inline-block;
 text-align: center;
 vertical-align: middle;
+height:550px;
+overflow: auto;
 `;
 
 const Ratings = ({ current }) => {
@@ -62,7 +64,7 @@ const Ratings = ({ current }) => {
         </Rating>
         <Review>
           Review - on right
-          <ReviewDropdown options={["Helpful", "Newest", "Relevent"]} title={"Sort on"}/>
+          <ReviewDropdown options={["Helpful", "Newest", "Relevent"]} title={"Relevent"}/>
             {reviews.map((review, index) => (<><div>
               <h6>{review.reviewer_name}</h6>
             <h3 key={index}>{review.summary}</h3>
