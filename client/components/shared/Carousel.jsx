@@ -7,6 +7,7 @@ const SlideWrapper = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 100%;
+  padding: 5rem;
   & > img {
     width: 100%;
     height: 100%;
@@ -14,17 +15,29 @@ const SlideWrapper = styled.div`
   }
 `;
 
-const ArrowWrapper = styled.div`
+const LeftArrowWrapper = styled.div`
+  height: 15px;
+  width: 15px;
   box-sizing: border-box;
   position: absolute;
   top: 50%
 `;
 
+const RightArrowWrapper = styled.div`
+  height: 15px;
+  width: 15px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: calc(100% - 15px);
+`;
+
 const CarouselWrapper = styled.div`
+  margin-left: 20px;
   box-sizing: border-box;
   position: relative;
-  width: 50%;
-  height: 50%;
+  width: 25%;
+  height: 25%;
   border: 1px solid black;
 `;
 
@@ -40,12 +53,12 @@ const Slide = ({ url }) => {
 const Arrow = ({ direction, clickHandler}) => {
   return (
     direction === 'Left' ? 
-      (<ArrowWrapper onClick={clickHandler}>
+      (<LeftArrowWrapper onClick={clickHandler}>
         <AiOutlineArrowLeft />  
-      </ArrowWrapper>) : 
-      (<ArrowWrapper onClick={clickHandler}>
+      </LeftArrowWrapper>) : 
+      (<RightArrowWrapper onClick={clickHandler}>
         <AiOutlineArrowRight />
-      </ArrowWrapper>)
+      </RightArrowWrapper>)
     );
 }
 /************ PRIMARY COMPONENT HERE ************/
