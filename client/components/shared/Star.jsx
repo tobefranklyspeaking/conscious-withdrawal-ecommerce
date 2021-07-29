@@ -8,13 +8,9 @@ const starSVG = ({className}) => (
   </svg>
 );
 
-const StyledStar = styled(starSVG)`
+export default styled(starSVG)`
   color: ${({ color }) => color ? color : 'transparent' };
   width: 1rem;
   height: auto;
   margin: 0 .06rem;
 `;
-
-const Star = ({ color }) => <StyledStar color={color} />
-
-export default Star;

@@ -5,28 +5,30 @@ import Star from './Star.jsx';
 const Input = styled.input`
   display: none;
 `;
-
-function Stars() {
-  const [rating, setRating] = useState(null);
-  const [hover, setHover] = useState(null);
+// If rendering Stars to display an already extant rating, pass the rating in with
+//   props currentRating={3.5} (or whatever).
+function Stars({ currentRating }) {
+  const [rating, setRating] = useState(currentRating || null);
+  const [hover, setHover] = useState(currentRating || null);
 
   return (
     <>
       {[...Array(5)].map((star, i) => {
         const ratingValue = i + 1;
         return (
-          <label key={`star${i}`}>
+          <label key={`star${i}`}
+          onMouseEnter={() => setHover(currentRating || ratingValue)}
+          onMouseLeave={() => setHover(currentRating || null)}
+          >
             <Input
               type='radio'
               name='rating'
               value={ratingValue}
-              onClick={() => setRating(ratingValue)}
-            />
+              onClick={() => setRating(currentRating || ratingValue)}
+              />
             <Star
               className='star'
               color={ratingValue <= (hover || rating) ? 'black' : 'transparent'}
-              onMouseEnter={() => setHover(ratingValue)}
-              onMouseLeave={() => setHover(null)}
             />
           </label>
         );
