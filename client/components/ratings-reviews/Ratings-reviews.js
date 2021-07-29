@@ -38,6 +38,7 @@ const Ratings = ({ current }) => {
 
 
 
+
   useEffect(() => {
     const getReviews = async () => {
       let res = await axios.get(`/reviews?product_id=${current.id}&sort=${sort}&count=1000`);
@@ -47,9 +48,7 @@ const Ratings = ({ current }) => {
     };
     getReviews();
 
-  }, [current.id]);
-
-  console.log('current review: ', currentReview);
+  }, [current, sort]);
 
 
   return (
@@ -64,18 +63,16 @@ const Ratings = ({ current }) => {
         </Rating>
         <Review>
           Review - on right
-          <ReviewDropdown options={["Helpful", "Newest", "Relevent"]} title={"Relevent"}/>
-            {reviews.map((review, index) => (<><div>
-              <h6>{review.reviewer_name}</h6>
+          <ReviewDropdown options={["helpful", "newest", "relevent"]} setSort={setSort} />
+          {reviews.map((review, index) => (<><div>
+            <h6>{review.reviewer_name}</h6>
             <h3 key={index}>{review.summary}</h3>
             <h5>{review.body}</h5>
-              <Helpful path={'/reviews'} id={review.review_id} helpfulness={review.helpfulness}/>
-              <span>  |   </span>
-              <Report path={'/reviews'} id={review.review_id}/>
-              </div></>))}
+            <Helpful path={'/reviews'} id={review.review_id} helpfulness={review.helpfulness} currentSort={sort}/>
+            <Report path={'/reviews'} id={review.review_id} />
+          </div></>))}
         </Review>
       </Wrapper>
-
     </>
   );
 }

@@ -13,35 +13,35 @@ const Button = styled.button`
 `;
 
 
-const Helpful = ({path, id, helpfulness}) => {
-  //set state
+const Helpful = ({ path, id, helpfulness, currentSort }) => {
+
   const [isHelpful, setIsHelpful] = useState(helpfulness);
   const [isClicked, setIsClicked] = useState(false);
-  console.log('helpfulness: ', helpfulness);
-
-  //styled components
-  //need wrapper span
-  //need button
+  const [sort, setSort] = useState(currentSort);
 
   useEffect(() => {
     if (isHelpful !== helpfulness) {
       setIsClicked(true);
       const putHelpful = async () => {
         let res = await axios.put(`${path}/${id}/helpful`);
-        //setIsClicked(true);
-        console.log('successful get current helpfullness: ');
       };
       putHelpful();
     }
   });
 
 
+  useEffect(async () => {
+    setIsHelpful(helpfulness);
+    setSort(currentSort);
+  }, [currentSort]);
+
+
 
   return (
     <>
-    <span>Helpful? </span>
-    <Button className="helpfulButton" onClick={() => (isClicked ? console.log('already clicked') : setIsHelpful(isHelpful + 1))}>Yes</Button>
-    <span>({isHelpful})</span>
+      <span>Helpful? </span>
+      <Button className="helpfulButton" onClick={() => isClicked ? console.log('already clicked') : setIsHelpful(isHelpful + 1)}>Yes</Button>
+      <span>({isHelpful})</span>
     </>
   );
 
