@@ -15,8 +15,8 @@ dist/
 # API Key files
 config.js
 
+# Testing snapshots
+__snapshots__
 
-# Add paths to exact file as soon as we know where we will store them.
-# Example:
-# client/env/config.js
+# Webpack
 /public/bundle.js

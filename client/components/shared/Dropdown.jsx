@@ -20,6 +20,11 @@ const Button = styled.button`
   justify-content: space-between;
   align-items: center;
   padding: .5rem;
+display: flex;
+flex-flow: column nowrap;
+position: absolute;
+justify-content: space-around;
+width: 8rem;
 `;
 
 const Dropdown = ({ options, title }) => {

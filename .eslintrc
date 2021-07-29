@@ -2,7 +2,7 @@
   "plugins": [
     "react-hooks"
   ],
-  "extends": ["airbnb-base"],
+  "extends": ["airbnb", "airbnb-base"],
   "env": {
     "node": true,
     "es6": true,
