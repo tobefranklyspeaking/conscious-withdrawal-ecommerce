@@ -6,7 +6,7 @@ const Input = styled.input`
   display: none;
 `;
 // If rendering Stars to display an already extant rating, pass the rating in with
-//   props currentRating={3.5} (or whatever).
+// props currentRating={3.5} (or whatever).
 function Stars({ currentRating }) {
   const [rating, setRating] = useState(currentRating || null);
   const [hover, setHover] = useState(currentRating || null);
