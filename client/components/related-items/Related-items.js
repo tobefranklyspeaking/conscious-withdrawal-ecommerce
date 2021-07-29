@@ -14,7 +14,6 @@ const RelatedProducts = () => {
     <>
       <RelatedStyle>
         <h1>Related Items</h1>
-        <h2>Temporary Home to Stars Component: <Stars /></h2>
       </RelatedStyle>
     </>
   );
