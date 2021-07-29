@@ -1,10 +1,9 @@
 const axios = require('axios');
-const React = require('react');
 const express = require('express');
 const API_KEY = require('../config.js');
-const path = require('path');
 
 const app = express();
+const port = 3000;
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -17,11 +16,11 @@ app.all('/*', (req, res) => {
     data: req.data || null
   })
     .then((response) => {
-      console.log('success with server request');
+      console.log('success with backend query');
       res.status(200).send(response.data);
     }).catch(err => {
-      console.log('error fetching from api');
-      res.status(401).send(err);
+      console.log('failure with backend query');
+      res.status(400).send(err);
     });
 })
 

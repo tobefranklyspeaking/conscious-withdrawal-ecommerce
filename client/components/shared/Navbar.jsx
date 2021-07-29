@@ -1,14 +1,18 @@
 import React from 'react';
-import SearchBar from './Searchbar.jsx'
+import SearchBar from './NavSearchBar.jsx'
 import styled from 'styled-components';
 //em or vh
 const NavStyle = styled.header`
-  height: 62px;
-  width: auto%;
+  height: 6.5vh;
+  min-height: 40px;
+  max-width: 1280px;
   background-color: #555555;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
+  margin-left: auto;
+  margin-right: auto;
   padding-left: 22px;
   padding-right: 22px;
 `;
@@ -28,13 +32,9 @@ const NavBar = () => {
   return (
     <NavStyle>
       <Logo>Logo</Logo>
-      <SearchBar/>
+      <SearchBar />
     </NavStyle>
   );
 }
 
 export default NavBar;
-      // <div>
-      //   <input className='searchBar'></input>
-      //   <a href="#">🔍</a>
-      // </div>
