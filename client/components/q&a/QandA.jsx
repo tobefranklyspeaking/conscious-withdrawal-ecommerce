@@ -1,7 +1,7 @@
-import React, {useStat, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import { CgSearch } from 'react-icons/cg';
-import QASearch from './subcomponents/QuestionSearch.jsx';
+import QuestionSearch from './subcomponents/QuestionSearch.jsx';
 
 const QandAStyle = styled.div`
   background-color: LightGray;
@@ -10,13 +10,13 @@ const QandAStyle = styled.div`
   width: 80%;
 `;
 
-const QandA = () => {
-
+const QandA = (props) => {
   return (
     <>
       <QandAStyle>
         <div>Questions and Answers</div>
-        <QASearch/>
+        <QuestionSearch current={props}/>
+        <div>-------------------------------------------------------</div>
         <div>
           <span>
             Question: Does this work?

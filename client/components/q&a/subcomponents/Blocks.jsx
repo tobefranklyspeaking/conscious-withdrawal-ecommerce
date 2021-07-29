@@ -2,34 +2,37 @@ import React from 'react';
 import QASearch from './QuestionSearch.jsx';
 
 const Blocks = (props) => {
-
+  console.log('what are my props inside blocks?', props)
   const Question = () => {
     return (
       <div>
-        Q: {props.question_body}
+        <span>
+          Q: {props.question_body}
+        </span>
+        <span>Helpful?</span>
+        <span>Add Answer</span>
       </div>
     )
   }
 
-  //requires rework
   const Answer = () => {
+    let list = [];
+    for (var item in props.answers) {
+      list.push(props.answers[item])
+    }
+
     return (
       <div>
-        {
-          console.log('answers inside blocks', props)
-          // for (let item in props.answers) {
-          //   console.log(props.answers[item].body);
-          //   if (text.answers[item].body) {
-          //     return (
-          //       <div key={item}>
-          //       <Filtered>{text.answers[item].body}</Filtered>
-          //       </div>
-          //       )
-          //     }
-          //   }
-          //   A: {props.answers[0].body}
-
-        }
+        {list.map(each => {
+          return (
+            <div key={each.answer_id}>
+              <div> A: {each.body} </div>
+              <div>
+                <span>by {each.answerer_name} | Helpful? Yes (0) | Report</span>
+              </div>
+            </div>
+          )
+        })}
       </div>
     )
   }
