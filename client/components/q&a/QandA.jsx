@@ -16,18 +16,6 @@ const QandA = (props) => {
       <QandAStyle>
         <div>Questions and Answers</div>
         <QuestionSearch current={props}/>
-        <div>-------------------------------------------------------</div>
-        <div>
-          <span>
-            Question: Does this work?
-            </span>
-            <span>
-              Helpful? Yes 25 | Add Answer
-          </span>
-        </div>
-        <div>Answer: It does for now <b/>
-          <div>by User1337, May 1, 2019 | Helpful? Yes(0) | Report</div>
-        </div>
         <button>More Answered Questions</button>
         <button>Add a question +</button>
       </QandAStyle>

@@ -34,11 +34,13 @@ const QASearch = (props) => {
   const [allQuestions, setAllQuestions] = useState([]);
 
   useEffect(() => {
-      axios.get(`/qa/questions/?product_id=${props.current.current.id}`)
+      if (props.current.current.id !== undefined) {
+        axios.get(`/qa/questions/?product_id=${props.current.current.id}`)
         .then(response => {
           setAllQuestions(response.data.results);
         })
         .catch(err => console.log(`Error in QuestionSearch useEffect: ${err}`));
+      }
     }, [props.current.current.id])
 
   const handleClick = async () => {
