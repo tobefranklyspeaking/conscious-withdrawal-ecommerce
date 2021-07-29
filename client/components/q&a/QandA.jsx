@@ -1,7 +1,7 @@
 import React, {useStat, useEffect} from 'react';
 import styled from "styled-components";
 import { CgSearch } from 'react-icons/cg';
-import QASearch from './subcomponents/QuestionSearch.js';
+import QASearch from './subcomponents/QuestionSearch.jsx';
 
 const QandAStyle = styled.div`
   background-color: LightGray;

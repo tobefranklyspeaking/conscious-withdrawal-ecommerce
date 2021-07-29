@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBar from './NavSearchbar.jsx'
+import SearchBar from './NavSearchBar.jsx'
 import styled from 'styled-components';
 //em or vh
 const NavStyle = styled.header`
