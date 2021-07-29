@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import Stars from '../shared/Stars.jsx';
 
 const RelatedStyle = styled.div`
   background-color: LightGray;
@@ -7,7 +8,7 @@ const RelatedStyle = styled.div`
   margin-right: auto;
 `;
 
-const Related = () => {
+const RelatedProducts = () => {
 
   return (
     <>
@@ -18,4 +19,4 @@ const Related = () => {
   );
 }
 
-export default Related;
+export default RelatedProducts;

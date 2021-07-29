@@ -4,22 +4,27 @@ import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
 //styling component elements
 const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  position: absolute;
+  justify-content: space-around;
+  width: 8rem;
+`;
+const Button = styled.button`
+  background: transparent;
+  border: 1px solid black;
+  margin: 0 auto;
+  display: flex;
+  height: 3rem;
+  width: 8rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem;
 display: flex;
 flex-flow: column nowrap;
 position: absolute;
 justify-content: space-around;
 width: 8rem;
-`;
-const Button = styled.button`
-background: transparent;
-border: 1px solid black;
-margin: 0 auto;
-display: flex;
-height: 3rem;
-width: 8rem;
-justify-content: space-between;
-align-items: center;
-padding: .5rem;
 `;
 
 const Dropdown = ({ options, title }) => {
