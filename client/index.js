@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styled from "styled-components";
 import axios from 'axios';
-import Carousel from './components/shared/Carousel.jsx';
-//import ReviewDropdown from './components/shared/ReviewDropdown.jsx';
 import Shared from './components/shared/shared.jsx';
-const sampleData = ['http://placecorgi.com/260/260', 'http://placecorgi.com/250', 'http://placecorgi.com/250'];
 const App = () => {
 
   /**********************Not needed at this time***********************/
@@ -27,7 +24,6 @@ const App = () => {
       <Shared current={currentProduct}/>
       <div>
         {currentProduct.id}
-        <Carousel urls={sampleData}/>
       </div>
     </div>
   );
