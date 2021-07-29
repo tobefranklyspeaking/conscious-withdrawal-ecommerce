@@ -3,35 +3,52 @@ import styled from 'styled-components';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 
 //component styles
-const SlideImage = styled.div`
-  border: 1px solid black;
-  width: 60%;
-  height: 500px; 
+const SlideWrapper = styled.div`
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  & > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const ArrowWrapper = styled.div`
-/*must add z index here*/
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%
 `;
 
 const CarouselWrapper = styled.div`
-  display: flex;
+  box-sizing: border-box;
+  position: relative;
+  width: 50%;
+  height: 50%;
+  border: 1px solid black;
 `;
+
 //slide subcomponent - image itself
 const Slide = ({ url }) => {
   return (
-    <SlideImage>
+    <SlideWrapper>
       <img src={url} alt="photo of clothing"/>
-    </SlideImage>);
+    </SlideWrapper>);
 };
 
 //arrow subcomponent for nav
 const Arrow = ({ direction, clickHandler}) => {
   return (
-    <ArrowWrapper onClick={clickHandler}>
-      {direction === 'Left' ? <AiOutlineArrowLeft /> : <AiOutlineArrowRight/>}
-    </ArrowWrapper>); 
-};
-
+    direction === 'Left' ? 
+      (<ArrowWrapper onClick={clickHandler}>
+        <AiOutlineArrowLeft />  
+      </ArrowWrapper>) : 
+      (<ArrowWrapper onClick={clickHandler}>
+        <AiOutlineArrowRight />
+      </ArrowWrapper>)
+    );
+}
+/************ PRIMARY COMPONENT HERE ************/
 const Carousel = ({ urls }) => {
   //state: index of images based on current item
   const [index, setIndex] = useState(0); 
@@ -51,7 +68,7 @@ const Carousel = ({ urls }) => {
   return (
     <CarouselWrapper>
       <Arrow direction="Left" clickHandler={previousSlide}/>
-      <Slide url={urls[index]}/>       
+      <Slide url={urls[index]}/>
       <Arrow direction="Right" clickHandler={nextSlide}/> 
     </CarouselWrapper>);
 };
