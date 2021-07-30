@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import axios from 'axios';
 import Stars from '../../shared/Stars.jsx';
+import RatingBreakdown from './Rating-Breakdown.jsx';
 
 
 const RatingSummaryNum = styled.h1`
@@ -52,7 +53,7 @@ const Summary = ({ id }) => {
   }, [id]);
 
 
-  console.log('meta date: wbakfhbs', metaData);
+  //console.log('meta date: wbakfhbs', metaData);
 
   const totalRatings = () => {
     //
@@ -77,7 +78,7 @@ const Summary = ({ id }) => {
     totalSum += (Number(ratings['3']) * 3);
     totalSum += (Number(ratings['4']) * 4);
     totalSum += (Number(ratings['5']) * 5);
-    console.log('total', totalSum);
+    //console.log('total', totalSum);
     return totalSum;
   };
 
@@ -85,7 +86,7 @@ const Summary = ({ id }) => {
     //
     let avg = sum()/totalRatings();
     avg = Math.round(avg);
-    console.log('average ', avg);
+    //console.log('average ', avg);
     //setAvgRating(avg);
     return avg;
   };
@@ -97,7 +98,7 @@ const Summary = ({ id }) => {
     //
     let totalrec = Number(recommended['false']) + Number(recommended['true']);
     let percent = Math.round(((Number(recommended['true'])) / totalrec) * 100);
-    console.log('total rec', percent);
+    //console.log('total rec', percent);
     return percent;
   };
   let percentRecommended = percentRec();
@@ -109,6 +110,7 @@ const Summary = ({ id }) => {
     <span><Stars currentRating={averageRating}> </Stars></span>
     <h5>{percentRecommended}% of reviews recommend this product</h5>
     </Wrapper>
+    <RatingBreakdown ratings={ratings} numRatings={totalRatings()}/>
     </>
   );
 

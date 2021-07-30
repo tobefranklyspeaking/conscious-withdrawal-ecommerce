@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
 //styling component elements
-const Wrapper = styled.div`
+const Wrapper = styled.span`
   display: flex;
   flex-flow: column nowrap;
   position: absolute;

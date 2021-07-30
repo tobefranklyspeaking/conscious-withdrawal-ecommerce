@@ -6,6 +6,7 @@ import Report from '../shared/Report.jsx';
 import ReviewDropdown from '../shared/ReviewDropdown.jsx';
 import Stars from '../shared/Stars.jsx';
 import Summary from './subcomponents/Summary.jsx';
+import RatingBreakdown from './subcomponents/Rating-Breakdown.jsx';
 
 const RatingsStyle = styled.div`
   background-color: LightGray;
@@ -29,6 +30,14 @@ text-align: center;
 vertical-align: middle;
 height:550px;
 overflow: auto;
+`;
+
+const TotalReviews = styled.div`
+  display: inline-block;
+`;
+
+const Inline = styled.div`
+  display: inline-block;
 `;
 
 const Ratings = ({ current }) => {
@@ -61,12 +70,14 @@ const Ratings = ({ current }) => {
       </RatingsStyle>
       <Wrapper>
         <Rating>
+          <h3>RATINGS & REVIEWS</h3>
         <Summary id={current.id} />
         </Rating>
         <Review>
-          Review - on right
-          <ReviewDropdown options={["helpful", "newest", "relevent"]} setSort={setSort} />
+          <TotalReviews>{reviews.length} reviews, sorted by </TotalReviews>
+          <Inline><ReviewDropdown options={["helpful", "newest", "relevent"]} setSort={setSort} /> </Inline>
           {reviews.map((review, index) => (<><div>
+            <Stars currentRating={review.rating}/>
             <h6>{review.reviewer_name}, {review.date}</h6>
             <h3 key={index}>{review.summary}</h3>
             <h5>{review.body}</h5>
