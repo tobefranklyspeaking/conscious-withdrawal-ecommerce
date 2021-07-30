@@ -30,7 +30,7 @@ overflow: auto;
 `;
 
 const Ratings = ({ current }) => {
-  console.log('kbdkhb', current.id);
+  // console.log('kbdkhb', current.id);
   const [reviews, setReviews] = useState([]);
   const [currentReview, setCurrentReview] = useState({});
   const [sort, setSort] = useState('relevent');
@@ -40,7 +40,7 @@ const Ratings = ({ current }) => {
       let res = await axios.get(`/reviews?product_id=${current.id}&sort=${sort}&count=1000`);
       setReviews(res.data.results);
       setCurrentReview(res.data.results[0]);
-      console.log('successful get current id: ', res.data.results);
+      // console.log('successful get current id: ', res.data.results);
     };
     getReviews();
 

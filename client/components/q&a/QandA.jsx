@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import { CgSearch } from 'react-icons/cg';
 import QuestionSearch from './subcomponents/QuestionSearch.jsx';
+import AddQuestion from './subcomponents/AddQuestion.jsx';
 
 const QandAStyle = styled.div`
   background-color: LightGray;
@@ -9,15 +10,17 @@ const QandAStyle = styled.div`
   margin-right: auto;
   width: 80%;
 `;
+const QandA = (current) => {
+  const [show, setShow] = useState(false);
 
-const QandA = (props) => {
   return (
     <>
       <QandAStyle>
         <div>Questions and Answers</div>
-        <QuestionSearch current={props}/>
+        <QuestionSearch current={current} />
         <button>More Answered Questions</button>
-        <button>Add a question +</button>
+        <button onClick={() => setShow(true)}>Add a question +</button>
+        <AddQuestion onClose={() => setShow(false)} show={show}/>
       </QandAStyle>
     </>
   );

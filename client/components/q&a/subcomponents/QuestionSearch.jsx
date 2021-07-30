@@ -29,19 +29,19 @@ const List = styled.div`
   overflow-y: scroll;
 `;
 
-const QASearch = (props) => {
+const QASearch = ({current}) => {
   const [search, setSearch] = useState('');
   const [allQuestions, setAllQuestions] = useState([]);
 
   useEffect(() => {
-      if (props.current.current.id !== undefined) {
-        axios.get(`/qa/questions/?product_id=${props.current.current.id}`)
+      if (current.current.id !== undefined) {
+        axios.get(`/qa/questions/?product_id=${current.current.id}`)
         .then(response => {
           setAllQuestions(response.data.results);
         })
         .catch(err => console.log(`Error in QuestionSearch useEffect: ${err}`));
       }
-    }, [props.current.current.id])
+    }, [current.current.id])
 
   const handleClick = async () => {
     // This will allow the user to submit search

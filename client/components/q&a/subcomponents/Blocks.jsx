@@ -53,9 +53,7 @@ const Blocks = (props) => {
             return (
               <div key={each}>
                 <div> A: {answerObj.body} </div>
-                <div>
                   <span>by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} | Helpful? Yes ({answerObj.helpfulness}) | Report</span>
-                </div>
               </div>
             )
           } else {
@@ -74,7 +72,6 @@ const Blocks = (props) => {
   return (
     <div>
       {props.map(each => {
-        console.log(each)
         return Questions(each);
       })}
     </div>
