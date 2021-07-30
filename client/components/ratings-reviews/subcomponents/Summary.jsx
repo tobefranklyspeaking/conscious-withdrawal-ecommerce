@@ -1,0 +1,94 @@
+// this file is a placeholder and can be modified to meet any needs
+import React, { useState, useEffect } from 'react';
+import styled from "styled-components";
+import axios from 'axios';
+import Stars from '../../shared/Stars.jsx';
+
+
+const Summary = ({ id }) => {
+  console.log('id in summary', id);
+
+  const [metaData, setMetaData] = useState({});
+  const [characteristics, setCharacteristics] = useState({});
+  const [ratings, setRatings] = useState({});
+  const [recommended, setRecommended] = useState({});
+  const [avgRating, setAvgRating] = useState(0);
+
+  /*
+  useEffect(() => {
+    const getMetaData = async () => {
+      let res = await axios.get(`/reviews/meta?product_id=${id}`);
+      setMetaData(res.data.results);
+      console.log('successful get meta data: ', res.data.results);
+    };
+    getMetaData();
+    console.log('metadata: ', metaData);
+
+  }, [id]);
+  */
+
+ useEffect(async () => {
+   try {
+     let res = await axios.get(`/reviews/meta?product_id=${id}`);
+     setMetaData(res.data);
+     setCharacteristics(res.data.characteristics);
+     setRatings(res.data.ratings);
+     setRecommended(res.data.recommended);
+     //average();
+     console.log('successful get meta data: ', res.data);
+    } catch (err) {
+      console.error(err)
+    }
+  }, [id]);
+
+
+  console.log('meta date: wbakfhbs', metaData);
+
+  const totalRatings = () => {
+    //
+    //console.log('what is ratings', ratings);
+    let total = 0;
+    //console.log('total', Number(ratings['1']));
+    total += Number(ratings['1']);
+    total += Number(ratings['2']);
+    total += Number(ratings['3']);
+    total += Number(ratings['4']);
+    total += Number(ratings['5']);
+    console.log('total', total);
+    return total;
+  };
+
+  const sum = () => {
+    //
+    let totalSum = 0;
+    //console.log('total', Number(ratings['1']));
+    totalSum += Number(ratings['1']);
+    totalSum += (Number(ratings['2']) * 2);
+    totalSum += (Number(ratings['3']) * 3);
+    totalSum += (Number(ratings['4']) * 4);
+    totalSum += (Number(ratings['5']) * 5);
+    console.log('total', totalSum);
+    return totalSum;
+  };
+
+  const average = () => {
+    //
+    let avg = sum()/totalRatings();
+    avg = Math.round(avg);
+    console.log('average ', avg);
+    //setAvgRating(avg);
+    return avg;
+  };
+
+  let averageRating = average();
+  //console.log('this is the average', avgRating);
+
+  return (
+    <>
+    <Stars currentRating={averageRating}></Stars>
+    </>
+  );
+
+};
+
+export default Summary;

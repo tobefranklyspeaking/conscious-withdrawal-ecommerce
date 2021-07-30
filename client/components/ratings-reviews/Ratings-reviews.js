@@ -5,6 +5,7 @@ import Helpful from '../shared/Helpful.jsx';
 import Report from '../shared/Report.jsx';
 import ReviewDropdown from '../shared/ReviewDropdown.jsx';
 import Stars from '../shared/Stars.jsx';
+import Summary from './subcomponents/Summary.jsx';
 
 const RatingsStyle = styled.div`
   background-color: LightGray;
@@ -59,15 +60,15 @@ const Ratings = ({ current }) => {
         <div>test</div>
       </RatingsStyle>
       <Wrapper>
-        <Stars currentRating={3}></Stars>
         <Rating>
           Rating - on left
+        <Summary id={current.id}/>
         </Rating>
         <Review>
           Review - on right
           <ReviewDropdown options={["helpful", "newest", "relevent"]} setSort={setSort} />
           {reviews.map((review, index) => (<><div>
-            <h6>{review.reviewer_name}</h6>
+            <h6>{review.reviewer_name}, {review.date}</h6>
             <h3 key={index}>{review.summary}</h3>
             <h5>{review.body}</h5>
             <Helpful path={'/reviews'} id={review.review_id} helpfulness={review.helpfulness} currentSort={sort}/>
