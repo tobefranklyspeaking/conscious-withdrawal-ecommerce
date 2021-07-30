@@ -25,7 +25,7 @@ const Review = styled.div`
 display: inline-block;
 text-align: center;
 vertical-align: middle;
-height:550px;
+height: 550px;
 overflow: auto;
 `;
 
@@ -34,10 +34,6 @@ const Ratings = ({ current }) => {
   const [reviews, setReviews] = useState([]);
   const [currentReview, setCurrentReview] = useState({});
   const [sort, setSort] = useState('relevent');
-
-
-
-
 
   useEffect(() => {
     const getReviews = async () => {
@@ -64,13 +60,17 @@ const Ratings = ({ current }) => {
         <Review>
           Review - on right
           <ReviewDropdown options={["helpful", "newest", "relevent"]} setSort={setSort} />
-          {reviews.map((review, index) => (<><div>
-            <h6>{review.reviewer_name}</h6>
-            <h3 key={index}>{review.summary}</h3>
-            <h5>{review.body}</h5>
-            <Helpful path={'/reviews'} id={review.review_id} helpfulness={review.helpfulness} currentSort={sort}/>
-            <Report path={'/reviews'} id={review.review_id} />
-          </div></>))}
+          {reviews.map((review, index) => (
+            <>
+              <div>
+                <h6>{review.reviewer_name}</h6>
+                <h3 key={index}>{review.summary}</h3>
+                <h5>{review.body}</h5>
+                <Helpful path={'/reviews'} id={review.review_id} helpfulness={review.helpfulness} currentSort={sort} />
+                <Report path={'/reviews'} id={review.review_id} />
+              </div>
+            </>
+          ))}
         </Review>
       </Wrapper>
     </>
