@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-
+import Carousel from '../shared/'
 //component styles
 const OverviewWrapper = styled.div`
   background-color: LightGray;
