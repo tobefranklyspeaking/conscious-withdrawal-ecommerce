@@ -4,6 +4,7 @@ import axios from 'axios';
 import Helpful from '../shared/Helpful.jsx';
 import Report from '../shared/Report.jsx';
 import ReviewDropdown from '../shared/ReviewDropdown.jsx';
+import Stars from '../shared/Stars.jsx';
 
 const RatingsStyle = styled.div`
   background-color: LightGray;
@@ -58,6 +59,7 @@ const Ratings = ({ current }) => {
         <div>test</div>
       </RatingsStyle>
       <Wrapper>
+        <Stars currentRating={3}></Stars>
         <Rating>
           Rating - on left
         </Rating>

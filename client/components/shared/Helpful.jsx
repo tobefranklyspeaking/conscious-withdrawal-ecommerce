@@ -21,11 +21,11 @@ const Helpful = ({ path, id, helpfulness, currentSort }) => {
 
   useEffect(() => {
     if (isHelpful !== helpfulness) {
-      setIsClicked(true);
       const putHelpful = async () => {
         let res = await axios.put(`${path}/${id}/helpful`);
       };
       putHelpful();
+      setIsClicked(true);
     }
   });
 
@@ -33,6 +33,7 @@ const Helpful = ({ path, id, helpfulness, currentSort }) => {
   useEffect(async () => {
     setIsHelpful(helpfulness);
     setSort(currentSort);
+    //setIsClicked(false);
   }, [currentSort]);
 
 
