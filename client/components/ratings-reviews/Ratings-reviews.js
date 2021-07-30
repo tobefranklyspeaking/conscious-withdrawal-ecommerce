@@ -61,8 +61,7 @@ const Ratings = ({ current }) => {
       </RatingsStyle>
       <Wrapper>
         <Rating>
-          Rating - on left
-        <Summary id={current.id}/>
+        <Summary id={current.id} />
         </Rating>
         <Review>
           Review - on right

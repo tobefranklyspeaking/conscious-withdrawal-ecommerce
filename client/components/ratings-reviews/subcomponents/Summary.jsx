@@ -5,6 +5,16 @@ import axios from 'axios';
 import Stars from '../../shared/Stars.jsx';
 
 
+const RatingSummaryNum = styled.h1`
+  display: inline;
+  font-size: 55px;
+  font-weight: bold;
+`;
+
+const Wrapper = styled.div`
+
+`;
+
 const Summary = ({ id }) => {
   console.log('id in summary', id);
 
@@ -83,9 +93,22 @@ const Summary = ({ id }) => {
   let averageRating = average();
   //console.log('this is the average', avgRating);
 
+  const percentRec = () => {
+    //
+    let totalrec = Number(recommended['false']) + Number(recommended['true']);
+    let percent = Math.round(((Number(recommended['true'])) / totalrec) * 100);
+    console.log('total rec', percent);
+    return percent;
+  };
+  let percentRecommended = percentRec();
+
   return (
     <>
-    <Stars currentRating={averageRating}></Stars>
+    <Wrapper>
+    <RatingSummaryNum>{averageRating}  </RatingSummaryNum>
+    <span><Stars currentRating={averageRating}> </Stars></span>
+    <h5>{percentRecommended}% of reviews recommend this product</h5>
+    </Wrapper>
     </>
   );
 
