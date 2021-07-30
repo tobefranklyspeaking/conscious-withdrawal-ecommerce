@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import moment from 'moment';
+import AddAnswer from './AddAnswer.jsx';
 
 const Blocks = (props) => {
   const [moreAnswers, setMoreAnswers] = useState(true);
+  const [show, setShow] = useState(false);
 
   const Questions = (question) => {
+    console.log(question)
     return (
       <div key={question.question_id}>
         <div >
@@ -12,7 +15,8 @@ const Blocks = (props) => {
             Q: {question.question_body}
           </span>
           <span> Helpful? ({question.question_helpfulness})| </span>
-          <span> Add Answer</span>
+          <span style={{cursor: 'pointer'}} onClick={() => setShow(true)}>Add Answer</span>
+          <AddAnswer onClose={() => setShow(false)} current={question} show={show}/>
         </div>
         <div>
           {Answers(question)}
@@ -23,7 +27,7 @@ const Blocks = (props) => {
 
 
   const Answers = (answer) => {
-    console.log(moreAnswers, Object.keys(answer.answers));
+    // console.log(moreAnswers, Object.keys(answer.answers));
     //template tag html
     // if (Object.keys(answer.answers) > 1 && moreAnswers === true) {
     //   return (

@@ -19,8 +19,8 @@ const QandA = (current) => {
         <div>Questions and Answers</div>
         <QuestionSearch current={current} />
         <button>More Answered Questions</button>
-        <button onClick={() => setShow(true)}>Add a question +</button>
-        <AddQuestion onClose={() => setShow(false)} show={show}/>
+        <button onClick={() => setShow(true)} style={{cursor: 'pointer'}}>Add a question +</button>
+        <AddQuestion onClose={() => setShow(false)} current={current} show={show}/>
       </QandAStyle>
     </>
   );

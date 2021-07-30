@@ -38,7 +38,7 @@ const ModalBody = styled.div`
 const ModalFooter = styled.div`
   padding: 10px;
 `;
-const AddQuestion = ({current, show, onClose}) => {
+const AddAnswer = ({question, show, onClose}) => {
   if (!show) {
     return null;
   }
@@ -46,7 +46,7 @@ const AddQuestion = ({current, show, onClose}) => {
     <Modal onClick={onClose}>
       <ModalContent onClick={e => e.stopPropagation()}>
         <ModalHeader>
-          <h4 className="modal-title">Add Question</h4>
+          <h4 className="modal-title">Add Answer</h4>
         </ModalHeader>
         <ModalBody>
           Add Forms Here
@@ -60,4 +60,4 @@ const AddQuestion = ({current, show, onClose}) => {
   )
 }
 
-export default AddQuestion;
+export default AddAnswer;
