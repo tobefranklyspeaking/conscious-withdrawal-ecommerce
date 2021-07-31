@@ -57,6 +57,7 @@ const AddAnswer = ({question, show, onClose}) => {
         </ModalFooter>
       </ModalContent>
     </Modal>
+    <br> 
   )
 }
 
