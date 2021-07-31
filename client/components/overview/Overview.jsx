@@ -21,6 +21,8 @@ const Banner = styled.div`
   text-transform: uppercase;
   font-style: italic;
   vertical-align: middle;
+  display: grid;
+  place-items: center;
 `;
 
 //right side elements
@@ -100,7 +102,6 @@ const QtyButton = styled.button`
 const AddToBag = styled.button``;
 const Fav = styled.button``;
 const FeatureChecklist = styled.div`
-  border: 1px solid black;
   display: flex;
   flex-flow: column nowrap;
 `;
@@ -157,10 +158,10 @@ const Overview = ({ current }) => {
           </ButtonRow2>
           <FeatureChecklist>
             {console.log('inside feature checklist', current)}
-            <FaCheck />
-            <FaCheck />
-            <FaCheck />
-            <FaCheck />
+            <div><FaCheck /> GMO and Pesticide-free</div>
+            <div><FaCheck /> Where can I find this in the product data?</div>
+            <div><FaCheck /> I have no damn clue</div>
+            <div><FaCheck /> CSS why</div>
           </FeatureChecklist>
         </Column2>
       </OverviewWrapper>
