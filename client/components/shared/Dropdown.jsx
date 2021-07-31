@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
-
+import Button from './Button.jsx';
 //styling component elements
 const Wrapper = styled.div`
   --custom-width: minmax(3rem, 8rem);
@@ -9,20 +9,21 @@ const Wrapper = styled.div`
   flex-flow: column nowrap;
   justify-content: space-around;
   width: var(--custom-width);
-`;
-const Button = styled.button`
-  background: transparent;
-  border: 1.5px solid black;
-  margin: 0 auto;
-  display: flex;
   height: 3rem;
-  width: inherit;
-  align-items: center;
-  padding: .5rem;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  width: 8rem;
 `;
+// const Button = styled.button`
+//   background: transparent;
+//   border: 1.5px solid black;
+//   margin: 0 auto;
+//   display: flex;
+//   height: inherit;
+//   width: inherit;
+//   align-items: center;
+//   padding: .5rem;
+//   flex-flow: row nowrap;
+//   justify-content: space-between;
+//   width: 8rem;
+// `;
 
 const Dropdown = ({ options, title }) => {
   //setting state
