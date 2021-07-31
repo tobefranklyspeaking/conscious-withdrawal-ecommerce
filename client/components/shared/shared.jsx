@@ -3,7 +3,7 @@ import NavBar from './Navbar.jsx';
 import Overview from '../overview/Overview.js';
 import QandA from '../q&a/QandA.jsx';
 import Ratings from '../ratings-reviews/Ratings-reviews.js';
-import RelatedProducts from '../related-items/RelatedItems.js';
+import RelatedProducts from '../related-items/RelatedItems.jsx';
 
 const Shared = ({current}) => {
   return (
