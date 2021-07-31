@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Carousel from '../shared/Carousel.jsx'
 import Stars from '../shared/Stars.jsx';
 import Dropdown from '../shared/Dropdown.jsx';
+import Button from '../shared/Button.jsx';
+import { FaRegHeart, FaCheck } from 'react-icons/fa'
 //component styles
 const OverviewWrapper = styled.div`
   border: 1px solid coral;
@@ -146,7 +148,10 @@ const Overview = ({ current }) => {
             <Dropdown options={['#']} title="SELECT SIZE"/>
             <Dropdown options={['#']} title="1"/>
           </ButtonRow1>
-          <ButtonRow2>add + fave here</ButtonRow2>
+          <ButtonRow2>
+            <Button>Add To Bag</Button>
+            <Button><FaRegHeart/></Button>
+          </ButtonRow2>
           <FeatureChecklist>Checklist Here</FeatureChecklist>
         </Column2>
       </OverviewWrapper>
