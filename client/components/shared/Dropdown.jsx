@@ -4,15 +4,14 @@ import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import Button from './Button.jsx';
 //styling component elements
 const Wrapper = styled.div`
-  --custom-width: minmax(3rem, 8rem);
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-around;
-  width: var(--custom-width);
+  width: ${props => props.width || '8rem'};
   height: 3rem;
 `;
 
-const Dropdown = ({ options, title }) => {
+const Dropdown = ({ options, title, width }) => {
   //setting state
   const [opt, setOpt] = useState(options);
   const [isOpen, setOpen] = useState(false);
@@ -20,7 +19,7 @@ const Dropdown = ({ options, title }) => {
 
 
   return (
-    <Wrapper>
+    <Wrapper width={width}>
     {/*title button -> switches to choice */}
       <Button onClick={(e) => setOpen(!isOpen)}>
     {choice.length ? choice : title}{isOpen ? <FaAngleUp size="1rem"/> : <FaAngleDown size="1rem"/> }
