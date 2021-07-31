@@ -32,7 +32,7 @@ const RightArrowWrapper = styled.div`
 const CarouselWrapper = styled.div`
   position: relative;
   width: auto;
-  height: 65vh;
+  height: ${props => props.height || '65vh'};
   border: 1px solid black;
 `;
 
@@ -57,7 +57,7 @@ const Arrow = ({ direction, clickHandler}) => {
     );
 }
 /************ PRIMARY COMPONENT HERE ************/
-const Carousel = ({ urls }) => {
+const Carousel = ({ urls, height }) => {
   //state: index of images based on current item
   const [index, setIndex] = useState(0);
 
@@ -74,7 +74,7 @@ const Carousel = ({ urls }) => {
   };
 
   return (
-    <CarouselWrapper>
+    <CarouselWrapper height={height}>
       <Arrow direction="Left" clickHandler={previousSlide}/>
       <Slide url={urls[index]}/>
       <Arrow direction="Right" clickHandler={nextSlide}/>
