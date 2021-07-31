@@ -1,33 +1,17 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
-
+import Button from './Button.jsx';
 //styling component elements
 const Wrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  position: absolute;
   justify-content: space-around;
-  width: 8rem;
-`;
-const Button = styled.button`
-  background: transparent;
-  border: 1px solid black;
-  margin: 0 auto;
-  display: flex;
-  height: 3rem;
-  width: 8rem;
-  justify-content: space-between;
-  align-items: center;
-  padding: .5rem;
-display: flex;
-flex-flow: column nowrap;
-position: absolute;
-justify-content: space-around;
-width: 8rem;
+  width: ${props => props.width || '8rem'};
+  height: 4rem;
 `;
 
-const Dropdown = ({ options, title }) => {
+const Dropdown = ({ options, title, width }) => {
   //setting state
   const [opt, setOpt] = useState(options);
   const [isOpen, setOpen] = useState(false);
@@ -35,7 +19,7 @@ const Dropdown = ({ options, title }) => {
 
 
   return (
-    <Wrapper>
+    <Wrapper width={width}>
     {/*title button -> switches to choice */}
       <Button onClick={(e) => setOpen(!isOpen)}>
     {choice.length ? choice : title}{isOpen ? <FaAngleUp size="1rem"/> : <FaAngleDown size="1rem"/> }

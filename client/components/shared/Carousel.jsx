@@ -4,7 +4,6 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 
 //component styles
 const SlideWrapper = styled.div`
-  box-sizing: border-box;
   width: 100%;
   height: 100%;
   padding: 5rem;
@@ -18,26 +17,22 @@ const SlideWrapper = styled.div`
 const LeftArrowWrapper = styled.div`
   height: 15px;
   width: 15px;
-  box-sizing: border-box;
   position: absolute;
-  top: 50%
+  top: 50%;
 `;
 
 const RightArrowWrapper = styled.div`
   height: 15px;
   width: 15px;
-  box-sizing: border-box;
   position: absolute;
   top: 50%;
   left: calc(100% - 15px);
 `;
 
 const CarouselWrapper = styled.div`
-  margin-left: 20px;
-  box-sizing: border-box;
   position: relative;
-  width: 25%;
-  height: 25%;
+  width: auto;
+  height: ${props => props.height || '65vh'};
   border: 1px solid black;
 `;
 
@@ -52,19 +47,19 @@ const Slide = ({ url }) => {
 //arrow subcomponent for nav
 const Arrow = ({ direction, clickHandler}) => {
   return (
-    direction === 'Left' ? 
+    direction === 'Left' ?
       (<LeftArrowWrapper onClick={clickHandler}>
-        <AiOutlineArrowLeft />  
-      </LeftArrowWrapper>) : 
+        <AiOutlineArrowLeft />
+      </LeftArrowWrapper>) :
       (<RightArrowWrapper onClick={clickHandler}>
         <AiOutlineArrowRight />
       </RightArrowWrapper>)
     );
 }
 /************ PRIMARY COMPONENT HERE ************/
-const Carousel = ({ urls }) => {
+const Carousel = ({ urls, height }) => {
   //state: index of images based on current item
-  const [index, setIndex] = useState(0); 
+  const [index, setIndex] = useState(0);
 
   //event handlers to switch carousel to next/previous image
   const previousSlide = (e) => {
@@ -79,10 +74,10 @@ const Carousel = ({ urls }) => {
   };
 
   return (
-    <CarouselWrapper>
+    <CarouselWrapper height={height}>
       <Arrow direction="Left" clickHandler={previousSlide}/>
       <Slide url={urls[index]}/>
-      <Arrow direction="Right" clickHandler={nextSlide}/> 
+      <Arrow direction="Right" clickHandler={nextSlide}/>
     </CarouselWrapper>);
 };
 

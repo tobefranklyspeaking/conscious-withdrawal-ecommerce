@@ -1,7 +1,8 @@
-import React, {useStat, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import { CgSearch } from 'react-icons/cg';
-import QASearch from './subcomponents/QuestionSearch.jsx';
+import QuestionSearch from './subcomponents/QuestionSearch.jsx';
+import AddQuestion from './subcomponents/AddQuestion.jsx';
 
 const QandAStyle = styled.div`
   background-color: LightGray;
@@ -9,27 +10,17 @@ const QandAStyle = styled.div`
   margin-right: auto;
   width: 80%;
 `;
-
-const QandA = () => {
+const QandA = (current) => {
+  const [show, setShow] = useState(false);
 
   return (
     <>
       <QandAStyle>
         <div>Questions and Answers</div>
-        <QASearch/>
-        <div>
-          <span>
-            Question: Does this work?
-            </span>
-            <span>
-              Helpful? Yes 25 | Add Answer
-          </span>
-        </div>
-        <div>Answer: It does for now <b/>
-          <div>by User1337, May 1, 2019 | Helpful? Yes(0) | Report</div>
-        </div>
+        <QuestionSearch current={current} />
         <button>More Answered Questions</button>
-        <button>Add a question +</button>
+        <button onClick={() => setShow(true)} style={{cursor: 'pointer'}}>Add a question +</button>
+        <AddQuestion onClose={() => setShow(false)} current={current} show={show}/>
       </QandAStyle>
     </>
   );

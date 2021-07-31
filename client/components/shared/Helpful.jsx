@@ -25,7 +25,7 @@ const Helpful = ({ path, id, helpfulness, currentSort }) => {
       const putHelpful = async () => {
         let res = await axios.put(`${path}/${id}/helpful`);
       };
-      putHelpful();
+      // putHelpful();
     }
   });
 
