@@ -4,7 +4,6 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 
 //component styles
 const SlideWrapper = styled.div`
-  box-sizing: border-box;
   width: 100%;
   height: 100%;
   padding: 5rem;
@@ -18,7 +17,6 @@ const SlideWrapper = styled.div`
 const LeftArrowWrapper = styled.div`
   height: 15px;
   width: 15px;
-  box-sizing: border-box;
   position: absolute;
   top: 50%;
 `;
@@ -26,18 +24,15 @@ const LeftArrowWrapper = styled.div`
 const RightArrowWrapper = styled.div`
   height: 15px;
   width: 15px;
-  box-sizing: border-box;
   position: absolute;
   top: 50%;
   left: calc(100% - 15px);
 `;
 
 const CarouselWrapper = styled.div`
-  margin-left: 20px;
-  box-sizing: border-box;
   position: relative;
-  width: 25%;
-  height: 25%;
+  width: auto;
+  height: ${props => props.height || '65vh'};
   border: 1px solid black;
 `;
 
@@ -62,7 +57,7 @@ const Arrow = ({ direction, clickHandler}) => {
     );
 }
 /************ PRIMARY COMPONENT HERE ************/
-const Carousel = ({ urls }) => {
+const Carousel = ({ urls, height }) => {
   //state: index of images based on current item
   const [index, setIndex] = useState(0);
 
@@ -79,7 +74,7 @@ const Carousel = ({ urls }) => {
   };
 
   return (
-    <CarouselWrapper>
+    <CarouselWrapper height={height}>
       <Arrow direction="Left" clickHandler={previousSlide}/>
       <Slide url={urls[index]}/>
       <Arrow direction="Right" clickHandler={nextSlide}/>
