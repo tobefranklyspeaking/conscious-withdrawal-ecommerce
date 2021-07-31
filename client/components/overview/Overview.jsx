@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import Carousel from '../shared/Carousel.jsx'
 import Stars from '../shared/Stars.jsx';
 import Dropdown from '../shared/Dropdown.jsx';
 import Button from '../shared/Button.jsx';
-import { FaRegHeart, FaCheck } from 'react-icons/fa'
+import { FaRegHeart, FaCheck, FaPlus } from 'react-icons/fa'
 //component styles
 const OverviewWrapper = styled.div`
-  border: 1px solid coral;
   margin-left: auto;
   margin-right: auto;
   width: 80%;
@@ -21,6 +20,7 @@ const Banner = styled.div`
   grid-column: 1 / span 2;
   text-transform: uppercase;
   font-style: italic;
+  vertical-align: middle;
 `;
 
 //right side elements
@@ -60,13 +60,15 @@ const Price = styled.div`
 const ButtonRow1 = styled.div`
   height: 5rem;
   display: flex;
-  border: 1px solid black;
   justify-content: space-between;
+  align-items: center;
 `;
 const ButtonRow2 = styled.div`
   height: 5rem;
   display: flex;
-  border: 1px solid black;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
 `;
 const StyleHeader = styled.div`
   margin-top: -1rem;
@@ -100,26 +102,28 @@ const AddToBag = styled.button``;
 const Fav = styled.button``;
 const FeatureChecklist = styled.div`
   border: 1px solid black;
+  display: flex;
+  flex-flow: column nowrap;
 `;
 
 const Column1 = styled.div`
-  border: 1px solid black;
   display: flex;
   flex-flow: column nowrap;
 `;
 const Column2 = styled.div`
-  border: 1px solid blue;
   display: flex;
   flex-flow: column nowrap;
   padding-left: 1rem;
 `;
 
 const Overview = ({ current }) => {
+  const [styles, updateStyles] = useState([]);
+
   console.log('this is the current obj ---', current);
   return (
     <>
       <OverviewWrapper>
-        <Banner />
+        <Banner>SITE-WIDE ANNOUCEMENT MESSAGE!</Banner>
         <Column1>
           <Carousel urls={['#']}/>
           <Slogan>{current.slogan}</Slogan>
@@ -149,10 +153,16 @@ const Overview = ({ current }) => {
             <Dropdown options={['#']} title="1"/>
           </ButtonRow1>
           <ButtonRow2>
-            <Button>Add To Bag</Button>
-            <Button><FaRegHeart/></Button>
+            <Button height="4rem" width="70%">ADD TO BAG<FaPlus /></Button>
+            <Button height="4rem" width="3rem"><FaRegHeart/></Button>
           </ButtonRow2>
-          <FeatureChecklist>Checklist Here</FeatureChecklist>
+          <FeatureChecklist>
+            {console.log('inside feature checklist', current)}
+            <FaCheck />
+            <FaCheck />
+            <FaCheck />
+            <FaCheck />
+          </FeatureChecklist>
         </Column2>
       </OverviewWrapper>
     </>
