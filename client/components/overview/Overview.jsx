@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import Carousel from '../shared/Carousel.jsx'
 import Stars from '../shared/Stars.jsx';
+import Dropdown from '../shared/Dropdown.jsx';
 //component styles
 const OverviewWrapper = styled.div`
   border: 1px solid coral;
@@ -10,67 +11,92 @@ const OverviewWrapper = styled.div`
   width: 80%;
   display: grid;
   grid-template-columns: 1fr minmax(150px, 40%);
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
+`;
+
+const Banner = styled.div`
+  height: 2rem;
+  grid-column: 1 / span 2;
+  text-transform: uppercase;
+  font-style: italic;
 `;
 
 //right side elements
-const Description = styled.div`
-  margin-top: 20px;
-  height: 200px;
+const Slogan = styled.h2`
+  margin-top: 1rem;
   margin-left: 10%;
   width: 90%;
   align-self: end;
-  border: 1px solid black;
+`;
+const Description = styled.div`
+  margin-left: 10%;
+  width: 90%;
+  align-self: end;
 `;
 
 //left side elements
 const StarsWrapper = styled.div`
-  margin-top: 7rem;
+  margin-top: 2rem;
+  font-size: .8rem;
+  display: flex;
   & > a {
     margin-left: 1rem;
   }
 `;
-
 const Category = styled.div`
-  border: 1px solid black;
   padding: .5rem 0;
+  text-transform: uppercase;
+  color: grey;
 `;
 const Name = styled.div`
-  border; 1px solid black;
-  font-size: 24px;
+  font-size: 36px;
   font-weight: 700;
-  height: 5rem;
-
 `;
 const Price = styled.div`
-  border: 1px solid black;
+  margin: 1rem 0;
 `;
 const ButtonRow1 = styled.div`
   height: 5rem;
   display: flex;
   border: 1px solid black;
-  justify-content: center;
+  justify-content: space-between;
 `;
 const ButtonRow2 = styled.div`
   height: 5rem;
   display: flex;
   border: 1px solid black;
 `;
-const StyleSelector = styled.div`
-  border: 1px solid black;
-  height: 10rem;
+const StyleHeader = styled.div`
+  margin-top: -1rem;
+  & > h4 {
+    display: inline-block;
+  }
 `;
+const StyleSelector = styled.div`
+  height: 10rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 80%;
+`;
+const StylePlaceholder = styled.div`
+  border: 1px solid black;
+  border-radius: 50%;
+  background-color: #d3d3d3;
+  height: 3.75rem;
+  width: 3.75rem;
+`;
+
 const SizeButton = styled.button`
   border: 1px solid black;
   margin: 0 auto;
 `;
 const QtyButton = styled.button`
   border: 1px solid black;
-  margin: 0 auto;
 `;
 const AddToBag = styled.button``;
 const Fav = styled.button``;
-const BarChecklist = styled.div`
+const FeatureChecklist = styled.div`
   border: 1px solid black;
 `;
 
@@ -83,6 +109,7 @@ const Column2 = styled.div`
   border: 1px solid blue;
   display: flex;
   flex-flow: column nowrap;
+  padding-left: 1rem;
 `;
 
 const Overview = ({ current }) => {
@@ -90,10 +117,11 @@ const Overview = ({ current }) => {
   return (
     <>
       <OverviewWrapper>
+        <Banner />
         <Column1>
-          <h1>Overview</h1>
           <Carousel urls={['#']}/>
-          <Description>Description here</Description>
+          <Slogan>{current.slogan}</Slogan>
+          <Description>{current.description}</Description>
         </Column1>
         <Column2>
         <StarsWrapper>
@@ -102,14 +130,24 @@ const Overview = ({ current }) => {
         </StarsWrapper>
           <Category>{current.category}</Category>
           <Name>{current.name}</Name>
-          <Price>{current.default_price}</Price>
-          <StyleSelector>Style Selector here</StyleSelector>
+          <Price>{'$' + current.default_price}</Price>
+          <StyleHeader> <h4>STYLE ></h4> SELECTED STYLE</StyleHeader>
+          <StyleSelector>
+            <StylePlaceholder />
+            <StylePlaceholder />
+            <StylePlaceholder />
+            <StylePlaceholder />
+            <StylePlaceholder />
+            <StylePlaceholder />
+            <StylePlaceholder />
+            <StylePlaceholder />
+          </StyleSelector>
           <ButtonRow1>
-            <SizeButton />
-            <QtyButton />
+            <Dropdown options={['#']} title="SELECT SIZE"/>
+            <Dropdown options={['#']} title="1"/>
           </ButtonRow1>
           <ButtonRow2>add + fave here</ButtonRow2>
-          <BarChecklist>Checklist Here</BarChecklist>
+          <FeatureChecklist>Checklist Here</FeatureChecklist>
         </Column2>
       </OverviewWrapper>
     </>
