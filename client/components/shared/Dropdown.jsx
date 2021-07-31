@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   flex-flow: column nowrap;
   justify-content: space-around;
   width: ${props => props.width || '8rem'};
-  height: 3rem;
+  height: 4rem;
 `;
 
 const Dropdown = ({ options, title, width }) => {

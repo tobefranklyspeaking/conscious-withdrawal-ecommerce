@@ -68,7 +68,6 @@ const ButtonRow2 = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
 `;
 const StyleHeader = styled.div`
   margin-top: -1rem;
@@ -149,7 +148,7 @@ const Overview = ({ current }) => {
             <StylePlaceholder />
           </StyleSelector>
           <ButtonRow1>
-            <Dropdown options={['#']} title="SELECT SIZE"/>
+            <Dropdown options={['#']} title="SELECT SIZE" width="60%"/>
             <Dropdown options={['#']} title="1"/>
           </ButtonRow1>
           <ButtonRow2>

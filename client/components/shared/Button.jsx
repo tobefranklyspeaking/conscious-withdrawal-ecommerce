@@ -6,7 +6,7 @@ const Button = styled.button`
   border: 1.5px solid black;
   display: flex;
   height: ${props => props.height || 'inherit'};
-  width: ${props => props.width || '8rem'};
+  width: ${props => props.width || 'inherit'};
   align-items: center;
   padding: .5rem 1rem;
   justify-content: space-between;
