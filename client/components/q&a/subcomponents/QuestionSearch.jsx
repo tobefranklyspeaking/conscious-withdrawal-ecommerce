@@ -5,16 +5,9 @@ import axios from 'axios';
 import Blocks from './Blocks.jsx';
 
 const SearchBarStyle = styled.input`
-  width: 95%;
+  width: 100%;
   line-height: 20%;
   padding: 2vh 2vh;
-`;
-
-const SearchButton = styled.button`
-width: 33px;
-height: 33px;
-border: 0;
-padding-bottom: 0;
 `;
 
 const Filtered = styled.div`
@@ -26,9 +19,18 @@ const Filtered = styled.div`
 
 const List = styled.div`
   height: auto;
-  max-height 300px;
+  max-height: 300px;
   overflow-y: scroll;
 `;
+
+const SearchButton = {
+  position: 'relative',
+  top: -32,
+  left: 733,
+  width: 18,
+  height: 18
+};
+
 
 const QASearch = ({ current }) => {
   const [search, setSearch] = useState('');
@@ -61,7 +63,7 @@ const QASearch = ({ current }) => {
           value={search}
           onChange={e => onChange(e.target.value)}
           placeholder='Have a question? Search for answers…' />
-        <CgSearch onClick={() => handleClick()} />
+        <CgSearch onClick={() => handleClick()} style={SearchButton} />
       </div>
       <List>
         {Blocks(allQuestions)}

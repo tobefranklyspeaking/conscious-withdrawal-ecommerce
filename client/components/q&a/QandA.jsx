@@ -5,10 +5,16 @@ import QuestionSearch from './subcomponents/QuestionSearch.jsx';
 import AddQuestion from './subcomponents/AddQuestion.jsx';
 
 const QandAStyle = styled.div`
-  background-color: LightGray;
+  margin: 1rem;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 90%;
+`;
+
+const Component = styled.div`
+  font-weight: lighter;
+  margin-bottom: 1rem;
+
 `;
 const QandA = (current) => {
   const [show, setShow] = useState(false);
@@ -16,7 +22,7 @@ const QandA = (current) => {
   return (
     <>
       <QandAStyle>
-        <div>Questions and Answers</div>
+        <Component>QUESTIONS AND ANSWERS</Component>
         <QuestionSearch current={current} />
         <button>More Answered Questions</button>
         <button onClick={() => setShow(true)} style={{cursor: 'pointer'}}>Add a question +</button>

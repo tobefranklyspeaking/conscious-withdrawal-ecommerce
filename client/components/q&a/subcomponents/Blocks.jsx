@@ -1,6 +1,78 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import AddAnswer from './AddAnswer.jsx';
+import styled from 'styled-components';
+import helpful from '../../shared/helpful.jsx';
+
+const Accordian = styled.div`
+
+`;
+
+const Container = styled.div`
+  margin-bottom: 10px;
+`;
+
+const Wrap = styled.div`
+
+`;
+
+const Bold = styled.span`
+  font-weight: bold;
+`;
+
+const SpaceQ = styled.span`
+  font-weight: lighter;
+  font-size: 12px;
+  margin-bottom: 5px;
+  margin-left: 1rem;
+  float: right;
+  cursor: pointer;
+`;
+
+const SpaceA = styled.span`
+  font-weight: lighter;
+  font-size: 12px;
+  margin-bottom: 5px;
+  margin-left: 1rem;
+  cursor: pointer;
+`;
+
+const SpaceAA = styled.span`
+  color: gray;
+  font-weight: lighter;
+  font-size: 10px;
+  margin-bottom: 5px;
+  margin-left: .7rem;
+`;
+
+const AnswerAdditions = styled.div`
+  font-weight: lighter;
+  font-size: 13px;
+  margin-bottom: 5px;
+`;
+
+const LineA = styled.div`
+  margin-top: 5px;
+  margin-bottom: 5px;
+`;
+
+const LineB = styled.div`
+  font-size: 8px;
+  margin-top: 5px;
+  margin-bottom: 25px;
+  font-weight: lighter;
+  font-size: 13px;
+  margin-bottom: 5px;
+`;
+
+const Details = styled.div`
+  margin-top: 5px;
+  margin-bottom: 5px;
+`;
+
+const Answers = styled.div`
+  max-height: 50vh;
+`;
 
 const Blocks = (props) => {
   const [moreAnswers, setMoreAnswers] = useState(true);
@@ -9,19 +81,25 @@ const Blocks = (props) => {
   const Questions = (question) => {
     console.log(question)
     return (
-      <div key={question.question_id}>
-        <div >
-          <span>
-            Q: {question.question_body}
-          </span>
-          <span> Helpful? ({question.question_helpfulness})| </span>
-          <span style={{cursor: 'pointer'}} onClick={() => setShow(true)}>Add Answer</span>
-          <AddAnswer onClose={() => setShow(false)} current={question} show={show}/>
-        </div>
-        <div>
+      <Accordian key={question.question_id}>
+        <Container >
+          <Wrap>
+            <Bold>
+              Q: {question.question_body}
+            </Bold>
+            <SpaceQ cursor='default'>
+              <SpaceQ onClick={() => setShow(true)}><u>Add Answer</u></SpaceQ>
+              <SpaceQ cursor='default'>|</SpaceQ>
+              <SpaceQ><u>Yes</u> ({question.question_helpfulness})</SpaceQ>
+              <SpaceQ cursor='default'> Helpful?</SpaceQ>
+              <AddAnswer onClose={() => setShow(false)} current={question} show={show} />
+            </SpaceQ>
+          </Wrap>
+        </Container>
+        <Container>
           {Answers(question)}
-        </div>
-      </div>
+        </Container>
+      </Accordian>
     )
   }
 
@@ -40,8 +118,8 @@ const Blocks = (props) => {
     //     </div>
     //   )
     // } else if (moreAnswers === false) {
-      return (
-        Object.keys(answer.answers)
+    return (
+      Object.keys(answer.answers)
         .sort((each, next) => {
           let a = answer.answers[each].helpfulness;
           let b = answer.answers[next].helpfulness;
@@ -56,8 +134,22 @@ const Blocks = (props) => {
           if (answerObj.body !== undefined) {
             return (
               <div key={each}>
-                <div> A: {answerObj.body} </div>
-                  <span>by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} | Helpful? Yes ({answerObj.helpfulness}) | Report</span>
+                <AnswerAdditions>
+                  <LineA>
+                    <Bold> A: </Bold>
+                    {answerObj.body}
+                  </LineA>
+                  <LineB >
+                    <SpaceAA> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </SpaceAA>
+                  <SpaceAA> | </SpaceAA>
+
+                  <SpaceAA> Helpful? </SpaceAA>
+                  <SpaceAA cursor='pointer'> <u>Yes</u> ({answerObj.helpfulness}) </SpaceAA>
+                  <SpaceAA> | </SpaceAA>
+                  <SpaceAA cursor='pointer'> <u>Report</u> </SpaceAA>
+
+                  </LineB>
+                </AnswerAdditions>
               </div>
             )
           } else {
@@ -67,7 +159,7 @@ const Blocks = (props) => {
           }
           <button>Load more answers</button>
         })
-      )
+    )
     // } else {
     //   return <div>No answers to question.</div>
     // }
