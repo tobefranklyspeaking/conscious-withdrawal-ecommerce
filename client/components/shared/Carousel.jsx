@@ -32,7 +32,7 @@ const RightArrowWrapper = styled.div`
 const CarouselWrapper = styled.div`
   position: relative;
   width: auto;
-  height: 50vh;
+  height: 65vh;
   border: 1px solid black;
 `;
 
@@ -47,10 +47,10 @@ const Slide = ({ url }) => {
 //arrow subcomponent for nav
 const Arrow = ({ direction, clickHandler}) => {
   return (
-    direction === 'Left' ? 
+    direction === 'Left' ?
       (<LeftArrowWrapper onClick={clickHandler}>
-        <AiOutlineArrowLeft />  
-      </LeftArrowWrapper>) : 
+        <AiOutlineArrowLeft />
+      </LeftArrowWrapper>) :
       (<RightArrowWrapper onClick={clickHandler}>
         <AiOutlineArrowRight />
       </RightArrowWrapper>)
@@ -59,7 +59,7 @@ const Arrow = ({ direction, clickHandler}) => {
 /************ PRIMARY COMPONENT HERE ************/
 const Carousel = ({ urls }) => {
   //state: index of images based on current item
-  const [index, setIndex] = useState(0); 
+  const [index, setIndex] = useState(0);
 
   //event handlers to switch carousel to next/previous image
   const previousSlide = (e) => {
@@ -77,7 +77,7 @@ const Carousel = ({ urls }) => {
     <CarouselWrapper>
       <Arrow direction="Left" clickHandler={previousSlide}/>
       <Slide url={urls[index]}/>
-      <Arrow direction="Right" clickHandler={nextSlide}/> 
+      <Arrow direction="Right" clickHandler={nextSlide}/>
     </CarouselWrapper>);
 };
 
