@@ -28,7 +28,10 @@ const Review = styled.div`
 display: inline-block;
 text-align: center;
 vertical-align: middle;
-height:550px;
+`;
+
+const ReviewContainer = styled.div`
+height:440px;
 overflow: auto;
 `;
 
@@ -45,6 +48,7 @@ const Ratings = ({ current }) => {
   const [reviews, setReviews] = useState([]);
   const [currentReview, setCurrentReview] = useState({});
   const [sort, setSort] = useState('relevent');
+  const [isFiltered, setIsFiltered] = useState([]);
 
 
 
@@ -62,6 +66,35 @@ const Ratings = ({ current }) => {
   }, [current, sort]);
 
 
+  let buildFilter = (filter) => {
+    let query = {};
+    for (let keys in filter) {
+        if (filter[keys].constructor === Array && filter[keys].length > 0) {
+            query[keys] = filter[keys];
+        }
+    }
+    return query;
+};
+
+let filterData = (data, query) => {
+    const filteredData = data.filter( (item) => {
+        for (let key in query) {
+            if (item[key] === undefined || !query[key].includes(item[key])) {
+                return false;
+            }
+        }
+        return true;
+    });
+    return filteredData;
+};
+
+let filter = {
+    rating: isFiltered
+};
+  let query = buildFilter(filter);
+  let filteredReviews = filterData(reviews, buildFilter(filter))
+  console.log('---',filteredReviews)
+
   return (
     <>
       <RatingsStyle>
@@ -71,12 +104,13 @@ const Ratings = ({ current }) => {
       <Wrapper>
         <Rating>
           <h3>RATINGS & REVIEWS</h3>
-        <Summary id={current.id} />
+        <Summary id={current.id} setIsFiltered={setIsFiltered}/>
         </Rating>
         <Review>
           <TotalReviews>{reviews.length} reviews, sorted by </TotalReviews>
           <Inline><ReviewDropdown options={["helpful", "newest", "relevent"]} setSort={setSort} /> </Inline>
-          {reviews.map((review, index) => (<><div>
+          <ReviewContainer>
+          {filteredReviews.map((review, index) => (<><div>
             <Stars currentRating={review.rating}/>
             <h6>{review.reviewer_name}, {review.date}</h6>
             <h3 key={index}>{review.summary}</h3>
@@ -84,6 +118,7 @@ const Ratings = ({ current }) => {
             <Helpful path={'/reviews'} id={review.review_id} helpfulness={review.helpfulness} currentSort={sort}/>
             <Report path={'/reviews'} id={review.review_id} />
           </div></>))}
+          </ReviewContainer>
         </Review>
       </Wrapper>
     </>

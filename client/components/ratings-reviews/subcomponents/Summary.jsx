@@ -16,8 +16,8 @@ const Wrapper = styled.div`
 
 `;
 
-const Summary = ({ id }) => {
-  console.log('id in summary', id);
+const Summary = ({ id, setIsFiltered }) => {
+  //console.log('id in summary', id);
 
   const [metaData, setMetaData] = useState({});
   const [characteristics, setCharacteristics] = useState({});
@@ -65,7 +65,7 @@ const Summary = ({ id }) => {
     total += Number(ratings['3']);
     total += Number(ratings['4']);
     total += Number(ratings['5']);
-    console.log('total', total);
+    //console.log('total', total);
     return total;
   };
 
@@ -110,7 +110,7 @@ const Summary = ({ id }) => {
     <span><Stars currentRating={averageRating}> </Stars></span>
     <h5>{percentRecommended}% of reviews recommend this product</h5>
     </Wrapper>
-    <RatingBreakdown ratings={ratings} numRatings={totalRatings()}/>
+    <RatingBreakdown ratings={ratings} numRatings={totalRatings()} setIsFiltered={setIsFiltered}/>
     </>
   );
 

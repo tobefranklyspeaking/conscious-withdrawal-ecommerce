@@ -14,7 +14,7 @@ const StarNum = styled.span`
 `;
 
 
-const RatingBreakdown = ({ratings, numRatings}) => {
+const RatingBreakdown = ({ratings, numRatings, setIsFiltered}) => {
   //console.log('ratibgs: num ratings', ratings, numRatings);
 
   const [one, setOne] = useState(0);
@@ -43,11 +43,11 @@ const RatingBreakdown = ({ratings, numRatings}) => {
 
   return (
     <>
-    <StarRating><StarNum>5 stars </StarNum><ProgressBar percentage={five} /> </StarRating>
-    <StarRating><StarNum>4 stars </StarNum><ProgressBar percentage={four} /> </StarRating>
-    <StarRating><StarNum>3 stars </StarNum><ProgressBar percentage={three} /> </StarRating>
-    <StarRating><StarNum>2 stars </StarNum><ProgressBar percentage={two} /> </StarRating>
-    <StarRating><StarNum>1 stars </StarNum><ProgressBar percentage={one} /> </StarRating>
+    <StarRating><StarNum onClick={(e) => {setIsFiltered([5])}}>5 stars </StarNum><ProgressBar percentage={five} /> </StarRating>
+    <StarRating><StarNum onClick={(e) => {setIsFiltered([4])}}>4 stars </StarNum><ProgressBar percentage={four} /> </StarRating>
+    <StarRating><StarNum onClick={(e) => {setIsFiltered([3])}}>3 stars </StarNum><ProgressBar percentage={three} /> </StarRating>
+    <StarRating><StarNum onClick={(e) => {setIsFiltered([2])}}>2 stars </StarNum><ProgressBar percentage={two} /> </StarRating>
+    <StarRating><StarNum onClick={(e) => {setIsFiltered([1])}}>1 stars </StarNum><ProgressBar percentage={one} /> </StarRating>
     </>
   );
 
