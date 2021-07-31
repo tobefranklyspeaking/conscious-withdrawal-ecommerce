@@ -50,9 +50,7 @@ const Ratings = ({ current }) => {
   const [sort, setSort] = useState('relevent');
   const [isFiltered, setIsFiltered] = useState([]);
 
-
-
-
+  console.log('filter in r-r', isFiltered);
 
   useEffect(() => {
     const getReviews = async () => {
@@ -66,34 +64,40 @@ const Ratings = ({ current }) => {
   }, [current, sort]);
 
 
-  let buildFilter = (filter) => {
-    let query = {};
-    for (let keys in filter) {
-        if (filter[keys].constructor === Array && filter[keys].length > 0) {
-            query[keys] = filter[keys];
-        }
-    }
-    return query;
+
+let buildFilter = (filter) => {
+  let query = {};
+  for (let keys in filter) {
+      if (filter[keys].constructor === Array && filter[keys].length > 0) {
+          query[keys] = filter[keys];
+      }
+  }
+  return query;
 };
 
 let filterData = (data, query) => {
-    const filteredData = data.filter( (item) => {
-        for (let key in query) {
-            if (item[key] === undefined || !query[key].includes(item[key])) {
-                return false;
-            }
-        }
-        return true;
-    });
-    return filteredData;
+  const filteredData = data.filter( (item) => {
+      for (let key in query) {
+          if (item[key] === undefined || !query[key].includes(item[key])) {
+              return false;
+          }
+      }
+      return true;
+  });
+  return filteredData;
 };
 
 let filter = {
-    rating: isFiltered
+  rating: isFiltered
 };
-  let query = buildFilter(filter);
-  let filteredReviews = filterData(reviews, buildFilter(filter))
-  console.log('---',filteredReviews)
+let query = buildFilter(filter);
+let filteredReviews = filterData(reviews, buildFilter(filter));
+console.log('---',filteredReviews);
+
+
+const handleFilterChange = (newVal) => {
+  setIsFiltered(newVal);
+};
 
   return (
     <>
@@ -104,7 +108,7 @@ let filter = {
       <Wrapper>
         <Rating>
           <h3>RATINGS & REVIEWS</h3>
-        <Summary id={current.id} setIsFiltered={setIsFiltered}/>
+        <Summary id={current.id} setRatingFilter={handleFilterChange}/>
         </Rating>
         <Review>
           <TotalReviews>{reviews.length} reviews, sorted by </TotalReviews>

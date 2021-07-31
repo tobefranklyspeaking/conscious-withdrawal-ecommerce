@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 
 `;
 
-const Summary = ({ id, setIsFiltered }) => {
+const Summary = ({ id, setRatingFilter }) => {
   //console.log('id in summary', id);
 
   const [metaData, setMetaData] = useState({});
@@ -24,6 +24,7 @@ const Summary = ({ id, setIsFiltered }) => {
   const [ratings, setRatings] = useState({});
   const [recommended, setRecommended] = useState({});
   const [avgRating, setAvgRating] = useState(0);
+  const [fil, setFil] = useState([]);
 
   /*
   useEffect(() => {
@@ -52,6 +53,10 @@ const Summary = ({ id, setIsFiltered }) => {
     }
   }, [id]);
 
+  useEffect(() => {
+    console.log('this is called', fil);
+    setRatingFilter(fil);
+  }, [fil]);
 
   //console.log('meta date: wbakfhbs', metaData);
 
@@ -103,6 +108,14 @@ const Summary = ({ id, setIsFiltered }) => {
   };
   let percentRecommended = percentRec();
 
+  const handleFilterChange = (newVal) => {
+    setFil(newVal);
+    console.log('summary kskns : ', fil);
+    setRatingFilter(fil);
+  };
+
+
+
   return (
     <>
     <Wrapper>
@@ -110,7 +123,7 @@ const Summary = ({ id, setIsFiltered }) => {
     <span><Stars currentRating={averageRating}> </Stars></span>
     <h5>{percentRecommended}% of reviews recommend this product</h5>
     </Wrapper>
-    <RatingBreakdown ratings={ratings} numRatings={totalRatings()} setIsFiltered={setIsFiltered}/>
+    <RatingBreakdown ratings={ratings} numRatings={totalRatings()} setRatingFilter={handleFilterChange}/>
     </>
   );
 
