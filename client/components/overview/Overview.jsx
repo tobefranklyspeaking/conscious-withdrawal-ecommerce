@@ -102,6 +102,8 @@ const QtyButton = styled.button`
 const AddToBag = styled.button``;
 const Fav = styled.button``;
 const FeatureChecklist = styled.div`
+  margin-top: 1.5rem;
+  margin-left: 1rem;
   display: flex;
   flex-flow: column nowrap;
 `;
