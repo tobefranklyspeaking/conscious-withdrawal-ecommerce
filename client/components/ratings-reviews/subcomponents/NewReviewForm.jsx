@@ -29,6 +29,22 @@ const CharLabel = styled.label`
 display: inline-block;
 `;
 
+const ReviewSummary = styled.div`
+`;
+
+const ReviewBody = styled.div`
+`;
+
+const ReviewPhotos = styled.div`
+`;
+
+const ReviewName = styled.div`
+`;
+
+const ReviewEmail = styled.div`
+`;
+
+
 const NewReviewForm = ({ charOptions }) => {
   console.log('hgjvh', charOptions);
   const [size, setSize] = useState(null);
@@ -325,8 +341,40 @@ const NewReviewForm = ({ charOptions }) => {
           </div>
         }
 
-      </ProductChars>
+      </ProductChars><br></br>
 
+      <ReviewSummary>
+        <label>
+          Review Summary: <br></br>
+          <input type='text' name='reviewsummary' placeholder='Example: Best purchase ever!' maxLength='60'/>
+        </label>
+      </ReviewSummary><br></br>
+      <ReviewBody>
+      <label>
+          *Review Body: <br></br>
+          <input type='text' name='reviewbody' placeholder='Why do you like the product or not?' maxLength='1000' minLength='50' required/>
+        </label>
+      </ReviewBody><br></br>
+      <ReviewPhotos>
+        <label>
+          Enter Photo Url: <br></br>
+          <input type='text' name='reviewphoto'/>
+        </label>
+      </ReviewPhotos><br></br>
+      <ReviewName>
+        <label>
+          *Review Name: <br></br>
+          <input type='text' name='reviewname' placeholder='Example: Jackson11!' maxLength='60' required/>
+        </label>
+      </ReviewName><br></br>
+      <ReviewEmail>
+        <label>
+          *Review Email: <br></br>
+          <input type='text' name='reviewemail' placeholder='Example: jackson11@email.com' maxLength='60' required/>
+        </label>
+      </ReviewEmail>
+
+        <input type='submit' value='Submit'/>
 
 
 
