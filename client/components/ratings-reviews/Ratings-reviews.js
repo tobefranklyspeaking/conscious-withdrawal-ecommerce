@@ -7,7 +7,7 @@ import Report from '../shared/Report.jsx';
 import ReviewDropdown from '../shared/ReviewDropdown.jsx';
 import Stars from '../shared/Stars.jsx';
 import Summary from './subcomponents/Summary.jsx';
-import RatingBreakdown from './subcomponents/Rating-Breakdown.jsx';
+import NewReview from './subcomponents/NewReview.jsx';
 
 const RatingsStyle = styled.div`
   background-color: LightGray;
@@ -69,6 +69,7 @@ const Ratings = ({ current }) => {
   const [sort, setSort] = useState('relevent');
   const [isFiltered, setIsFiltered] = useState([]);
   const [reviewsDisplayed, setReviewsDisplayed] = useState([]);
+  const [show, setShow] = useState(false);
 
 
   useEffect(() => {
@@ -165,7 +166,8 @@ console.log('---',filteredReviews);
           </ReviewContainer>
           {(reviewCount < reviews.length && reviews.length > 2) &&
           <button onClick={(e) => {setReviewCount(reviewCount + 2)}}>MORE REVIEWS</button>}
-          <button>ADD A REVIEW +</button>
+          <button onClick={() => setShow(true)}>Add a Review +</button>
+        <NewReview onClose={() => setShow(false)} current={current} show={show}/>
         </Review>
       </Wrapper>
     </>
