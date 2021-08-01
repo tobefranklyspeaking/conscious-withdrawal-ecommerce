@@ -1,5 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import NewReviewForm from './NewReviewForm.jsx';
 
 const Modal = styled.div`
   position: fixed;
@@ -33,12 +35,27 @@ const ModalBody = styled.div`
   height: 50vh;
   border-top: 1px solid #eee;
   border bottom: 1px solid #eee;
+  overflow: auto;
 `;
 
 const ModalFooter = styled.div`
   padding: 10px;
 `;
 const NewReview = ({current, show, onClose}) => {
+  const [charOptions, setCharOptions] = useState({});
+
+  useEffect(async () => {
+    try {
+      let res = await axios.get(`/reviews/meta?product_id=${current.id}`);
+      setCharOptions(res.data.characteristics);
+      console.log('successful get meta data: ', res.data);
+    } catch (err) {
+      console.error(err)
+    }
+  }, [current]);
+
+  console.log('chars --', charOptions);
+
   if (!show) {
     return null;
   }
@@ -50,10 +67,10 @@ const NewReview = ({current, show, onClose}) => {
         </ModalHeader>
         <ModalBody>
           Add Forms Here
+          <NewReviewForm />
         </ModalBody>
         <ModalFooter className="modal-footer">
-          <button onClick={onClose} className="button">Cancel</button>
-          <button className="submit">Submit</button>
+          <button onClick={onClose} className="button">Close</button>
         </ModalFooter>
       </ModalContent>
     </Modal>
@@ -61,3 +78,11 @@ const NewReview = ({current, show, onClose}) => {
 }
 
 export default NewReview;
+
+
+/*
+<ModalFooter className="modal-footer">
+          <button onClick={onClose} className="button">Cancel</button>
+          <button className="submit">Submit</button>
+ </ModalFooter>
+*/
