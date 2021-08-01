@@ -11,9 +11,9 @@ const App = () => {
 
   useEffect(async () => {
     try {
-      let res = await axios.get('/products/19090');
+      let res = await axios.get('/products/19092');
       updateCurrent(res.data);
-      console.log('successful get');
+      console.log('successful get with item: ', res.data);
     } catch (err) {
       console.error(err)
     }
