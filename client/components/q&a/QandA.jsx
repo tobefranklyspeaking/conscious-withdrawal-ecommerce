@@ -9,6 +9,7 @@ const QandAStyle = styled.div`
   margin-left: auto;
   margin-right: auto;
   width: 90%;
+  height: 90%;
 `;
 
 const Buttons = styled.button`

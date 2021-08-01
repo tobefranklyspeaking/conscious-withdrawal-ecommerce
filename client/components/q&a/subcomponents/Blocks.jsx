@@ -62,6 +62,10 @@ const LineB = styled.div`
     margin-bottom: 5px;
     margin-left: .7rem;
   }
+
+  div {
+    margin-top: 1rem;
+  }
 `;
 
 const Details = styled.div`
@@ -70,7 +74,7 @@ const Details = styled.div`
 `;
 
 const Answers = styled.div`
-  max-height: 50vh;
+
 `;
 
 const Images = styled.span`
@@ -82,7 +86,7 @@ const Img = styled.img`
   max-height: 200px;
   width: auto;
   height: auto;
-  margin: 1rem;
+  margin: 1rem 1rem 0 0;
 `;
 
 const Blocks = (props) => {
@@ -168,12 +172,12 @@ const Blocks = (props) => {
                       </span>
                     </Images>
                     <div>
-                    <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
-                    <span> | </span>
-                    <span> Helpful? </span>
-                    <span cursor='pointer'> <u>Yes</u> ({answerObj.helpfulness}) </span>
-                    <span> | </span>
-                    <span cursor='pointer'> <u>Report</u> </span>
+                      <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
+                      <span> | </span>
+                      <span> Helpful? </span>
+                      <span cursor='pointer'> <u>Yes</u> ({answerObj.helpfulness}) </span>
+                      <span> | </span>
+                      <span cursor='pointer'> <u>Report</u> </span>
                     </div>
                   </LineB>
                 </AnswerAdditions>

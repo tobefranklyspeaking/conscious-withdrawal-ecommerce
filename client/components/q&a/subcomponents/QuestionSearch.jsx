@@ -14,6 +14,7 @@ const SearchBarStyle = styled.input`
 
 const Search = styled.div`
   position: relative;
+  height: auto;
   width: auto;
 `;
 const Filtered = styled.div`
@@ -25,7 +26,7 @@ const Filtered = styled.div`
 
 const List = styled.div`
   height: auto;
-  max-height: 300px;
+  max-height: 50vh;
   overflow-y: scroll;
 `;
 
