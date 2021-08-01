@@ -6,10 +6,15 @@ import Blocks from './Blocks.jsx';
 
 const SearchBarStyle = styled.input`
   width: 100%;
+  display: flex;
   line-height: 20%;
   padding: 2vh 2vh;
 `;
 
+const Search = styled.div`
+  position: relative;
+  width: auto;
+`;
 const Filtered = styled.div`
   height: auto;
   width: auto;
@@ -23,13 +28,13 @@ const List = styled.div`
   overflow-y: scroll;
 `;
 
-const SearchButton = {
-  position: 'relative',
-  top: -32,
-  left: 733,
-  width: 18,
-  height: 18
-};
+const SearchButton = styled.div`
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 18px;
+  height: 18px;
+`;
 
 
 const QASearch = ({ current }) => {
@@ -57,16 +62,20 @@ const QASearch = ({ current }) => {
 
   return (
     <>
-      <div style={{ width: 'auto' }}>
+      <Search>
         <SearchBarStyle
           type='text'
           value={search}
           onChange={e => onChange(e.target.value)}
-          placeholder='Have a question? Search for answers…' />
-        <CgSearch onClick={() => handleClick()} style={SearchButton} />
-      </div>
+          placeholder='Have a question? Search for answers…'>
+        </SearchBarStyle>
+        <SearchButton>
+          <CgSearch onClick={() => handleClick()} />
+        </SearchButton>
+      </Search>
       <List>
         {Blocks(allQuestions)}
+        <button>LOAD MORE ANSWERS</button>
       </List>
     </>
   )

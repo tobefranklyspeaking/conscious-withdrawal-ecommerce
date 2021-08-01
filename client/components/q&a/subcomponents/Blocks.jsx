@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import AddAnswer from './AddAnswer.jsx';
 import styled from 'styled-components';
-import helpful from '../../shared/helpful.jsx';
 
 const Accordian = styled.div`
 
@@ -37,14 +36,6 @@ const SpaceA = styled.span`
   cursor: pointer;
 `;
 
-const SpaceAA = styled.span`
-  color: gray;
-  font-weight: lighter;
-  font-size: 10px;
-  margin-bottom: 5px;
-  margin-left: .7rem;
-`;
-
 const AnswerAdditions = styled.div`
   font-weight: lighter;
   font-size: 13px;
@@ -63,6 +54,14 @@ const LineB = styled.div`
   font-weight: lighter;
   font-size: 13px;
   margin-bottom: 5px;
+
+  span {
+    color: gray;
+    font-weight: lighter;
+    font-size: 10px;
+    margin-bottom: 5px;
+    margin-left: .7rem;
+  }
 `;
 
 const Details = styled.div`
@@ -79,7 +78,7 @@ const Blocks = (props) => {
   const [show, setShow] = useState(false);
 
   const Questions = (question) => {
-    console.log(question)
+    // console.log(question)
     return (
       <Accordian key={question.question_id}>
         <Container >
@@ -104,8 +103,9 @@ const Blocks = (props) => {
   }
 
 
-  const Answers = (answer) => {
-    // console.log(moreAnswers, Object.keys(answer.answers));
+  const Answers = ({ answers }) => {
+    console.log(answers);
+
     //template tag html
     // if (Object.keys(answer.answers) > 1 && moreAnswers === true) {
     //   return (
@@ -119,10 +119,10 @@ const Blocks = (props) => {
     //   )
     // } else if (moreAnswers === false) {
     return (
-      Object.keys(answer.answers)
+      Object.keys(answers)
         .sort((each, next) => {
-          let a = answer.answers[each].helpfulness;
-          let b = answer.answers[next].helpfulness;
+          let a = answers[each].helpfulness;
+          let b = answers[next].helpfulness;
           if (a > b) {
             return -1;
           } else if (b < a) {
@@ -130,7 +130,7 @@ const Blocks = (props) => {
           } else return 0;
         })
         .map(each => {
-          let answerObj = answer.answers[each];
+          let answerObj = answers[each];
           if (answerObj.body !== undefined) {
             return (
               <div key={each}>
@@ -140,15 +140,23 @@ const Blocks = (props) => {
                     {answerObj.body}
                   </LineA>
                   <LineB >
-                    <SpaceAA> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </SpaceAA>
-                  <SpaceAA> | </SpaceAA>
-
-                  <SpaceAA> Helpful? </SpaceAA>
-                  <SpaceAA cursor='pointer'> <u>Yes</u> ({answerObj.helpfulness}) </SpaceAA>
-                  <SpaceAA> | </SpaceAA>
-                  <SpaceAA cursor='pointer'> <u>Report</u> </SpaceAA>
-
+                    <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
+                    <span> | </span>
+                    <span> Helpful? </span>
+                    <span cursor='pointer'> <u>Yes</u> ({answerObj.helpfulness}) </span>
+                    <span> | </span>
+                    <span cursor='pointer'> <u>Report</u> </span>
                   </LineB>
+                  {/* <LineB>
+                    <p>Yes, as you can see in these photos</p>
+                    <div>{answerObj.photos ? answerObj.photos.map(each => console.log(each)) : 'No photos at this time'}</div>
+                    <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
+                    <span> | </span>
+                    <span> Helpful? </span>
+                    <span cursor='pointer'> <u>Yes</u> ({answerObj.helpfulness}) </span>
+                    <span> | </span>
+                    <span cursor='pointer'> <u>Report</u> </span>
+                  </LineB> */}
                 </AnswerAdditions>
               </div>
             )
