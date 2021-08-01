@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import axios from 'axios';
+import moment from 'moment';
 import Helpful from '../shared/Helpful.jsx';
 import Report from '../shared/Report.jsx';
 import ReviewDropdown from '../shared/ReviewDropdown.jsx';
@@ -155,7 +156,7 @@ console.log('---',filteredReviews);
           <ReviewContainer><>
           {finalReviews.map((review, index) => (<div key={index}>
             <Stars currentRating={review.rating}/>
-            <h6>{review.reviewer_name}, {review.date}</h6>
+            <h6>{review.reviewer_name}, {moment(review.date).format('ll')}</h6>
             <h3 key={index}>{review.summary}</h3>
             <h5>{review.body}</h5>
             <Helpful path={'/reviews'} id={review.review_id} helpfulness={review.helpfulness} currentSort={sort}/>
@@ -163,7 +164,8 @@ console.log('---',filteredReviews);
           </div>))}</>
           </ReviewContainer>
           {(reviewCount < reviews.length && reviews.length > 2) &&
-          <button onClick={(e) => {setReviewCount(reviewCount + 2)}}>More Reviews</button>}
+          <button onClick={(e) => {setReviewCount(reviewCount + 2)}}>MORE REVIEWS</button>}
+          <button>ADD A REVIEW +</button>
         </Review>
       </Wrapper>
     </>
