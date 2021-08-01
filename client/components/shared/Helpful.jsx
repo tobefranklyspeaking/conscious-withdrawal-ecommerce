@@ -27,6 +27,7 @@ const Helpful = ({ path, id, helpfulness, currentSort }) => {
       };
       putHelpful();
       setIsClicked(true);
+      // putHelpful();
     }
   });
 

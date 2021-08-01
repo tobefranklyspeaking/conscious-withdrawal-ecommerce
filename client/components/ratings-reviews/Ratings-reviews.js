@@ -31,11 +31,15 @@ const Review = styled.div`
 display: inline-block;
 text-align: center;
 vertical-align: middle;
+<<<<<<< HEAD
 border: 1px solid black;
 `;
 
 const ReviewContainer = styled.div`
 height:440px;
+=======
+height: 550px;
+>>>>>>> dev
 overflow: auto;
 border: 1px solid black;
 `;
@@ -61,7 +65,7 @@ const SortContainer = styled.div`
 `;
 
 const Ratings = ({ current }) => {
-  console.log('kbdkhb', current.id);
+  // console.log('kbdkhb', current.id);
   const [reviews, setReviews] = useState([]);
   const [currentReview, setCurrentReview] = useState({});
   const [sort, setSort] = useState('relevent');
@@ -74,7 +78,7 @@ const Ratings = ({ current }) => {
       let res = await axios.get(`/reviews?product_id=${current.id}&sort=${sort}&count=1000`);
       setReviews(res.data.results);
       setCurrentReview(res.data.results[0]);
-      console.log('successful get current id: ', res.data.results);
+      // console.log('successful get current id: ', res.data.results);
     };
     getReviews();
 
@@ -127,6 +131,7 @@ console.log('---',filteredReviews);
           <SortContainer>
           <TotalReviews>{reviews.length} reviews, sorted by </TotalReviews>
           <ReviewDropdown options={["helpful", "newest", "relevent"]} setSort={setSort} />
+<<<<<<< HEAD
           </SortContainer>
           <ReviewContainer>
           {filteredReviews.map((review, index) => (<><div>
@@ -138,6 +143,19 @@ console.log('---',filteredReviews);
             <Report path={'/reviews'} id={review.review_id} />
           </div></>))}
           </ReviewContainer>
+=======
+          {reviews.map((review, index) => (
+            <>
+              <div>
+                <h6>{review.reviewer_name}</h6>
+                <h3 key={index}>{review.summary}</h3>
+                <h5>{review.body}</h5>
+                <Helpful path={'/reviews'} id={review.review_id} helpfulness={review.helpfulness} currentSort={sort} />
+                <Report path={'/reviews'} id={review.review_id} />
+              </div>
+            </>
+          ))}
+>>>>>>> dev
         </Review>
       </Wrapper>
     </>

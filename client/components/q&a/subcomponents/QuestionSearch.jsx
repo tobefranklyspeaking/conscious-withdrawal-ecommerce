@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, IconContext } from 'react';
 import styled from 'styled-components';
 import { CgSearch } from 'react-icons/cg';
 import axios from 'axios';
 import Blocks from './Blocks.jsx';
 
 const SearchBarStyle = styled.input`
-  width: 99%
-  outline: 0;
+  width: 95%;
+  line-height: 20%;
+  padding: 2vh 2vh;
 `;
 
 const SearchButton = styled.button`
@@ -29,24 +30,22 @@ const List = styled.div`
   overflow-y: scroll;
 `;
 
-const QASearch = () => {
+const QASearch = ({ current }) => {
   const [search, setSearch] = useState('');
   const [allQuestions, setAllQuestions] = useState([]);
-  const [filteredQA, setFilteredQA] = useState([]);
 
-  useEffect(async (productId) => {
-    productId = 19089; // <------ need to remove and update to be used with current product
-    await axios.get(`/qa/questions/?product_id=${productId}`)
-      .then(response => {
-        console.log(response.data.results);
-        setAllQuestions(response.data.results);
-      })
-      .catch(err => console.log(`Error in QuestionSearch useEffect: ${err}`));
-  }, [])
+  useEffect(() => {
+    if (current.current.id !== undefined) {
+      axios.get(`/qa/questions/?product_id=${current.current.id}`)
+        .then(response => {
+          setAllQuestions(response.data.results);
+        })
+        .catch(err => console.log(`Error in QuestionSearch useEffect: ${err}`));
+    }
+  }, [current.current.id])
 
   const handleClick = async () => {
     // This will allow the user to submit search
-
     console.log('handleClick clicked')
   }
 
@@ -62,22 +61,22 @@ const QASearch = () => {
           value={search}
           onChange={e => onChange(e.target.value)}
           placeholder='Have a question? Search for answers…' />
-        <CgSearch style={{ size: 18 }} onClick={() => handleClick()} />
+        <CgSearch onClick={() => handleClick()} />
       </div>
       <List>
-        {
-          allQuestions.filter(text => {
-            if (search.length > 2 && text.question_body.toLowerCase().indexOf(search)) {
-              console.log('before');
-              <Blocks props={text}/>
-              console.log('after');
-            } else return null
-          })
-        }
+        {Blocks(allQuestions)}
       </List>
     </>
   )
 }
 
 export default QASearch;
+
+// {
+//   allQuestions.filter(text => {
+//     if (search.length > 2 && text.question_body.toLowerCase().indexOf(search)) {
+//       <div>{Blocks(text)}</div>
+//     } else return null
+//   })
+// }
 
