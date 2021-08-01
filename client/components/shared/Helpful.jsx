@@ -10,6 +10,7 @@ const Button = styled.button`
   &:hover.helpfulButton {
     color: blue;
   }
+  border: 1px solid black;
 `;
 
 

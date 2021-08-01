@@ -12,35 +12,52 @@ const RatingsStyle = styled.div`
   background-color: LightGray;
   margin-left: auto;
   margin-right: auto;
+  border: 1px solid black;
 `;
 const Wrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
+  border: 1px solid black;
 `;
 
 const Rating = styled.div`
   display: inline-block;
   text-align: center;
   vertical-align: middle;
+  border: 1px solid black;
 `;
 
 const Review = styled.div`
 display: inline-block;
 text-align: center;
 vertical-align: middle;
+border: 1px solid black;
 `;
 
 const ReviewContainer = styled.div`
 height:440px;
 overflow: auto;
+border: 1px solid black;
 `;
 
 const TotalReviews = styled.div`
   display: inline-block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  border: 1px solid black;
 `;
 
 const Inline = styled.div`
   display: inline-block;
+  vertical-align: top;
+  height: 100%
+  border: 1px solid black;
+`;
+
+const SortContainer = styled.div`
+  height: 40px;
+  border: 1px solid black;
 `;
 
 const Ratings = ({ current }) => {
@@ -50,9 +67,9 @@ const Ratings = ({ current }) => {
   const [sort, setSort] = useState('relevent');
   const [isFiltered, setIsFiltered] = useState([]);
 
-  console.log('filter in r-r', isFiltered);
 
   useEffect(() => {
+    console.log('filter in r-r', isFiltered);
     const getReviews = async () => {
       let res = await axios.get(`/reviews?product_id=${current.id}&sort=${sort}&count=1000`);
       setReviews(res.data.results);
@@ -61,7 +78,7 @@ const Ratings = ({ current }) => {
     };
     getReviews();
 
-  }, [current, sort]);
+  }, [current, sort, isFiltered]);
 
 
 
@@ -95,10 +112,6 @@ let filteredReviews = filterData(reviews, buildFilter(filter));
 console.log('---',filteredReviews);
 
 
-const handleFilterChange = (newVal) => {
-  setIsFiltered(newVal);
-};
-
   return (
     <>
       <RatingsStyle>
@@ -108,11 +121,13 @@ const handleFilterChange = (newVal) => {
       <Wrapper>
         <Rating>
           <h3>RATINGS & REVIEWS</h3>
-        <Summary id={current.id} setRatingFilter={handleFilterChange}/>
+        <Summary id={current.id} setIsFiltered={setIsFiltered}/>
         </Rating>
         <Review>
+          <SortContainer>
           <TotalReviews>{reviews.length} reviews, sorted by </TotalReviews>
-          <Inline><ReviewDropdown options={["helpful", "newest", "relevent"]} setSort={setSort} /> </Inline>
+          <ReviewDropdown options={["helpful", "newest", "relevent"]} setSort={setSort} />
+          </SortContainer>
           <ReviewContainer>
           {filteredReviews.map((review, index) => (<><div>
             <Stars currentRating={review.rating}/>

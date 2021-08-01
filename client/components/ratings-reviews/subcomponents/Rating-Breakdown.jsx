@@ -5,16 +5,18 @@ import ProgressBar from './Progress-Bar.jsx';
 const StarRating = styled.div`
   width: 100%;
   height: 30px;
+  border: 1px solid black;
 `;
 
 const StarNum = styled.span`
   width: 10%
   float: left;
   height: 10px;
+  border: 1px solid black;
 `;
 
 
-const RatingBreakdown = ({ratings, numRatings, setRatingFilter}) => {
+const RatingBreakdown = ({ratings, numRatings, setIsFiltered}) => {
   //console.log('ratibgs: num ratings', ratings, numRatings);
 
   const [one, setOne] = useState(0);
@@ -42,42 +44,44 @@ const RatingBreakdown = ({ratings, numRatings, setRatingFilter}) => {
  // console.log('khdjhd', one);
  console.log('current filter', filter);
 
-//  useEffect(() => {
 
-//     setIsFiltered(filter);
 
-//  }, [filter]);
 
-/*
-    let rmFilter = () => {
-    const ratingIndex = filter.indexOf(starval);
-    rmFilter.splice(ratingIndex, 1);
-    console.log('-=-=-=', rmFilter);
-    setFilter(rmFilter);
+    let rmFilter = (num) => {
+      let tempfilter = filter;
+    let ratingIndex = filter.indexOf(num);
+    tempfilter.splice(ratingIndex, 1);
+    console.log('-=-=-=', tempfilter);
+    setFilter(tempfilter);
     console.log('rm filter', filter);
     //setIsFiltered(filter);
     };
-*/
+
     let addFilter = (num) => {
       let tempfilter = filter;
       tempfilter.push(num);
     console.log('-=-=-=', tempfilter);
       setFilter(tempfilter);
-      setRatingFilter(tempfilter);
-    console.log('filter', filter, 'should equal ', tempfilter);
+      console.log('filter', filter, 'should equal ', tempfilter);
+      //setIsFiltered(filter);
     };
   console.log('234543', filter);
- // setIsFiltered(filter);
 
 
 
   return (
     <>
-    <StarRating><StarNum onClick={(e) => {(filter.indexOf(5) === -1) ? addFilter(5) : console.log('does  exist')}}> 5 stars </StarNum><ProgressBar percentage={five} /> </StarRating>
-    <StarRating><StarNum onClick={(e) => {(filter.indexOf(4) === -1) ? addFilter(4) : console.log('does  exist')}}>4 stars </StarNum><ProgressBar percentage={four} /> </StarRating>
-    <StarRating><StarNum onClick={(e) => {(filter.indexOf(3) === -1) ? addFilter(3) : console.log('does  exist')}}>3 stars </StarNum><ProgressBar percentage={three} /> </StarRating>
-    <StarRating><StarNum onClick={(e) => {(filter.indexOf(2) === -1) ? addFilter(2) : console.log('does  exist')}}>2 stars </StarNum><ProgressBar percentage={two} /> </StarRating>
-    <StarRating><StarNum onClick={(e) => {(filter.indexOf(1) === -1) ? addFilter(1) : console.log('does  exist')}}>1 stars </StarNum><ProgressBar percentage={one} /> </StarRating>
+    {filter.length > 0 &&
+    <div>
+      <p>Current Filters: {filter.join(' stars, ')}  stars</p>
+      <button onClick={(e) => {setFilter([]); setIsFiltered([])}}>Remove all filters</button>
+    </div>
+    }
+    <StarRating><StarNum onClick={(e) => {((filter.indexOf(5) === -1) ? addFilter(5) : rmFilter(5)); setIsFiltered(filter)}}> 5 stars </StarNum><ProgressBar percentage={five} /> </StarRating>
+    <StarRating><StarNum onClick={(e) => {{(filter.indexOf(4) === -1) ? addFilter(4) : rmFilter(4)}; setIsFiltered(filter)}}>4 stars </StarNum><ProgressBar percentage={four} /> </StarRating>
+    <StarRating><StarNum onClick={(e) => {{(filter.indexOf(3) === -1) ? addFilter(3) : rmFilter(3)}; setIsFiltered(filter)}}>3 stars </StarNum><ProgressBar percentage={three} /> </StarRating>
+    <StarRating><StarNum onClick={(e) => {{(filter.indexOf(2) === -1) ? addFilter(2) : rmFilter(2)}; setIsFiltered(filter)}}>2 stars </StarNum><ProgressBar percentage={two} /> </StarRating>
+    <StarRating><StarNum onClick={(e) => {{(filter.indexOf(1) === -1) ? addFilter(1) : rmFilter(1)}; setIsFiltered(filter)}}>1 stars </StarNum><ProgressBar percentage={one} /> </StarRating>
     </>
   );
 

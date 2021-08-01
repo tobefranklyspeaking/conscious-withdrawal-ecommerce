@@ -8,6 +8,7 @@ const ContainerStyles = styled.div`
   background-color: grey;
   margin: 8px;
   float: right;
+  border: 1px solid black;
 `;
 
 const FillerStyles = styled.div`
@@ -15,6 +16,7 @@ const FillerStyles = styled.div`
   width: ${props => props.per}%;
   background-color: green;
   text-align: right;
+  border: 1px solid black;
 `;
 
 const ProgressBar = ({percentage}) => {
