@@ -73,6 +73,18 @@ const Answers = styled.div`
   max-height: 50vh;
 `;
 
+const Images = styled.span`
+
+`;
+
+const Img = styled.img`
+  max-width: 200px;
+  max-height: 200px;
+  width: auto;
+  height: auto;
+  margin: 1rem;
+`;
+
 const Blocks = (props) => {
   const [moreAnswers, setMoreAnswers] = useState(true);
   const [show, setShow] = useState(false);
@@ -147,16 +159,23 @@ const Blocks = (props) => {
                     <span> | </span>
                     <span cursor='pointer'> <u>Report</u> </span>
                   </LineB>
-                  {/* <LineB>
-                    <p>Yes, as you can see in these photos</p>
-                    <div>{answerObj.photos ? answerObj.photos.map(each => console.log(each)) : 'No photos at this time'}</div>
+                  <LineB>
+                    <div>Yes, as you can see in these photos</div>
+                    <Images>
+                      <span>
+                        {answerObj.photos ? answerObj.photos.map(each => <Img src={each} />) : '#'}
+                                          <Img src='https://source.unsplash.com/random/'/>
+                      </span>
+                    </Images>
+                    <div>
                     <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
                     <span> | </span>
                     <span> Helpful? </span>
                     <span cursor='pointer'> <u>Yes</u> ({answerObj.helpfulness}) </span>
                     <span> | </span>
                     <span cursor='pointer'> <u>Report</u> </span>
-                  </LineB> */}
+                    </div>
+                  </LineB>
                 </AnswerAdditions>
               </div>
             )

@@ -9,6 +9,7 @@ const SearchBarStyle = styled.input`
   display: flex;
   line-height: 20%;
   padding: 2vh 2vh;
+  margin-bottom: 1rem;
 `;
 
 const Search = styled.div`
@@ -45,6 +46,7 @@ const QASearch = ({ current }) => {
     if (current.current.id !== undefined) {
       axios.get(`/qa/questions/?product_id=${current.current.id}`)
         .then(response => {
+          console.log('successful question get', response.data)
           setAllQuestions(response.data.results);
         })
         .catch(err => console.log(`Error in QuestionSearch useEffect: ${err}`));
@@ -75,7 +77,7 @@ const QASearch = ({ current }) => {
       </Search>
       <List>
         {Blocks(allQuestions)}
-        <button>LOAD MORE ANSWERS</button>
+        {/* <button>LOAD MORE ANSWERS</button> */}
       </List>
     </>
   )
