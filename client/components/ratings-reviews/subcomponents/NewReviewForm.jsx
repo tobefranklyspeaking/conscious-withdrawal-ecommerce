@@ -47,31 +47,35 @@ const ReviewEmail = styled.div`
 
 const NewReviewForm = ({ charOptions }) => {
   console.log('hgjvh', charOptions);
-  const [size, setSize] = useState(null);
-  const [width, setWidth] = useState(null);
-  const [comfort, setComfort] = useState(null);
-  const [quality, setQuality] = useState(null);
-  const [length, setLength] = useState(null);
-  const [fit, setFit] = useState(null);
+  const [sizeID, setSizeID] = useState(null);
+  const [widthID, setWidthID] = useState(null);
+  const [comfortID, setComfortID] = useState(null);
+  const [qualityID, setQualityID] = useState(null);
+  const [lengthID, setLengthID] = useState(null);
+  const [fitID, setFitID] = useState(null);
+  const [currentOverallRating, setCurrentOverallRating] = useState(0);
+  const [currentSummary, setCurrentSummary] = useState('');
+  const [currentBody, setCurrentBody] = useState('');
+  const [currentRecommended, setCurrentRecommended] = useState('')
 
   useEffect(() => {
     if (charOptions.Size) {
-      setSize(charOptions.Size.id);
+      setSizeID(charOptions.Size.id);
     }
     if (charOptions.Width) {
-      setWidth(charOptions.Width.id);
+      setWidthID(charOptions.Width.id);
     }
     if (charOptions.Comfort) {
-      setComfort(charOptions.Comfort.id);
+      setComfortID(charOptions.Comfort.id);
     }
     if (charOptions.Quality) {
-      setQuality(charOptions.Quality.id);
+      setQualityID(charOptions.Quality.id);
     }
     if (charOptions.Length) {
-      setLength(charOptions.Length.id);
+      setLengthID(charOptions.Length.id);
     }
     if (charOptions.Fit) {
-      setFit(charOptions.Fit.id);
+      setFitID(charOptions.Fit.id);
     }
   });
 
@@ -131,7 +135,7 @@ const NewReviewForm = ({ charOptions }) => {
 
       <ProductChars>
         <p>---Characteristics---</p>
-        {size &&
+        {sizeID &&
           <div>
             <p> *Size: </p>
             <CharLabel >
@@ -166,7 +170,7 @@ const NewReviewForm = ({ charOptions }) => {
           </div>
         }
 
-        {width &&
+        {widthID &&
           <div>
             <p> *Width: </p>
             <CharLabel >
@@ -201,7 +205,7 @@ const NewReviewForm = ({ charOptions }) => {
           </div>
         }
 
-        {comfort &&
+        {comfortID &&
           <div>
             <p> *Comfort: </p>
             <CharLabel >
@@ -236,7 +240,7 @@ const NewReviewForm = ({ charOptions }) => {
           </div>
         }
 
-        {quality &&
+        {qualityID &&
           <div>
             <p> *Quality: </p>
             <CharLabel >
@@ -271,7 +275,7 @@ const NewReviewForm = ({ charOptions }) => {
           </div>
         }
 
-        {length &&
+        {lengthID &&
           <div>
             <p> *Length: </p>
             <CharLabel >
@@ -306,7 +310,7 @@ const NewReviewForm = ({ charOptions }) => {
           </div>
         }
 
-        {fit &&
+        {fitID &&
           <div>
             <p> *Fit: </p>
             <CharLabel >
@@ -370,9 +374,10 @@ const NewReviewForm = ({ charOptions }) => {
       <ReviewEmail>
         <label>
           *Review Email: <br></br>
-          <input type='text' name='reviewemail' placeholder='Example: jackson11@email.com' maxLength='60' required/>
+          <input type='email' name='reviewemail' placeholder='Example: jackson11@email.com' maxLength='60' required/><br></br>
+          <p>For authentication reasons, you will not be emailed</p>
         </label>
-      </ReviewEmail>
+      </ReviewEmail> <br></br>
 
         <input type='submit' value='Submit'/>
 
