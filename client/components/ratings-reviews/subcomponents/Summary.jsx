@@ -65,13 +65,27 @@ const Summary = ({ id, setIsFiltered }) => {
     //
     //console.log('what is ratings', ratings);
     let total = 0;
-    //console.log('total', Number(ratings['1']));
-    total += Number(ratings['1']);
-    total += Number(ratings['2']);
-    total += Number(ratings['3']);
-    total += Number(ratings['4']);
-    total += Number(ratings['5']);
-    //console.log('total', total);
+    //console.log('total first', Number(ratings['1']));
+    if(ratings['1']) {
+      total += Number(ratings['1']);
+    }
+    // console.log('total 1', total);
+    if(ratings['2']) {
+      total += Number(ratings['2']);
+    }
+    // console.log('total 2', total);
+    if(ratings['3']) {
+      total += Number(ratings['3']);
+    }
+    // console.log('total 3', total);
+    if(ratings['4']) {
+      total += Number(ratings['4']);
+    }
+    // console.log('total 4', total);
+    if(ratings['5']) {
+      total += Number(ratings['5']);
+    }
+    // console.log('total', total);
     return total;
   };
 
@@ -79,11 +93,26 @@ const Summary = ({ id, setIsFiltered }) => {
     //
     let totalSum = 0;
     //console.log('total', Number(ratings['1']));
-    totalSum += Number(ratings['1']);
-    totalSum += (Number(ratings['2']) * 2);
-    totalSum += (Number(ratings['3']) * 3);
-    totalSum += (Number(ratings['4']) * 4);
-    totalSum += (Number(ratings['5']) * 5);
+    if(ratings['1']) {
+      totalSum += Number(ratings['1']);
+    }
+    if(ratings['2']) {
+      totalSum += (Number(ratings['2']) * 2);
+    }
+    if(ratings['3']) {
+      totalSum += (Number(ratings['3']) * 3);
+    }
+    if(ratings['4']) {
+      totalSum += (Number(ratings['4']) * 4);
+    }
+    if(ratings['5']) {
+      totalSum += (Number(ratings['5']) * 5);
+    }
+    // totalSum += Number(ratings['1']);
+    // totalSum += (Number(ratings['2']) * 2);
+    // totalSum += (Number(ratings['3']) * 3);
+    // totalSum += (Number(ratings['4']) * 4);
+    // totalSum += (Number(ratings['5']) * 5);
     //console.log('total', totalSum);
     return totalSum;
   };
@@ -98,7 +127,7 @@ const Summary = ({ id, setIsFiltered }) => {
   };
 
   let averageRating = average();
-  //console.log('this is the average', avgRating);
+  // console.log('this is the average', avgRating);
 
   const percentRec = () => {
     //

@@ -35,11 +35,21 @@ const RatingBreakdown = ({ratings, numRatings, setIsFiltered}) => {
   */
 
   useEffect(() => {
-    setOne(Math.round((Number(ratings['1'])/ numRatings) * 100));
-    setTwo(Math.round((Number(ratings['2'])/ numRatings) * 100));
-    setThree(Math.round((Number(ratings['3'])/ numRatings) * 100));
-    setFour(Math.round((Number(ratings['4'])/ numRatings) * 100));
-    setFive(Math.round((Number(ratings['5'])/ numRatings) * 100));
+    if(ratings['1']) {
+      setOne(Math.round((Number(ratings['1'])/ numRatings) * 100));
+    }
+    if(ratings['2']) {
+      setTwo(Math.round((Number(ratings['2'])/ numRatings) * 100));
+    }
+    if(ratings['3']) {
+      setThree(Math.round((Number(ratings['3'])/ numRatings) * 100));
+    }
+    if(ratings['4']) {
+      setFour(Math.round((Number(ratings['4'])/ numRatings) * 100));
+    }
+    if(ratings['5']) {
+      setFive(Math.round((Number(ratings['5'])/ numRatings) * 100));
+    }
   });
  // console.log('khdjhd', one);
  console.log('current filter', filter);
