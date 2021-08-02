@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Star from './Star.jsx';
 
@@ -10,6 +10,10 @@ const Input = styled.input`
 function Stars({ currentRating }) {
   const [rating, setRating] = useState(currentRating || null);
   const [hover, setHover] = useState(currentRating || null);
+
+  useEffect(() => {
+    setRating(currentRating);
+  }, [currentRating])
 
   return (
     <>
