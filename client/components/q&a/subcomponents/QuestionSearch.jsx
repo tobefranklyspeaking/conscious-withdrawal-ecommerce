@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, IconContext } from 'react';
 import styled from 'styled-components';
 import { CgSearch } from 'react-icons/cg';
 import axios from 'axios';
 import Blocks from './Blocks.jsx';
 
 const SearchBarStyle = styled.input`
-  width: 99%
-  outline: 0;
+  width: 100%;
+  display: flex;
+  line-height: 20%;
+  padding: 2vh 2vh;
+  margin-bottom: 1rem;
 `;
 
-const SearchButton = styled.button`
-width: 33px;
-height: 33px;
-border: 0;
-padding-bottom: 0;
+const Search = styled.div`
+  position: relative;
+  width: auto;
 `;
-
 const Filtered = styled.div`
   height: auto;
   width: auto;
@@ -25,28 +25,36 @@ const Filtered = styled.div`
 
 const List = styled.div`
   height: auto;
-  max-height 300px;
+  max-height: 300px;
   overflow-y: scroll;
 `;
 
-const QASearch = () => {
+const SearchButton = styled.div`
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 18px;
+  height: 18px;
+`;
+
+
+const QASearch = ({ current }) => {
   const [search, setSearch] = useState('');
   const [allQuestions, setAllQuestions] = useState([]);
-  const [filteredQA, setFilteredQA] = useState([]);
 
-  useEffect(async (productId) => {
-    productId = 19089; // <------ need to remove and update to be used with current product
-    await axios.get(`/qa/questions/?product_id=${productId}`)
-      .then(response => {
-        console.log(response.data.results);
-        setAllQuestions(response.data.results);
-      })
-      .catch(err => console.log(`Error in QuestionSearch useEffect: ${err}`));
-  }, [])
+  useEffect(() => {
+    if (current.current.id !== undefined) {
+      axios.get(`/qa/questions/?product_id=${current.current.id}`)
+        .then(response => {
+          console.log('successful question get', response.data)
+          setAllQuestions(response.data.results);
+        })
+        .catch(err => console.log(`Error in QuestionSearch useEffect: ${err}`));
+    }
+  }, [current.current.id])
 
   const handleClick = async () => {
     // This will allow the user to submit search
-
     console.log('handleClick clicked')
   }
 
@@ -56,28 +64,32 @@ const QASearch = () => {
 
   return (
     <>
-      <div style={{ width: 'auto' }}>
+      <Search>
         <SearchBarStyle
           type='text'
           value={search}
           onChange={e => onChange(e.target.value)}
-          placeholder='Have a question? Search for answers…' />
-        <CgSearch style={{ size: 18 }} onClick={() => handleClick()} />
-      </div>
+          placeholder='Have a question? Search for answers…'>
+        </SearchBarStyle>
+        <SearchButton>
+          <CgSearch onClick={() => handleClick()} />
+        </SearchButton>
+      </Search>
       <List>
-        {
-          allQuestions.filter(text => {
-            if (search.length > 2 && text.question_body.toLowerCase().indexOf(search)) {
-              console.log('before');
-              <Blocks props={text}/>
-              console.log('after');
-            } else return null
-          })
-        }
+        {Blocks(allQuestions)}
+        {/* <button>LOAD MORE ANSWERS</button> */}
       </List>
     </>
   )
 }
 
 export default QASearch;
+
+// {
+//   allQuestions.filter(text => {
+//     if (search.length > 2 && text.question_body.toLowerCase().indexOf(search)) {
+//       <div>{Blocks(text)}</div>
+//     } else return null
+//   })
+// }
 

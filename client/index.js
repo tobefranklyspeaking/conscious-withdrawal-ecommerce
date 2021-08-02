@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from "styled-components";
 import axios from 'axios';
 import Shared from './components/shared/shared.jsx';
+
 const App = () => {
 
   /**********************Not needed at this time***********************/
@@ -10,9 +11,9 @@ const App = () => {
 
   useEffect(async () => {
     try {
-      let res = await axios.get('/products/19093');
+      let res = await axios.get('/products/19092');
       updateCurrent(res.data);
-      console.log('successful get');
+      console.log('successful get with item: ', res.data);
     } catch (err) {
       console.error(err)
     }
