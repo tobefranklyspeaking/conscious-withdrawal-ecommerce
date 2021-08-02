@@ -54,7 +54,7 @@ const NewReview = ({current, show, onClose}) => {
     }
   }, [current]);
 
-  console.log('chars --', charOptions);
+  //console.log('chars --', charOptions);
 
   if (!show) {
     return null;

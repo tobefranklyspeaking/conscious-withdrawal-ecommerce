@@ -52,7 +52,7 @@ const RatingBreakdown = ({ratings, numRatings, setIsFiltered}) => {
     }
   });
  // console.log('khdjhd', one);
- console.log('current filter', filter);
+ //console.log('current filter', filter);
 
 
 
@@ -75,7 +75,7 @@ const RatingBreakdown = ({ratings, numRatings, setIsFiltered}) => {
       console.log('filter', filter, 'should equal ', tempfilter);
       //setIsFiltered(filter);
     };
-  console.log('234543', filter);
+  //console.log('234543', filter);
 
 
 
