@@ -9,7 +9,7 @@ import { FaRegHeart, FaCheck, FaPlus } from 'react-icons/fa'
 const OverviewWrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr minmax(150px, 40%);
   margin-bottom: 1rem;
