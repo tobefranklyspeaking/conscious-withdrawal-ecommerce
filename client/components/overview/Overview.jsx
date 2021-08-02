@@ -86,18 +86,17 @@ const StyleSelector = styled.div`
   grid-template-rows: 1fr 1fr;
   width: 80%;
 `;
-const StylePlaceholder = styled.div`
-  border: 1px solid black;
-  border-radius: 50%;
-  background-color: #d3d3d3;
-  height: 3.75rem;
-  width: 3.75rem;
-`;
 const StyleContainer = styled.div`
   border: 1px solid black;
   border-radius: 50%;
   height: 3.75rem;
   width: 3.75rem;
+  & > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
 `;
 
 const AddToBag = styled.button``;
@@ -168,12 +167,11 @@ const Overview = ({ current }) => {
           <Price>{'$' + current.default_price}</Price>
           <StyleHeader> <h4>STYLE ></h4> SELECTED STYLE</StyleHeader>
           <StyleSelector>
-            <StylePlaceholder />
-            <StylePlaceholder />
-            <StylePlaceholder />
-            <StylePlaceholder />
-            <StylePlaceholder />
-            <StylePlaceholder />
+            {thumbnails.map((nail, i) => (
+            <StyleContainer key={i}>
+              <img src={nail}/>
+            </StyleContainer>
+            ))}
           </StyleSelector>
           <ButtonRow1>
             <Dropdown options={['#']} title="SELECT SIZE" width="60%"/>
