@@ -113,25 +113,39 @@ const Column2 = styled.div`
 
 const Overview = ({ current }) => {
   const [styles, updateStyles] = useState([]);
-  const [currentStyle, updateCurrentStyle] = useState();
+  const [currentStyle, updateCurrentStyle] = useState({});
+  const [photos, updatePhotos] = useState([]);
+
+  //fetches styles and sets default to first style based on current product on mount
   useEffect(async () => {
     try {
         if(current.id) {
           let res = await fetch(`/products/${current.id}/styles`);
           let arr = await res.json();
-          console.log('arr here', arr.results);
+          console.log('arr.results here', arr.results);
+          updateStyles(arr.results);
+          updateCurrentStyle(arr.results[0]);
         }
     } catch (err) {
       console.error('err fetching styles', err);
     }
-  });
+  },[current]);
+
+  // updates photos for carousel on change to current style to avoid type errors
+  useEffect(() => {
+    if(currentStyle.photos) {
+      let newPhotos = currentStyle.photos.map(photo => photo.url);
+      console.log('newphotos here', newPhotos);
+      updatePhotos(newPhotos);
+    }
+  }, [currentStyle]);
 
   return (
     <>
       <OverviewWrapper>
         <Banner>SITE-WIDE ANNOUCEMENT MESSAGE!</Banner>
         <Column1>
-          <Carousel urls={['#']}/>
+          <Carousel urls={photos}/>
           <Slogan>{current.slogan}</Slogan>
           <Description>{current.description}</Description>
         </Column1>
