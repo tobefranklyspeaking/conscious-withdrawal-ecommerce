@@ -42,8 +42,7 @@ const ModalFooter = styled.div`
 `;
 
 const Button = styled.button`
-  margin-left: auto;
-  margin-right: auto;
+  cursor: pointer;
   background: white;
   height: auto;
   width: auto;

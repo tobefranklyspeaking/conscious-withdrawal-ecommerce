@@ -19,7 +19,9 @@ const Buttons = styled.button`
   margin: 1rem 1rem 0 0;
   padding: 1rem;
   font-size: .7rem;
+  cursor: pointer;
 `;
+
 const Component = styled.div`
   font-weight: lighter;
   margin-bottom: 1rem;
@@ -34,7 +36,7 @@ const QandA = (current) => {
         <Component>QUESTIONS AND ANSWERS</Component>
         <QuestionSearch current={current} />
         <Buttons>MORE ANSWERED QUESTIONS</Buttons>
-        <Buttons onClick={() => setShow(true)} style={{cursor: 'pointer'}}>ADD A QUESTION +</Buttons>
+        <Buttons onClick={() => setShow(true)} >ADD A QUESTION +</Buttons>
         <AddQuestion onClose={() => setShow(false)} current={current} show={show}/>
       </QandAStyle>
     </>

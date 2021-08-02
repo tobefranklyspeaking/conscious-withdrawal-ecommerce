@@ -102,11 +102,11 @@ const Blocks = (props) => {
               Q: {question.question_body}
             </Bold>
             <SpaceQ>
-              <SpaceQ cursor='pointer' background-color='gray' onClick={() => setShow(true)}><u>Add Answer</u></SpaceQ>
+              <SpaceQ style={{cursor: 'pointer'}} background-color='gray' onClick={() => setShow(true)}><u>Add Answer</u></SpaceQ>
               <SpaceQ>|</SpaceQ>
-              <SpaceQ cursor='pointer'><u>Yes</u> ({question.question_helpfulness})</SpaceQ>
+              <SpaceQ style={{cursor: 'pointer'}}><u>Yes</u> ({question.question_helpfulness})</SpaceQ>
               <SpaceQ> Helpful? </SpaceQ>
-              <AddAnswer onClose={() => setShow(false)} current={question} show={show} cursor='pointer' />
+              <AddAnswer onClose={() => setShow(false)} current={question} show={show} style={{cursor: 'pointer'}} />
             </SpaceQ>
           </Wrap>
         </Container>
@@ -158,29 +158,30 @@ const Blocks = (props) => {
                     <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
                     <span> | </span>
                     <span> Helpful? </span>
-                    <span cursor='pointer'> <u>Yes</u> ({answerObj.helpfulness}) </span>
+                    <span style={{cursor: 'pointer'}}> <u>Yes</u> ({answerObj.helpfulness}) </span>
                     <span> | </span>
-                    <span cursor='pointer'> <u>Report</u> </span>
+                    <span style={{cursor: 'pointer'}}> <u>Report</u> </span>
                   </LineB>
-                  {Object.keys(answerObj.photos).length ?
+                  {Object.keys(answerObj.photos).length > 0 && Object.keys(answerObj.photos).length < 6 ?
                     <LineB>
                       <div>Yes, as you can see in these photos</div>
                       <Images>
                         <span>
+
                           {answerObj.photos
                             ? answerObj.photos.map((each, index) => <Img key={index} src={each} />)
                             : '#'}
-                          {/* <Img src='https://source.unsplash.com/random/' />
-                        <Img src="http://placecorgi.com/260/180" /> */}
+                          {/* {/* <Img src='https://source.unsplash.com/random/' /> */}
+                        <Img src="http://placecorgi.com/260/180" />
                         </span>
                       </Images>
                       <div>
                         <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
                         <span> | </span>
                         <span> Helpful? </span>
-                        <span cursor='pointer'> <u>Yes</u> ({answerObj.helpfulness}) </span>
+                        <span style={{cursor: 'pointer'}}> <u>Yes</u> ({answerObj.helpfulness}) </span>
                         <span> | </span>
-                        <span cursor='pointer'> <u>Report</u> </span>
+                        <span style={{cursor: 'pointer'}}> <u>Report</u> </span>
                       </div>
                     </LineB>
                     : null}

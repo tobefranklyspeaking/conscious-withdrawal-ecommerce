@@ -74,7 +74,7 @@ const QASearch = ({ current }) => {
           placeholder='Have a question? Search for answers…'>
         </SearchBarStyle>
         <SearchButton>
-          <CgSearch onClick={() => handleClick()} />
+          <CgSearch onClick={() => handleClick()} style={{cursor: 'pointer'}} />
         </SearchButton>
       </Search>
       <List>
