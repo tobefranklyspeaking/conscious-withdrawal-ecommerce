@@ -78,7 +78,6 @@ const QASearch = ({ current }) => {
         </SearchButton>
       </Search>
       <List>
-        {console.log(allQuestions)}
         {Blocks(allQuestions)}
         {/* <button>LOAD MORE ANSWERS</button> */}
       </List>

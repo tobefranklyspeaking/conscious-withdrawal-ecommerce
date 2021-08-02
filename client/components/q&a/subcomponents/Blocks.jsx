@@ -86,7 +86,7 @@ const Img = styled.img`
   max-height: 150px;
   width: auto;
   height: auto;
-  margin: 1rem 1rem 0 0;
+  margin-right: 1rem;
 `;
 
 const Blocks = (props) => {
@@ -106,7 +106,7 @@ const Blocks = (props) => {
               <SpaceQ>|</SpaceQ>
               <SpaceQ cursor='pointer'><u>Yes</u> ({question.question_helpfulness})</SpaceQ>
               <SpaceQ> Helpful? </SpaceQ>
-              <AddAnswer onClose={() => setShow(false)} current={question} show={show} cursor='pointer'/>
+              <AddAnswer onClose={() => setShow(false)} current={question} show={show} cursor='pointer' />
             </SpaceQ>
           </Wrap>
         </Container>
@@ -166,8 +166,11 @@ const Blocks = (props) => {
                     <div>Yes, as you can see in these photos</div>
                     <Images>
                       <span>
-                        {answerObj.photos ? answerObj.photos.map((each, index) => <Img key={index} src={each} />) : '#'}
-                                          <Img src='https://source.unsplash.com/random/'/>
+                        {answerObj.photos
+                          ? answerObj.photos.map((each, index) => <Img key={index} src={each} />)
+                          : '#'}
+                        <Img src='https://source.unsplash.com/random/' />
+                        <Img src="http://placecorgi.com/260/180" />
                       </span>
                     </Images>
                     <div>

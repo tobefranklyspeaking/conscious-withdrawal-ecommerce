@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Modal = styled.div`
   position: fixed;
-  background-color: rgba(0,0,0,1)
+  background-color: hsla(0, 0%, 0%, 0.5);
   box-shadow: 5px, 10px;
   top: 0;
   right: 0;
@@ -38,6 +38,7 @@ const ModalBody = styled.div`
 const ModalFooter = styled.div`
   padding: 10px;
 `;
+
 const AddAnswer = ({question, show, onClose}) => {
   if (!show) {
     return null;
@@ -49,7 +50,14 @@ const AddAnswer = ({question, show, onClose}) => {
           <h4 className="modal-title">Add Answer</h4>
         </ModalHeader>
         <ModalBody>
-          Add Forms Here
+          <div>Your Answer - mandatory</div>
+        <input></input>
+        <div>Your Nickname - mandatory</div>
+          <input></input>
+          <div>Your Email - mandatory</div>
+          <input placeholder='Example: jack=@email.com'></input>
+          <button>Opens new window to select photos</button>
+          {/* thumbnail should appear and max 5 */}
         </ModalBody>
         <ModalFooter className="modal-footer">
           <button onClick={onClose} className="button">Cancel</button>
