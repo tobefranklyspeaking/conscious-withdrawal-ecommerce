@@ -14,6 +14,7 @@ const SearchBarStyle = styled.input`
 
 const Search = styled.div`
   position: relative;
+  height: auto;
   width: auto;
 `;
 const Filtered = styled.div`
@@ -25,7 +26,7 @@ const Filtered = styled.div`
 
 const List = styled.div`
   height: auto;
-  max-height: 300px;
+  max-height: 50vh;
   overflow-y: scroll;
 `;
 
@@ -62,6 +63,7 @@ const QASearch = ({ current }) => {
     setSearch(searchText);
   }
 
+  const [count, setCount] = useState(0);
   return (
     <>
       <Search>
@@ -72,7 +74,7 @@ const QASearch = ({ current }) => {
           placeholder='Have a question? Search for answers…'>
         </SearchBarStyle>
         <SearchButton>
-          <CgSearch onClick={() => handleClick()} />
+          <CgSearch onClick={() => handleClick()} style={{cursor: 'pointer'}} />
         </SearchButton>
       </Search>
       <List>

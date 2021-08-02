@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Modal = styled.div`
   position: fixed;
-  background-color: hsla(0, 0%, 0%, 0.5);
+  background-color: rgba(0,0,0,1)
   box-shadow: 5px, 10px;
   top: 0;
   right: 0;
@@ -15,8 +15,8 @@ const Modal = styled.div`
 `;
 
 const ModalContent = styled.div`
-  width: 80%;
-  height: 70%;
+  width: 80vh;
+  height: 70vh;
   background-color: white;
 `;
 
@@ -36,22 +36,8 @@ const ModalBody = styled.div`
 `;
 
 const ModalFooter = styled.div`
-  display: relative;
   padding: 10px;
-  height: auto;
 `;
-
-const Button = styled.button`
-  cursor: pointer;
-  background: white;
-  height: auto;
-  width: auto;
-  border: 1px solid black;
-  margin: 1rem 1rem 0 0;
-  padding: 1rem;
-  font-size: .7rem;
-`;
-
 const AddAnswer = ({question, show, onClose}) => {
   if (!show) {
     return null;
@@ -63,19 +49,11 @@ const AddAnswer = ({question, show, onClose}) => {
           <h4 className="modal-title">Add Answer</h4>
         </ModalHeader>
         <ModalBody>
-          <div>Your Answer - mandatory</div>
-        <input></input>
-        <div>Your Nickname - mandatory</div>
-          <input></input>
-          <div>Your Email - mandatory</div>
-          <input placeholder='Example: jack=@email.com'></input>
-          <div>For authentication reasons, you will not be emailed</div>
-          <Button>Opens new window to select photos</Button>
-          {/* thumbnail should appear and max 5 */}
+          Add Forms Here
         </ModalBody>
         <ModalFooter className="modal-footer">
-          <Button onClick={onClose} className="button">Cancel</Button>
-          <Button className="submit">Submit</Button>
+          <button onClick={onClose} className="button">Cancel</button>
+          <button className="submit">Submit</button>
         </ModalFooter>
       </ModalContent>
     </Modal>
