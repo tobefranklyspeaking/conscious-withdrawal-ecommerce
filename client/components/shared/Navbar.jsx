@@ -5,7 +5,6 @@ import styled from 'styled-components';
 const NavStyle = styled.header`
   height: 6.5vh;
   min-height: 40px;
-  max-width: 1280px;
   background-color: #555555;
   display: flex;
   flex-wrap: wrap;

@@ -92,7 +92,7 @@ const Img = styled.img`
 const Blocks = (props) => {
   const [moreAnswers, setMoreAnswers] = useState(true);
   const [show, setShow] = useState(false);
-
+  // console.log(props);
   const Questions = (question) => {
     return (
       <Accordian key={question.question_id}>
@@ -119,20 +119,8 @@ const Blocks = (props) => {
 
 
   const Answers = ({ answers }) => {
-    // console.log(answers);
+    console.log(answers);
 
-    //template tag html
-    // if (Object.keys(answer.answers) > 1 && moreAnswers === true) {
-    //   return (
-    //     <div key={each}>
-    //       <div> A: {answerObj.body} </div>
-    //       <div>
-    //         <span>by {answerObj.answerer_name} | Helpful? Yes ({answerObj.helpfulness}) | Report</span>
-    //       </div>
-    //       <button >More Answered Questions</button>
-    //     </div>
-    //   )
-    // } else if (moreAnswers === false) {
     return (
       Object.keys(answers)
         .sort((each, next) => {
