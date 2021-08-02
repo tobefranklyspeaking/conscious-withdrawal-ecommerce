@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ProductCard from './ProductCard.jsx';
+import axios from 'axios';
 
 const RelatedProductsContainer = styled.section`
-  margin: auto 0;
+  margin: 80px 0 80px 50px;
 
   * {
     font-family: sans-serif;
@@ -19,16 +20,26 @@ const RelatedProductsContainer = styled.section`
   }
 `;
 
-const RelatedProducts = () => {
+const RelatedProducts = ({ current }) => {
+  const [relatedProductsList, setRelatedProducts] = useState([]);
+
+  useEffect(() => {
+    if (current.id) {
+      axios(`/products/${current.id}/related`)
+        .then((response) => {
+          setRelatedProducts(response.data);
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [current])
 
   return (
     <RelatedProductsContainer>
       <h1 className='section-title'>Related Products</h1>
       <div className='cards-container'>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {relatedProductsList && relatedProductsList.map(
+          product => <ProductCard key={product} productID={product} />
+        )}
       </div>
     </RelatedProductsContainer>
   );

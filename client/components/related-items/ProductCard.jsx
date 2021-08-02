@@ -1,11 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import styled, { css } from 'styled-components';
 import Stars from '../shared/Stars.jsx';
 import Star from '../shared/Star.jsx';
+import axios from 'axios';
 
 const Card = styled.div`
   border: 1px solid black;
-  max-width: 256px;
+  width: 256px;
   margin: 0 12px;
 
   &:first-child {
@@ -22,8 +23,19 @@ const Card = styled.div`
     position: relative;
     width: 100%;
     height: 254px;
-    background-color: hsla(0, 0%, 90%, 1);
+    ${props => props.img
+      ? css`background: url(${props.img}) no-repeat center;`
+      : `background: hsla(0, 0%, 90%, 1);`}
+    background-size: cover;
     color: hsla(0, 0%, 60%, 1);
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .no-img {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .add-to-outfit {
     position: absolute;
@@ -47,19 +59,63 @@ const Card = styled.div`
   }
 `;
 
-export default () => {
+const getAverageRating = (ratings) => {
+  var totalNumberRatings = 0;
+  var sum = 0;
+  for (var key in ratings) {
+    totalNumberRatings += Number(ratings[key]);
+    sum += ratings[key] * key;
+  }
+  console.log('Average rating: ', sum / totalNumberRatings)
+  return sum / totalNumberRatings;
+}
+
+export default ({ productID }) => {
+
+const loadingState = {
+    category: 'Loading...',
+    name: 'Loading...',
+    default_price: 'Loading...',
+  };
+
+  const [productInfo, setProductInfo] = useState(loadingState);
+  const [productImage, setProductImage] = useState('');
+  const [productRating, setProductRating] = useState(0);
+
+  useEffect(() => {
+    axios(`/products/${productID}`)
+      .then((response) => {
+        setProductInfo(response.data)
+      })
+      .catch((error) => console.log(error));
+    axios(`/products/${productID}/styles`)
+      .then((response) => {
+        setProductImage(response.data.results[0].photos[0].thumbnail_url)
+      })
+      .catch((error) => console.log(error));
+    axios(`/reviews/meta/?product_id=${productID}`)
+      .then((response) => {setProductRating(getAverageRating(response.data.ratings))
+      })
+      .catch((error) => console.log(error));
+  }, [])
+
   return (
-    <Card className='card'>
+    <Card className='card' img={productImage}>
       <div className='image'>
         <div className='add-to-outfit'><Star /></div>
+        {productImage === ''
+          ? 'Loading...'
+          : productImage === null
+          ? <div className='no-img'><div>No Image Available For This Product</div></div>
+          : ''}
       </div>
       <div className='info'>
-        <h3 className='category'>Category</h3>
-        <h2 className='expanded-name'>Expanded Product Name with Extra Text</h2>
-        <h4 className='price'>$$$$$$</h4>
+        <h3 className='category'>{productInfo.category}</h3>
+        <h2 className='expanded-name'>{productInfo.name}</h2>
+        <h4 className='price'>${productInfo.default_price}</h4>
       </div>
       <div className='rating'>
-        <Stars />
+        {isNaN(productRating) ? 'This product is not yet rated.' : <Stars currentRating={productRating} />}
       </div>
     </Card>
   )
