@@ -92,13 +92,6 @@ const StylePlaceholder = styled.div`
   width: 3.75rem;
 `;
 
-const SizeButton = styled.button`
-  border: 1px solid black;
-  margin: 0 auto;
-`;
-const QtyButton = styled.button`
-  border: 1px solid black;
-`;
 const AddToBag = styled.button``;
 const Fav = styled.button``;
 const FeatureChecklist = styled.div`
@@ -120,17 +113,19 @@ const Column2 = styled.div`
 
 const Overview = ({ current }) => {
   const [styles, updateStyles] = useState([]);
-
+  const [currentStyle, updateCurrentStyle] = useState();
   useEffect(async () => {
     try {
-      console.log('current id here', current.id);
-      let res = await fetch(`/products/${current.id}/styles`);
-      let arr = await res.json();
-      console.log('success fetching styles', arr);
+        if(current.id) {
+          let res = await fetch(`/products/${current.id}/styles`);
+          let arr = await res.json();
+          console.log('arr here', arr.results);
+        }
     } catch (err) {
       console.error('err fetching styles', err);
     }
-  }, []);
+  });
+
   return (
     <>
       <OverviewWrapper>
