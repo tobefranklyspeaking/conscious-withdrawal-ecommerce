@@ -13,7 +13,7 @@ const App = () => {
     try {
       let res = await axios.get('/products/19093');
       updateCurrent(res.data);
-      console.log('successful get');
+      console.log('successful get with item: ', res.data);
     } catch (err) {
       console.error(err)
     }

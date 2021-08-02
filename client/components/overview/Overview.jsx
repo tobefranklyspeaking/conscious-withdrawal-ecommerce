@@ -121,7 +121,7 @@ const Column2 = styled.div`
 const Overview = ({ current }) => {
   const [styles, updateStyles] = useState([]);
 
-  console.log('this is the current obj ---', current);
+  // console.log('this is the current obj ---', current);
   return (
     <>
       <OverviewWrapper>
@@ -159,7 +159,7 @@ const Overview = ({ current }) => {
             <Button height="4rem" width="3rem"><FaRegHeart/></Button>
           </ButtonRow2>
           <FeatureChecklist>
-            {console.log('inside feature checklist', current)}
+            {/* {console.log('inside feature checklist', current)} */}
             <div><FaCheck /> GMO and Pesticide-free</div>
             <div><FaCheck /> Where can I find this in the product data?</div>
             <div><FaCheck /> I have no damn clue</div>
