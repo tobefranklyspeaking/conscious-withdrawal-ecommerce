@@ -5,6 +5,7 @@ import ProgressBar from './Progress-Bar.jsx';
 const StarRating = styled.div`
   width: 100%;
   height: 30px;
+  text-decoration: underline;
 
 `;
 
