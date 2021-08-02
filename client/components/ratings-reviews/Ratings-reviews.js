@@ -52,7 +52,7 @@ const TotalReviews = styled.div`
 const Inline = styled.div`
   display: inline-block;
   vertical-align: top;
-  height: 100%
+  height: 100%;
 
 `;
 
@@ -92,7 +92,7 @@ const Ratings = ({ current }) => {
 
 
   useEffect(() => {
-    console.log('filter in r-r', isFiltered);
+    // console.log('filter in r-r', isFiltered);
     const getReviews = async () => {
       let res = await axios.get(`/reviews?product_id=${current.id}&sort=${sort}&count=1000`);
       setReviews(res.data.results);
@@ -136,14 +136,14 @@ let filter = {
 };
 let query = buildFilter(filter);
 let filteredReviews = filterData(reviews, buildFilter(filter));
-console.log('---',filteredReviews);
+// console.log('---',filteredReviews);
 
   let display = (filterReview, count) => {
     let reviewsToDisplay = filterReview;
     if(filterReview.length > 2) {
       //console.log('should be displayed', reviewsToDisplay.slice(0, count));
       reviewsToDisplay = reviewsToDisplay.slice(0, count);
-      console.log('should be displayed', reviewsToDisplay);
+      // console.log('should be displayed', reviewsToDisplay);
       return reviewsToDisplay;
     } else {
       return reviewsToDisplay;
@@ -151,7 +151,7 @@ console.log('---',filteredReviews);
   }
 
   let finalReviews = display(filteredReviews, reviewCount);
-  console.log('sould equal should be displayed', finalReviews);
+  // console.log('sould equal should be displayed', finalReviews);
 
   let handleMoreReviews = () => {
 

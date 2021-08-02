@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { CgSearch } from 'react-icons/cg';
 import axios from 'axios';
-
+import App from '/client/index.js'
 const SearchBarStyle = styled.input`
   margin: 10px;
   border: 0;
@@ -38,7 +38,7 @@ const SearchBar = () => {
   const [allProducts, setAllProducts] = useState([]);
 
   useEffect(async () => {
-    await axios.get('/products/?count=1100')
+    await axios.get('/products/?count=19089')
       .then(response => {
         setAllProducts(response.data);
       })
@@ -48,7 +48,7 @@ const SearchBar = () => {
   const handleClick = async () => {
     // This will allow the user to submit search
 
-    console.log('handleClick clicked')
+    console.log('handleClick clicked', event.target)
   }
 
   const onChange = (searchText) => {
@@ -79,7 +79,8 @@ const SearchBar = () => {
             }).map((value) => {
               return (
                 <div key={value.id}>
-                  <Filtered>{value.name}</Filtered>
+                  {console.log(value)}
+                  <Filtered>{value.name} </Filtered>
                 </div>
               )
             })

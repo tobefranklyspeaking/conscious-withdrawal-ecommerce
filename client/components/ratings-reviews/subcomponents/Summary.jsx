@@ -48,7 +48,7 @@ const Summary = ({ id, setIsFiltered }) => {
      setRatings(res.data.ratings);
      setRecommended(res.data.recommended);
      //average();
-     console.log('successful get meta data: ', res.data);
+    //  console.log('successful get meta data: ', res.data);
     } catch (err) {
       console.error(err)
     }

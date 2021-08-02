@@ -130,7 +130,7 @@ const Overview = ({ current }) => {
         if(current.id) {
           let res = await fetch(`/products/${current.id}/styles`);
           let arr = await res.json();
-          console.log('arr.results here', arr.results);
+          // console.log('arr.results here', arr.results);
           updateStyles(arr.results);
           updateCurrentStyle(arr.results[0]);
         }
@@ -141,7 +141,7 @@ const Overview = ({ current }) => {
 
   // updates photos for carousel on change to current style to avoid type errors
   useEffect(() => {
-    if(currentStyle.photos) {
+    if(currentStyle !== undefined && currentStyle.photos !== undefined) {
       let newPhotos = currentStyle.photos.map(photo => photo.url);
       let newThumbnails = currentStyle.photos.map(photo => photo.thumbnail_url);
       updatePhotos(newPhotos);
