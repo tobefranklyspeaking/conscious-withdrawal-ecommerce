@@ -23,9 +23,6 @@ const App = () => {
   return (
     <div>
       <Shared current={currentProduct}/>
-      <div>
-        {currentProduct.id}
-      </div>
     </div>
   );
 }
