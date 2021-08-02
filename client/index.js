@@ -3,36 +3,33 @@ import ReactDOM from 'react-dom';
 import styled from "styled-components";
 import axios from 'axios';
 import Shared from './components/shared/shared.jsx';
+import NavSearch from '/client/components/shared/NavSearchBar.jsx';
 
-const App = (props) => {
+const App = () => {
 
   /**********************Not needed at this time***********************/
   const [currentProduct, updateCurrent] = useState({});
+  const [currentSelection, updateSelection] = useState(Math.floor((Math.random() * (18077 - 17067)) + 17067));
 
-  useEffect(async (props) => {
+  useEffect(async () => {
     try {
-      console.log('-----------', props);
-
-      let temp = Math.floor((Math.random() * (18077 - 17067)) + 17067);
-      let res = await axios.get(`/products/${temp}`);
+      let res = await axios.get(`/products/${currentSelection}`);
       updateCurrent(res.data);
       console.log('successful get with item: ', res.data);
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  }, [currentSelection]);
 
-  const handleClick = async () => {
-    // This will allow the user to submit search
-
-    console.log('handleClick clicked', event.target)
+  const updateProduct = (props) => {
+    console.log('fucking work!', props)
+    updateSelection(props);
   }
 
-  /**********************Not needed at this time***********************/
 
   return (
     <div>
-      <Shared current={currentProduct}/>
+      <Shared current={currentProduct} update={updateProduct}/>
     </div>
   );
 }

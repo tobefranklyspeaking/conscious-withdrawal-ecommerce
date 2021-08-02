@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { CgSearch } from 'react-icons/cg';
 import axios from 'axios';
-import App from '/client/index.js'
+
 const SearchBarStyle = styled.input`
   margin: 10px;
   border: 0;
@@ -24,18 +24,20 @@ const Filtered = styled.div`
   width: auto;
   padding: 5px;
   background-color: white;
+  border: 1px solid black;
 `;
 
 const List = styled.div`
   height: auto;
-  max-height: 300px;
+  max-height: 50vw;
   overflow-y: scroll;
 `;
 
 
-const SearchBar = () => {
+const SearchBar = ({ updateProduct }) => {
   const [search, setSearch] = useState('');
   const [allProducts, setAllProducts] = useState([]);
+  const [selection, setSelection] = useState(null);
 
   useEffect(async () => {
     await axios.get('/products/?count=19089')
@@ -47,8 +49,13 @@ const SearchBar = () => {
 
   const handleClick = async () => {
     // This will allow the user to submit search
+    updateProduct(selection);
+    console.log('handleClick clicked', selection);
+  }
 
-    console.log('handleClick clicked', event.target)
+  const handleProduct = (e) => {
+    setSearch(e.name);
+    setSelection(e.id);
   }
 
   const onChange = (searchText) => {
@@ -64,9 +71,9 @@ const SearchBar = () => {
           value={search}
           onChange={e => onChange(e.target.value)} />
         <span>
-          <CgSearch style={{ size: 18, color: 'white' }} onClick={() => handleClick()} />
+          <CgSearch type='submit' style={{ size: 18, color: 'white' }} onClick={() => handleClick(event.target)} />
         </span>
-        <List>
+        <List name='dropdown'>
           {
             allProducts.filter(text => {
               if (search.length > 2) {
@@ -78,10 +85,7 @@ const SearchBar = () => {
               }
             }).map((value) => {
               return (
-                <div key={value.id}>
-                  {console.log(value)}
-                  <Filtered>{value.name} </Filtered>
-                </div>
+                  <Filtered key={value.id} value={value.id} onClick={() => handleProduct(value)}>{value.name} </Filtered>
               )
             })
           }
