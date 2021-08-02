@@ -62,6 +62,7 @@ const Price = styled.div`
   margin: 1rem 0;
 `;
 const ButtonRow1 = styled.div`
+  margin-top: 1rem;
   height: 5rem;
   display: flex;
   justify-content: space-between;
@@ -80,10 +81,10 @@ const StyleHeader = styled.div`
   }
 `;
 const StyleSelector = styled.div`
-  height: 10rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+  grid-row-gap: 1rem;
   width: 80%;
 `;
 const StyleContainer = styled.div`
