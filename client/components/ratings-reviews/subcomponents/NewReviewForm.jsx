@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const OverallRatingWrapper = styled.div`
 
@@ -45,8 +46,8 @@ const ReviewEmail = styled.div`
 `;
 
 
-const NewReviewForm = ({ charOptions }) => {
-  console.log('hgjvh', charOptions);
+const NewReviewForm = ({ charOptions, id }) => {
+  //console.log('hgjvh', charOptions);
   const [sizeID, setSizeID] = useState(null);
   const [widthID, setWidthID] = useState(null);
   const [comfortID, setComfortID] = useState(null);
@@ -56,7 +57,16 @@ const NewReviewForm = ({ charOptions }) => {
   const [currentOverallRating, setCurrentOverallRating] = useState(0);
   const [currentSummary, setCurrentSummary] = useState('');
   const [currentBody, setCurrentBody] = useState('');
-  const [currentRecommended, setCurrentRecommended] = useState('')
+  const [currentRecommended, setCurrentRecommended] = useState(true)
+  const [size, setSize] = useState(0);
+  const [width, setWidth] = useState(0);
+  const [comfort, setComfort] = useState(0);
+  const [quality, setQuality] = useState(0);
+  const [length, setLength] = useState(0);
+  const [fit, setFit] = useState(0);
+  const [currentPhotos, setCurrentPhotos] = useState('');
+  const [currentName, setCurrentName] = useState('');
+  const [currentEmail, setCurrentEmail] = useState('');
 
   useEffect(() => {
     if (charOptions.Size) {
@@ -77,13 +87,103 @@ const NewReviewForm = ({ charOptions }) => {
     if (charOptions.Fit) {
       setFitID(charOptions.Fit.id);
     }
-  });
+  }, [charOptions]);
 
-  //console.log('------------', size, width, comfort, quality, length, fit);
+  //console.log('------------', sizeID, widthID, comfortID, qualityID, lengthID, fitID);
 
+  let handleOverallRating = (e) => {
+    setCurrentOverallRating(e.target.value);
+  };
+  let handleSummary = (e) => {
+    setCurrentSummary(e.target.value);
+  };
+  let handleBody = (e) => {
+    setCurrentBody(e.target.value);
+  };
+  let handleRecommended = (e) => {
+    setCurrentRecommended(e.target.value);
+  };
+
+  let handleSize = (e) => {
+    setSize(e.target.value);
+  };
+  let handleWidth = (e) => {
+    setWidth(e.target.value);
+  };
+  let handleComfort = (e) => {
+    setComfort(e.target.value);
+  };
+  let handleQuality = (e) => {
+    setQuality(e.target.value);
+  };
+  let handleLength = (e) => {
+    setLength(e.target.value);
+  };
+  let handleFit = (e) => {
+    setFit(e.target.value);
+  };
+  let handlePhotos = (e) => {
+    setCurrentPhotos(e.target.value);
+  };
+  let handleName = (e) => {
+    setCurrentName(e.target.value);
+  };
+  let handleEmail = (e) => {
+    setCurrentEmail(e.target.value);
+  };
+
+
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    let currentChars = {};
+
+    if (sizeID !== null) {
+      currentChars[sizeID] = size;
+    }
+    if (widthID !== null) {
+      currentChars[widthID] = width;
+    }
+    if (comfortID !== null) {
+      currentChars[comfortID] = comfort;
+    }
+    if (qualityID !== null) {
+      currentChars[qualityID] = quality;
+    }
+    if (lengthID !== null) {
+      currentChars[lengthID] = length;
+    }
+    if (fitID !== null) {
+      currentChars[fitID] = fit;
+    }
+    //console.log('d', currentChars);
+    let submitData = {};
+    submitData['product_id'] = id;
+    submitData['rating'] = currentOverallRating;
+    submitData['summary'] = currentSummary;
+    submitData['body'] = currentBody;
+    submitData['recommend'] = currentRecommended;
+    submitData['name'] = currentName;
+    submitData['email'] = currentEmail;
+    submitData['photos'] = [];
+    submitData['characteristics'] = currentChars;
+    //  submitData.name = currentName;
+    //  submitData.email = currentEmail;
+    //  submitData.photos = [currentPhotos];
+    //  submitData.characteristics = currentChars;
+
+    console.log('data-submit', submitData);
+
+
+    axios.get('/reviews', submitData)
+    .then((res) => {
+      console.log('yay', res);
+    });
+  };
+
+//console.log('curr', currentOverallRating);
   return (
-    <form>
-      <OverallRatingWrapper>
+    <form onSubmit={handleSubmit}>
+      <OverallRatingWrapper onChange={handleOverallRating}>
         <RatingOpt>
           <p> *Overall Rating: </p>
           <label htmlFor='oneStar'>
@@ -120,7 +220,7 @@ const NewReviewForm = ({ charOptions }) => {
         </RatingDesc>
       </OverallRatingWrapper>
 
-      <ProductRec>
+      <ProductRec onChange={handleRecommended}>
         <p>*Do you recommend this product</p>
         <label htmlFor='yesRec'>
           <input type='radio' id='yesRec' name='chooseRec' value='true' defaultChecked="checked" required />
@@ -136,7 +236,7 @@ const NewReviewForm = ({ charOptions }) => {
       <ProductChars>
         <p>---Characteristics---</p>
         {sizeID &&
-          <div>
+          <div onChange={handleSize}>
             <p> *Size: </p>
             <CharLabel >
               1<br></br>
@@ -171,7 +271,7 @@ const NewReviewForm = ({ charOptions }) => {
         }
 
         {widthID &&
-          <div>
+          <div onChange={handleWidth}>
             <p> *Width: </p>
             <CharLabel >
               1<br></br>
@@ -206,7 +306,7 @@ const NewReviewForm = ({ charOptions }) => {
         }
 
         {comfortID &&
-          <div>
+          <div onChange={handleComfort}>
             <p> *Comfort: </p>
             <CharLabel >
               1<br></br>
@@ -241,7 +341,7 @@ const NewReviewForm = ({ charOptions }) => {
         }
 
         {qualityID &&
-          <div>
+          <div onChange={handleQuality}>
             <p> *Quality: </p>
             <CharLabel >
               1<br></br>
@@ -276,7 +376,7 @@ const NewReviewForm = ({ charOptions }) => {
         }
 
         {lengthID &&
-          <div>
+          <div onChange={handleLength}>
             <p> *Length: </p>
             <CharLabel >
               1<br></br>
@@ -311,7 +411,7 @@ const NewReviewForm = ({ charOptions }) => {
         }
 
         {fitID &&
-          <div>
+          <div onChange={handleFit}>
             <p> *Fit: </p>
             <CharLabel >
               1<br></br>
@@ -347,31 +447,31 @@ const NewReviewForm = ({ charOptions }) => {
 
       </ProductChars><br></br>
 
-      <ReviewSummary>
+      <ReviewSummary onChange={handleSummary}>
         <label>
           Review Summary: <br></br>
           <input type='text' name='reviewsummary' placeholder='Example: Best purchase ever!' maxLength='60'/>
         </label>
       </ReviewSummary><br></br>
-      <ReviewBody>
+      <ReviewBody  onChange={handleBody}>
       <label>
           *Review Body: <br></br>
           <input type='text' name='reviewbody' placeholder='Why do you like the product or not?' maxLength='1000' minLength='50' required/>
         </label>
       </ReviewBody><br></br>
-      <ReviewPhotos>
+      <ReviewPhotos onChange={handlePhotos}>
         <label>
           Enter Photo Url: <br></br>
           <input type='text' name='reviewphoto'/>
         </label>
       </ReviewPhotos><br></br>
-      <ReviewName>
+      <ReviewName onChange={handleName}>
         <label>
           *Review Name: <br></br>
           <input type='text' name='reviewname' placeholder='Example: Jackson11!' maxLength='60' required/>
         </label>
       </ReviewName><br></br>
-      <ReviewEmail>
+      <ReviewEmail onChange={handleEmail}>
         <label>
           *Review Email: <br></br>
           <input type='email' name='reviewemail' placeholder='Example: jackson11@email.com' maxLength='60' required/><br></br>
