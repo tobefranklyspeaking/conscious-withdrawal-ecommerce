@@ -119,7 +119,7 @@ const Blocks = (props) => {
 
 
   const Answers = ({ answers }) => {
-    console.log(answers);
+    // console.log(answers);
 
     //template tag html
     // if (Object.keys(answer.answers) > 1 && moreAnswers === true) {
