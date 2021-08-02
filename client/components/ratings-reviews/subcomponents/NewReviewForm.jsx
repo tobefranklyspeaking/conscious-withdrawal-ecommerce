@@ -134,7 +134,7 @@ const NewReviewForm = ({ charOptions, id }) => {
 
 
   let handleSubmit = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     let currentChars = {};
 
     if (sizeID !== null) {
@@ -174,13 +174,36 @@ const NewReviewForm = ({ charOptions, id }) => {
     console.log('data-submit', submitData);
 
 
-    axios.get('/reviews', submitData)
-    .then((res) => {
-      console.log('yay', res);
-    });
+
+       axios.post('/reviews', {
+          'product_id': id,
+          'rating': currentOverallRating,
+          'summary': currentSummary,
+          'body': currentBody,
+          'recommend': currentRecommended,
+          'name': currentName,
+          'email': currentEmail,
+          'photos': [],
+          'characteristics': currentChars
+        });
+
+    // axios.post('/reviews', submitData)
+    // .then((res) => console.log(res));
+    // {
+    //   product_id: id,
+    //   rating: currentOverallRating,
+    //   summary: currentSummary,
+    //   body: currentBody,
+    //   recommend: currentRecommended,
+    //   name: currentName,
+    //   email: currentEmail,
+    //   photos: [],
+    //   characteristics: currentChars
+    // }
+    // console.log('successful post data: ', res);
   };
 
-//console.log('curr', currentOverallRating);
+  //console.log('curr', currentOverallRating);
   return (
     <form onSubmit={handleSubmit}>
       <OverallRatingWrapper onChange={handleOverallRating}>
@@ -450,36 +473,36 @@ const NewReviewForm = ({ charOptions, id }) => {
       <ReviewSummary onChange={handleSummary}>
         <label>
           Review Summary: <br></br>
-          <input type='text' name='reviewsummary' placeholder='Example: Best purchase ever!' maxLength='60'/>
+          <input type='text' name='reviewsummary' placeholder='Example: Best purchase ever!' maxLength='60' />
         </label>
       </ReviewSummary><br></br>
-      <ReviewBody  onChange={handleBody}>
-      <label>
+      <ReviewBody onChange={handleBody}>
+        <label>
           *Review Body: <br></br>
-          <input type='text' name='reviewbody' placeholder='Why do you like the product or not?' maxLength='1000' minLength='50' required/>
+          <input type='text' name='reviewbody' placeholder='Why do you like the product or not?' maxLength='1000' minLength='50' required />
         </label>
       </ReviewBody><br></br>
       <ReviewPhotos onChange={handlePhotos}>
         <label>
           Enter Photo Url: <br></br>
-          <input type='text' name='reviewphoto'/>
+          <input type='text' name='reviewphoto' />
         </label>
       </ReviewPhotos><br></br>
       <ReviewName onChange={handleName}>
         <label>
           *Review Name: <br></br>
-          <input type='text' name='reviewname' placeholder='Example: Jackson11!' maxLength='60' required/>
+          <input type='text' name='reviewname' placeholder='Example: Jackson11!' maxLength='60' required />
         </label>
       </ReviewName><br></br>
       <ReviewEmail onChange={handleEmail}>
         <label>
           *Review Email: <br></br>
-          <input type='email' name='reviewemail' placeholder='Example: jackson11@email.com' maxLength='60' required/><br></br>
+          <input type='email' name='reviewemail' placeholder='Example: jackson11@email.com' maxLength='60' required /><br></br>
           <p>For authentication reasons, you will not be emailed</p>
         </label>
       </ReviewEmail> <br></br>
 
-        <input type='submit' value='Submit'/>
+      <input type='submit' value='Submit' />
 
 
 

@@ -5,14 +5,14 @@ import ProgressBar from './Progress-Bar.jsx';
 const StarRating = styled.div`
   width: 100%;
   height: 30px;
-  border: 1px solid black;
+
 `;
 
 const StarNum = styled.span`
   width: 10%
   float: left;
   height: 10px;
-  border: 1px solid black;
+
 `;
 
 

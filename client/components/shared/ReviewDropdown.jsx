@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   position: absolute;
   justify-content: space-around;
   width: 6rem;
-  border: 1px solid black;
+
 `;
 const Button = styled.button`
   border: none;
@@ -23,7 +23,7 @@ const Button = styled.button`
   align-items: center;
   padding: .5rem;
   font-weight: 700;
-  border: 1px solid black;
+
 `;
 
 const ReviewDropdown = ({ options, setSort }) => {

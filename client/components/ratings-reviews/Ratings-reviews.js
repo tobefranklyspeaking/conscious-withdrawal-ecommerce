@@ -13,33 +13,31 @@ const RatingsStyle = styled.div`
   background-color: LightGray;
   margin-left: auto;
   margin-right: auto;
-  border: 1px solid black;
 `;
 const Wrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
-  border: 1px solid black;
+  width: 80%;
 `;
 
 const Rating = styled.div`
   display: inline-block;
   text-align: center;
   vertical-align: middle;
-  border: 1px solid black;
 `;
 
 const Review = styled.div`
 display: inline-block;
 text-align: center;
 vertical-align: middle;
-border: 1px solid black;
+
 `;
 
 const ReviewContainer = styled.div`
 height:440px;
 height: 550px;
 overflow: auto;
-border: 1px solid black;
+
 `;
 
 const TotalReviews = styled.div`
@@ -47,19 +45,19 @@ const TotalReviews = styled.div`
   margin-top: 5px;
   margin-bottom: 5px;
   margin-left: 5px;
-  border: 1px solid black;
+
 `;
 
 const Inline = styled.div`
   display: inline-block;
   vertical-align: top;
   height: 100%
-  border: 1px solid black;
+
 `;
 
 const SortContainer = styled.div`
   height: 40px;
-  border: 1px solid black;
+
 `;
 
 const Ratings = ({ current }) => {
@@ -142,7 +140,6 @@ console.log('---',filteredReviews);
     <>
       <RatingsStyle>
         <h1>Ratings</h1>
-        <div>test</div>
       </RatingsStyle>
       <Wrapper>
         <Rating>
