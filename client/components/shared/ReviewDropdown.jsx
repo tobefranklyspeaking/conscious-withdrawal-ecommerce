@@ -4,11 +4,13 @@ import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
 //styling component elements
 const Wrapper = styled.div`
-  display: flex;
+  display: inline-block;
+  height: 100%
   flex-flow: column nowrap;
   position: absolute;
   justify-content: space-around;
-  width: 8rem;
+  width: 6rem;
+
 `;
 const Button = styled.button`
   border: none;
@@ -16,11 +18,12 @@ const Button = styled.button`
   margin: 0 auto;
   display: flex;
   height: 2rem;
-  width: 6rem;
+  width: 5rem;
   justify-content: space-evenly;
   align-items: center;
   padding: .5rem;
   font-weight: 700;
+
 `;
 
 const ReviewDropdown = ({ options, setSort }) => {
