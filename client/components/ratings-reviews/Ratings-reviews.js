@@ -18,16 +18,17 @@ const Wrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   width: 80%;
+  display flex;
 `;
 
 const Rating = styled.div`
-  display: inline-block;
+  display: flex-inline;
   text-align: center;
   vertical-align: middle;
 `;
 
 const Review = styled.div`
-display: inline-block;
+display: flex-inline;
 text-align: center;
 vertical-align: middle;
 
@@ -58,6 +59,26 @@ const Inline = styled.div`
 const SortContainer = styled.div`
   height: 40px;
 
+`;
+
+const EachReview = styled.div`
+  border-bottom: 1px solid black;
+  margin: 10px;
+`;
+
+const StarUser = styled.div`
+display: flex;
+justify-content: space-between;
+`;
+
+const User = styled.div`
+display: flex-inline;
+justify-content: right;
+`;
+
+const StarDiv = styled.div`
+display: flex-inline;
+justify-content: left;
 `;
 
 const Ratings = ({ current }) => {
@@ -138,9 +159,6 @@ console.log('---',filteredReviews);
 
   return (
     <>
-      <RatingsStyle>
-        <h1>Ratings</h1>
-      </RatingsStyle>
       <Wrapper>
         <Rating>
           <h3>RATINGS & REVIEWS</h3>
@@ -152,18 +170,20 @@ console.log('---',filteredReviews);
           <ReviewDropdown options={["helpful", "newest", "relevent"]} setSort={setSort} />
           </SortContainer>
           <ReviewContainer><>
-          {finalReviews.map((review, index) => (<div key={index}>
-            <Stars currentRating={review.rating}/>
-            <h6>{review.reviewer_name}, {moment(review.date).format('ll')}</h6>
+          {finalReviews.map((review, index) => (<EachReview key={index}>
+            <StarUser>
+            <StarDiv><Stars currentRating={review.rating}/></StarDiv>
+            <User>{review.reviewer_name}, {moment(review.date).format('ll')}</User>
+            </StarUser>
             <h3 key={index}>{review.summary}</h3>
             <h5>{review.body}</h5>
             <Helpful path={'/reviews'} id={review.review_id} helpfulness={review.helpfulness} currentSort={sort}/>
             <Report path={'/reviews'} id={review.review_id} />
-          </div>))}</>
+          </EachReview>))}</>
           </ReviewContainer>
           {(reviewCount < reviews.length && reviews.length > 2) &&
           <button onClick={(e) => {setReviewCount(reviewCount + 2)}}>MORE REVIEWS</button>}
-          <button onClick={() => setShow(true)}>Add a Review +</button>
+          <button onClick={() => setShow(true)}>ADD A REVIEW +</button>
         <NewReview onClose={() => setShow(false)} current={current} show={show}/>
         </Review>
       </Wrapper>
