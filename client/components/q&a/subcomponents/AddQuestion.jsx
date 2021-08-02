@@ -15,8 +15,8 @@ const Modal = styled.div`
 `;
 
 const ModalContent = styled.div`
-  width: 80vh;
-  height: 70vh;
+  width: 80%;
+  height: 70%;
   background-color: white;
 `;
 
@@ -36,7 +36,21 @@ const ModalBody = styled.div`
 `;
 
 const ModalFooter = styled.div`
+  display: relative;
   padding: 10px;
+  height: auto;
+`;
+
+const Button = styled.button`
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
+  height: auto;
+  width: auto;
+  border: 1px solid black;
+  margin: 1rem 1rem 0 0;
+  padding: 1rem;
+  font-size: .7rem;
 `;
 
 const AddQuestion = ({current, show, onClose}) => {
@@ -58,11 +72,10 @@ const AddQuestion = ({current, show, onClose}) => {
           <div>Your Email - mandatory</div>
           <input placeholder='Example: jack=@email.com'/>
           <div>For authentication reasons, you will not be emailed</div>
-          <button>Opens new window to select photos</button>
         </ModalBody>
         <ModalFooter className="modal-footer">
-          <button onClick={onClose} className="button">Cancel</button>
-          <button className="submit">Submit</button>
+          <Button onClick={onClose} className="button">Cancel</Button>
+          <Button className="submit">Submit</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

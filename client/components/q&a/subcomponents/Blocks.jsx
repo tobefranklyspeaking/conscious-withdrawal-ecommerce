@@ -162,26 +162,28 @@ const Blocks = (props) => {
                     <span> | </span>
                     <span cursor='pointer'> <u>Report</u> </span>
                   </LineB>
-                  <LineB>
-                    <div>Yes, as you can see in these photos</div>
-                    <Images>
-                      <span>
-                        {answerObj.photos
-                          ? answerObj.photos.map((each, index) => <Img key={index} src={each} />)
-                          : '#'}
-                        <Img src='https://source.unsplash.com/random/' />
-                        <Img src="http://placecorgi.com/260/180" />
-                      </span>
-                    </Images>
-                    <div>
-                      <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
-                      <span> | </span>
-                      <span> Helpful? </span>
-                      <span cursor='pointer'> <u>Yes</u> ({answerObj.helpfulness}) </span>
-                      <span> | </span>
-                      <span cursor='pointer'> <u>Report</u> </span>
-                    </div>
-                  </LineB>
+                  {Object.keys(answerObj.photos).length ?
+                    <LineB>
+                      <div>Yes, as you can see in these photos</div>
+                      <Images>
+                        <span>
+                          {answerObj.photos
+                            ? answerObj.photos.map((each, index) => <Img key={index} src={each} />)
+                            : '#'}
+                          {/* <Img src='https://source.unsplash.com/random/' />
+                        <Img src="http://placecorgi.com/260/180" /> */}
+                        </span>
+                      </Images>
+                      <div>
+                        <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
+                        <span> | </span>
+                        <span> Helpful? </span>
+                        <span cursor='pointer'> <u>Yes</u> ({answerObj.helpfulness}) </span>
+                        <span> | </span>
+                        <span cursor='pointer'> <u>Report</u> </span>
+                      </div>
+                    </LineB>
+                    : null}
                 </AnswerAdditions>
               </div>
             )
