@@ -66,7 +66,6 @@ const getAverageRating = (ratings) => {
     totalNumberRatings += Number(ratings[key]);
     sum += ratings[key] * key;
   }
-  console.log('Average rating: ', sum / totalNumberRatings)
   return sum / totalNumberRatings;
 }
 
