@@ -25,7 +25,6 @@ const SpaceQ = styled.span`
   margin-bottom: 5px;
   margin-left: 1rem;
   float: right;
-  cursor: pointer;
 `;
 
 const SpaceA = styled.span`
@@ -64,7 +63,8 @@ const LineB = styled.div`
   }
 
   div {
-    margin-top: 1rem;
+    margin-top: 1vh;
+    margin-bottom: 2vh;
   }
 `;
 
@@ -83,7 +83,7 @@ const Images = styled.span`
 
 const Img = styled.img`
   max-width: 200px;
-  max-height: 200px;
+  max-height: 150px;
   width: auto;
   height: auto;
   margin: 1rem 1rem 0 0;
@@ -94,7 +94,6 @@ const Blocks = (props) => {
   const [show, setShow] = useState(false);
 
   const Questions = (question) => {
-    // console.log(question)
     return (
       <Accordian key={question.question_id}>
         <Container >
@@ -102,12 +101,12 @@ const Blocks = (props) => {
             <Bold>
               Q: {question.question_body}
             </Bold>
-            <SpaceQ cursor='default'>
-              <SpaceQ onClick={() => setShow(true)}><u>Add Answer</u></SpaceQ>
-              <SpaceQ cursor='default'>|</SpaceQ>
-              <SpaceQ><u>Yes</u> ({question.question_helpfulness})</SpaceQ>
-              <SpaceQ cursor='default'> Helpful?</SpaceQ>
-              <AddAnswer onClose={() => setShow(false)} current={question} show={show} />
+            <SpaceQ>
+              <SpaceQ cursor='pointer' background-color='gray' onClick={() => setShow(true)}><u>Add Answer</u></SpaceQ>
+              <SpaceQ>|</SpaceQ>
+              <SpaceQ cursor='pointer'><u>Yes</u> ({question.question_helpfulness})</SpaceQ>
+              <SpaceQ> Helpful? </SpaceQ>
+              <AddAnswer onClose={() => setShow(false)} current={question} show={show} cursor='pointer'/>
             </SpaceQ>
           </Wrap>
         </Container>
@@ -149,7 +148,7 @@ const Blocks = (props) => {
           let answerObj = answers[each];
           if (answerObj.body !== undefined) {
             return (
-              <div key={each}>
+              <div key={parseInt(each)}>
                 <AnswerAdditions>
                   <LineA>
                     <Bold> A: </Bold>
@@ -167,7 +166,7 @@ const Blocks = (props) => {
                     <div>Yes, as you can see in these photos</div>
                     <Images>
                       <span>
-                        {answerObj.photos ? answerObj.photos.map(each => <Img src={each} />) : '#'}
+                        {answerObj.photos ? answerObj.photos.map((each, index) => <Img key={index} src={each} />) : '#'}
                                           <Img src='https://source.unsplash.com/random/'/>
                       </span>
                     </Images>

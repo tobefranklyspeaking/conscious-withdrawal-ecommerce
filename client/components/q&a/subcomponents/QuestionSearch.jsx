@@ -63,6 +63,7 @@ const QASearch = ({ current }) => {
     setSearch(searchText);
   }
 
+  const [count, setCount] = useState(0);
   return (
     <>
       <Search>
@@ -77,6 +78,7 @@ const QASearch = ({ current }) => {
         </SearchButton>
       </Search>
       <List>
+        {console.log(allQuestions)}
         {Blocks(allQuestions)}
         {/* <button>LOAD MORE ANSWERS</button> */}
       </List>
