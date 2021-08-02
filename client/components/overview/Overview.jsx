@@ -31,6 +31,7 @@ const Slogan = styled.h2`
   margin-left: 10%;
   width: 90%;
   align-self: end;
+  color: #3D4849;
 `;
 const Description = styled.div`
   margin-left: 10%;
@@ -55,6 +56,7 @@ const Category = styled.div`
 const Name = styled.div`
   font-size: 36px;
   font-weight: 700;
+  color: #3D4849;
 `;
 const Price = styled.div`
   margin: 1rem 0;
@@ -91,6 +93,12 @@ const StylePlaceholder = styled.div`
   height: 3.75rem;
   width: 3.75rem;
 `;
+const StyleContainer = styled.div`
+  border: 1px solid black;
+  border-radius: 50%;
+  height: 3.75rem;
+  width: 3.75rem;
+`;
 
 const AddToBag = styled.button``;
 const Fav = styled.button``;
@@ -115,7 +123,7 @@ const Overview = ({ current }) => {
   const [styles, updateStyles] = useState([]);
   const [currentStyle, updateCurrentStyle] = useState({});
   const [photos, updatePhotos] = useState([]);
-
+  const [thumbnails, updateThumbnails] = useState([]);
   //fetches styles and sets default to first style based on current product on mount
   useEffect(async () => {
     try {
@@ -135,8 +143,9 @@ const Overview = ({ current }) => {
   useEffect(() => {
     if(currentStyle.photos) {
       let newPhotos = currentStyle.photos.map(photo => photo.url);
-      console.log('newphotos here', newPhotos);
+      let newThumbnails = currentStyle.photos.map(photo => photo.thumbnail_url);
       updatePhotos(newPhotos);
+      updateThumbnails(newThumbnails);
     }
   }, [currentStyle]);
 
@@ -165,8 +174,6 @@ const Overview = ({ current }) => {
             <StylePlaceholder />
             <StylePlaceholder />
             <StylePlaceholder />
-            <StylePlaceholder />
-            <StylePlaceholder />
           </StyleSelector>
           <ButtonRow1>
             <Dropdown options={['#']} title="SELECT SIZE" width="60%"/>
@@ -179,7 +186,7 @@ const Overview = ({ current }) => {
           <FeatureChecklist>
             <div><FaCheck /> GMO and Pesticide-free</div>
             <div><FaCheck /> Where can I find this in the product data?</div>
-            <div><FaCheck /> I have no damn clue</div>
+            <div><FaCheck /> I have no clue</div>
             <div><FaCheck /> CSS why</div>
           </FeatureChecklist>
         </Column2>
