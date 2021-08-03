@@ -8,7 +8,7 @@ const QandAStyle = styled.div`
   margin: 1rem 1rem 3rem 1rem;
   margin-left: auto;
   margin-right: auto;
-  width: 90%;
+  width: 100%;
   max-height: 90vw;
 `;
 

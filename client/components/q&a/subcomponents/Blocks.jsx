@@ -2,6 +2,7 @@ import React, { setState, useState } from 'react';
 import moment from 'moment';
 import AddAnswer from './AddAnswer.jsx';
 import styled from 'styled-components';
+import Helpful from '/client/components/shared/Helpful.jsx';
 
 const Accordian = styled.div`
 `;
@@ -89,9 +90,19 @@ const Img = styled.img`
   margin-right: 1rem;
 `;
 
+const Wrapper = styled.span`
+  color: gray;
+  margin-top: 5;
+  font-weight: 'lighter';
+  font-size: 10;
+  margin-bottom: 5;
+  margin-left: 10;
+`;
+
 const Blocks = (props) => {
   const [moreAnswers, setMoreAnswers] = useState(true);
   const [show, setShow] = useState(false);
+
 
   const Questions = (question) => {
     return (
@@ -104,7 +115,8 @@ const Blocks = (props) => {
             <SpaceQ>
               <SpaceQ style={{ cursor: 'pointer' }} background-color='gray' onClick={() => setShow(true)}><u>Add Answer</u></SpaceQ>
               <SpaceQ>|</SpaceQ>
-              <SpaceQ style={{ cursor: 'pointer' }}><u>Yes</u> ({question.question_helpfulness})</SpaceQ>
+              <Helpful path={'/qa/questions/'} id={parseInt(question.question_id)} helpfulness={question.question_helpfulness} />
+              <SpaceQ>|</SpaceQ>
               <SpaceQ> Helpful? </SpaceQ>
               <AddAnswer onClose={() => setShow(false)} current={question} show={show} style={{ cursor: 'pointer' }} />
             </SpaceQ>
@@ -143,7 +155,7 @@ const Blocks = (props) => {
                   <LineB >
                     <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
                     <span> | </span>
-                    <span> Helpful? </span>
+                    <Helpful path={'/qa/questions/'} id={parseInt(each)} helpfulness={answerObj.helpfulness} />
                     <span style={{ cursor: 'pointer' }}> <u>Yes</u> ({answerObj.helpfulness}) </span>
                     <span> | </span>
                     <span style={{ cursor: 'pointer' }}> <u>Report</u> </span>
@@ -156,15 +168,16 @@ const Blocks = (props) => {
                           {answerObj.photos
                             ? answerObj.photos.map((each, index) => <Img key={index} src={each} />)
                             : '#'}
-                          {/* {/* <Img src='https://source.unsplash.com/random/' /> */}
-                          <Img src="http://placecorgi.com/260/180" />
                         </span>
                       </Images>
                       <div>
                         <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
                         <span> | </span>
-                        <span> Helpful? </span>
-                        <span style={{ cursor: 'pointer' }}> <u>Yes</u> ({answerObj.helpfulness}) </span>
+                        <span>
+
+                          <Helpful path={'/qa/questions/'} id={parseInt(each)} helpfulness={answerObj.helpfulness} />
+
+                        </span>
                         <span> | </span>
                         <span style={{ cursor: 'pointer' }}> <u>Report</u> </span>
                       </div>

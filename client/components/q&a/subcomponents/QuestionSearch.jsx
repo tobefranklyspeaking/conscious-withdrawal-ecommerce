@@ -86,12 +86,3 @@ const QASearch = ({ current }) => {
 }
 
 export default QASearch;
-
-// {
-//   allQuestions.filter(text => {
-//     if (search.length > 2 && text.question_body.toLowerCase().indexOf(search)) {
-//       <div>{Blocks(text)}</div>
-//     } else return null
-//   })
-// }
-
