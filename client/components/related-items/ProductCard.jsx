@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import Stars from '../shared/Stars.jsx';
 import Star from '../shared/Star.jsx';
 import axios from 'axios';
+import getAverageRating from './getAverageRating.js';
 
 const Card = styled.div`
   border: 1px solid black;
@@ -58,16 +59,6 @@ const Card = styled.div`
     font-size: 1em;
   }
 `;
-
-const getAverageRating = (ratings) => {
-  var totalNumberRatings = 0;
-  var sum = 0;
-  for (var key in ratings) {
-    totalNumberRatings += Number(ratings[key]);
-    sum += ratings[key] * key;
-  }
-  return sum / totalNumberRatings;
-}
 
 export default ({ productID }) => {
 
