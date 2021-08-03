@@ -52,7 +52,7 @@ const TotalReviews = styled.div`
 const Inline = styled.div`
   display: inline-block;
   vertical-align: top;
-  height: 100%
+  height: 100%;
 
 `;
 
@@ -134,6 +134,7 @@ let filterData = (data, query) => {
 let filter = {
   rating: isFiltered
 };
+
 let query = buildFilter(filter);
 let filteredReviews = filterData(reviews, buildFilter(filter));
 console.log('---',filteredReviews);

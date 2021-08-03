@@ -12,7 +12,7 @@ const RatingOpt = styled.span`
 
 const RatingDesc = styled.span`
   display: inline-block;
-  align: rigth;
+  align: right;
 `;
 
 const ProductRec = styled.div`
@@ -46,7 +46,7 @@ const ReviewEmail = styled.div`
 `;
 
 
-const NewReviewForm = ({ charOptions, id }) => {
+const NewReviewForm = ({ charOptions, id, onClose }) => {
   //console.log('hgjvh', charOptions);
   const [sizeID, setSizeID] = useState(null);
   const [widthID, setWidthID] = useState(null);
@@ -70,7 +70,7 @@ const NewReviewForm = ({ charOptions, id }) => {
 
   useEffect(() => {
     if (charOptions.Size) {
-      setSizeID(charOptions.Size.id);
+      setSizeID(`${charOptions.Size.id}`);
     }
     if (charOptions.Width) {
       setWidthID(charOptions.Width.id);
@@ -134,38 +134,48 @@ const NewReviewForm = ({ charOptions, id }) => {
 
 
   let handleSubmit = (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     let currentChars = {};
 
     if (sizeID !== null) {
-      currentChars[sizeID] = size;
+      currentChars[`${sizeID}`] = Number(size);
     }
     if (widthID !== null) {
-      currentChars[widthID] = width;
+      currentChars[`${widthID}`] =  Number(width);
     }
     if (comfortID !== null) {
-      currentChars[comfortID] = comfort;
+      currentChars[`${comfortID}`] =  Number(comfort);
     }
     if (qualityID !== null) {
-      currentChars[qualityID] = quality;
+      currentChars[`${qualityID}`] =  Number(quality);
     }
     if (lengthID !== null) {
-      currentChars[lengthID] = length;
+      currentChars[`"${lengthID}"`] =  Number(length);
     }
     if (fitID !== null) {
-      currentChars[fitID] = fit;
+      currentChars[`${fitID}`] =  Number(fit);
     }
-    //console.log('d', currentChars);
-    let submitData = {};
-    submitData['product_id'] = id;
-    submitData['rating'] = currentOverallRating;
-    submitData['summary'] = currentSummary;
-    submitData['body'] = currentBody;
-    submitData['recommend'] = currentRecommended;
-    submitData['name'] = currentName;
-    submitData['email'] = currentEmail;
-    submitData['photos'] = [];
-    submitData['characteristics'] = currentChars;
+    console.log('d', currentChars);
+    let submitData = {
+      "product_id": id,
+      "rating": Number(currentOverallRating),
+      "summary": currentSummary,
+      "body": currentBody,
+      "recommend": currentRecommended,
+      "name": currentName,
+      "email": currentEmail,
+      "photos": [],
+      "characteristics": currentChars
+    };
+    // submitData['product_id'] = id;
+    // submitData['rating'] = Number(currentOverallRating);
+    // submitData['summary'] = currentSummary;
+    // submitData['body'] = currentBody;
+    // submitData['recommend'] = currentRecommended;
+    // submitData['name'] = currentName;
+    // submitData['email'] = currentEmail;
+    // submitData['photos'] = [];
+    // submitData['characteristics'] = currentChars;
     //  submitData.name = currentName;
     //  submitData.email = currentEmail;
     //  submitData.photos = [currentPhotos];
@@ -173,19 +183,31 @@ const NewReviewForm = ({ charOptions, id }) => {
 
     console.log('data-submit', submitData);
 
+       axios.post('/reviews', submitData)
+       .then((res) => {
+         onClose()
+       })
+       .catch((err) => {console.log('error: ', err)});
+
+       onClose();
 
 
-       axios.post('/reviews', {
-          'product_id': id,
-          'rating': currentOverallRating,
-          'summary': currentSummary,
-          'body': currentBody,
-          'recommend': currentRecommended,
-          'name': currentName,
-          'email': currentEmail,
-          'photos': [],
-          'characteristics': currentChars
-        });
+        // {
+        //   "product_id": id,
+        //   "rating": Number(currentOverallRating),
+        //   "summary": currentSummary,
+        //   "body": currentBody,
+        //   "recommend": currentRecommended,
+        //   "name": currentName,
+        //   "email": currentEmail,
+        //   "photos": [],
+        //   "characteristics": currentChars
+        // }
+
+      // axios.post('/reviews', submitData)
+      //   .then((res) => {
+      //     console.log('res', res);
+      //   });
 
     // axios.post('/reviews', submitData)
     // .then((res) => console.log(res));
@@ -201,6 +223,17 @@ const NewReviewForm = ({ charOptions, id }) => {
     //   characteristics: currentChars
     // }
     // console.log('successful post data: ', res);
+    // {
+    //   'product_id': id,
+    //   'rating': currentOverallRating,
+    //   'summary': currentSummary,
+    //   'body': currentBody,
+    //   'recommend': currentRecommended,
+    //   'name': currentName,
+    //   'email': currentEmail,
+    //   'photos': [],
+    //   'characteristics': currentChars
+    // }
   };
 
   //console.log('curr', currentOverallRating);

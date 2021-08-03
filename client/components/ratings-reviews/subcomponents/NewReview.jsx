@@ -67,7 +67,7 @@ const NewReview = ({current, show, onClose}) => {
         </ModalHeader>
         <ModalBody>
           Add Forms Here
-          <NewReviewForm charOptions={charOptions} id={current.id}/>
+          <NewReviewForm charOptions={charOptions} id={current.id} onClose={onClose}/>
         </ModalBody>
         <ModalFooter className="modal-footer">
           <button onClick={onClose} className="button">Close</button>
