@@ -125,6 +125,7 @@ const Overview = ({ current }) => {
   const [currentStyle, updateCurrentStyle] = useState({});
   const [photos, updatePhotos] = useState([]);
   const [thumbnails, updateThumbnails] = useState([]);
+  const [features, updateFeatures] = useState([]);
 
   //fetches styles and sets default to first style based on current product on mount
   useEffect(async () => {
@@ -135,6 +136,7 @@ const Overview = ({ current }) => {
           // console.log('arr.results here', arr.results);
           updateStyles(arr.results);
           updateCurrentStyle(arr.results[0]);
+          updateFeatures(current.features);
           console.log('current obj here!', current);
           console.log('current Style here!', arr.results[0]);
         }
@@ -187,10 +189,11 @@ const Overview = ({ current }) => {
             <Button height="4rem" width="3rem"><FaRegHeart/></Button>
           </ButtonRow2>
           <FeatureChecklist>
-            <div><FaCheck /> GMO and Pesticide-free</div>
-            <div><FaCheck /> Where can I find this in the product data?</div>
-            <div><FaCheck /> I have no clue</div>
-            <div><FaCheck /> CSS why</div>
+              {features.map((feature, i) => (
+                <div key={i}>
+                  <FaCheck /> {feature.feature}
+                </div>
+              ))}
           </FeatureChecklist>
         </Column2>
       </OverviewWrapper>
