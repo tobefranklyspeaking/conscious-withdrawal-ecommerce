@@ -14,20 +14,24 @@ const Modal = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid black;
 `;
 
 const ModalContent = styled.div`
   width: 80vh;
   height: 70vh;
   background-color: white;
+  border: 1px solid black;
 `;
 
 const ModalHeader = styled.div`
   padding: 10px;
+  border: 1px solid black;
 `;
 
 const ModalTitle = styled.div`
   margin: 0;
+  border: 1px solid black;
 `;
 
 const ModalBody = styled.div`
@@ -36,10 +40,12 @@ const ModalBody = styled.div`
   border-top: 1px solid #eee;
   border bottom: 1px solid #eee;
   overflow: auto;
+  border: 1px solid black;
 `;
 
 const ModalFooter = styled.div`
   padding: 10px;
+  border: 1px solid black;
 `;
 const NewReview = ({current, show, onClose}) => {
   const [charOptions, setCharOptions] = useState({});

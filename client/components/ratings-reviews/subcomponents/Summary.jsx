@@ -10,11 +10,11 @@ const RatingSummaryNum = styled.h1`
   display: inline;
   font-size: 55px;
   font-weight: bold;
-
+  border: 1px solid black;
 `;
 
 const Wrapper = styled.div`
-
+border: 1px solid black;
 `;
 
 const Summary = ({ id, setIsFiltered }) => {

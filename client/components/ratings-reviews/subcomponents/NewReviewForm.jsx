@@ -3,46 +3,57 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 const OverallRatingWrapper = styled.div`
-
+border: 1px solid black;
 `;
 const RatingOpt = styled.span`
   display: inline-block;
   align: left;
+  border: 1px solid black;
 `;
 
 const RatingDesc = styled.span`
   display: inline-block;
   align: right;
+  border: 1px solid black;
 `;
 
 const ProductRec = styled.div`
+border: 1px solid black;
 `;
 
 const ProductChars = styled.div`
+border: 1px solid black;
 `;
 
 const CharInput = styled.input`
 display: block;
 margin: 0 auto;
+border: 1px solid black;
 `;
 
 const CharLabel = styled.label`
 display: inline-block;
+border: 1px solid black;
 `;
 
 const ReviewSummary = styled.div`
+border: 1px solid black;
 `;
 
 const ReviewBody = styled.div`
+border: 1px solid black;
 `;
 
 const ReviewPhotos = styled.div`
+border: 1px solid black;
 `;
 
 const ReviewName = styled.div`
+border: 1px solid black;
 `;
 
 const ReviewEmail = styled.div`
+border: 1px solid black;
 `;
 
 
