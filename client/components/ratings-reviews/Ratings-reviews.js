@@ -22,13 +22,13 @@ const Wrapper = styled.div`
 `;
 
 const Rating = styled.div`
-  display: flex-inline;
+  /* display: inline-flex; */
   text-align: center;
   vertical-align: middle;
 `;
 
 const Review = styled.div`
-display: flex-inline;
+/* display: inline-flex; */
 text-align: center;
 vertical-align: middle;
 
@@ -52,7 +52,7 @@ const TotalReviews = styled.div`
 const Inline = styled.div`
   display: inline-block;
   vertical-align: top;
-  height: 100%
+  height: 100%;
 
 `;
 
@@ -72,12 +72,12 @@ justify-content: space-between;
 `;
 
 const User = styled.div`
-display: flex-inline;
+display: inline-flex;
 justify-content: right;
 `;
 
 const StarDiv = styled.div`
-display: flex-inline;
+display: inline-flex;
 justify-content: left;
 `;
 
@@ -92,7 +92,7 @@ const Ratings = ({ current }) => {
 
 
   useEffect(() => {
-    console.log('filter in r-r', isFiltered);
+    // console.log('filter in r-r', isFiltered);
     const getReviews = async () => {
       let res = await axios.get(`/reviews?product_id=${current.id}&sort=${sort}&count=1000`);
       setReviews(res.data.results);
@@ -101,7 +101,7 @@ const Ratings = ({ current }) => {
       // setReviewsDisplayed(display);
       // console.log('should be displayed', reviewsDisplayed);
       //setCurrentReview(res.data.results[0]);
-       //console.log('successful get current id: ', res.data.results);
+      //console.log('successful get current id: ', res.data.results);
     };
     getReviews();
 
@@ -109,41 +109,42 @@ const Ratings = ({ current }) => {
 
 
 
-let buildFilter = (filter) => {
-  let query = {};
-  for (let keys in filter) {
+  let buildFilter = (filter) => {
+    let query = {};
+    for (let keys in filter) {
       if (filter[keys].constructor === Array && filter[keys].length > 0) {
-          query[keys] = filter[keys];
+        query[keys] = filter[keys];
       }
-  }
-  return query;
-};
+    }
+    return query;
+  };
 
-let filterData = (data, query) => {
-  const filteredData = data.filter( (item) => {
+  let filterData = (data, query) => {
+    const filteredData = data.filter((item) => {
       for (let key in query) {
-          if (item[key] === undefined || !query[key].includes(item[key])) {
-              return false;
-          }
+        if (item[key] === undefined || !query[key].includes(item[key])) {
+          return false;
+        }
       }
       return true;
-  });
-  return filteredData;
-};
+    });
+    return filteredData;
+  };
 
-let filter = {
-  rating: isFiltered
-};
-let query = buildFilter(filter);
-let filteredReviews = filterData(reviews, buildFilter(filter));
-console.log('---',filteredReviews);
+  let filter = {
+    rating: isFiltered
+  };
+
+  let query = buildFilter(filter);
+  let filteredReviews = filterData(reviews, buildFilter(filter));
+  /* console.log('---',filteredReviews); */
 
   let display = (filterReview, count) => {
     let reviewsToDisplay = filterReview;
-    if(filterReview.length > 2) {
+    if (filterReview.length > 2) {
       //console.log('should be displayed', reviewsToDisplay.slice(0, count));
       reviewsToDisplay = reviewsToDisplay.slice(0, count);
-      console.log('should be displayed', reviewsToDisplay);
+      // console.log('should be displayed', reviewsToDisplay);
       return reviewsToDisplay;
     } else {
       return reviewsToDisplay;
@@ -151,7 +152,7 @@ console.log('---',filteredReviews);
   }
 
   let finalReviews = display(filteredReviews, reviewCount);
-  console.log('sould equal should be displayed', finalReviews);
+  /* console.log('sould equal should be displayed', finalReviews); */
 
   let handleMoreReviews = () => {
 
@@ -162,29 +163,29 @@ console.log('---',filteredReviews);
       <Wrapper>
         <Rating>
           <h3>RATINGS & REVIEWS</h3>
-        <Summary id={current.id} setIsFiltered={setIsFiltered}/>
+          <Summary id={current.id} setIsFiltered={setIsFiltered} />
         </Rating>
         <Review>
           <SortContainer>
-          <TotalReviews>{reviews.length} reviews, sorted by </TotalReviews>
-          <ReviewDropdown options={["helpful", "newest", "relevent"]} setSort={setSort} />
+            <TotalReviews>{reviews.length} reviews, sorted by </TotalReviews>
+            <ReviewDropdown options={["helpful", "newest", "relevent"]} setSort={setSort} />
           </SortContainer>
           <ReviewContainer><>
-          {finalReviews.map((review, index) => (<EachReview key={index}>
-            <StarUser>
-            <StarDiv><Stars currentRating={review.rating}/></StarDiv>
-            <User>{review.reviewer_name}, {moment(review.date).format('ll')}</User>
-            </StarUser>
-            <h3 key={index}>{review.summary}</h3>
-            <h5>{review.body}</h5>
-            <Helpful path={'/reviews'} id={review.review_id} helpfulness={review.helpfulness} currentSort={sort}/>
-            <Report path={'/reviews'} id={review.review_id} />
-          </EachReview>))}</>
+            {finalReviews.map((review, index) => (<EachReview key={index}>
+              <StarUser>
+                <StarDiv><Stars currentRating={review.rating} /></StarDiv>
+                <User>{review.reviewer_name}, {moment(review.date).format('ll')}</User>
+              </StarUser>
+              <h3 key={index}>{review.summary}</h3>
+              <h5>{review.body}</h5>
+              <Helpful path={'/reviews'} id={review.review_id} helpfulness={review.helpfulness} currentSort={sort} />
+              <Report path={'/reviews'} id={review.review_id} />
+            </EachReview>))}</>
           </ReviewContainer>
           {(reviewCount < reviews.length && reviews.length > 2) &&
-          <button onClick={(e) => {setReviewCount(reviewCount + 2)}}>MORE REVIEWS</button>}
+            <button onClick={(e) => { setReviewCount(reviewCount + 2) }}>MORE REVIEWS</button>}
           <button onClick={() => setShow(true)}>ADD A REVIEW +</button>
-        <NewReview onClose={() => setShow(false)} current={current} show={show}/>
+          <NewReview onClose={() => setShow(false)} current={current} show={show} />
         </Review>
       </Wrapper>
     </>
