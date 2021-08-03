@@ -48,9 +48,8 @@ const SearchBar = ({ updateProduct }) => {
   }, [])
 
   const handleClick = async () => {
-    // This will allow the user to submit search
     updateProduct(selection);
-    console.log('handleClick clicked', selection);
+    setSearch('');
   }
 
   const handleProduct = (e) => {
