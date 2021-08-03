@@ -126,6 +126,8 @@ const Overview = ({ current }) => {
   const [photos, updatePhotos] = useState([]);
   const [thumbnails, updateThumbnails] = useState([]);
   const [features, updateFeatures] = useState([]);
+  const [skus, updateSkus] = useState({});
+  const [avgRating, updateAvg] = useState(0);
 
   //fetches styles and sets default to first style based on current product on mount
   useEffect(async () => {
@@ -152,6 +154,7 @@ const Overview = ({ current }) => {
       let newThumbnails = currentStyle.photos.map(photo => photo.thumbnail_url);
       updatePhotos(newPhotos);
       updateThumbnails(newThumbnails);
+      updateSkus(currentStyle.skus);
     }
   }, [currentStyle]);
 
@@ -171,7 +174,7 @@ const Overview = ({ current }) => {
         </StarsWrapper>
           <Category>{current.category}</Category>
           <Name>{current.name}</Name>
-          <Price>{'$' + (currentStyle.original_price || current.default_price)}</Price>
+          <Price style={currentStyle.sale_price ? {color: 'red'} : {}} >{'$' + (currentStyle.sale_price || currentStyle.original_price)}</Price>
           <StyleHeader> <h4>STYLE ></h4> SELECTED STYLE</StyleHeader>
           <StyleSelector>
             {thumbnails.map((nail, i) => (
@@ -189,11 +192,11 @@ const Overview = ({ current }) => {
             <Button height="4rem" width="3rem"><FaRegHeart/></Button>
           </ButtonRow2>
           <FeatureChecklist>
-              {features.map((feature, i) => (
-                <div key={i}>
-                  <FaCheck /> {feature.feature}
-                </div>
-              ))}
+              {features.map((feature, i) => {
+                return (<div key={i}>
+                  <FaCheck /> {`${feature.feature}`}
+                </div>);
+                  })}
           </FeatureChecklist>
         </Column2>
       </OverviewWrapper>
