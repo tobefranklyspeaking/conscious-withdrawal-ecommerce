@@ -64,7 +64,7 @@ const SearchBar = () => {
           value={search}
           onChange={e => onChange(e.target.value)} />
         <span>
-          <CgSearch style={{stroke: 'white', strokeWidth:2, fill:'white'}} onClick={() => handleClick()} />
+          <CgSearch style={{ size: 18, color: 'white' }} onClick={() => handleClick()} />
         </span>
         <List>
           {
