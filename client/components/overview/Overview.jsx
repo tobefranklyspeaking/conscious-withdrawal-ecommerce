@@ -141,7 +141,7 @@ const Overview = ({ current }) => {
 
   // updates photos for carousel on change to current style to avoid type errors
   useEffect(() => {
-    if(currentStyle !== undefined && currentStyle.photos !== undefined) {
+    if(currentStyle.photos) {
       let newPhotos = currentStyle.photos.map(photo => photo.url);
       let newThumbnails = currentStyle.photos.map(photo => photo.thumbnail_url);
       updatePhotos(newPhotos);
