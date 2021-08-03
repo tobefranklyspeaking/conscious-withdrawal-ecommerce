@@ -120,19 +120,22 @@ const Column2 = styled.div`
 `;
 
 const Overview = ({ current }) => {
+  //set state: have isolated photos/thumbnails and sku/sale for easier useEffect logic
   const [styles, updateStyles] = useState([]);
   const [currentStyle, updateCurrentStyle] = useState({});
   const [photos, updatePhotos] = useState([]);
   const [thumbnails, updateThumbnails] = useState([]);
+
   //fetches styles and sets default to first style based on current product on mount
   useEffect(async () => {
     try {
         if(current.id) {
           let res = await fetch(`/products/${current.id}/styles`);
           let arr = await res.json();
-          console.log('arr.results here', arr.results);
           updateStyles(arr.results);
           updateCurrentStyle(arr.results[0]);
+          console.log('current obj here!', current);
+          console.log('current Style here!', arr.results[0]);
         }
     } catch (err) {
       console.error('err fetching styles', err);
@@ -165,7 +168,7 @@ const Overview = ({ current }) => {
         </StarsWrapper>
           <Category>{current.category}</Category>
           <Name>{current.name}</Name>
-          <Price>{'$' + current.default_price}</Price>
+          <Price>{'$' + (currentStyle.original_price || current.default_price)}</Price>
           <StyleHeader> <h4>STYLE ></h4> SELECTED STYLE</StyleHeader>
           <StyleSelector>
             {thumbnails.map((nail, i) => (
