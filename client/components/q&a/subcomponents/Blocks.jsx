@@ -25,7 +25,6 @@ const SpaceQ = styled.span`
   margin-bottom: 5px;
   margin-left: 1rem;
   float: right;
-  cursor: pointer;
 `;
 
 const SpaceA = styled.span`
@@ -62,6 +61,11 @@ const LineB = styled.div`
     margin-bottom: 5px;
     margin-left: .7rem;
   }
+
+  div {
+    margin-top: 1vh;
+    margin-bottom: 2vh;
+  }
 `;
 
 const Details = styled.div`
@@ -70,7 +74,7 @@ const Details = styled.div`
 `;
 
 const Answers = styled.div`
-  max-height: 50vh;
+
 `;
 
 const Images = styled.span`
@@ -79,10 +83,10 @@ const Images = styled.span`
 
 const Img = styled.img`
   max-width: 200px;
-  max-height: 200px;
+  max-height: 150px;
   width: auto;
   height: auto;
-  margin: 1rem;
+  margin-right: 1rem;
 `;
 
 const Blocks = (props) => {
@@ -90,7 +94,6 @@ const Blocks = (props) => {
   const [show, setShow] = useState(false);
 
   const Questions = (question) => {
-    // console.log(question)
     return (
       <Accordian key={question.question_id}>
         <Container >
@@ -98,12 +101,12 @@ const Blocks = (props) => {
             <Bold>
               Q: {question.question_body}
             </Bold>
-            <SpaceQ cursor='default'>
-              <SpaceQ onClick={() => setShow(true)}><u>Add Answer</u></SpaceQ>
-              <SpaceQ cursor='default'>|</SpaceQ>
-              <SpaceQ><u>Yes</u> ({question.question_helpfulness})</SpaceQ>
-              <SpaceQ cursor='default'> Helpful?</SpaceQ>
-              <AddAnswer onClose={() => setShow(false)} current={question} show={show} />
+            <SpaceQ>
+              <SpaceQ style={{cursor: 'pointer'}} background-color='gray' onClick={() => setShow(true)}><u>Add Answer</u></SpaceQ>
+              <SpaceQ>|</SpaceQ>
+              <SpaceQ style={{cursor: 'pointer'}}><u>Yes</u> ({question.question_helpfulness})</SpaceQ>
+              <SpaceQ> Helpful? </SpaceQ>
+              <AddAnswer onClose={() => setShow(false)} current={question} show={show} style={{cursor: 'pointer'}} />
             </SpaceQ>
           </Wrap>
         </Container>
@@ -116,7 +119,7 @@ const Blocks = (props) => {
 
 
   const Answers = ({ answers }) => {
-    console.log(answers);
+    // console.log(answers);
 
     //template tag html
     // if (Object.keys(answer.answers) > 1 && moreAnswers === true) {
@@ -145,7 +148,7 @@ const Blocks = (props) => {
           let answerObj = answers[each];
           if (answerObj.body !== undefined) {
             return (
-              <div key={each}>
+              <div key={parseInt(each)}>
                 <AnswerAdditions>
                   <LineA>
                     <Bold> A: </Bold>
@@ -155,27 +158,33 @@ const Blocks = (props) => {
                     <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
                     <span> | </span>
                     <span> Helpful? </span>
-                    <span cursor='pointer'> <u>Yes</u> ({answerObj.helpfulness}) </span>
+                    <span style={{cursor: 'pointer'}}> <u>Yes</u> ({answerObj.helpfulness}) </span>
                     <span> | </span>
-                    <span cursor='pointer'> <u>Report</u> </span>
+                    <span style={{cursor: 'pointer'}}> <u>Report</u> </span>
                   </LineB>
-                  <LineB>
-                    <div>Yes, as you can see in these photos</div>
-                    <Images>
-                      <span>
-                        {answerObj.photos ? answerObj.photos.map(each => <Img src={each} />) : '#'}
-                                          <Img src='https://source.unsplash.com/random/'/>
-                      </span>
-                    </Images>
-                    <div>
-                    <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
-                    <span> | </span>
-                    <span> Helpful? </span>
-                    <span cursor='pointer'> <u>Yes</u> ({answerObj.helpfulness}) </span>
-                    <span> | </span>
-                    <span cursor='pointer'> <u>Report</u> </span>
-                    </div>
-                  </LineB>
+                  {Object.keys(answerObj.photos).length > 0 && Object.keys(answerObj.photos).length < 6 ?
+                    <LineB>
+                      <div>Yes, as you can see in these photos</div>
+                      <Images>
+                        <span>
+
+                          {answerObj.photos
+                            ? answerObj.photos.map((each, index) => <Img key={index} src={each} />)
+                            : '#'}
+                          {/* {/* <Img src='https://source.unsplash.com/random/' /> */}
+                        <Img src="http://placecorgi.com/260/180" />
+                        </span>
+                      </Images>
+                      <div>
+                        <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
+                        <span> | </span>
+                        <span> Helpful? </span>
+                        <span style={{cursor: 'pointer'}}> <u>Yes</u> ({answerObj.helpfulness}) </span>
+                        <span> | </span>
+                        <span style={{cursor: 'pointer'}}> <u>Report</u> </span>
+                      </div>
+                    </LineB>
+                    : null}
                 </AnswerAdditions>
               </div>
             )
