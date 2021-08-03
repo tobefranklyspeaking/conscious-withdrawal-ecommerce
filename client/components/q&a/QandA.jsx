@@ -5,11 +5,11 @@ import QuestionSearch from './subcomponents/QuestionSearch.jsx';
 import AddQuestion from './subcomponents/AddQuestion.jsx';
 
 const QandAStyle = styled.div`
-  margin: 1rem;
+  margin: 1rem 1rem 3rem 1rem;
   margin-left: auto;
   margin-right: auto;
   width: 90%;
-  /* height: 90%; */
+  max-height: 90vw;
 `;
 
 const Buttons = styled.button`

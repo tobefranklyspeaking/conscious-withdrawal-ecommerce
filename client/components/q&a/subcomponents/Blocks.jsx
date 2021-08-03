@@ -91,7 +91,7 @@ const Img = styled.img`
 const Blocks = (props) => {
   const [moreAnswers, setMoreAnswers] = useState(true);
   const [show, setShow] = useState(false);
-
+  // console.log(props);
   const Questions = (question) => {
     return (
       <Accordian key={question.question_id}>
@@ -118,6 +118,11 @@ const Blocks = (props) => {
 
 
   const Answers = ({ answers }) => {
+<<<<<<< HEAD
+=======
+    console.log(answers);
+
+>>>>>>> 484fe44d23427ec528bc0aaaf955908db4427b42
     return (
       Object.keys(answers)
         .sort((each, next) => {
