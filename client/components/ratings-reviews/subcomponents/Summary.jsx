@@ -148,7 +148,7 @@ const Summary = ({ id, setIsFiltered }) => {
 
   return (
     <>
-    <Wrapper>
+    <Wrapper className='SummaryWrapper'>
     <RatingSummaryNum>{averageRating}  </RatingSummaryNum>
     <span><Stars currentRating={averageRating}> </Stars></span>
     <h5>{percentRecommended}% of reviews recommend this product</h5>

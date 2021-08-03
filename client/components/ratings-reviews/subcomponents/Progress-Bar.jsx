@@ -8,7 +8,7 @@ const ContainerStyles = styled.div`
   background-color: grey;
   margin: 8px;
   float: right;
-  border: 1px solid black;
+  border: 2px solid yellow;
 `;
 
 const FillerStyles = styled.div`

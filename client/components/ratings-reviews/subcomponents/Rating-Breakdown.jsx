@@ -6,7 +6,7 @@ const StarRating = styled.div`
   width: 100%;
   height: 30px;
   text-decoration: underline;
-  border: 1px solid black;
+  border: 5px solid orange;
 
 `;
 
@@ -14,7 +14,7 @@ const StarNum = styled.span`
   width: 10%
   float: left;
   height: 10px;
-  border: 1px solid black;
+  border: 5px solid pink;
 
 `;
 

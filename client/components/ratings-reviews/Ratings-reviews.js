@@ -11,6 +11,8 @@ import NewReview from './subcomponents/NewReview.jsx';
 
 //--------------------------------STYLED COMPONENTS----------------------------------------------//
 
+
+//Wrappers
 const RatingsStyle = styled.div`
   background-color: LightGray;
   margin-left: auto;
@@ -24,6 +26,7 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr;
   column-gap: 10px;
+  grid-template-areas: "Rating Review"
   border: 5px solid green;
 `;
 
@@ -34,15 +37,20 @@ const Rating = styled.div`
   border: 5px solid blue;
 `;
 
-
-
 const Review = styled.div`
 display: flex-inline;
 text-align: center;
 vertical-align: middle;
 border: 5px solid orange;
+`;
+
+//Ratings Styled Components
+
+const Title = styled.div`
 
 `;
+
+//Reviews Styled Components
 
 const ReviewContainer = styled.div`
 height:440px;
@@ -196,11 +204,11 @@ const Ratings = ({ current }) => {
     return (
       <>
         <Wrapper>
-          <Rating>
-            <h3>RATINGS & REVIEWS</h3>
+          <Rating className='Rating'>
+            <h3 className='Title' >RATINGS & REVIEWS</h3>
             <Summary id={current.id} setIsFiltered={setIsFiltered} />
           </Rating>
-          <Review>
+          <Review className='Review'>
             <SortContainer>
               <TotalReviews>{reviews.length} reviews, sorted by </TotalReviews>
               <ReviewDropdown options={["helpful", "newest", "relevent"]} setSort={setSort} />
