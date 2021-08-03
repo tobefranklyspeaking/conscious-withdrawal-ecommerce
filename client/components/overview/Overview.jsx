@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import Carousel from '../shared/Carousel.jsx'
 import Stars from '../shared/Stars.jsx';
+import getAverageRating from '../shared/getAverageRating.js';
 import Dropdown from '../shared/Dropdown.jsx';
 import Button from '../shared/Button.jsx';
 import { FaRegHeart, FaCheck, FaPlus } from 'react-icons/fa'
@@ -141,9 +142,14 @@ const Overview = ({ current }) => {
           updateFeatures(current.features);
           console.log('current obj here!', current);
           console.log('current Style here!', arr.results[0]);
+
+          let meta = await fetch(`/reviews/meta?product_id=${current.id}`).then(data => data.json());
+          let avg = getAverageRating(meta.ratings);
+          console.log('avg here', avg);
+          updateAvg(avg);
         }
     } catch (err) {
-      console.error('err fetching styles', err);
+      console.error('err fetching styles or metadata', err);
     }
   },[current]);
 
@@ -169,7 +175,7 @@ const Overview = ({ current }) => {
         </Column1>
         <Column2>
         <StarsWrapper>
-          <Stars />
+          <Stars currentRating={avgRating}/>
           <a href="#" style={{color: 'grey'}}>Read all reviews</a>
         </StarsWrapper>
           <Category>{current.category}</Category>
