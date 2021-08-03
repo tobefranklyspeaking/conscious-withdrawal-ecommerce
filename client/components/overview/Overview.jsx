@@ -129,24 +129,30 @@ const Overview = ({ current }) => {
   const [features, updateFeatures] = useState([]);
   const [skus, updateSkus] = useState({});
   const [avgRating, updateAvg] = useState(0);
-
+  const [meta, updateMeta] = useState({});
+  const [numReviews, updateNumReviews] = useState(0);
   //fetches styles and sets default to first style based on current product on mount
   useEffect(async () => {
     try {
         if(current.id) {
           let res = await fetch(`/products/${current.id}/styles`);
           let arr = await res.json();
-          // console.log('arr.results here', arr.results);
+
           updateStyles(arr.results);
           updateCurrentStyle(arr.results[0]);
           updateFeatures(current.features);
           console.log('current obj here!', current);
           console.log('current Style here!', arr.results[0]);
 
-          let meta = await fetch(`/reviews/meta?product_id=${current.id}`).then(data => data.json());
-          let avg = getAverageRating(meta.ratings);
-          console.log('avg here', avg);
+          let newMeta = await fetch(`/reviews/meta?product_id=${current.id}`).then(data => data.json());
+          let avg = getAverageRating(newMeta.ratings);
+          console.log('fetched meta here', newMeta);
           updateAvg(avg);
+          updateMeta(newMeta);
+
+          let reviews = await fetch(`/reviews?product_id=${current.id}&count=1000`).then(data => data.json());
+          console.log('reviews hurr', reviews);
+          updateNumReviews(reviews.results.length);
         }
     } catch (err) {
       console.error('err fetching styles or metadata', err);
@@ -176,7 +182,7 @@ const Overview = ({ current }) => {
         <Column2>
         <StarsWrapper>
           <Stars currentRating={avgRating}/>
-          <a href="#" style={{color: 'grey'}}>Read all reviews</a>
+          <a href="#" style={{color: 'grey'}}>Read all {numReviews} reviews</a>
         </StarsWrapper>
           <Category>{current.category}</Category>
           <Name>{current.name}</Name>
