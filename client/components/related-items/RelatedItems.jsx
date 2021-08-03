@@ -6,9 +6,6 @@ import axios from 'axios';
 const RelatedProductsContainer = styled.section`
   margin: 80px 0;
 
-  * {
-    font-family: sans-serif;
-  }
   .section-title {
     color: hsla(0, 0%, 30%, 1);
     text-transform: uppercase;
@@ -20,7 +17,7 @@ const RelatedProductsContainer = styled.section`
   }
 `;
 
-const RelatedProducts = ({ current }) => {
+export default ({ current }) => {
   const [relatedProductsList, setRelatedProducts] = useState([]);
 
   useEffect(() => {
@@ -43,6 +40,4 @@ const RelatedProducts = ({ current }) => {
       </div>
     </RelatedProductsContainer>
   );
-}
-
-export default RelatedProducts;
+};
