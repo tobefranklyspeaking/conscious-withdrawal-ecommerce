@@ -4,7 +4,7 @@ import ProductCard from './ProductCard.jsx';
 import axios from 'axios';
 
 const RelatedProductsContainer = styled.section`
-  margin: 80px 0 80px 50px;
+  margin: 80px 0;
 
   * {
     font-family: sans-serif;
