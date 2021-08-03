@@ -101,7 +101,7 @@ const loadingState = {
   return (
     <Card className='card' img={productImage}>
       <div className='image'>
-        <div className='add-to-outfit'><Star /></div>
+        <div className='add-to-outfit'><Star color='hsla(0, 0%, 100%, .6)'/></div>
         {productImage === ''
           ? 'Loading...'
           : productImage === null
