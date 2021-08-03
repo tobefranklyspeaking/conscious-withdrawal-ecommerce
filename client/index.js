@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styled from "styled-components";
 import axios from 'axios';
-// import NavBar from './components/shared/Navbar.jsx';
-import Shared from './components/shared/shared.jsx'
+import Shared from './components/shared/shared.jsx';
 
 const App = () => {
 
@@ -12,9 +11,9 @@ const App = () => {
 
   useEffect(async () => {
     try {
-      let res = await axios.get('/products/19094');
+      let res = await axios.get('/products/19092');
       updateCurrent(res.data);
-      console.log('successful get');
+      console.log('successful get with item: ', res.data);
     } catch (err) {
       console.error(err)
     }
@@ -24,12 +23,8 @@ const App = () => {
   return (
     <div>
       <Shared current={currentProduct}/>
-      <div>
-        {currentProduct.id}
-      </div>
     </div>
   );
 }
-export default App;
 
 ReactDOM.render(<App />, document.getElementById('app'));
