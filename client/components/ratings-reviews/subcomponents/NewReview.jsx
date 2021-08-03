@@ -48,7 +48,7 @@ const NewReview = ({current, show, onClose}) => {
     try {
       let res = await axios.get(`/reviews/meta?product_id=${current.id}`);
       setCharOptions(res.data.characteristics);
-      console.log('successful get meta data: ', res.data);
+      // console.log('successful get meta data: ', res.data);
     } catch (err) {
       console.error(err)
     }

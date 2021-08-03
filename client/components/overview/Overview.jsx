@@ -132,6 +132,7 @@ const Overview = ({ current }) => {
         if(current.id) {
           let res = await fetch(`/products/${current.id}/styles`);
           let arr = await res.json();
+          // console.log('arr.results here', arr.results);
           updateStyles(arr.results);
           updateCurrentStyle(arr.results[0]);
           console.log('current obj here!', current);

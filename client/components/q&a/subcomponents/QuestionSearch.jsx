@@ -9,13 +9,13 @@ const SearchBarStyle = styled.input`
   display: flex;
   line-height: 20%;
   padding: 2vh 2vh;
-  margin-bottom: 1rem;
 `;
 
 const Search = styled.div`
   position: relative;
   height: auto;
   width: auto;
+  margin-bottom: 3%;
 `;
 const Filtered = styled.div`
   height: auto;
@@ -33,7 +33,7 @@ const List = styled.div`
 const SearchButton = styled.div`
   position: absolute;
   right: 1rem;
-  top: 1rem;
+  top: 35%;
   width: 18px;
   height: 18px;
 `;
