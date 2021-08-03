@@ -22,10 +22,8 @@ const App = () => {
   }, [currentSelection]);
 
   const updateProduct = (props) => {
-    console.log('fucking work!', props)
     updateSelection(props);
   }
-
 
   return (
     <div>

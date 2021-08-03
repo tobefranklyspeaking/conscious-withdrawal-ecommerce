@@ -4,7 +4,6 @@ import AddAnswer from './AddAnswer.jsx';
 import styled from 'styled-components';
 
 const Accordian = styled.div`
-
 `;
 
 const Container = styled.div`
@@ -14,7 +13,9 @@ const Container = styled.div`
 const Wrap = styled.div`
 
 `;
-
+const AnswerContainer = styled.div`
+  margin-bottom: 3%;
+`;
 const Bold = styled.span`
   font-weight: bold;
 `;
@@ -91,7 +92,7 @@ const Img = styled.img`
 const Blocks = (props) => {
   const [moreAnswers, setMoreAnswers] = useState(true);
   const [show, setShow] = useState(false);
-  // console.log(props);
+
   const Questions = (question) => {
     return (
       <Accordian key={question.question_id}>
@@ -109,20 +110,15 @@ const Blocks = (props) => {
             </SpaceQ>
           </Wrap>
         </Container>
-        <Container>
+        <AnswerContainer>
           {Answers(question)}
-        </Container>
+        </AnswerContainer>
       </Accordian>
     )
   }
 
 
   const Answers = ({ answers }) => {
-<<<<<<< HEAD
-=======
-    console.log(answers);
-
->>>>>>> 484fe44d23427ec528bc0aaaf955908db4427b42
     return (
       Object.keys(answers)
         .sort((each, next) => {
