@@ -1,7 +1,6 @@
 * {
   box-sizing: border-box;
   font-family: sans-serif;
-  color: hsla(0, 0%, 30%, 1);
 }
 
 body {
@@ -9,4 +8,5 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0;
+  color: hsla(0, 0%, 30%, 1);
  }

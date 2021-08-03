@@ -32,7 +32,7 @@ function Stars({ currentRating }) {
               />
             <Star
               className='star'
-              color={ratingValue <= (hover || rating) ? 'black' : 'transparent'}
+              color={ratingValue <= (hover || rating) ? 'hsla(0, 0%, 30%, 1)' : 'transparent'}
             />
           </label>
         );
