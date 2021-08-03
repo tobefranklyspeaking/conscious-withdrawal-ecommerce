@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import Stars from '../shared/Stars.jsx';
 import Star from '../shared/Star.jsx';
 import axios from 'axios';
-import getAverageRating from './getAverageRating.js';
+import getAverageRating from '../shared/getAverageRating.js';
 
 const Card = styled.div`
   border: 1px solid black;
