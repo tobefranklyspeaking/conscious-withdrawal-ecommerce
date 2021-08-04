@@ -132,40 +132,44 @@ const HelpfulButton = styled.span`
   }
 `;
 
-const Blocks = (props) => {
+const Blocks = (current) => {
   const [moreAnswers, setMoreAnswers] = useState(true);
   const [show, setShow] = useState(false);
 
+  console.log('question list I need some questions', current.props);
+  current = current.props;
+  console.log('this is just current', current);
+  //need to map through current.props to render questions
 
-
-  const Questions = (question) => {
+  const Questions = () => {
     return (
-      <Accordian key={question.question_id}>
+      <Accordian key={current.question_id}>
         <Container >
           <Wrap>
             <Bold>
-              Q: {question.question_body}
+              Q: {current.question_body}
             </Bold>
             <SpaceQ>
               <SpaceQ style={{ cursor: 'pointer' }} background-color='gray' onClick={() => setShow(true)}><u>Add Answer</u>
               </SpaceQ>
               <SpaceQ>|</SpaceQ>
               <Wrapper>
-                <Helpful path={'/qa/questions'} id={question.question_id} helpfulness={question.question_helpfulness} />
+                <Helpful path={'/qa/questions'} id={current.question_id} helpfulness={current.question_helpfulness} />
               </Wrapper>
-              <AddAnswer onClose={() => setShow(false)} current={question} show={show} style={{ cursor: 'pointer' }} />
+              <AddAnswer onClose={() => setShow(false)} current={current} show={show} style={{ cursor: 'pointer' }} />
             </SpaceQ>
           </Wrap>
         </Container>
         <AnswerContainer>
-          {Answers(question)}
+          {Answers()}
         </AnswerContainer>
       </Accordian>
     )
   }
 
 
-  const Answers = ({ answers }) => {
+  const Answers = () => {
+    let answers = current.answers;
     return (
       Object.keys(answers)
         .sort((each, next) => {
@@ -191,31 +195,31 @@ const Blocks = (props) => {
                     <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
                     <span> | </span>
                     <HelpfulButton>
-                      <Helpful  path={'/qa/questions'} id={parseInt(each)} helpfulness={answerObj.helpfulness} />
+                      <Helpful path={'/qa/questions'} id={parseInt(each)} helpfulness={answerObj.helpfulness} />
                     </HelpfulButton>
                     <span> | </span>
                     <span style={{ cursor: 'pointer' }}> <u>Report</u> </span>
                   </LineB>
-                  {Object.keys(answerObj.photos).length > 0 && Object.keys(answerObj.photos).length < 6 ?
-                    <LineB>
-                      <div style={{marginTop: '-0.5rem'}}>Attached Photos: </div>
-                      <Images>
-                        <span>
-                          {answerObj.photos
-                            ? answerObj.photos.map((each, index) => <Img key={index} src={each} />)
-                            : '#'}
-                        </span>
-                      </Images>
-                      <div>
-                        <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
-                        <span> | </span>
-                        <HelpfulButton >
-                          <Helpful path={'/qa/questions'} id={parseInt(each)} helpfulness={answerObj.helpfulness} />
-                        </HelpfulButton >
-                        <span> | </span>
-                        <span style={{ cursor: 'pointer' }}> <u>Report</u> </span>
-                      </div>
-                    </LineB>
+                  {Object.keys(answerObj.photos).length > 0 && Object.keys(answerObj.photos).length < 6
+                    ? <LineB>
+                        <div style={{ margin: '0.5rem' }}>Attached Photos: </div>
+                        <Images>
+                          <span>
+                            {answerObj.photos
+                              ? answerObj.photos.map((each, index) => <Img key={index} src={each} />)
+                              : '#'}
+                          </span>
+                        </Images>
+                        <div>
+                          <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
+                          <span> | </span>
+                          <HelpfulButton >
+                            <Helpful path={'/qa/questions'} id={parseInt(each)} helpfulness={answerObj.helpfulness} />
+                          </HelpfulButton >
+                          <span> | </span>
+                          <span style={{ cursor: 'pointer' }}> <u>Report</u> </span>
+                        </div>
+                      </LineB>
                     : null}
                 </AnswerAdditions>
               </div>
@@ -228,12 +232,9 @@ const Blocks = (props) => {
         })
     )
   }
-
   return (
     <div>
-      {props.map(each => {
-        return Questions(each);
-      })}
+      Loading...
     </div>
   )
 }

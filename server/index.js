@@ -17,10 +17,10 @@ app.all('/*', (req, res) => {
     data: req.data || req.body || null
   })
     .then((response) => {
-      console.log('success with backend query', req.url, req.params);
+      console.log('success with backend query');
       res.status(200).send(response.data);
     }).catch(err => {
-      console.log('failure with backend query', req.url, req.params);
+      console.log('failure with backend query');
       res.status(400).send(err);
     });
 })

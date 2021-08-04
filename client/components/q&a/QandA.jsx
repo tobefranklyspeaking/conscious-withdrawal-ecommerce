@@ -27,9 +27,8 @@ const Component = styled.div`
   margin-bottom: 1rem;
 
 `;
-const QandA = (current) => {
+const QandA = ({current}) => {
   const [show, setShow] = useState(false);
-
   return (
     <>
       <QandAStyle>
