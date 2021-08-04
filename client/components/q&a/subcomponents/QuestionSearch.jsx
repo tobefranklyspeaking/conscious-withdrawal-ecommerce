@@ -47,6 +47,7 @@ const QASearch = ({ current }) => {
   const [allQuestions, setAllQuestions] = useState([]);
   const [filteredQuestions, setFiltered] = useState([]);
   const [selection, setSelection] = useState(null);
+  const [update, setUpdate] = useState(null);
 
   useEffect(() => {
     if (current.id !== undefined) {
@@ -57,11 +58,16 @@ const QASearch = ({ current }) => {
         })
         .catch(err => console.log(`Error in QuestionSearch useEffect: ${err}`));
     }
-  }, [current.id, filteredQuestions])
+  }, [current.id, filteredQuestions, update])
 
   const handleClick = async () => {
     // This will allow the user to submit search
     console.log('handleClick clicked')
+  }
+
+  const updateData = (props) => {
+    setUpdate(props);
+    console.log('updated', props)
   }
 
   const handleQuestion = (e) => {
@@ -91,7 +97,7 @@ const QASearch = ({ current }) => {
       </Search>
       <List name='dropdown'>
         <List>
-          <Blocks current={allQuestions}/>
+          <Blocks current={allQuestions} updateData={updateData} update={update} />
         </List>
         {search ? (
           allQuestions.filter(text => {
@@ -110,11 +116,11 @@ const QASearch = ({ current }) => {
           })
         )
           : console.log('no search: ', search)
-          }
         }
       </List>
     </>
   )
 }
+
 
 export default QASearch;

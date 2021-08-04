@@ -8,7 +8,7 @@ import RelatedProducts from '../related-items/RelatedItems.jsx';
 const Shared = ({ current, update }) => {
   return (
     <>
-      <NavBar current={current, update} />
+      <NavBar update={update} />
       <Overview current={current} />
       <RelatedProducts current={current} />
       <QandA current={current} />
