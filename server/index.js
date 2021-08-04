@@ -8,10 +8,11 @@ const port = 3000;
 app.use(express.static('public'));
 app.use(express.json());
 
+
 app.get('/*', (req, res) => {
   axios.defaults.headers.common['Authorization'] = API_KEY;
   axios({
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe${req.url}`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp${req.url}`,
     method: 'GET',
     data: req.data || null
   })
@@ -27,7 +28,7 @@ app.get('/*', (req, res) => {
 app.put('/*', (req, res) => {
   axios.defaults.headers.common['Authorization'] = API_KEY;
   axios({
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe${req.url}`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp${req.url}`,
     method: 'PUT',
     data: req.data || null
   })
@@ -43,7 +44,7 @@ app.put('/*', (req, res) => {
 app.post('/*', (req, res) => {
   axios.defaults.headers.common['Authorization'] = API_KEY;
   axios({
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe${req.url}`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp${req.url}`,
     method: 'POST',
     data: req.body || null
   })
