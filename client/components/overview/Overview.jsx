@@ -195,9 +195,17 @@ const Overview = ({ current }) => {
     updateCurrentStyle(newStyle);
   };
 
-const sizeDropdownCallback = (option) => {
-  updateSize(option);
-};
+  const sizeDropdownCallback = (option) => {
+    updateSize(option);
+  };
+
+  const qtyDropdownCallback = (option) => {
+    updateQty(option);
+  }
+
+  const cartClickHandler = (e) => {
+
+  }
 
   return (
     <>
@@ -239,10 +247,18 @@ const sizeDropdownCallback = (option) => {
               width="60%"
               callback={sizeDropdownCallback}
             />
-            <Dropdown options={['#']} title="1"/>
+            <Dropdown
+            options={skus.length && skus.filter(sku => (sku.size === size)).map(sku => sku.quantity).reduce((acc, quant) => {
+              for(var x = 1; x < (quant > 15 ? 15 : quant); x++) {
+                acc.push(x);
+              }
+              return acc;
+            }, [])}
+            title="QUANTITY"
+            callback={qtyDropdownCallback}/>
           </ButtonRow1>
           <ButtonRow2>
-            <Button height="4rem" width="70%">ADD TO BAG<FaPlus /></Button>
+            <Button height="4rem" width="70%">ADD TO CART<FaPlus /></Button>
             <Button height="4rem" width="3rem"><FaRegHeart/></Button>
           </ButtonRow2>
           <FeatureChecklist>
