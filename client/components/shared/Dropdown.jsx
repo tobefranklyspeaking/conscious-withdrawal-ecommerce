@@ -30,7 +30,8 @@ const Dropdown = ({ options=['#'], title, width, callback }) => {
         <Button key={i} onClick={(e) => {
           setChoice(option);
           setOpen(!isOpen);
-          callback(option)}}>
+          callback(option);
+        }}>
         {option}
         </Button>
       ))}
