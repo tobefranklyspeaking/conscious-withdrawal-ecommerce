@@ -7,6 +7,7 @@ import RelatedProducts from '../related-items/RelatedItems.jsx';
 import MyOutfit from '../related-items/MyOutfit.jsx';
 
 const Shared = ({ current, update }) => {
+
   return (
     <>
       <NavBar update={update} />

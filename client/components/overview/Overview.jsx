@@ -195,9 +195,17 @@ const Overview = ({ current }) => {
     updateCurrentStyle(newStyle);
   };
 
-const sizeDropdownCallback = (option) => {
-  updateSize(option);
-};
+  const sizeDropdownCallback = (option) => {
+    updateSize(option);
+  };
+
+  const reviewScroller = (e) => {
+    e.preventDefault();
+    let elt = document.getElementById('reviews');
+    console.log(elt);
+    elt.scrollIntoView();
+  };
+
 
   return (
     <>
@@ -216,7 +224,7 @@ const sizeDropdownCallback = (option) => {
         <Column2>
         <StarsWrapper>
           <Stars currentRating={avgRating}/>
-          {(numReviews > 0) && <a href="#" style={{color: 'grey'}}>Read all {numReviews} reviews</a> }
+          {(numReviews > 0) && <a href="#" onClick={reviewScroller} style={{color: 'grey'}}>Read all {numReviews} reviews</a> }
         </StarsWrapper>
           <Category>{current.category}</Category>
           <Name>{current.name}</Name>
