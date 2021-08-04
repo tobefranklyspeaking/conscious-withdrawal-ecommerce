@@ -8,7 +8,7 @@ import Button from '../shared/Button.jsx';
 import { FaRegHeart, FaCheck, FaPlus, FaFacebook, FaTwitter, FaPinterest } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 //component styles
-//NEED TO ADD ONCLICK TO STYLE SELECTOR
+//NEED TO ADD CALLBACK TO STYLE SELECTOR
 const OverviewWrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
@@ -145,6 +145,9 @@ const Overview = ({ current }) => {
   const [photos, updatePhotos] = useState([]);
   const [skus, updateSkus] = useState([]);
 
+  //state which depends on user interaction with dropdowns + is useful for cart
+  const [size, updateSize] = useState('');
+
 
   //fetches styles and sets default to first style based on current product on mount. This useEffect acts like componentDidMount
   useEffect(async () => {
@@ -186,11 +189,16 @@ const Overview = ({ current }) => {
     }
   }, [currentStyle]);
 
+//click handlers for *all* the buttons
   const styleClickHandler = (e) => {
     const thumb = e.target.src;
     let newStyle = styles.filter(style => style.photos[0].thumbnail_url === thumb)[0];
     updateCurrentStyle(newStyle);
   };
+
+const sizeDropdownCallback = (option) => {
+  updateSize(option);
+};
 
   return (
     <>
@@ -230,6 +238,7 @@ const Overview = ({ current }) => {
               options={ skus.length && skus.filter(sku => (sku.quantity > 0)).map(sku => sku.size)}
               title={skus.length && skus.filter(sku => (sku.quantity > 0)).length ? 'SELECT SIZE' : 'OUT OF STOCK' }
               width="60%"
+              callback={sizeDropdownCallback}
             />
             <Dropdown options={['#']} title="1"/>
           </ButtonRow1>
