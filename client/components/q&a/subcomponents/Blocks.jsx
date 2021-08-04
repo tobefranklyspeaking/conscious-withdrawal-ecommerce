@@ -53,7 +53,7 @@ const LineB = styled.div`
   margin-top: 5px;
   font-weight: lighter;
   font-size: 13px;
-  margin-bottom: 5px;
+  margin-bottom: 1rem;
 
   span {
     color: gray;
@@ -101,6 +101,7 @@ const Wrapper = styled.div`
   display: inline-flex;
 
   .helpfulButton {
+    text-decoration: underline;
     font-weight: lighter;
     font-size: 12px;
     float: right;
@@ -117,7 +118,8 @@ const Wrapper = styled.div`
 
 const HelpfulButton = styled.span`
   .helpfulButton {
-    margin: 5px 0 5px 5px;
+    text-decoration: underline;
+    margin-left: 1rem;
     font-weight: lighter;
     color: gray;
     background-color: white;
@@ -191,13 +193,12 @@ const Blocks = (props) => {
                     <HelpfulButton>
                       <Helpful  path={'/qa/questions'} id={parseInt(each)} helpfulness={answerObj.helpfulness} />
                     </HelpfulButton>
-                    {/* <span style={{ cursor: 'pointer' }}> <u>Yes</u> ({answerObj.helpfulness}) </span>
-                    <span> | </span> */}
+                    <span> | </span>
                     <span style={{ cursor: 'pointer' }}> <u>Report</u> </span>
                   </LineB>
                   {Object.keys(answerObj.photos).length > 0 && Object.keys(answerObj.photos).length < 6 ?
                     <LineB>
-                      <div>Attached Photos: </div>
+                      <div style={{marginTop: '-0.5rem'}}>Attached Photos: </div>
                       <Images>
                         <span>
                           {answerObj.photos
