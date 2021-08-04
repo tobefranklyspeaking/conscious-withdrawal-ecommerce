@@ -41,17 +41,19 @@ const Summary = ({ id, setIsFiltered }) => {
   */
 
  useEffect(async () => {
-   try {
-     let res = await axios.get(`/reviews/meta?product_id=${id}`);
-     setMetaData(res.data);
-     setCharacteristics(res.data.characteristics);
-     setRatings(res.data.ratings);
-     setRecommended(res.data.recommended);
-     //average();
-    //  console.log('successful get meta data: ', res.data);
-    } catch (err) {
-      console.error(err)
-    }
+   if(id) {
+     try {
+       let res = await axios.get(`/reviews/meta?product_id=${id}`);
+       setMetaData(res.data);
+       setCharacteristics(res.data.characteristics);
+       setRatings(res.data.ratings);
+       setRecommended(res.data.recommended);
+       //average();
+      //  console.log('successful get meta data: ', res.data);
+      } catch (err) {
+        console.error(err)
+      }
+   }
   }, [id]);
 
   // useEffect(() => {
