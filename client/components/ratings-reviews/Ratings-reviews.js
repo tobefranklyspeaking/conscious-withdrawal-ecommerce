@@ -93,17 +93,19 @@ const Ratings = ({ current }) => {
 
   useEffect(() => {
     // console.log('filter in r-r', isFiltered);
-    const getReviews = async () => {
-      let res = await axios.get(`/reviews?product_id=${current.id}&sort=${sort}&count=1000`);
-      setReviews(res.data.results);
-      // console.log('asd', reviews);
-      // let display = reviews.slice(0, reviewCount)
-      // setReviewsDisplayed(display);
-      // console.log('should be displayed', reviewsDisplayed);
-      //setCurrentReview(res.data.results[0]);
-      //console.log('successful get current id: ', res.data.results);
-    };
-    getReviews();
+    if (current.id) {
+      const getReviews = async () => {
+        let res = await axios.get(`/reviews?product_id=${current.id}&sort=${sort}&count=1000`);
+        setReviews(res.data.results);
+        // console.log('asd', reviews);
+        // let display = reviews.slice(0, reviewCount)
+        // setReviewsDisplayed(display);
+        // console.log('should be displayed', reviewsDisplayed);
+        //setCurrentReview(res.data.results[0]);
+        //console.log('successful get current id: ', res.data.results);
+      };
+      getReviews();
+    }
 
   }, [current, sort, isFiltered]);
 
