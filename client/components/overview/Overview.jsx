@@ -8,6 +8,7 @@ import Button from '../shared/Button.jsx';
 import { FaRegHeart, FaCheck, FaPlus, FaFacebook, FaTwitter, FaPinterest } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 //component styles
+//NEED TO ADD ONCLICK TO STYLE SELECTOR
 const OverviewWrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
@@ -178,6 +179,12 @@ const Overview = ({ current }) => {
     }
   }, [currentStyle]);
 
+  const styleClickHandler = (e) => {
+    const thumb = e.target.src;
+    let newStyle = styles.filter(style => style.photos[0].thumbnail_url === thumb)[0];
+    updateCurrentStyle(newStyle);
+  };
+
   return (
     <>
       <OverviewWrapper>
@@ -202,12 +209,12 @@ const Overview = ({ current }) => {
           <Price style={currentStyle.sale_price ? {color: 'red'} : {}} >{'$' + (currentStyle.sale_price || currentStyle.original_price)}</Price>
           <StyleHeader> <h4>STYLE ></h4> SELECTED STYLE</StyleHeader>
           <StyleSelector>
-            {styles.length && currentStyle.photos && styles.map(style => style.photos[0].thumbnail_url).map((nail) => (
-            <StyleContainer>
+            {styles.length && currentStyle.photos && styles.map(style => style.photos[0].thumbnail_url).map((nail, i) => (
+            <StyleContainer key={i}>
               {(nail === currentStyle.photos[0].thumbnail_url) && (<IconContext.Provider value={{ style: { position: 'absolute' } }}>
                 <FaCheck />
               </IconContext.Provider>)}
-              <img src={nail}/>
+              <img src={nail} onClick={styleClickHandler}/>
             </StyleContainer>
             ))}
           </StyleSelector>
