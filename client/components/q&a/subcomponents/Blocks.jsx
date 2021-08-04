@@ -136,9 +136,8 @@ const Blocks = (current) => {
   const [moreAnswers, setMoreAnswers] = useState(true);
   const [show, setShow] = useState(false);
 
-  console.log('question list I need some questions', current.props);
-  current = current.props;
-  console.log('this is just current', current);
+  console.log('question list I need some questions', current);
+
   //need to map through current.props to render questions
 
   const Questions = () => {
@@ -170,6 +169,7 @@ const Blocks = (current) => {
 
   const Answers = () => {
     let answers = current.answers;
+    console.log(answers)
     return (
       Object.keys(answers)
         .sort((each, next) => {

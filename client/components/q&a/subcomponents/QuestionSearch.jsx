@@ -91,7 +91,7 @@ const QASearch = ({ current }) => {
       </Search>
       <List name='dropdown'>
         <List>
-          <Blocks props={allQuestions}/>
+          <Blocks current={allQuestions}/>
         </List>
         {search ? (
           allQuestions.filter(text => {
@@ -109,13 +109,7 @@ const QASearch = ({ current }) => {
             )
           })
         )
-          : () => {
-            return (
-              <List>
-                {Blocks (filteredQuestions || allQuestions)}/>
-                {/* <button>LOAD MORE ANSWERS</button> */}
-              </List>
-            )
+          : console.log('no search: ', search)
           }
         }
       </List>
