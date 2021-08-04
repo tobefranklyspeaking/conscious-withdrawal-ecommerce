@@ -24,21 +24,23 @@ const Filtered = styled.div`
   width: auto;
   padding: 5px;
   background-color: white;
+  border: 1px solid black;
 `;
 
 const List = styled.div`
   height: auto;
-  max-height: 300px;
+  max-height: 50vw;
   overflow-y: scroll;
 `;
 
 
-const SearchBar = () => {
+const SearchBar = ({ updateProduct }) => {
   const [search, setSearch] = useState('');
   const [allProducts, setAllProducts] = useState([]);
+  const [selection, setSelection] = useState(null);
 
   useEffect(async () => {
-    await axios.get('/products/?count=1100')
+    await axios.get('/products/?count=19089')
       .then(response => {
         setAllProducts(response.data);
       })
@@ -47,8 +49,13 @@ const SearchBar = () => {
 
   const handleClick = async () => {
     // This will allow the user to submit search
+    updateProduct(selection);
+    console.log('handleClick clicked', selection);
+  }
 
-    console.log('handleClick clicked')
+  const handleProduct = (e) => {
+    setSearch(e.name);
+    setSelection(e.id);
   }
 
   const onChange = (searchText) => {
@@ -64,9 +71,9 @@ const SearchBar = () => {
           value={search}
           onChange={e => onChange(e.target.value)} />
         <span>
-          <CgSearch style={{stroke: 'white', strokeWidth:2, fill:'white'}} onClick={() => handleClick()} />
+          <CgSearch type='submit' style={{ size: 18, color: 'white' }} onClick={() => handleClick(event.target)} />
         </span>
-        <List>
+        <List name='dropdown'>
           {
             allProducts.filter(text => {
               if (search.length > 2) {
@@ -78,9 +85,7 @@ const SearchBar = () => {
               }
             }).map((value) => {
               return (
-                <div key={value.id}>
-                  <Filtered>{value.name}</Filtered>
-                </div>
+                  <Filtered key={value.id} value={value.id} onClick={() => handleProduct(value)}>{value.name} </Filtered>
               )
             })
           }

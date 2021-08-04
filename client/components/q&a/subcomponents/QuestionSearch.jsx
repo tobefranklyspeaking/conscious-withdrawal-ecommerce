@@ -18,10 +18,13 @@ const Search = styled.div`
   margin-bottom: 3%;
 `;
 const Filtered = styled.div`
+  position: absolute;
+  background-color: tan;
   height: auto;
   width: auto;
   padding: 5px;
-  background-color: white;
+  /* background-color: white; */
+  z-index: 1;
 `;
 
 const List = styled.div`
@@ -42,25 +45,39 @@ const SearchButton = styled.div`
 const QASearch = ({ current }) => {
   const [search, setSearch] = useState('');
   const [allQuestions, setAllQuestions] = useState([]);
+  const [filteredQuestions, setFiltered] = useState([]);
+  const [selection, setSelection] = useState(null);
+  const [update, setUpdate] = useState(null);
 
   useEffect(() => {
-    if (current.current.id !== undefined) {
-      axios.get(`/qa/questions/?product_id=${current.current.id}`)
+    if (current.id !== undefined) {
+      axios.get(`/qa/questions/?product_id=${current.id}`)
         .then(response => {
           console.log('successful question get', response.data)
           setAllQuestions(response.data.results);
         })
         .catch(err => console.log(`Error in QuestionSearch useEffect: ${err}`));
     }
-  }, [current.current.id])
+  }, [current.id, filteredQuestions, update])
 
   const handleClick = async () => {
     // This will allow the user to submit search
     console.log('handleClick clicked')
   }
 
+  const updateData = (props) => {
+    setUpdate(props);
+  }
+
+  const handleQuestion = (e) => {
+    // setSearch(e.question_);
+    console.log(e);
+    Blocks(e);
+  }
+
   const onChange = (searchText) => {
-    setSearch(searchText);
+    console.log(searchText);
+    setSearch(searchText.toLowerCase());
   }
 
   const [count, setCount] = useState(0);
@@ -74,24 +91,34 @@ const QASearch = ({ current }) => {
           placeholder='Have a question? Search for answers…'>
         </SearchBarStyle>
         <SearchButton>
-          <CgSearch onClick={() => handleClick()} style={{cursor: 'pointer'}} />
+          <CgSearch onClick={() => handleClick()} style={{ cursor: 'pointer' }} />
         </SearchButton>
       </Search>
-      <List>
-        {Blocks(allQuestions)}
-        {/* <button>LOAD MORE ANSWERS</button> */}
+      <List name='dropdown'>
+        <List>
+          <Blocks current={allQuestions} updateData={updateData} update={update} />
+        </List>
+        {console.log(search)}
+        {search && (
+          allQuestions.filter(text => {
+            if (search.length > 2 && text !== undefined) {
+              if (text.question_body.toLowerCase().indexOf(search) !== -1) {
+                console.log('inside filter', text)
+                return true;
+              } else {
+                return false
+              }
+            }
+          }).map((value, i) => {
+            return (
+              <div key={i}>Hello World</div>
+            )
+          })
+        )}
       </List>
     </>
   )
 }
 
+
 export default QASearch;
-
-// {
-//   allQuestions.filter(text => {
-//     if (search.length > 2 && text.question_body.toLowerCase().indexOf(search)) {
-//       <div>{Blocks(text)}</div>
-//     } else return null
-//   })
-// }
-
