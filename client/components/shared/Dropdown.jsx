@@ -9,6 +9,7 @@ const Wrapper = styled.div`
   justify-content: space-around;
   width: ${props => props.width || '8rem'};
   height: 4rem;
+  z-index: 999;
 `;
 
 const Dropdown = ({ options=['#'], title, width }) => {
