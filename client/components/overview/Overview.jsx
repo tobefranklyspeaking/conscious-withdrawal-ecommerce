@@ -8,7 +8,6 @@ import Button from '../shared/Button.jsx';
 import { FaRegHeart, FaCheck, FaPlus, FaFacebook, FaTwitter, FaPinterest } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 //component styles
-//NEED TO ADD CALLBACK TO STYLE SELECTOR
 const OverviewWrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
@@ -147,7 +146,7 @@ const Overview = ({ current }) => {
 
   //state which depends on user interaction with dropdowns + is useful for cart
   const [size, updateSize] = useState('');
-
+  const [qty, updateQty] = useState(0);
 
   //fetches styles and sets default to first style based on current product on mount. This useEffect acts like componentDidMount
   useEffect(async () => {
@@ -236,7 +235,7 @@ const sizeDropdownCallback = (option) => {
           <ButtonRow1>
             <Dropdown
               options={ skus.length && skus.filter(sku => (sku.quantity > 0)).map(sku => sku.size)}
-              title={skus.length && skus.filter(sku => (sku.quantity > 0)).length ? 'SELECT SIZE' : 'OUT OF STOCK' }
+              title={ skus.length && skus.filter(sku => (sku.quantity > 0)).length ? 'SELECT SIZE' : 'OUT OF STOCK' }
               width="60%"
               callback={sizeDropdownCallback}
             />
