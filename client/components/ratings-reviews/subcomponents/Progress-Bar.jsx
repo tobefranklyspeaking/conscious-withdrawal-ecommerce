@@ -3,12 +3,12 @@ import styled from "styled-components";
 
 
 const ContainerStyles = styled.div`
-  height: 10px;
+  order: 2;
+  height: 50%;
   width: 60%;
   background-color: grey;
-  margin: 8px;
+  margin: 0px;
   float: right;
-  border: 2px solid yellow;
 `;
 
 const FillerStyles = styled.div`

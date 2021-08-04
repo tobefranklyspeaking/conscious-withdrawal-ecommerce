@@ -24,28 +24,21 @@ const Wrapper = styled.div`
   grid-template-areas:
     "Title ."
     "Rating Review";
-  border: 5px solid green;
 `;
 
 const Title = styled.div`
-grid-area: Title
-border: 5px solid brown;
+grid-area: Title;
 `;
 
 const Rating = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 0px 0px;
-  grid-template-areas:
-    "SummaryWrapper"
-    "BreakdownWrapper";
-  grid-area: Rating
+  display: flex;
+  flex-direction: column;
+  grid-area: Rating;
   border: 5px solid blue;
 `;
 
 const Review = styled.div`
-display: flex-inline;
+grid-area: Review;
 text-align: center;
 vertical-align: middle;
 border: 5px solid orange;
@@ -64,11 +57,11 @@ border: 1px solid black;
 `;
 
 const TotalReviews = styled.div`
-  display: inline-block;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: 5px;
-  border: 1px solid black;
+height: 100%;
+text-align: center;
+margin-top: 5px;
+margin-left: 5px;
+font-weight: bold;
 `;
 
 const Inline = styled.div`
@@ -79,8 +72,9 @@ const Inline = styled.div`
 `;
 
 const SortContainer = styled.div`
+display: flex;
+justify-content: flex-start;
   height: 40px;
-  border: 1px solid black;
 `;
 
 const EachReview = styled.div`
@@ -208,7 +202,7 @@ const Ratings = ({ current }) => {
     return (
       <>
         <Wrapper>
-          <Title className='Title' >RATINGS & REVIEWS</Title>
+          <Title className='Title' ><p>RATINGS & REVIEWS</p></Title>
           <Rating className='Rating'>
             <Summary id={current.id} setIsFiltered={setIsFiltered} />
           </Rating>
