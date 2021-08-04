@@ -66,8 +66,8 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
   const [lengthID, setLengthID] = useState(null);
   const [fitID, setFitID] = useState(null);
   const [currentOverallRating, setCurrentOverallRating] = useState(0);
-  const [currentSummary, setCurrentSummary] = useState('');
-  const [currentBody, setCurrentBody] = useState('');
+  const [currentSummary, setCurrentSummary] = useState("");
+  const [currentBody, setCurrentBody] = useState("");
   const [currentRecommended, setCurrentRecommended] = useState(true)
   const [size, setSize] = useState(0);
   const [width, setWidth] = useState(0);
@@ -75,9 +75,9 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
   const [quality, setQuality] = useState(0);
   const [length, setLength] = useState(0);
   const [fit, setFit] = useState(0);
-  const [currentPhotos, setCurrentPhotos] = useState('');
-  const [currentName, setCurrentName] = useState('');
-  const [currentEmail, setCurrentEmail] = useState('');
+  const [currentPhotos, setCurrentPhotos] = useState("");
+  const [currentName, setCurrentName] = useState("");
+  const [currentEmail, setCurrentEmail] = useState("");
 
   useEffect(() => {
     if (charOptions.Size) {
@@ -161,7 +161,7 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
       currentChars[`${qualityID}`] =  Number(quality);
     }
     if (lengthID !== null) {
-      currentChars[`"${lengthID}"`] =  Number(length);
+      currentChars[`${lengthID}`] =  Number(length);
     }
     if (fitID !== null) {
       currentChars[`${fitID}`] =  Number(fit);
@@ -175,7 +175,7 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
       "recommend": currentRecommended,
       "name": currentName,
       "email": currentEmail,
-      "photos": [],
+      "photos": ["photo"],
       "characteristics": currentChars
     };
     // submitData['product_id'] = id;
@@ -196,9 +196,16 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
 
        axios.post('/reviews', submitData)
        .then((res) => {
-         onClose()
+         console.log('yay it works');
        })
        .catch((err) => {console.log('error: ', err)});
+
+
+      //  axios({
+      //   method: 'post',
+      //   url: '/reviews',
+      //   data: submitData
+      // });
 
        onClose();
 

@@ -13,27 +13,34 @@ import NewReview from './subcomponents/NewReview.jsx';
 
 
 //Wrappers
-const RatingsStyle = styled.div`
-  background-color: LightGray;
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid black;
-`;
 const Wrapper = styled.div`
   margin: auto;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: 1fr;
-  column-gap: 10px;
-  grid-template-areas: "Rating Review"
+  grid-auto-columns: 1fr;
+  grid-template-columns: 0.5fr 1.5fr;
+  grid-template-rows: 0.2fr 1.8fr;
+  gap: 0px 10px;
+  grid-template-areas:
+    "Title ."
+    "Rating Review";
   border: 5px solid green;
+`;
+
+const Title = styled.div`
+grid-area: Title
+border: 5px solid brown;
 `;
 
 const Rating = styled.div`
   display: grid;
-  text-align: center;
-  vertical-align: middle;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "SummaryWrapper"
+    "BreakdownWrapper";
+  grid-area: Rating
   border: 5px solid blue;
 `;
 
@@ -46,9 +53,6 @@ border: 5px solid orange;
 
 //Ratings Styled Components
 
-const Title = styled.div`
-
-`;
 
 //Reviews Styled Components
 
@@ -204,8 +208,8 @@ const Ratings = ({ current }) => {
     return (
       <>
         <Wrapper>
+          <Title className='Title' >RATINGS & REVIEWS</Title>
           <Rating className='Rating'>
-            <h3 className='Title' >RATINGS & REVIEWS</h3>
             <Summary id={current.id} setIsFiltered={setIsFiltered} />
           </Rating>
           <Review className='Review'>

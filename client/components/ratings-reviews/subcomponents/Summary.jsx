@@ -13,8 +13,11 @@ const RatingSummaryNum = styled.h1`
   border: 1px solid black;
 `;
 
-const Wrapper = styled.div`
-border: 1px solid black;
+const SummaryWrapper = styled.div`
+border: 5px solid purple;
+`;
+const BreakdownWrapper = styled.div`
+border: 5px solid dark-green;
 `;
 
 const Summary = ({ id, setIsFiltered }) => {
@@ -148,12 +151,14 @@ const Summary = ({ id, setIsFiltered }) => {
 
   return (
     <>
-    <Wrapper className='SummaryWrapper'>
+    <SummaryWrapper className='SummaryWrapper'>
     <RatingSummaryNum>{averageRating}  </RatingSummaryNum>
     <span><Stars currentRating={averageRating}> </Stars></span>
     <h5>{percentRecommended}% of reviews recommend this product</h5>
-    </Wrapper>
+    </SummaryWrapper>
+    <BreakdownWrapper className='BreakdownWrapper'>
     <RatingBreakdown ratings={ratings} numRatings={totalRatings()} setIsFiltered={setIsFiltered}/>
+    </BreakdownWrapper>
     </>
   );
 
