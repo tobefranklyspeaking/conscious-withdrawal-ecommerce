@@ -8,12 +8,13 @@ const port = 3000;
 app.use(express.static('public'));
 app.use(express.json());
 
+
 app.all('/*', (req, res) => {
   axios.defaults.headers.common['Authorization'] = API_KEY;
   axios({
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp${req.url}`,
     method: req.method,
-    data: req.data || null
+    data: req.data || req.body || null
   })
     .then((response) => {
       console.log('success with backend query');
