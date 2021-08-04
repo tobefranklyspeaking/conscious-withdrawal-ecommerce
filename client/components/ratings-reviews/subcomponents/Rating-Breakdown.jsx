@@ -37,7 +37,7 @@ background-color: Transparent;
   }
 `;
 
-const RatingBreakdown = ({ratings, numRatings, setIsFiltered}) => {
+const RatingBreakdown = ({ratings, numRatings, setIsFiltered, characteristics}) => {
   //console.log('ratibgs: num ratings', ratings, numRatings);
 
   const [one, setOne] = useState(0);
@@ -114,10 +114,7 @@ const RatingBreakdown = ({ratings, numRatings, setIsFiltered}) => {
     <StarRating><StarNum onClick={(e) => {{(filter.indexOf(2) === -1) ? addFilter(2) : rmFilter(2)}; setIsFiltered(filter)}}>2 stars </StarNum><ProgressBar percentage={two} /> <NumReviews>({`${two}`})</NumReviews></StarRating>
     <StarRating><StarNum onClick={(e) => {{(filter.indexOf(1) === -1) ? addFilter(1) : rmFilter(1)}; setIsFiltered(filter)}}>1 stars </StarNum><ProgressBar percentage={one} /> <NumReviews>({`${one}`})</NumReviews></StarRating>
     <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-    <CharRating percentage={one}/>
+    <CharRating char={characteristics}/>
     </>
   );
 

@@ -16,7 +16,7 @@ const SummaryWrapper = styled.div`
 margin-bottom: 10px;
 `;
 const BreakdownWrapper = styled.div`
-border: 5px solid brown;
+
 `;
 
 const StarWrapper = styled.div`
@@ -170,7 +170,7 @@ const Summary = ({ id, setIsFiltered }) => {
     <RecommendDiv>{percentRecommended}% of reviews recommend this product</RecommendDiv>
     </SummaryWrapper>
     <BreakdownWrapper className='BreakdownWrapper'>
-    <RatingBreakdown ratings={ratings} numRatings={totalRatings()} setIsFiltered={setIsFiltered}/>
+    <RatingBreakdown ratings={ratings} numRatings={totalRatings()} setIsFiltered={setIsFiltered} characteristics={characteristics}/>
     </BreakdownWrapper>
     </>
   );

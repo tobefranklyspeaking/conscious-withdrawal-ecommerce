@@ -35,7 +35,6 @@ const Rating = styled.div`
   display: flex;
   flex-direction: column;
   grid-area: Rating;
-  border: 5px solid blue;
 `;
 
 const Review = styled.div`
@@ -196,6 +195,7 @@ font-size: 12px;
 const Ratings = ({ current }) => {
   // console.log('kbdkhb', current.id);
   //--------------------------------STATE----------------------------------------------//
+
   const [reviews, setReviews] = useState([]);
   const [reviewCount, setReviewCount] = useState(2);
   const [sort, setSort] = useState('relevent');
@@ -313,7 +313,7 @@ const Ratings = ({ current }) => {
                 <ReviewBody>{review.body}</ReviewBody>
                 {(review.recommend === true) &&
                 <ReviewRec><FaCheck /> I recommend this product</ReviewRec>}
-                {(review.response !== null && review.response.length >= 0) &&
+                {(review.response !== null && review.response.length > 0) &&
                 <ReviewRes>
                   <ResTitle>Response:</ResTitle>
                   <ResBody>{review.response}</ResBody>
