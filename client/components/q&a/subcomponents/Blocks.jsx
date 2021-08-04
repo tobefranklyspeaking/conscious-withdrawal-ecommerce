@@ -3,6 +3,7 @@ import moment from 'moment';
 import AddAnswer from './AddAnswer.jsx';
 import styled from 'styled-components';
 import Helpful from '/client/components/shared/Helpful.jsx';
+import Report from '/client/components/shared/Report.jsx';
 
 const Accordian = styled.div`
 `;

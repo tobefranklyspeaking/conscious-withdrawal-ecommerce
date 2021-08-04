@@ -67,7 +67,6 @@ const QASearch = ({ current }) => {
 
   const updateData = (props) => {
     setUpdate(props);
-    console.log('updated', props)
   }
 
   const handleQuestion = (e) => {
@@ -99,7 +98,8 @@ const QASearch = ({ current }) => {
         <List>
           <Blocks current={allQuestions} updateData={updateData} update={update} />
         </List>
-        {search ? (
+        {console.log(search)}
+        {search && (
           allQuestions.filter(text => {
             if (search.length > 2 && text !== undefined) {
               if (text.question_body.toLowerCase().indexOf(search) !== -1) {
@@ -109,14 +109,12 @@ const QASearch = ({ current }) => {
                 return false
               }
             }
-          }).map((value) => {
+          }).map((value, i) => {
             return (
-              <div>Hello World</div>
+              <div key={i}>Hello World</div>
             )
           })
-        )
-          : console.log('no search: ', search)
-        }
+        )}
       </List>
     </>
   )
