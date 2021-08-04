@@ -8,6 +8,7 @@ import ReviewDropdown from '../shared/ReviewDropdown.jsx';
 import Stars from '../shared/Stars.jsx';
 import Summary from './subcomponents/Summary.jsx';
 import NewReview from './subcomponents/NewReview.jsx';
+import { FaCheck } from 'react-icons/fa'
 
 //--------------------------------STYLED COMPONENTS----------------------------------------------//
 
@@ -41,7 +42,6 @@ const Review = styled.div`
 grid-area: Review;
 text-align: center;
 vertical-align: middle;
-border: 5px solid orange;
 `;
 
 //Ratings Styled Components
@@ -53,7 +53,6 @@ const ReviewContainer = styled.div`
 height:440px;
 height: 550px;
 overflow: auto;
-border: 1px solid black;
 `;
 
 const TotalReviews = styled.div`
@@ -79,26 +78,119 @@ justify-content: flex-start;
 
 const EachReview = styled.div`
   border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: column;
   margin: 10px;
-  border: 1px solid black;
 `;
 
 const StarUser = styled.div`
 display: flex;
 justify-content: space-between;
-border: 1px solid black;
+height: 1 vh;
+font-size: 12px;
 `;
 
 const User = styled.div`
 display: flex-inline;
 justify-content: right;
-border: 1px solid black;
+text-align: center;
+font-weight: lighter;
+margin-top: 2px;
+height: 100%;
 `;
 
 const StarDiv = styled.div`
 display: flex-inline;
 justify-content: left;
-border: 1px solid black;
+`;
+
+
+const Buttons = styled.button`
+  background: white;
+  width: auto;
+  border: 1px solid black;
+  margin: 1rem 1rem 0 0;
+  padding: 1rem;
+  font-size: .7rem;
+  cursor: pointer;
+`;
+
+const ReviewSummary = styled.div`
+font-weight: bold;
+text-align: left;
+justify-content: left;
+margin: .2rem 0rem;
+font-size: 20px;
+`;
+
+const ReviewBody = styled.div`
+font-weight: lighter;
+justify-content: left;
+text-align: left;
+margin: .2rem 0rem;
+font-size: 12px;
+`;
+
+const ReviewRec = styled.div`
+text-align: left;
+margin: .5rem 0rem;
+font-size: 12px;
+font-weight: lighter;
+`;
+
+const ReviewRes = styled.div`
+text-align: left;
+margin: .5rem 0rem;
+display: flex;
+flex-direction: column;
+background-color: hsl(0,0%,0%, 0.2);
+`;
+
+const ResTitle = styled.p`
+font-weight: bold;
+margin: .5rem .5rem;
+font-size: 12px;
+`;
+
+const ResBody = styled.p`
+font-weight: lighter;
+margin: .5rem .5rem;
+font-size: 12px;
+`;
+
+const HelpfulReport = styled.div`
+display: inline-flex;
+font-size: 12px;
+.helpfulButton {
+  background-color: Transparent;
+  text-align: center;
+  font-size: 12px;
+  font-weight: lighter;
+  margin-left: .7rem;
+  margin-bottom: .3rem;
+  outline: none;
+  border: none;
+  text-decoration: underline;
+  &:hover.helpfulButton {
+    color: blue;
+  }
+}
+.helpfulend {
+  margin-right: 1rem;
+}
+.reportButton {
+  background-color: Transparent;
+  margin-left: 1rem;
+   margin-bottom: .3rem;
+  outline: none;
+  border: none;
+     font-size: 12px;
+     font-weight: lighter;
+     text-decoration: underline;
+     &:hover.reportButton {
+       color: blue;
+     }
+}
 `;
 
 const Ratings = ({ current }) => {
@@ -217,15 +309,25 @@ const Ratings = ({ current }) => {
                   <StarDiv><Stars currentRating={review.rating} /></StarDiv>
                   <User>{review.reviewer_name}, {moment(review.date).format('ll')}</User>
                 </StarUser>
-                <h3 key={index}>{review.summary}</h3>
-                <h5>{review.body}</h5>
+                <ReviewSummary key={index}>{review.summary}</ReviewSummary>
+                <ReviewBody>{review.body}</ReviewBody>
+                {(review.recommend === true) &&
+                <ReviewRec><FaCheck /> I recommend this product</ReviewRec>}
+                {(review.response !== null && review.response.length >= 0) &&
+                <ReviewRes>
+                  <ResTitle>Response:</ResTitle>
+                  <ResBody>{review.response}</ResBody>
+                </ReviewRes>}
+                  <HelpfulReport>
                 <Helpful path={'/reviews'} id={review.review_id} helpfulness={review.helpfulness} currentSort={sort} />
+                  |
                 <Report path={'/reviews'} id={review.review_id} />
+                </HelpfulReport>
               </EachReview>))}</>
             </ReviewContainer>
             {(reviewCount < reviews.length && reviews.length > 2) &&
-              <button onClick={(e) => { setReviewCount(reviewCount + 2) }}>MORE REVIEWS</button>}
-            <button onClick={() => setShow(true)}>ADD A REVIEW +</button>
+              <Buttons onClick={(e) => { setReviewCount(reviewCount + 2) }}>MORE REVIEWS</Buttons>}
+            <Buttons onClick={() => setShow(true)}>ADD A REVIEW +</Buttons>
             <NewReview onClose={() => setShow(false)} current={current} show={show} />
           </Review>
         </Wrapper>

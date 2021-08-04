@@ -18,12 +18,23 @@ const StarNum = styled.span`
   float: left;
   height: 100%;
   text-decoration: underline;
+  text-align: left;
 `;
 
 const NumReviews = styled.span`
 order: 3;
 float: right;
 height: 100%;
+`;
+
+const RemoveFiltersButton = styled.button`
+background-color: Transparent;
+  outline: none;
+  border: none;
+  text-decoration: underline;
+  &:hover.removefilterbutton {
+    color: blue;
+  }
 `;
 
 const RatingBreakdown = ({ratings, numRatings, setIsFiltered}) => {
@@ -94,7 +105,7 @@ const RatingBreakdown = ({ratings, numRatings, setIsFiltered}) => {
     {filter.length > 0 &&
     <div>
       <p>Current Filters: {filter.join(' stars, ')}  stars</p>
-      <button onClick={(e) => {setFilter([]); setIsFiltered([])}}>Remove all filters</button>
+      <RemoveFiltersButton className='removefilterbutton' onClick={(e) => {setFilter([]); setIsFiltered([])}}>Remove all filters</RemoveFiltersButton>
     </div>
     }
     <StarRating><StarNum onClick={(e) => {((filter.indexOf(5) === -1) ? addFilter(5) : rmFilter(5)); setIsFiltered(filter)}}> 5 stars </StarNum><ProgressBar percentage={five} /> <NumReviews>({`${five}`})</NumReviews></StarRating>

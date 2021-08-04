@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import axios from 'axios';
 
-const Button = styled.button`
-  background-color: Transparent;
-  outline: none;
-  border: none;
-  text-decoration: underline;
-  &:hover.helpfulButton {
-    color: blue;
-  }
-  border: 1px solid black;
-`;
+// const Button = styled.button`
+//   background-color: Transparent;
+//   outline: none;
+//   border: none;
+//   text-decoration: underline;
+//   &:hover.helpfulButton {
+//     color: blue;
+//   }
+//   border: 1px solid black;
+// `;
 
 
 const Helpful = ({ path, id, helpfulness, currentSort }) => {
@@ -43,8 +43,8 @@ const Helpful = ({ path, id, helpfulness, currentSort }) => {
   return (
     <>
       <span>Helpful? </span>
-      <Button className="helpfulButton" onClick={() => isClicked ? console.log('already clicked') : setIsHelpful(isHelpful + 1)}>Yes</Button>
-      <span>({isHelpful})</span>
+      <button className="helpfulButton" onClick={() => isClicked ? console.log('already clicked') : setIsHelpful(isHelpful + 1)}>Yes</button>
+      <span className="helpfulend">({isHelpful})</span>
     </>
   );
 
