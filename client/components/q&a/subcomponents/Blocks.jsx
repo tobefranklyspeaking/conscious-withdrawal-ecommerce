@@ -127,17 +127,31 @@ const HelpfulButton = styled.span`
       color: blue;
     }
   }
+
+  .reportButton {
+    background-color: white;
+    border: none;
+    margin: 5px 0 1rem 1rem;
+    color: gray;
+    font-weight: lighter;
+    font-size: 10px;
+    cursor: pointer;
+    &:hover.helpfulButton {
+      color: blue;
+    }
+  }
 `;
 
 const Blocks = ({ current, updateData, update }) => {
   const [moreAnswers, setMoreAnswers] = useState(true);
   const [show, setShow] = useState(false);
+  const [hide, setHide] = useState(true);
 
   useEffect(() => {
     try {
       updateData(current.toString())
     }
-    catch(err) {
+    catch (err) {
       console.log(err)
     }
   }, [current])
@@ -201,9 +215,9 @@ const Blocks = ({ current, updateData, update }) => {
                     <span> | </span>
                     <HelpfulButton>
                       <Helpful path={'/qa/questions'} id={parseInt(each)} helpfulness={current.helpfulness} />
+                      <span> | </span>
+                      <Report path={'/qa/questions'} id={parseInt(each)}/>
                     </HelpfulButton>
-                    <span> | </span>
-                    <span style={{ cursor: 'pointer' }}> <u>Report</u> </span>
                   </LineB>
                   {Object.keys(current.photos).length > 0 && Object.keys(current.photos).length < 6
                     ? <LineB>
