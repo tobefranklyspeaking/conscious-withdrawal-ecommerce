@@ -162,7 +162,7 @@ const Ratings = ({ current }) => {
     <>
       <Wrapper>
         <Rating>
-          <h3>RATINGS & REVIEWS</h3>
+          <h3 id="reviews">RATINGS & REVIEWS</h3>
           <Summary id={current.id} setIsFiltered={setIsFiltered} />
         </Rating>
         <Review>
