@@ -9,7 +9,7 @@ import MyOutfit from '../related-items/MyOutfit.jsx';
 const Shared = ({ current, update }) => {
   return (
     <>
-      <NavBar current={current, update} />
+      <NavBar update={update} />
       <Overview current={current} />
       <RelatedProducts current={current} />
       <MyOutfit />
