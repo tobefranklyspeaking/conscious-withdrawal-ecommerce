@@ -8,6 +8,7 @@ const port = 3000;
 app.use(express.static('public'));
 app.use(express.json());
 
+
 app.all('/*', (req, res) => {
   axios.defaults.headers.common['Authorization'] = API_KEY;
 
