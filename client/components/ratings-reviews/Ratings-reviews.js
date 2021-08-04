@@ -90,7 +90,7 @@ font-size: 12px;
 `;
 
 const User = styled.div`
-display: flex-inline;
+display: inline-flex;
 justify-content: right;
 text-align: center;
 font-weight: lighter;
@@ -99,7 +99,7 @@ height: 100%;
 `;
 
 const StarDiv = styled.div`
-display: flex-inline;
+display: inline-flex;
 justify-content: left;
 `;
 
@@ -206,14 +206,9 @@ const Ratings = ({ current }) => {
   //--------------------------------useEffect/GET----------------------------------------------//
 
   useEffect(() => {
-    //console.log('filter in r-r', isFiltered);
-    // const getReviews = async () => {
-    //   let res = await axios.get(`/reviews?product_id=${current.id}&sort=${sort}&count=1000`);
-    //   setReviews(res.data.results);
-    // };
-    // getReviews();
+    if (current.id) {
     handleMoreReviews();
-
+    };
   }, [current, sort, isFiltered]);
 
 
@@ -255,7 +250,6 @@ const Ratings = ({ current }) => {
 
   let query = buildFilter(filter);
   let filteredReviews = filterData(reviews, buildFilter(filter));
-  console.log('---', filteredReviews);
 
   //--------------------------------LENGTH OF REVIEWS DISPLAYED----------------------------------------------//
 
@@ -264,7 +258,7 @@ const Ratings = ({ current }) => {
     if (filterReview.length > 2) {
       //console.log('should be displayed', reviewsToDisplay.slice(0, count));
       reviewsToDisplay = reviewsToDisplay.slice(0, count);
-      console.log('should be displayed', reviewsToDisplay);
+      // console.log('should be displayed', reviewsToDisplay);
       return reviewsToDisplay;
     } else {
       return reviewsToDisplay;
@@ -272,14 +266,14 @@ const Ratings = ({ current }) => {
   }
 
   let finalReviews = display(filteredReviews, reviewCount);
-  console.log('should equal should be displayed', finalReviews);
+  //console.log('should equal should be displayed', finalReviews);
 
   //--------------------------------RETURN----------------------------------------------//
   if (reviews.length === 0) {
     return (
       <Wrapper>
         <Rating>
-          <h3>RATINGS & REVIEWS</h3>
+        <Title id="reviews" className='Title' ><p>RATINGS & REVIEWS</p></Title>
         </Rating>
         <Review>
           <p>NO REVIEWS YET</p>
@@ -294,7 +288,7 @@ const Ratings = ({ current }) => {
     return (
       <>
         <Wrapper>
-          <Title className='Title' ><p>RATINGS & REVIEWS</p></Title>
+          <Title id="reviews" className='Title' ><p>RATINGS & REVIEWS</p></Title>
           <Rating className='Rating'>
             <Summary id={current.id} setIsFiltered={setIsFiltered} />
           </Rating>

@@ -38,7 +38,7 @@ const ModalBody = styled.div`
 const ModalFooter = styled.div`
   padding: 10px;
 `;
-const AddAnswer = ({question, show, onClose}) => {
+const ImageModal = ({question, show, onClose}) => {
   if (!show) {
     return null;
   }
@@ -49,7 +49,7 @@ const AddAnswer = ({question, show, onClose}) => {
           <h4 className="modal-title">Add Answer</h4>
         </ModalHeader>
         <ModalBody>
-          Add Forms Here
+          Image
         </ModalBody>
         <ModalFooter className="modal-footer">
           <button onClick={onClose} className="button">Cancel</button>
@@ -60,4 +60,4 @@ const AddAnswer = ({question, show, onClose}) => {
   )
 }
 
-export default AddAnswer;
+export default ImageModal;

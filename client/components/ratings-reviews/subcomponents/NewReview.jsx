@@ -51,16 +51,16 @@ const NewReview = ({current, show, onClose}) => {
   const [charOptions, setCharOptions] = useState({});
 
   useEffect(async () => {
-    try {
-      let res = await axios.get(`/reviews/meta?product_id=${current.id}`);
-      setCharOptions(res.data.characteristics);
-      console.log('successful get meta data: ', res.data);
-    } catch (err) {
-      console.error(err)
+    if (current.id) {
+      try {
+        let res = await axios.get(`/reviews/meta?product_id=${current.id}`);
+        setCharOptions(res.data.characteristics);
+        // console.log('successful get meta data: ', res.data);
+      } catch (err) {
+        console.error(err)
+      }
     }
   }, [current]);
-
-  //console.log('chars --', charOptions);
 
   if (!show) {
     return null;

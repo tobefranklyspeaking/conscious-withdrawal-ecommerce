@@ -13,9 +13,7 @@ import axios from 'axios';
 //   border: 1px solid black;
 // `;
 
-
 const Helpful = ({ path, id, helpfulness, currentSort }) => {
-
   const [isHelpful, setIsHelpful] = useState(helpfulness);
   const [isClicked, setIsClicked] = useState(false);
   const [sort, setSort] = useState(currentSort);
