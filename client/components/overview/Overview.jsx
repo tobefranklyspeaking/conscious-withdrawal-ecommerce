@@ -182,7 +182,7 @@ const Overview = ({ current }) => {
         <Column2>
         <StarsWrapper>
           <Stars currentRating={avgRating}/>
-          <a href="#" style={{color: 'grey'}}>Read all {numReviews} reviews</a>
+          {(numReviews > 0) && <a href="#" style={{color: 'grey'}}>Read all {numReviews} reviews</a> }
         </StarsWrapper>
           <Category>{current.category}</Category>
           <Name>{current.name}</Name>
