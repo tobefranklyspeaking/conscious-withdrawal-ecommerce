@@ -9,7 +9,7 @@ const Modal = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 `;
