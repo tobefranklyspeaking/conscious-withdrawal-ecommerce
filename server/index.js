@@ -13,7 +13,7 @@ app.all('/*', (req, res) => {
   axios.defaults.headers.common['Authorization'] = API_KEY;
   axios({
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp${req.url}`,
-    method: 'GET',
+    method: req.method,
     data: req.data || req.body || null
   })
     .then((response) => {
