@@ -51,7 +51,6 @@ const LineA = styled.div`
 const LineB = styled.div`
   font-size: 8px;
   margin-top: 5px;
-  margin-bottom: 25px;
   font-weight: lighter;
   font-size: 13px;
   margin-bottom: 5px;
@@ -60,7 +59,6 @@ const LineB = styled.div`
     color: gray;
     font-weight: lighter;
     font-size: 10px;
-    margin-bottom: 5px;
     margin-left: 1rem;
   }
 
@@ -95,38 +93,43 @@ const Img = styled.img`
 `;
 
 const Wrapper = styled.div`
-  color: #d82c2c;
-  margin-top: 5;
-  font-weight: 'lighter';
-  font-size: 10;
-  margin-bottom: 5;
-  margin-left: 10;
-  border: none;
+  font-weight: lighter;
+  font-size: 12px;
+  margin-bottom: 5px;
+  margin-left: 1rem;
+  float: right;
   display: inline-flex;
 
   .helpfulButton {
-    background-color: Transparent;
-    outline: none;
+    font-weight: lighter;
+    font-size: 12px;
+    float: right;
+    padding: 0px 6px 0px 6px;
+    background-color: white;
     border: none;
-    text-decoration: underline;
+    cursor: pointer;
+    text-align: none;
     &:hover.helpfulButton {
       color: blue;
     }
-
   }
 `;
-const TempSpan = styled.span`
-.helpfulButton {
-    background-color: Transparent;
-    outline: none;
+
+const HelpfulButton = styled.span`
+  .helpfulButton {
+    margin: 5px 0 5px 5px;
+    font-weight: lighter;
+    color: gray;
+    background-color: white;
     border: none;
-    text-decoration: underline;
+    font-size: 10px;
+    cursor: pointer;
     &:hover.helpfulButton {
       color: blue;
     }
-
-}
+  }
 `;
+
 const Blocks = (props) => {
   const [moreAnswers, setMoreAnswers] = useState(true);
   const [show, setShow] = useState(false);
@@ -142,10 +145,11 @@ const Blocks = (props) => {
               Q: {question.question_body}
             </Bold>
             <SpaceQ>
-              <SpaceQ style={{ cursor: 'pointer' }} background-color='gray' onClick={() => setShow(true)}><u>Add Answer</u></SpaceQ>
+              <SpaceQ style={{ cursor: 'pointer' }} background-color='gray' onClick={() => setShow(true)}><u>Add Answer</u>
+              </SpaceQ>
               <SpaceQ>|</SpaceQ>
               <Wrapper>
-                <Helpful path={'/qa/questions/'} id={parseInt(question.question_id)} helpfulness={question.question_helpfulness} />
+                <Helpful path={'/qa/questions'} id={question.question_id} helpfulness={question.question_helpfulness} />
               </Wrapper>
               <AddAnswer onClose={() => setShow(false)} current={question} show={show} style={{ cursor: 'pointer' }} />
             </SpaceQ>
@@ -184,11 +188,11 @@ const Blocks = (props) => {
                   <LineB >
                     <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
                     <span> | </span>
-
-                    <Helpful path={'/qa/questions/'} id={parseInt(each)} helpfulness={answerObj.helpfulness} />
-
-                    <span style={{ cursor: 'pointer' }}> <u>Yes</u> ({answerObj.helpfulness}) </span>
-                    <span> | </span>
+                    <HelpfulButton>
+                      <Helpful  path={'/qa/questions'} id={parseInt(each)} helpfulness={answerObj.helpfulness} />
+                    </HelpfulButton>
+                    {/* <span style={{ cursor: 'pointer' }}> <u>Yes</u> ({answerObj.helpfulness}) </span>
+                    <span> | </span> */}
                     <span style={{ cursor: 'pointer' }}> <u>Report</u> </span>
                   </LineB>
                   {Object.keys(answerObj.photos).length > 0 && Object.keys(answerObj.photos).length < 6 ?
@@ -204,11 +208,9 @@ const Blocks = (props) => {
                       <div>
                         <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
                         <span> | </span>
-                        <TempSpan>
-
-                          <Helpful path={'/qa/questions/'} id={parseInt(each)} helpfulness={answerObj.helpfulness} />
-
-                        </TempSpan>
+                        <HelpfulButton >
+                          <Helpful path={'/qa/questions'} id={parseInt(each)} helpfulness={answerObj.helpfulness} />
+                        </HelpfulButton >
                         <span> | </span>
                         <span style={{ cursor: 'pointer' }}> <u>Report</u> </span>
                       </div>
