@@ -203,9 +203,9 @@ const Overview = ({ current }) => {
           <StyleSelector>
             {thumbnails.map((nail, i) => (
             <StyleContainer key={i}>
-              <IconContext.Provider value={{ style: { position: 'absolute' } }}>
+              {(nail === currentStyle.photos[0].thumbnail_url) && (<IconContext.Provider value={{ style: { position: 'absolute' } }}>
                 <FaCheck />
-              </IconContext.Provider>
+              </IconContext.Provider>)}
               <img src={nail}/>
             </StyleContainer>
             ))}
