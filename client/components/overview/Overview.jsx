@@ -150,6 +150,7 @@ const Overview = ({ current }) => {
           updateFeatures(current.features);
           console.log('current obj here!', current);
           console.log('current Style here!', arr.results[0]);
+          console.log('styles total here!', arr.results);
 
           let newMeta = await fetch(`/reviews/meta?product_id=${current.id}`).then(data => data.json());
           let avg = getAverageRating(newMeta.ratings);
@@ -201,8 +202,8 @@ const Overview = ({ current }) => {
           <Price style={currentStyle.sale_price ? {color: 'red'} : {}} >{'$' + (currentStyle.sale_price || currentStyle.original_price)}</Price>
           <StyleHeader> <h4>STYLE ></h4> SELECTED STYLE</StyleHeader>
           <StyleSelector>
-            {thumbnails.map((nail, i) => (
-            <StyleContainer key={i}>
+            {styles.length && currentStyle.photos && styles.map(style => style.photos[0].thumbnail_url).map((nail) => (
+            <StyleContainer>
               {(nail === currentStyle.photos[0].thumbnail_url) && (<IconContext.Provider value={{ style: { position: 'absolute' } }}>
                 <FaCheck />
               </IconContext.Provider>)}
