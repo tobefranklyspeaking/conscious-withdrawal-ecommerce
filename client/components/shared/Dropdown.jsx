@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   height: 4rem;
 `;
 
-const Dropdown = ({ options, title, width }) => {
+const Dropdown = ({ options=['#'], title, width }) => {
   //setting state
   const [opt, setOpt] = useState(options);
   const [isOpen, setOpen] = useState(false);
