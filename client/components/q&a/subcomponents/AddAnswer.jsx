@@ -93,7 +93,7 @@ const AddAnswer = ({ current, show, onClose }) => {
     <Modal onClick={onClose}>
       <ModalContent onClick={e => e.stopPropagation()}>
         <ModalHeader>
-          <h4 className="modal-title">Add Answer</h4>
+          <h1 className="modal-title">Add Answer</h1>
         </ModalHeader>
         <ModalBody>
           <div>*Your Answer</div>
@@ -107,7 +107,6 @@ const AddAnswer = ({ current, show, onClose }) => {
         </ModalBody>
         <ModalFooter className="modal-footer">
           <Button onClick={onClose} className="button">Cancel</Button>
-          <Button>Opens new window to select photos</Button>
           <Button className="submit" onClick={() => onSubmit()}>Submit</Button>
           <div>Page will close if successful submit occurs</div>
         </ModalFooter>
