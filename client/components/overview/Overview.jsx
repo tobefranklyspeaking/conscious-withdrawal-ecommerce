@@ -126,20 +126,27 @@ const SocialButtonRow = styled.div`
   margin-top: 1rem;
   align-items: center;
   justify-content: space-evenly;
+  & > * {
+    color: inherit;
+  }
 `
 
 const Overview = ({ current }) => {
   //set state: have isolated photos/thumbnails and sku/sale for easier useEffect logic
   const [styles, updateStyles] = useState([]);
   const [currentStyle, updateCurrentStyle] = useState({});
-  const [photos, updatePhotos] = useState([]);
-  const [thumbnails, updateThumbnails] = useState([]);
   const [features, updateFeatures] = useState([]);
-  const [skus, updateSkus] = useState({});
-  const [avgRating, updateAvg] = useState(0);
+  const [thumbnails, updateThumbnails] = useState([]);
   const [meta, updateMeta] = useState({});
   const [numReviews, updateNumReviews] = useState(0);
-  //fetches styles and sets default to first style based on current product on mount
+
+  //state which depends on the currentStyle/is updated in the second useEffect hook
+  const [avgRating, updateAvg] = useState(0);
+  const [photos, updatePhotos] = useState([]);
+  const [skus, updateSkus] = useState([]);
+
+
+  //fetches styles and sets default to first style based on current product on mount. This useEffect acts like componentDidMount
   useEffect(async () => {
     try {
         if(current.id) {
@@ -175,7 +182,7 @@ const Overview = ({ current }) => {
       let newThumbnails = currentStyle.photos.map(photo => photo.thumbnail_url);
       updatePhotos(newPhotos);
       updateThumbnails(newThumbnails);
-      updateSkus(currentStyle.skus);
+      updateSkus(Object.values(currentStyle.skus));
     }
   }, [currentStyle]);
 
@@ -219,7 +226,11 @@ const Overview = ({ current }) => {
             ))}
           </StyleSelector>
           <ButtonRow1>
-            <Dropdown options={['#']} title="SELECT SIZE" width="60%"/>
+            <Dropdown
+              options={ skus.length && skus.filter(sku => (sku.quantity > 0)).map(sku => sku.size)}
+              title={skus.length && skus.filter(sku => (sku.quantity > 0)).length ? 'SELECT SIZE' : 'OUT OF STOCK' }
+              width="60%"
+            />
             <Dropdown options={['#']} title="1"/>
           </ButtonRow1>
           <ButtonRow2>
