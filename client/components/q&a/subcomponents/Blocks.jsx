@@ -67,6 +67,10 @@ const LineB = styled.div`
   div {
     margin: 1vh 0 0 2vh;
   }
+
+  button {
+
+  }
 `;
 
 const Details = styled.div`
@@ -90,18 +94,43 @@ const Img = styled.img`
   margin-right: 1rem;
 `;
 
-const Wrapper = styled.span`
-  color: gray;
+const Wrapper = styled.div`
+  color: #d82c2c;
   margin-top: 5;
   font-weight: 'lighter';
   font-size: 10;
   margin-bottom: 5;
   margin-left: 10;
-`;
+  border: none;
+  display: inline-flex;
 
+  .helpfulButton {
+    background-color: Transparent;
+    outline: none;
+    border: none;
+    text-decoration: underline;
+    &:hover.helpfulButton {
+      color: blue;
+    }
+
+  }
+`;
+const TempSpan = styled.span`
+.helpfulButton {
+    background-color: Transparent;
+    outline: none;
+    border: none;
+    text-decoration: underline;
+    &:hover.helpfulButton {
+      color: blue;
+    }
+
+}
+`;
 const Blocks = (props) => {
   const [moreAnswers, setMoreAnswers] = useState(true);
   const [show, setShow] = useState(false);
+
 
 
   const Questions = (question) => {
@@ -115,9 +144,9 @@ const Blocks = (props) => {
             <SpaceQ>
               <SpaceQ style={{ cursor: 'pointer' }} background-color='gray' onClick={() => setShow(true)}><u>Add Answer</u></SpaceQ>
               <SpaceQ>|</SpaceQ>
-              <Helpful path={'/qa/questions/'} id={parseInt(question.question_id)} helpfulness={question.question_helpfulness} />
-              <SpaceQ>|</SpaceQ>
-              <SpaceQ> Helpful? </SpaceQ>
+              <Wrapper>
+                <Helpful path={'/qa/questions/'} id={parseInt(question.question_id)} helpfulness={question.question_helpfulness} />
+              </Wrapper>
               <AddAnswer onClose={() => setShow(false)} current={question} show={show} style={{ cursor: 'pointer' }} />
             </SpaceQ>
           </Wrap>
@@ -155,7 +184,9 @@ const Blocks = (props) => {
                   <LineB >
                     <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
                     <span> | </span>
+
                     <Helpful path={'/qa/questions/'} id={parseInt(each)} helpfulness={answerObj.helpfulness} />
+
                     <span style={{ cursor: 'pointer' }}> <u>Yes</u> ({answerObj.helpfulness}) </span>
                     <span> | </span>
                     <span style={{ cursor: 'pointer' }}> <u>Report</u> </span>
@@ -173,11 +204,11 @@ const Blocks = (props) => {
                       <div>
                         <span> by {answerObj.answerer_name}, {moment(answerObj.question_date).format('ll')} </span>
                         <span> | </span>
-                        <span>
+                        <TempSpan>
 
                           <Helpful path={'/qa/questions/'} id={parseInt(each)} helpfulness={answerObj.helpfulness} />
 
-                        </span>
+                        </TempSpan>
                         <span> | </span>
                         <span style={{ cursor: 'pointer' }}> <u>Report</u> </span>
                       </div>
@@ -205,3 +236,13 @@ const Blocks = (props) => {
 }
 
 export default Blocks;
+
+// "product_id": 17070,
+// "rating": 3,
+// "summary": 'its ehh',
+// "body": "This product isn't the best but it is not too terrible",
+// "recommend": true,
+// "name": 'jackson12',
+// "email": 'jackson12@email.com',
+// "photos": [ 'photo' ],
+// "characteristics": { '57231': 4, '57233': 4, '57234': 4, '"57232"': 2 }

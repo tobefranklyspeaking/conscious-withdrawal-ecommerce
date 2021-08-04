@@ -10,10 +10,14 @@ app.use(express.json());
 
 app.all('/*', (req, res) => {
   axios.defaults.headers.common['Authorization'] = API_KEY;
+  console.log(req.data);
+  let dataType = req.body;
+  req.method.toLowerCase() === 'post' ? dataType = req.body : dataType = req.data;
+
   axios({
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp${req.url}`,
     method: req.method,
-    data: req.data || null
+    data: dataType || null
   })
     .then((response) => {
       console.log('success with backend query');
