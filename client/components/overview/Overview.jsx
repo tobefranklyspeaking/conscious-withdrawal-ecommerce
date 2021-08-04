@@ -5,7 +5,8 @@ import Stars from '../shared/Stars.jsx';
 import getAverageRating from '../shared/getAverageRating.js';
 import Dropdown from '../shared/Dropdown.jsx';
 import Button from '../shared/Button.jsx';
-import { FaRegHeart, FaCheck, FaPlus } from 'react-icons/fa'
+import { FaRegHeart, FaCheck, FaPlus, FaFacebook, FaTwitter, FaPinterest } from 'react-icons/fa';
+import { IconContext } from 'react-icons';
 //component styles
 const OverviewWrapper = styled.div`
   margin-left: auto;
@@ -119,6 +120,12 @@ const Column2 = styled.div`
   flex-flow: column nowrap;
   padding-left: 1rem;
 `;
+const SocialButtonRow = styled.div`
+  display: flex;
+  margin-top: 1rem;
+  align-items: center;
+  justify-content: space-evenly;
+`
 
 const Overview = ({ current }) => {
   //set state: have isolated photos/thumbnails and sku/sale for easier useEffect logic
@@ -178,6 +185,11 @@ const Overview = ({ current }) => {
           <Carousel urls={photos}/>
           <Slogan>{current.slogan}</Slogan>
           <Description>{current.description}</Description>
+          <SocialButtonRow>
+            <a href="http://facebook.com"><FaFacebook size="2em" /></a>
+            <a href="http://twitter.com"><FaTwitter size="2em"/></a>
+            <a href="http://pinterest.com"><FaPinterest size="2em"/></a>
+          </SocialButtonRow>
         </Column1>
         <Column2>
         <StarsWrapper>
@@ -191,6 +203,9 @@ const Overview = ({ current }) => {
           <StyleSelector>
             {thumbnails.map((nail, i) => (
             <StyleContainer key={i}>
+              <IconContext.Provider value={{ style: { position: 'absolute' } }}>
+                <FaCheck />
+              </IconContext.Provider>
               <img src={nail}/>
             </StyleContainer>
             ))}
