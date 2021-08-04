@@ -136,6 +136,7 @@ const HelpfulButton = styled.span`
     font-weight: lighter;
     font-size: 10px;
     cursor: pointer;
+
     &:hover.helpfulButton {
       color: blue;
     }
@@ -147,6 +148,7 @@ const Blocks = ({ current, updateData, update }) => {
   const [show, setShow] = useState(false);
   const [hide, setHide] = useState(true);
 
+
   useEffect(() => {
     try {
       updateData(current.toString())
@@ -155,6 +157,14 @@ const Blocks = ({ current, updateData, update }) => {
       console.log(err)
     }
   }, [current])
+
+const Reported = ({hide}) => {
+  console.log('inside reported component within blocks', hide)
+  if (hide === true) {
+    return null;
+  }
+  return <div>Reported</div>
+}
 
   const Questions = ({ current, state }) => {
     return (
@@ -216,7 +226,8 @@ const Blocks = ({ current, updateData, update }) => {
                     <HelpfulButton>
                       <Helpful path={'/qa/questions'} id={parseInt(each)} helpfulness={current.helpfulness} />
                       <span> | </span>
-                      <Report path={'/qa/questions'} id={parseInt(each)}/>
+                      <Report  path={'/qa/questions'} id={parseInt(each)}/>
+
                     </HelpfulButton>
                   </LineB>
                   {Object.keys(current.photos).length > 0 && Object.keys(current.photos).length < 6
@@ -234,9 +245,9 @@ const Blocks = ({ current, updateData, update }) => {
                         <span> | </span>
                         <HelpfulButton >
                           <Helpful path={'/qa/questions'} id={parseInt(each)} helpfulness={current.helpfulness} />
-                        </HelpfulButton >
                         <span> | </span>
-                        <span style={{ cursor: 'pointer' }}> <u>Report</u> </span>
+                          <Report path={'/qa/questions'} id={parseInt(each)}/>
+                        </HelpfulButton >
                       </div>
                     </LineB>
                     : null}

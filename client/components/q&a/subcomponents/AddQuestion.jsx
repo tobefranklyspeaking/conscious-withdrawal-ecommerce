@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-
+import AddQuestionForm from '/client/components/q&a/subcomponents/AddQuestionForm.jsx';
 const Modal = styled.div`
   position: fixed;
   background-color: hsla(0, 0%, 0%, 0.5);
@@ -64,6 +64,7 @@ const AddQuestion = ({current, show, onClose}) => {
           <h3>About the <u>Product Name</u></h3>
         </ModalHeader>
         <ModalBody>
+          <AddQuestionForm />
           <div>Your Question - mandatory</div>
           <input/>
           <div>Your Nickname - mandatory</div>

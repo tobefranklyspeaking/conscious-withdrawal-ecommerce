@@ -53,7 +53,6 @@ const QASearch = ({ current }) => {
     if (current.id !== undefined) {
       axios.get(`/qa/questions/?product_id=${current.id}`)
         .then(response => {
-          console.log('successful question get', response.data)
           setAllQuestions(response.data.results);
         })
         .catch(err => console.log(`Error in QuestionSearch useEffect: ${err}`));
@@ -71,12 +70,12 @@ const QASearch = ({ current }) => {
 
   const handleQuestion = (e) => {
     // setSearch(e.question_);
-    console.log(e);
+    // console.log(e);
     Blocks(e);
   }
 
   const onChange = (searchText) => {
-    console.log(searchText);
+    // console.log(searchText);
     setSearch(searchText.toLowerCase());
   }
 
@@ -98,7 +97,6 @@ const QASearch = ({ current }) => {
         <List>
           <Blocks current={allQuestions} updateData={updateData} update={update} />
         </List>
-        {console.log(search)}
         {search && (
           allQuestions.filter(text => {
             if (search.length > 2 && text !== undefined) {

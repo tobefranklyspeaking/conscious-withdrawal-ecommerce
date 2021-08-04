@@ -35,7 +35,7 @@ const Report = ({path, id}) => {
 
   return (
     <>
-    <Button className="reportButton" onClick={() => (isClicked ? console.log('already clicked') : setIsReported(true))}>Report</Button>
+    <Button className="reportButton" onClick={() => (isClicked ? console.log('already clicked') : setIsReported(true))}>{isClicked ? "Reported" : "Report"}</Button>
     </>
   )
 
