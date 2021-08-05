@@ -7,23 +7,19 @@ const Wrapper = styled.div`
   display: inline-block;
   height: 100%
   flex-flow: column nowrap;
-  position: absolute;
   justify-content: space-around;
   width: 6rem;
-
 `;
 const Button = styled.button`
   border: none;
   background: transparent;
-  margin: 0 auto;
+  margin-top: 5px;
   display: flex;
   height: 2rem;
-  width: 5rem;
+  width: 4.5rem;
   justify-content: space-evenly;
-  align-items: center;
-  padding: .5rem;
-  font-weight: 700;
-
+  align-items: left;
+  font-weight: bold;
 `;
 
 const ReviewDropdown = ({ options, setSort }) => {

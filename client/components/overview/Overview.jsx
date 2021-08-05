@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from "styled-components";
 import Carousel from '../shared/Carousel.jsx'
 import Stars from '../shared/Stars.jsx';
@@ -148,6 +148,9 @@ const Overview = ({ current }) => {
   const [size, updateSize] = useState('');
   const [qty, updateQty] = useState(0);
 
+  //ref to access size dropdown
+  const sizeRef = useRef(null);
+
   //fetches styles and sets default to first style based on current product on mount. This useEffect acts like componentDidMount
   useEffect(async () => {
     try {
@@ -160,16 +163,13 @@ const Overview = ({ current }) => {
           updateFeatures(current.features);
           console.log('current obj here!', current);
           console.log('current Style here!', arr.results[0]);
-          console.log('styles total here!', arr.results);
 
           let newMeta = await fetch(`/reviews/meta?product_id=${current.id}`).then(data => data.json());
           let avg = getAverageRating(newMeta.ratings);
-          console.log('fetched meta here', newMeta);
           updateAvg(avg);
           updateMeta(newMeta);
 
           let reviews = await fetch(`/reviews?product_id=${current.id}&count=1000`).then(data => data.json());
-          console.log('reviews hurr', reviews);
           updateNumReviews(reviews.results.length);
         }
     } catch (err) {
@@ -199,6 +199,44 @@ const Overview = ({ current }) => {
     updateSize(option);
   };
 
+  const qtyDropdownCallback = (option) => {
+    updateQty(option);
+  }
+
+  const cartClickHandler = (e) => {
+    //edge cases: size not selected or sku not in stock
+    if (!size) {
+      sizeRef.current.click();
+      alert('Please select size.')
+      return;
+    }
+    let currentSku = skus.filter(sku => (sku.size === size))
+    let inStock = currentSku[0].quantity;
+    if(!inStock) {
+      document.getElementById('cartButton').remove();
+      return;
+    }
+    //most requests should fall through to here
+    let body = {
+      sku_id: Object.keys(currentStyle.skus).find(key => currentStyle.skus[key] === currentSku[0]),
+      count: qty
+    }
+    fetch('/cart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    }).then((res) => {
+      if(res.status === (200 || 201)) {
+        alert('successfully added to cart!');
+      } else {
+        console.error('err posting to cart', res);
+      }
+    }).catch((err) => {
+      console.error('err posting to cart', err);
+    });
+  }
   const reviewScroller = (e) => {
     e.preventDefault();
     let elt = document.getElementById('reviews');
@@ -246,11 +284,26 @@ const Overview = ({ current }) => {
               title={ skus.length && skus.filter(sku => (sku.quantity > 0)).length ? 'SELECT SIZE' : 'OUT OF STOCK' }
               width="60%"
               callback={sizeDropdownCallback}
+              nref={sizeRef}
             />
-            <Dropdown options={['#']} title="1"/>
+            <Dropdown
+            options={skus.length && skus.filter(sku => (sku.size === size)).map(sku => sku.quantity).reduce((acc, quant) => {
+              for(var x = 1; x < (quant > 15 ? 15 : quant); x++) {
+                acc.push(x);
+              }
+              return acc;
+            }, [])}
+            title="QUANTITY"
+            callback={qtyDropdownCallback}/>
           </ButtonRow1>
           <ButtonRow2>
-            <Button height="4rem" width="70%">ADD TO BAG<FaPlus /></Button>
+            <Button
+              height="4rem"
+              width="70%"
+              onClick={cartClickHandler}
+              id="cartButton"
+              >ADD TO CART<FaPlus />
+            </Button>
             <Button height="4rem" width="3rem"><FaRegHeart/></Button>
           </ButtonRow2>
           <FeatureChecklist>

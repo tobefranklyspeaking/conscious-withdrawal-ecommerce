@@ -80,6 +80,7 @@ const loadingState = {
         setProductInfo(response.data)
       })
       .catch((error) => console.log(error));
+
       axios(`/products/${productID}/styles`)
       .then((response) => {
         setProductImage(response.data.results[0].photos[0].thumbnail_url)
