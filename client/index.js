@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from 'axios';
 import Shared from './components/shared/shared.jsx';
 import NavSearch from '/client/components/shared/NavSearchBar.jsx';
-
+import ModularCarousel from '/client/components/shared/Modular-Carousel.jsx'
 const App = () => {
 
   /**********************Not needed at this time***********************/

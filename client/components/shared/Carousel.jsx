@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-
+import ModularCarousel from './Modular-Carousel.jsx'
 //component styles
 const SlideWrapper = styled.div`
   width: 100%;
@@ -76,6 +76,7 @@ const Carousel = ({ urls, height }) => {
   return (
     <CarouselWrapper height={height}>
       <Arrow direction="Left" clickHandler={previousSlide}/>
+      <ModularCarousel orientation="column"/>
       <Slide url={urls[index]}/>
       <Arrow direction="Right" clickHandler={nextSlide}/>
     </CarouselWrapper>);
