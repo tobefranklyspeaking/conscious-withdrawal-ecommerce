@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import AddQuestionForm from '/client/components/q&a/subcomponents/AddQuestionForm.jsx';
+import axios from 'axios';
+
 const Modal = styled.div`
   position: fixed;
   background-color: hsla(0, 0%, 0%, 0.5);
@@ -9,34 +10,34 @@ const Modal = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 `;
 
 const ModalContent = styled.div`
+  display: relative;
   width: 80%;
   height: 70%;
   background-color: white;
 `;
 
 const ModalHeader = styled.div`
+  display: flex;
+  height: auto;
   padding: 10px;
-`;
-
-const ModalTitle = styled.div`
-  margin: 0;
 `;
 
 const ModalBody = styled.div`
+  display: flex;
   padding: 10px;
-  height: 50vh;
-  border-top: 1px solid #eee;
-  border bottom: 1px solid #eee;
+  height: 70%;
+  border-top: 1px solid lightgray;
+  border-bottom: 18px solid lightgray;
 `;
 
 const ModalFooter = styled.div`
-  display: relative;
+  display: flex;
   padding: 10px;
   height: auto;
 `;
@@ -47,12 +48,46 @@ const Button = styled.button`
   height: auto;
   width: auto;
   border: 1px solid black;
-  margin: 1rem 1rem 0 0;
+  margin-right: 1rem;
   padding: 1rem;
   font-size: .7rem;
 `;
 
 const AddQuestion = ({current, show, onClose}) => {
+  const [answer, updateAnswer] = useState('');
+  const [nickname, updateNickname] = useState('');
+  const [email, updateEmail] = useState('');
+
+  const onAnswerChange = (e) => {
+    updateAnswer(e);
+  }
+
+  const onNicknameChange = (e) => {
+    updateNickname(e);
+  }
+
+  const onEmailChange = (e) => {
+    updateEmail(e);
+  }
+
+  const onSubmit = (e) => {
+    const id = current.id;
+    console.log('why is this freaking out', id, nickname, email, answer)
+
+    axios.post(`qa/questions/`,
+    {
+      "body": answer,
+      "name": nickname,
+      "email": email,
+      "product_id": id
+    })
+    .then(res => {
+      onClose()
+      console.log('success')
+    })
+    .catch(err => console.log(err))
+  }
+
   if (!show) {
     return null;
   }
@@ -60,22 +95,23 @@ const AddQuestion = ({current, show, onClose}) => {
     <Modal onClick={onClose}>
       <ModalContent onClick={e => e.stopPropagation()}>
         <ModalHeader>
-          <h4 className="modal-title">Ask Your Question</h4>
-          <h3>About the <u>Product Name</u></h3>
+          <h1 className="modal-title">Ask Your Question</h1>
+          <h3 className="modal-title">About the {current.name}</h3>
         </ModalHeader>
         <ModalBody>
-          <AddQuestionForm />
-          <div>Your Question - mandatory</div>
-          <input/>
-          <div>Your Nickname - mandatory</div>
-          <input placeholder='jackson11!'/>
-          <div>Your Email - mandatory</div>
-          <input placeholder='Example: jack=@email.com'/>
+          <div>*Your Question</div>
+          <input onChange={e => onAnswerChange(e.target.value)}></input>
+          <div>*Your Nickname</div>
+          <input onChange={e => onNicknameChange(e.target.value)}></input>
+          <div>*Your Email</div>
+          <input onChange={e => onEmailChange(e.target.value)} placeholder='Example: jack@email.com'></input>
           <div>For authentication reasons, you will not be emailed</div>
+          {/* thumbnail should appear and max 5 */}
         </ModalBody>
         <ModalFooter className="modal-footer">
           <Button onClick={onClose} className="button">Cancel</Button>
-          <Button className="submit">Submit</Button>
+          <Button className="submit" onClick={() => onSubmit()}>Submit</Button>
+          <div>Page will close if successful submit occurs</div>
         </ModalFooter>
       </ModalContent>
     </Modal>
