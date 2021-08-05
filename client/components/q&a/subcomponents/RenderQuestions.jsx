@@ -4,7 +4,8 @@ import AddAnswer from './AddAnswer.jsx';
 import styled from 'styled-components';
 import Helpful from '/client/components/shared/Helpful.jsx';
 import Report from '/client/components/shared/Report.jsx';
-import ImageModal from './ImageModal.jsx'
+import ImageModal from './ImageModal.jsx';
+import Answers from './RenderAnswers.jsx';
 
 const Accordian = styled.div`
 `;
@@ -19,6 +20,7 @@ const Wrap = styled.div`
 const AnswerContainer = styled.div`
   margin-bottom: 3%;
 `;
+
 const Bold = styled.span`
   font-weight: bold;
 `;
@@ -31,15 +33,7 @@ const SpaceQ = styled.span`
   float: right;
 `;
 
-const SpaceA = styled.span`
-  font-weight: lighter;
-  font-size: 12px;
-  margin-bottom: 5px;
-  margin-left: 1rem;
-  cursor: pointer;
-`;
-
-const AnswerAdditions = styled.div`
+const QuestionAdditions = styled.div`
   font-weight: lighter;
   font-size: 13px;
   margin-bottom: 5px;
@@ -71,11 +65,6 @@ const LineB = styled.div`
   button {
 
   }
-`;
-
-const Details = styled.div`
-  margin-top: 5px;
-  margin-bottom: 5px;
 `;
 
 const Images = styled.span`
@@ -144,11 +133,13 @@ const HelpfulButton = styled.span`
   }
 `;
 
-const Blocks = ({ current, updateData, update }) => {
-  const [moreAnswers, setMoreAnswers] = useState(true);
+
+
+const Questions = ({ current, updateData, update }) => {
+  const [moreQuestions, setMoreQuestions] = useState(true);
   const [show, setShow] = useState(false);
   const [hide, setHide] = useState(true);
-  const [showImg, setShowImg] = useState(false);
+
 
   useEffect(() => {
     try {
@@ -159,7 +150,7 @@ const Blocks = ({ current, updateData, update }) => {
     }
   }, [current])
 
-  const Reported = ({hide}) => {
+  const Reported = ({ hide }) => {
     console.log('inside reported component within blocks', hide)
     if (hide === true) {
       return null;
@@ -170,7 +161,7 @@ const Blocks = ({ current, updateData, update }) => {
   const imgClickZoom = (each) => {
     console.log(each, show);
     return (
-      <ImageModal onClose={() => showImg(false)} current={each} show={show} style={{ cursor: 'pointer' }}/>
+      <ImageModal onClose={() => showImg(false)} current={each} show={show} style={{ cursor: 'pointer' }} />
     )
   }
 
@@ -185,7 +176,7 @@ const Blocks = ({ current, updateData, update }) => {
                   Q: {each.question_body}
                 </Bold>
                 <SpaceQ>
-                  <SpaceQ style={{ cursor: 'pointer' }} onClick={() => setShow(true)}><u>Add Answer</u>
+                  <SpaceQ style={{ cursor: 'pointer' }} onClick={() => setShow(true)} pass={() => setShow(true)}><u>Add Answer</u>
                   </SpaceQ>
                   <SpaceQ>|</SpaceQ>
                   <Wrapper>
@@ -203,83 +194,6 @@ const Blocks = ({ current, updateData, update }) => {
       })
     )
   }
-
-  const Answers = ({ current }) => {
-    let answers = current.answers;
-
-    return (
-      Object.keys(answers)
-        .sort((each, next) => {
-          let a = answers[each].helpfulness;
-          let b = answers[next].helpfulness;
-          if (a > b) {
-            return -1;
-          } else if (b < a) {
-            return 1;
-          } else return 0;
-        })
-        .map(each => {
-          let current = answers[each];
-          if (current.body !== undefined) {
-            return (
-              <div key={parseInt(each)}>
-                <AnswerAdditions>
-                  <LineA>
-                    <Bold> A: </Bold>
-                    {current.body}
-                  </LineA>
-                  <LineB >
-                    <span> by {current.answerer_name}, {moment(current.question_date).format('ll')} </span>
-                    <span> | </span>
-                    <HelpfulButton>
-                      <Helpful path={'/qa/questions'} id={parseInt(each)} helpfulness={current.helpfulness} />
-                      <span> | </span>
-                      <Report  path={'/qa/questions'} id={parseInt(each)}/>
-
-                    </HelpfulButton>
-                  </LineB>
-                  {Object.keys(current.photos).length > 0 && Object.keys(current.photos).length < 6
-                    ? <LineB>
-                      <div style={{ margin: '0.5rem' }}>Attached Photos: </div>
-                      <Images>
-                          {current.photos
-                            ? current.photos.map((each, index) => {
-                              return (
-                                <span key={index}>
-                                  <Img src={each} onClick={(e) => setShowImg(true)} style={{ cursor: 'pointer' }}/>
-                                  <ImageModal onClose={() => setShowImg(false)} current={each} show={showImg} style={{ cursor: 'pointer' }}/>
-                                </span>
-                              )})
-                            : '#'}
-                      </Images>
-                      <div>
-                        <span> by {current.answerer_name}, {moment(current.question_date).format('ll')} </span>
-                        <span> | </span>
-                        <HelpfulButton >
-                          <Helpful path={'/qa/questions'} id={parseInt(each)} helpfulness={current.helpfulness} />
-                        <span> | </span>
-                          <Report path={'/qa/questions'} id={parseInt(each)}/>
-                        </HelpfulButton >
-                      </div>
-                    </LineB>
-                    : null}
-                </AnswerAdditions>
-              </div>
-            )
-          } else {
-            return (
-              each.map(item => {
-                return (
-                  <div>{item}</div>
-                )
-              })
-            )
-          }
-        })
-    )
-  }
-
-
   return (
     current && (
       <div>
@@ -289,4 +203,4 @@ const Blocks = ({ current, updateData, update }) => {
   )
 }
 
-export default Blocks;
+export default Questions;

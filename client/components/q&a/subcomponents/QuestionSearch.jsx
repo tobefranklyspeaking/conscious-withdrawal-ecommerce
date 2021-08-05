@@ -2,7 +2,7 @@ import React, { useState, useEffect, IconContext } from 'react';
 import styled from 'styled-components';
 import { CgSearch } from 'react-icons/cg';
 import axios from 'axios';
-import Blocks from './Blocks.jsx';
+import Questions from './RenderQuestions.jsx';
 
 const SearchBarStyle = styled.input`
   width: 100%;
@@ -71,7 +71,7 @@ const QASearch = ({ current }) => {
   const handleQuestion = (e) => {
     // setSearch(e.question_);
     // console.log(e);
-    Blocks(e);
+    Questions(e);
   }
 
   const onChange = (searchText) => {
@@ -95,7 +95,7 @@ const QASearch = ({ current }) => {
       </Search>
       <List name='dropdown'>
         <List>
-          <Blocks current={allQuestions} updateData={updateData} update={update} />
+          <Questions current={allQuestions} updateData={updateData} update={update} />
         </List>
         {search && (
           allQuestions.filter(text => {
