@@ -1,61 +1,66 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Modal = styled.div`
   position: fixed;
-  background-color: rgba(0,0,0,1)
+  background-color: hsla(0, 0%, 0%, 0.5);
   box-shadow: 5px, 10px;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 `;
 
 const ModalContent = styled.div`
-  width: 80vh;
-  height: 70vh;
+  display: relative;
+  width: 50%;
+  height: 40%;
   background-color: white;
 `;
 
-const ModalHeader = styled.div`
-  padding: 10px;
-`;
-
-const ModalTitle = styled.div`
-  margin: 0;
-`;
-
 const ModalBody = styled.div`
+  display: flex;
   padding: 10px;
-  height: 50vh;
-  border-top: 1px solid #eee;
-  border bottom: 1px solid #eee;
+  height: 70%;
+  border-top: 1px solid lightgray;
+  border-bottom: 18px solid lightgray;
 `;
 
-const ModalFooter = styled.div`
-  padding: 10px;
+const Image = styled.img`
+  display: flex;
+  max-height: 50%;
+  max-width: 50%;
+  height: auto;
+  width: auto;
 `;
-const ImageModal = ({question, show, onClose}) => {
+
+const Button = styled.button`
+  cursor: pointer;
+  background: white;
+  height: auto;
+  width: auto;
+  border: 1px solid black;
+  margin-right: 1rem;
+  padding: 1rem;
+  font-size: .7rem;
+`;
+
+const ImageModal = ({current, show, onClose}) => {
+
   if (!show) {
     return null;
   }
   return (
     <Modal onClick={onClose}>
-      <ModalContent onClick={e => e.stopPropagation()}>
-        <ModalHeader>
-          <h4 className="modal-title">Add Answer</h4>
-        </ModalHeader>
-        <ModalBody>
-          Image
-        </ModalBody>
-        <ModalFooter className="modal-footer">
-          <button onClick={onClose} className="button">Cancel</button>
-          <button className="submit">Submit</button>
-        </ModalFooter>
-      </ModalContent>
+      {/* <ModalContent>
+          <ModalBody>
+            <Image src={current}/>
+          </ModalBody>
+      </ModalContent> */}
     </Modal>
   )
 }

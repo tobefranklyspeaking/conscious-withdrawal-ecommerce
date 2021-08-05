@@ -4,6 +4,7 @@ import AddAnswer from './AddAnswer.jsx';
 import styled from 'styled-components';
 import Helpful from '/client/components/shared/Helpful.jsx';
 import Report from '/client/components/shared/Report.jsx';
+import ImageModal from './ImageModal.jsx'
 
 const Accordian = styled.div`
 `;
@@ -147,7 +148,7 @@ const Blocks = ({ current, updateData, update }) => {
   const [moreAnswers, setMoreAnswers] = useState(true);
   const [show, setShow] = useState(false);
   const [hide, setHide] = useState(true);
-
+  const [showImg, setShowImg] = useState(false);
 
   useEffect(() => {
     try {
@@ -158,13 +159,20 @@ const Blocks = ({ current, updateData, update }) => {
     }
   }, [current])
 
-const Reported = ({hide}) => {
-  console.log('inside reported component within blocks', hide)
-  if (hide === true) {
-    return null;
+  const Reported = ({hide}) => {
+    console.log('inside reported component within blocks', hide)
+    if (hide === true) {
+      return null;
+    }
+    return <div>Reported</div>
   }
-  return <div>Reported</div>
-}
+
+  const imgClickZoom = (each) => {
+    console.log(each, show);
+    return (
+      <ImageModal onClose={() => showImg(false)} current={each} show={show} style={{ cursor: 'pointer' }}/>
+    )
+  }
 
   const Questions = ({ current, state }) => {
     return (
@@ -177,7 +185,7 @@ const Reported = ({hide}) => {
                   Q: {each.question_body}
                 </Bold>
                 <SpaceQ>
-                  <SpaceQ style={{ cursor: 'pointer' }} background-color='gray' onClick={() => setShow(true)}><u>Add Answer</u>
+                  <SpaceQ style={{ cursor: 'pointer' }} onClick={() => setShow(true)}><u>Add Answer</u>
                   </SpaceQ>
                   <SpaceQ>|</SpaceQ>
                   <Wrapper>
@@ -234,11 +242,15 @@ const Reported = ({hide}) => {
                     ? <LineB>
                       <div style={{ margin: '0.5rem' }}>Attached Photos: </div>
                       <Images>
-                        <span>
                           {current.photos
-                            ? current.photos.map((each, index) => <Img key={index} src={each} />)
+                            ? current.photos.map((each, index) => {
+                              return (
+                                <span key={index}>
+                                  <Img src={each} onClick={(e) => setShowImg(true)} style={{ cursor: 'pointer' }}/>
+                                  <ImageModal onClose={() => setShowImg(false)} current={each} show={showImg} style={{ cursor: 'pointer' }}/>
+                                </span>
+                              )})
                             : '#'}
-                        </span>
                       </Images>
                       <div>
                         <span> by {current.answerer_name}, {moment(current.question_date).format('ll')} </span>
