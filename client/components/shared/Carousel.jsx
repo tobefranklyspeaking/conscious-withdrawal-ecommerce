@@ -8,6 +8,7 @@ const SlideWrapper = styled.div`
   width: 100%;
   height: 100%;
   padding: 5rem;
+  z-index: 998;
   & > img {
     width: 100%;
     height: 100%;
@@ -15,17 +16,18 @@ const SlideWrapper = styled.div`
   }
 `;
 const LeftArrowWrapper = styled.div`
-  height: 15px;
-  width: 15px;
+  height: 20px;
+  width: 20px;
   /* position: absolute;
   top: 50%; */
 `;
 const RightArrowWrapper = styled.div`
-  height: 15px;
-  width: 15px;
+  height: 20px;
+  width: 20px;
   /* position: absolute;
   top: 50%;
-  left: calc(100% - 15px); */
+  left: calc(100% - 20px); */
+  margin-right: 1rem;
 `;
 const CarouselWrapper = styled.div`
   position: relative;
@@ -38,11 +40,21 @@ const CarouselWrapper = styled.div`
 const SideSlideWrapper = styled.div`
   width: 7rem;
   height: 7rem;
+  margin-right: 2rem;
   & > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+`;
+const Zoomed = styled.div`
+  /*background-image: url(${props => props.url}); */
+  position: absolute;
+  width: 80vh;
+  height: 80vh;
+  border: 1px solid black;
+  z-index: 999;
+  background-color: coral;
 `;
 
 //slide subcomponent - image itself
@@ -58,20 +70,24 @@ const Arrow = ({ direction, clickHandler}) => {
   return (
     direction === 'Left' ?
       (<LeftArrowWrapper onClick={clickHandler}>
-        <AiOutlineArrowLeft />
+        <AiOutlineArrowLeft size={'1.5em'}/>
       </LeftArrowWrapper>) :
       (<RightArrowWrapper onClick={clickHandler}>
-        <AiOutlineArrowRight />
+        <AiOutlineArrowRight size={'1.5em'}/>
       </RightArrowWrapper>)
     );
 }
+
+const ZoomedSlide = ({url}) => {
+  return (<Zoomed url={url}/>);
+};
 
 /************ PRIMARY COMPONENT HERE ************/
 const Carousel = ({ urls, height, thumbnails}) => {
   //state: index of images based on current item
   const [index, setIndex] = useState(0);
   const [modComponents, setModComponents] = useState([]);
-  const[showZoom, setShowZoom] = useState(false);
+  const [showZoom, setShowZoom] = useState(false);
 
   useEffect(() => {
     let newThumbnails = thumbnails.map((url,i) => (<SideSlideWrapper key={i}><img src={url}/></SideSlideWrapper>))
@@ -92,7 +108,9 @@ const Carousel = ({ urls, height, thumbnails}) => {
     }
   };
 
+
   return (
+    <>
     <CarouselWrapper height={height}>
       <ModularCarousel orientation="column" components={modComponents}/>
       <Arrow direction="Left" clickHandler={previousSlide}/>
@@ -102,7 +120,11 @@ const Carousel = ({ urls, height, thumbnails}) => {
       onMouseLeave={(e) => {setShowZoom(false)}}
       />
       <Arrow direction="Right" clickHandler={nextSlide}/>
-    </CarouselWrapper>);
-};
+    </CarouselWrapper>
+    {/* {showZoom && (<ZoomedSlide />)} */}
+    </>
+    );
 
+
+}
 export default Carousel;

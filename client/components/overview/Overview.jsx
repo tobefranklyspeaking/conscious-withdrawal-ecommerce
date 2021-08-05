@@ -161,8 +161,6 @@ const Overview = ({ current }) => {
           updateStyles(arr.results);
           updateCurrentStyle(arr.results[0]);
           updateFeatures(current.features);
-          console.log('current obj here!', current);
-          console.log('current Style here!', arr.results[0]);
 
           let newMeta = await fetch(`/reviews/meta?product_id=${current.id}`).then(data => data.json());
           let avg = getAverageRating(newMeta.ratings);
@@ -240,7 +238,6 @@ const Overview = ({ current }) => {
   const reviewScroller = (e) => {
     e.preventDefault();
     let elt = document.getElementById('reviews');
-    console.log(elt);
     elt.scrollIntoView();
   };
 
