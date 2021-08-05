@@ -1,52 +1,66 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import Stars from '../../shared/Stars.jsx';
 
 const OverallRatingWrapper = styled.div`
-
+display: inline-flex;
+justify-content: space-between;
+border: 1px solid black;
 `;
-const RatingOpt = styled.span`
-  display: inline-block;
-  align: left;
+const RatingOpt = styled.div`
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
 `;
 
-const RatingDesc = styled.span`
-  display: inline-block;
-  align: rigth;
+const RatingDesc = styled.div`
+  display: flex;
+flex-direction: column;
+  border: 1px solid black;
 `;
 
 const ProductRec = styled.div`
+border: 1px solid black;
 `;
 
 const ProductChars = styled.div`
+border: 1px solid black;
 `;
 
 const CharInput = styled.input`
 display: block;
 margin: 0 auto;
+border: 1px solid black;
 `;
 
 const CharLabel = styled.label`
 display: inline-block;
+border: 1px solid black;
 `;
 
 const ReviewSummary = styled.div`
+border: 1px solid black;
 `;
 
 const ReviewBody = styled.div`
+border: 1px solid black;
 `;
 
 const ReviewPhotos = styled.div`
+border: 1px solid black;
 `;
 
 const ReviewName = styled.div`
+border: 1px solid black;
 `;
 
 const ReviewEmail = styled.div`
+border: 1px solid black;
 `;
 
 
-const NewReviewForm = ({ charOptions, id }) => {
+const NewReviewForm = ({ charOptions, id, onClose }) => {
   //console.log('hgjvh', charOptions);
   const [sizeID, setSizeID] = useState(null);
   const [widthID, setWidthID] = useState(null);
@@ -55,8 +69,8 @@ const NewReviewForm = ({ charOptions, id }) => {
   const [lengthID, setLengthID] = useState(null);
   const [fitID, setFitID] = useState(null);
   const [currentOverallRating, setCurrentOverallRating] = useState(0);
-  const [currentSummary, setCurrentSummary] = useState('');
-  const [currentBody, setCurrentBody] = useState('');
+  const [currentSummary, setCurrentSummary] = useState("");
+  const [currentBody, setCurrentBody] = useState("");
   const [currentRecommended, setCurrentRecommended] = useState(true)
   const [size, setSize] = useState(0);
   const [width, setWidth] = useState(0);
@@ -64,13 +78,13 @@ const NewReviewForm = ({ charOptions, id }) => {
   const [quality, setQuality] = useState(0);
   const [length, setLength] = useState(0);
   const [fit, setFit] = useState(0);
-  const [currentPhotos, setCurrentPhotos] = useState('');
-  const [currentName, setCurrentName] = useState('');
-  const [currentEmail, setCurrentEmail] = useState('');
+  const [currentPhotos, setCurrentPhotos] = useState("");
+  const [currentName, setCurrentName] = useState("");
+  const [currentEmail, setCurrentEmail] = useState("");
 
   useEffect(() => {
     if (charOptions.Size) {
-      setSizeID(charOptions.Size.id);
+      setSizeID(`${charOptions.Size.id}`);
     }
     if (charOptions.Width) {
       setWidthID(charOptions.Width.id);
@@ -93,6 +107,7 @@ const NewReviewForm = ({ charOptions, id }) => {
 
   let handleOverallRating = (e) => {
     setCurrentOverallRating(e.target.value);
+    console.log('does starts work', e);
   };
   let handleSummary = (e) => {
     setCurrentSummary(e.target.value);
@@ -134,105 +149,59 @@ const NewReviewForm = ({ charOptions, id }) => {
 
 
   let handleSubmit = (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     let currentChars = {};
 
     if (sizeID !== null) {
-      currentChars[sizeID] = size;
+      currentChars[`${sizeID}`] = Number(size);
     }
     if (widthID !== null) {
-      currentChars[widthID] = width;
+      currentChars[`${widthID}`] =  Number(width);
     }
     if (comfortID !== null) {
-      currentChars[comfortID] = comfort;
+      currentChars[`${comfortID}`] =  Number(comfort);
     }
     if (qualityID !== null) {
-      currentChars[qualityID] = quality;
+      currentChars[`${qualityID}`] =  Number(quality);
     }
     if (lengthID !== null) {
-      currentChars[lengthID] = length;
+      currentChars[`${lengthID}`] =  Number(length);
     }
     if (fitID !== null) {
-      currentChars[fitID] = fit;
+      currentChars[`${fitID}`] =  Number(fit);
     }
-    //console.log('d', currentChars);
-    let submitData = {};
-    submitData['product_id'] = id;
-    submitData['rating'] = currentOverallRating;
-    submitData['summary'] = currentSummary;
-    submitData['body'] = currentBody;
-    submitData['recommend'] = currentRecommended;
-    submitData['name'] = currentName;
-    submitData['email'] = currentEmail;
-    submitData['photos'] = [];
-    submitData['characteristics'] = currentChars;
-    //  submitData.name = currentName;
-    //  submitData.email = currentEmail;
-    //  submitData.photos = [currentPhotos];
-    //  submitData.characteristics = currentChars;
+    console.log('d', currentChars);
+    let submitData = {
+      "product_id": id,
+      "rating": Number(currentOverallRating),
+      "summary": currentSummary,
+      "body": currentBody,
+      "recommend": currentRecommended,
+      "name": currentName,
+      "email": currentEmail,
+      "photos": ["photo"],
+      "characteristics": currentChars
+    };
 
     console.log('data-submit', submitData);
 
+       axios.post('/reviews', submitData)
+       .then((res) => {
+         console.log('yay it works');
+       })
+       .catch((err) => {console.log('error: ', err)});
 
 
-       axios.post('/reviews', {
-          'product_id': id,
-          'rating': currentOverallRating,
-          'summary': currentSummary,
-          'body': currentBody,
-          'recommend': currentRecommended,
-          'name': currentName,
-          'email': currentEmail,
-          'photos': [],
-          'characteristics': currentChars
-        });
+       onClose();
 
-    // axios.post('/reviews', submitData)
-    // .then((res) => console.log(res));
-    // {
-    //   product_id: id,
-    //   rating: currentOverallRating,
-    //   summary: currentSummary,
-    //   body: currentBody,
-    //   recommend: currentRecommended,
-    //   name: currentName,
-    //   email: currentEmail,
-    //   photos: [],
-    //   characteristics: currentChars
-    // }
-    // console.log('successful post data: ', res);
   };
 
   //console.log('curr', currentOverallRating);
   return (
     <form onSubmit={handleSubmit}>
-      <OverallRatingWrapper onChange={handleOverallRating}>
+      <OverallRatingWrapper >
         <RatingOpt>
-          <p> *Overall Rating: </p>
-          <label htmlFor='oneStar'>
-            <input type='radio' id='oneStar' name='chooseStarRating' value='1' required />
-            1 star
-          </label><br></br>
-
-          <label htmlFor='twoStars'>
-            <input type='radio' id='twoStars' name='chooseStarRating' value='2' />
-            2 Stars
-          </label><br></br>
-
-          <label htmlFor='threeStars'>
-            <input type='radio' id='threeStars' name='chooseStarRating' value='3' />
-            3 Stars
-          </label><br></br>
-
-          <label htmlFor='fourStars'>
-            <input type='radio' id='fourStars' name='chooseStarRating' value='4' />
-            4 Stars
-          </label><br></br>
-
-          <label htmlFor='fiveStars'>
-            <input type='radio' id='fiveStars' name='chooseStarRating' value='5' />
-            5 Stars
-          </label>
+      <Stars setCurrentOverallRating={setCurrentOverallRating}/>
         </RatingOpt>
         <RatingDesc>
           <p>1 star = 'Poor'</p>
@@ -512,3 +481,33 @@ const NewReviewForm = ({ charOptions, id }) => {
 
 
 export default NewReviewForm;
+
+/*
+        <RatingOpt>
+          <p> *Overall Rating: </p>
+          <label htmlFor='oneStar'>
+            <input type='radio' id='oneStar' name='chooseStarRating' value='1' required />
+            1 star
+          </label><br></br>
+
+          <label htmlFor='twoStars'>
+            <input type='radio' id='twoStars' name='chooseStarRating' value='2' />
+            2 Stars
+          </label><br></br>
+
+          <label htmlFor='threeStars'>
+            <input type='radio' id='threeStars' name='chooseStarRating' value='3' />
+            3 Stars
+          </label><br></br>
+
+          <label htmlFor='fourStars'>
+            <input type='radio' id='fourStars' name='chooseStarRating' value='4' />
+            4 Stars
+          </label><br></br>
+
+          <label htmlFor='fiveStars'>
+            <input type='radio' id='fiveStars' name='chooseStarRating' value='5' />
+            5 Stars
+          </label>
+        </RatingOpt>
+*/
