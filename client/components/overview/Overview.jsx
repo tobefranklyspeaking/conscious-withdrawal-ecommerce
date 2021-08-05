@@ -204,17 +204,38 @@ const Overview = ({ current }) => {
   }
 
   const cartClickHandler = (e) => {
+    //edge cases: size not selected or sku not in stock
     if (!size) {
       sizeRef.current.click();
       alert('Please select size.')
-    } else if(size) {
-      let inStock = skus.filter(sku => (sku.size === size))[0].quantity;
-      if(!inStock) {
-        document.getElementById('cartButton').remove();
-      }
+      return;
     }
-
-
+    let currentSku = skus.filter(sku => (sku.size === size))
+    let inStock = currentSku[0].quantity;
+    if(!inStock) {
+      document.getElementById('cartButton').remove();
+      return;
+    }
+    //most requests should fall through to here
+    let body = {
+      sku_id: Object.keys(currentStyle.skus).find(key => currentStyle.skus[key] === currentSku[0]),
+      count: qty
+    }
+    fetch('/cart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    }).then((res) => {
+      if(res.status === (200 || 201)) {
+        alert('successfully added to cart!');
+      } else {
+        console.error('err posting to cart', res);
+      }
+    }).catch((err) => {
+      console.error('err posting to cart', err);
+    });
   }
 
   return (
