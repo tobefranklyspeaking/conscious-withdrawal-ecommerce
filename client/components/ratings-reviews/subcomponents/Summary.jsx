@@ -6,15 +6,31 @@ import Stars from '../../shared/Stars.jsx';
 import RatingBreakdown from './Rating-Breakdown.jsx';
 
 
-const RatingSummaryNum = styled.h1`
-  display: inline;
-  font-size: 55px;
+const RatingSummaryNum = styled.div`
+  display: inline-block;
+  font-size: 80px;
   font-weight: bold;
+`;
+
+const SummaryWrapper = styled.div`
+margin-bottom: 10px;
+`;
+const BreakdownWrapper = styled.div`
 
 `;
 
-const Wrapper = styled.div`
+const StarWrapper = styled.div`
+display: inline-block;
+margin-top: 5px;
+vertical-align: top;
+`;
 
+const RecommendDiv = styled.div`
+width: 100%;
+text-align: justify;
+margin-top: 5px;
+margin-left: 5px;
+font-size: 14px;
 `;
 
 const Summary = ({ id, setIsFiltered }) => {
@@ -150,12 +166,14 @@ const Summary = ({ id, setIsFiltered }) => {
 
   return (
     <>
-    <Wrapper>
+    <SummaryWrapper className='SummaryWrapper'>
     <RatingSummaryNum>{averageRating}  </RatingSummaryNum>
-    <span><Stars currentRating={averageRating}> </Stars></span>
-    <h5>{percentRecommended}% of reviews recommend this product</h5>
-    </Wrapper>
-    <RatingBreakdown ratings={ratings} numRatings={totalRatings()} setIsFiltered={setIsFiltered}/>
+    <StarWrapper><Stars currentRating={averageRating}> </Stars></StarWrapper>
+    <RecommendDiv>{percentRecommended}% of reviews recommend this product</RecommendDiv>
+    </SummaryWrapper>
+    <BreakdownWrapper className='BreakdownWrapper'>
+    <RatingBreakdown ratings={ratings} numRatings={totalRatings()} setIsFiltered={setIsFiltered} characteristics={characteristics}/>
+    </BreakdownWrapper>
     </>
   );
 
