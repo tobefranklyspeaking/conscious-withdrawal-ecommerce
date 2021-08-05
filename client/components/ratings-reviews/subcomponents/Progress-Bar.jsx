@@ -3,12 +3,12 @@ import styled from "styled-components";
 
 
 const ContainerStyles = styled.div`
-  height: 10px;
+  order: 2;
+  height: 50%;
   width: 60%;
   background-color: grey;
-  margin: 8px;
+  margin: 0px;
   float: right;
-
 `;
 
 const FillerStyles = styled.div`
@@ -16,7 +16,7 @@ const FillerStyles = styled.div`
   width: ${props => props.per}%;
   background-color: green;
   text-align: right;
-
+  border: 1px solid black;
 `;
 
 const ProgressBar = ({percentage}) => {
