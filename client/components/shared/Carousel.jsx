@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import ModularCarousel from './Modular-Carousel.jsx'
 //component styles
+
 const SlideWrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -45,10 +46,10 @@ const SideSlideWrapper = styled.div`
 `;
 
 //slide subcomponent - image itself
-const Slide = ({ url }) => {
+const Slide = ({ url, onMouseEnter, onMouseLeave}) => {
   return (
     <SlideWrapper>
-      <img src={url} alt="photo of clothing"/>
+      <img src={url} alt="photo of clothing" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}/>
     </SlideWrapper>);
 };
 
@@ -70,6 +71,8 @@ const Carousel = ({ urls, height, thumbnails}) => {
   //state: index of images based on current item
   const [index, setIndex] = useState(0);
   const [modComponents, setModComponents] = useState([]);
+  const[showZoom, setShowZoom] = useState(false);
+
   useEffect(() => {
     let newThumbnails = thumbnails.map((url,i) => (<SideSlideWrapper key={i}><img src={url}/></SideSlideWrapper>))
     setModComponents(newThumbnails);
@@ -93,7 +96,11 @@ const Carousel = ({ urls, height, thumbnails}) => {
     <CarouselWrapper height={height}>
       <ModularCarousel orientation="column" components={modComponents}/>
       <Arrow direction="Left" clickHandler={previousSlide}/>
-      <Slide url={urls[index]}/>
+      <Slide
+      url={urls[index]}
+      onMouseEnter={(e) => {setShowZoom(true)}}
+      onMouseLeave={(e) => {setShowZoom(false)}}
+      />
       <Arrow direction="Right" clickHandler={nextSlide}/>
     </CarouselWrapper>);
 };
