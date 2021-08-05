@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
 
@@ -8,37 +9,40 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineArrowUp, AiOutlineArr
 const LeftArrowWrapper = styled.div`
   height: 15px;
   width: 15px;
-  position: absolute;
-  top: 50%;
 `;
 const RightArrowWrapper = styled.div`
   height: 15px;
   width: 15px;
-  position: absolute;
-  top: 50%;
-  left: calc(100% - 15px);
 `;
 const UpArrowWrapper = styled.div`
   height: 15px;
   width: 15px;
-  position: absolute;
-  left: 50%;
 `;
 const DownArrowWrapper = styled.div`
   height: 15px;
   width: 15px;
-  position: absolute;
-  top: calc(100% - 15px);
-  left: 50%;
 `;
 
+const SampleCard = styled.div`
+  width: 8rem;
+  height: 8rem;
+  border: 1px solid black;
+`;
+
+const defaultComponents = [
+  <SampleCard />,
+  <SampleCard />,
+  <SampleCard />
+];
 
 
-const mCarousel = ({ components=[], orientation='row'}) => {
+const ModularCarousel = ({ components=defaultComponents, orientation='row'}) => {
   //this style inside component to allow for passing props
   const CarouselWrapper = styled.div`
     display: flex;
     flex-direction: ${orientation};
+    align-items: center;
+    justify-content: center;
   `;
 
   //renders right set of arrows based on orientation string value
@@ -54,4 +58,4 @@ const mCarousel = ({ components=[], orientation='row'}) => {
   </CarouselWrapper>);
 };
 
-export default mCarousel;
+export default ModularCarousel;
