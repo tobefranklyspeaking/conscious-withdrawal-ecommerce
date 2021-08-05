@@ -6,29 +6,17 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineArrowUp, AiOutlineArr
 //higher order component: pass it an array of components to render, as well as an orientation ('row' or 'column')
 
 //necessary styles
-const LeftArrowWrapper = styled.div`
+const ArrowWrapper = styled.div`
   height: 15px;
   width: 15px;
 `;
-const RightArrowWrapper = styled.div`
-  height: 15px;
-  width: 15px;
-`;
-const UpArrowWrapper = styled.div`
-  height: 15px;
-  width: 15px;
-`;
-const DownArrowWrapper = styled.div`
-  height: 15px;
-  width: 15px;
-`;
-
 const SampleCard = styled.div`
   width: 8rem;
   height: 8rem;
   border: 1px solid black;
 `;
 
+//test data
 const defaultComponents = [
   <SampleCard />,
   <SampleCard />,
@@ -36,7 +24,7 @@ const defaultComponents = [
 ];
 
 
-const ModularCarousel = ({ components=defaultComponents, orientation='row'}) => {
+const ModularCarousel = ({ components=defaultComponents, orientation='row', clickHandler}) => {
   //this style inside component to allow for passing props
   const CarouselWrapper = styled.div`
     display: flex;
@@ -48,13 +36,9 @@ const ModularCarousel = ({ components=defaultComponents, orientation='row'}) => 
   //renders right set of arrows based on orientation string value
   return (
   <CarouselWrapper>
-    {orientation === 'row' ?
-    <LeftArrowWrapper><AiOutlineArrowLeft /></LeftArrowWrapper> :
-    <UpArrowWrapper><AiOutlineArrowUp /></UpArrowWrapper>}
+    <ArrowWrapper>{orientation === 'row' ? <AiOutlineArrowLeft /> : <AiOutlineArrowUp />}</ArrowWrapper>
     {components}
-    {orientation === 'row' ?
-    <RightArrowWrapper><AiOutlineArrowRight /></RightArrowWrapper> :
-    <DownArrowWrapper><AiOutlineArrowDown /></DownArrowWrapper>}
+    <ArrowWrapper>{orientation === 'row' ? <AiOutlineArrowRight /> : <AiOutlineArrowDown />}</ArrowWrapper>
   </CarouselWrapper>);
 };
 
