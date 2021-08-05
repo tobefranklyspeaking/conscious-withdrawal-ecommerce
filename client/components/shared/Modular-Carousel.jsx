@@ -29,6 +29,10 @@ const ModularCarousel = ({ components=defaultComponents, orientation='row', coun
   //state for which components out of the total components prop to display
   const [displayed, updateDisplayed] = useState(components.slice(0, count));
 
+  useEffect(() => {
+    updateDisplayed(components.slice(0, count));
+  }, [components])
+
   //this style inside component to allow for passing props
   const CarouselWrapper = styled.div`
     display: flex;
