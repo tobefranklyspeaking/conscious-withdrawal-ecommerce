@@ -28,7 +28,7 @@ function Stars({ currentRating , setCurrentOverallRating }) {
               type='radio'
               name='rating'
               value={ratingValue}
-              onClick={(e) => {setRating(currentRating || ratingValue); setCurrentOverallRating(ratingValue);}}
+              onClick={(e) => {setRating(currentRating || ratingValue); if(setCurrentOverallRating) {setCurrentOverallRating(ratingValue);}}}
               />
             <Star
               className='star'

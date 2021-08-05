@@ -8,6 +8,7 @@ import ReviewDropdown from '../shared/ReviewDropdown.jsx';
 import Stars from '../shared/Stars.jsx';
 import Summary from './subcomponents/Summary.jsx';
 import NewReview from './subcomponents/NewReview.jsx';
+import Reviewbody from './subcomponents/Reviewbody.jsx';
 import { FaCheck } from 'react-icons/fa'
 
 //--------------------------------STYLED COMPONENTS----------------------------------------------//
@@ -122,13 +123,13 @@ margin: .2rem 0rem;
 font-size: 20px;
 `;
 
-const ReviewBody = styled.div`
-font-weight: lighter;
-justify-content: left;
-text-align: left;
-margin: .2rem 0rem;
-font-size: 12px;
-`;
+// const ReviewBody = styled.div`
+// font-weight: lighter;
+// justify-content: left;
+// text-align: left;
+// margin: .2rem 0rem;
+// font-size: 12px;
+// `;
 
 const ReviewRec = styled.div`
 text-align: left;
@@ -193,7 +194,7 @@ font-size: 12px;
 `;
 
 const Ratings = ({ current }) => {
-  // console.log('kbdkhb', current.id);
+   //console.log('kbdkhb', current);
   //--------------------------------STATE----------------------------------------------//
 
   const [reviews, setReviews] = useState([]);
@@ -266,7 +267,7 @@ const Ratings = ({ current }) => {
   }
 
   let finalReviews = display(filteredReviews, reviewCount);
-  //console.log('should equal should be displayed', finalReviews);
+  console.log('should equal should be displayed', finalReviews);
 
   //--------------------------------RETURN----------------------------------------------//
   if (reviews.length === 0) {
@@ -304,7 +305,7 @@ const Ratings = ({ current }) => {
                   <User>{review.reviewer_name}, {moment(review.date).format('ll')}</User>
                 </StarUser>
                 <ReviewSummary key={index}>{review.summary}</ReviewSummary>
-                <ReviewBody>{review.body}</ReviewBody>
+                <Reviewbody body={review.body} photos={review.photos}/>
                 {(review.recommend === true) &&
                 <ReviewRec><FaCheck /> I recommend this product</ReviewRec>}
                 {(review.response !== null && review.response.length > 0) &&

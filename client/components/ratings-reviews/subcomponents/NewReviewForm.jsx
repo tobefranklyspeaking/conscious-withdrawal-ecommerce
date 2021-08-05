@@ -4,19 +4,19 @@ import axios from 'axios';
 import Stars from '../../shared/Stars.jsx';
 
 const OverallRatingWrapper = styled.div`
-display: flex;
-
+display: inline-flex;
+justify-content: space-between;
 border: 1px solid black;
 `;
-const RatingOpt = styled.span`
-  display: inline-block;
-  align: left;
+const RatingOpt = styled.div`
+  display: flex;
+  align-items: center;
   border: 1px solid black;
 `;
 
-const RatingDesc = styled.span`
-  display: inline-block;
-  align: right;
+const RatingDesc = styled.div`
+  display: flex;
+flex-direction: column;
   border: 1px solid black;
 `;
 
@@ -182,19 +182,6 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
       "photos": ["photo"],
       "characteristics": currentChars
     };
-    // submitData['product_id'] = id;
-    // submitData['rating'] = Number(currentOverallRating);
-    // submitData['summary'] = currentSummary;
-    // submitData['body'] = currentBody;
-    // submitData['recommend'] = currentRecommended;
-    // submitData['name'] = currentName;
-    // submitData['email'] = currentEmail;
-    // submitData['photos'] = [];
-    // submitData['characteristics'] = currentChars;
-    //  submitData.name = currentName;
-    //  submitData.email = currentEmail;
-    //  submitData.photos = [currentPhotos];
-    //  submitData.characteristics = currentChars;
 
     console.log('data-submit', submitData);
 
@@ -205,57 +192,8 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
        .catch((err) => {console.log('error: ', err)});
 
 
-      //  axios({
-      //   method: 'post',
-      //   url: '/reviews',
-      //   data: submitData
-      // });
-
        onClose();
 
-
-        // {
-        //   "product_id": id,
-        //   "rating": Number(currentOverallRating),
-        //   "summary": currentSummary,
-        //   "body": currentBody,
-        //   "recommend": currentRecommended,
-        //   "name": currentName,
-        //   "email": currentEmail,
-        //   "photos": [],
-        //   "characteristics": currentChars
-        // }
-
-      // axios.post('/reviews', submitData)
-      //   .then((res) => {
-      //     console.log('res', res);
-      //   });
-
-    // axios.post('/reviews', submitData)
-    // .then((res) => console.log(res));
-    // {
-    //   product_id: id,
-    //   rating: currentOverallRating,
-    //   summary: currentSummary,
-    //   body: currentBody,
-    //   recommend: currentRecommended,
-    //   name: currentName,
-    //   email: currentEmail,
-    //   photos: [],
-    //   characteristics: currentChars
-    // }
-    // console.log('successful post data: ', res);
-    // {
-    //   'product_id': id,
-    //   'rating': currentOverallRating,
-    //   'summary': currentSummary,
-    //   'body': currentBody,
-    //   'recommend': currentRecommended,
-    //   'name': currentName,
-    //   'email': currentEmail,
-    //   'photos': [],
-    //   'characteristics': currentChars
-    // }
   };
 
   //console.log('curr', currentOverallRating);

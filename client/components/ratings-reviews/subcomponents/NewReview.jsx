@@ -69,10 +69,10 @@ const NewReview = ({current, show, onClose}) => {
     <Modal onClick={onClose}>
       <ModalContent onClick={e => e.stopPropagation()}>
         <ModalHeader>
-          <h4 className="modal-title">Add Review</h4>
+          <h4 className="modal-title">Write Your Review</h4>
         </ModalHeader>
         <ModalBody>
-          Add Forms Here
+          About the {current.name}
           <NewReviewForm charOptions={charOptions} id={current.id} onClose={onClose}/>
         </ModalBody>
         <ModalFooter className="modal-footer">
