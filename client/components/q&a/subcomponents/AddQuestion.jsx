@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import AddQuestionForm from '/client/components/q&a/subcomponents/AddQuestionForm.jsx';
+//import AddQuestionForm from '/client/components/q&a/subcomponents/AddQuestionForm.jsx';
 const Modal = styled.div`
   position: fixed;
   background-color: hsla(0, 0%, 0%, 0.5);
