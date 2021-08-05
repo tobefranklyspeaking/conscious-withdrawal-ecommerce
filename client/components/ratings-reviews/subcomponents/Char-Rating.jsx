@@ -77,7 +77,7 @@ const Middle = styled.div`
 
 const CharRating = ({char}) => {
   //console.log('---',percentage);
-  console.log('char in char-rating: ', char);
+  //console.log('char in char-rating: ', char);
 
  const getWidth = (value) => {
     let newVal = Math.round(Number(value));

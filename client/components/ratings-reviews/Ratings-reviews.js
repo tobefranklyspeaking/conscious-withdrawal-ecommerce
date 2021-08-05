@@ -267,7 +267,7 @@ const Ratings = ({ current }) => {
   }
 
   let finalReviews = display(filteredReviews, reviewCount);
-  console.log('should equal should be displayed', finalReviews);
+  //console.log('should equal should be displayed', finalReviews);
 
   //--------------------------------RETURN----------------------------------------------//
   if (reviews.length === 0) {

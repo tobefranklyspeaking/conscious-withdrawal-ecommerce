@@ -42,8 +42,8 @@ useEffect(() => {
 }, [body]);
 
 
-console.log('reviewbody: ', bodyDisplay);
-console.log('review photos', photos);
+//console.log('reviewbody: ', bodyDisplay);
+//console.log('review photos', photos);
 
   return (
     //
