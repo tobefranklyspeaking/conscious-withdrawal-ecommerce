@@ -237,6 +237,13 @@ const Overview = ({ current }) => {
       console.error('err posting to cart', err);
     });
   }
+  const reviewScroller = (e) => {
+    e.preventDefault();
+    let elt = document.getElementById('reviews');
+    console.log(elt);
+    elt.scrollIntoView();
+  };
+
 
   return (
     <>
@@ -255,7 +262,7 @@ const Overview = ({ current }) => {
         <Column2>
         <StarsWrapper>
           <Stars currentRating={avgRating}/>
-          {(numReviews > 0) && <a href="#" style={{color: 'grey'}}>Read all {numReviews} reviews</a> }
+          {(numReviews > 0) && <a href="#" onClick={reviewScroller} style={{color: 'grey'}}>Read all {numReviews} reviews</a> }
         </StarsWrapper>
           <Category>{current.category}</Category>
           <Name>{current.name}</Name>

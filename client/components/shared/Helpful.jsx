@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import axios from 'axios';
-
+/*
 const Button = styled.button`
-  background-color: Transparent;
+   background-color: Transparent;
   outline: none;
   border: none;
   text-decoration: underline;
@@ -12,10 +12,9 @@ const Button = styled.button`
   }
   border: 1px solid black;
 `;
-
+*/
 
 const Helpful = ({ path, id, helpfulness, currentSort }) => {
-
   const [isHelpful, setIsHelpful] = useState(helpfulness);
   const [isClicked, setIsClicked] = useState(false);
   const [sort, setSort] = useState(currentSort);
@@ -43,7 +42,7 @@ const Helpful = ({ path, id, helpfulness, currentSort }) => {
   return (
     <>
       <span>Helpful? </span>
-      <Button className="helpfulButton" onClick={() => isClicked ? console.log('already clicked') : setIsHelpful(isHelpful + 1)}>Yes</Button>
+      <button className="helpfulButton" onClick={() => isClicked ? console.log('already clicked') : setIsHelpful(isHelpful + 1)}>Yes</button>
       <span>({isHelpful})</span>
     </>
   );

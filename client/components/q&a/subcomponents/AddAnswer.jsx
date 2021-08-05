@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Modal = styled.div`
   position: fixed;
@@ -9,7 +10,7 @@ const Modal = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  display: flex;
+  /* display: inline-flex; */
   align-items: center;
   justify-content: center;
 `;
@@ -38,7 +39,7 @@ const ModalBody = styled.div`
 const ModalFooter = styled.div`
   display: relative;
   padding: 10px;
-  height: auto;
+  height: 20%;
 `;
 
 const Button = styled.button`
@@ -52,7 +53,43 @@ const Button = styled.button`
   font-size: .7rem;
 `;
 
-const AddAnswer = ({question, show, onClose}) => {
+const AddAnswer = ({ current, show, onClose }) => {
+  const [answer, updateAnswer] = useState('');
+  const [nickname, updateNickname] = useState('');
+  const [email, updateEmail] = useState('');
+
+
+
+
+
+  const onAnswerChange = (e) => {
+    updateAnswer(e);
+  }
+
+  const onNicknameChange = (e) => {
+    updateNickname(e);
+  }
+
+  const onEmailChange = (e) => {
+    updateEmail(e);
+  }
+
+  const onSubmit = (e) => {
+    const id = current.question_id;
+    console.log('why is this freaking out', id, nickname, email, answer)
+
+    // `${id}/answers`, {
+    axios.post(`qa/questions/${id}/answers?question_id=${id}`,
+    {
+      "body": answer,
+      "name": nickname,
+      "email": email,
+      "photos": [null]
+    })
+    .then(res => onclose)
+    .catch(err => console.log(err))
+  }
+
   if (!show) {
     return null;
   }
@@ -64,18 +101,18 @@ const AddAnswer = ({question, show, onClose}) => {
         </ModalHeader>
         <ModalBody>
           <div>Your Answer - mandatory</div>
-        <input></input>
-        <div>Your Nickname - mandatory</div>
-          <input></input>
+          <input onChange={e => onAnswerChange(e.target.value)}></input>
+          <div>Your Nickname - mandatory</div>
+          <input onChange={e => onNicknameChange(e.target.value)}></input>
           <div>Your Email - mandatory</div>
-          <input placeholder='Example: jack=@email.com'></input>
+          <input onChange={e => onEmailChange(e.target.value)} placeholder='Example: jack@email.com'></input>
           <div>For authentication reasons, you will not be emailed</div>
-          <Button>Opens new window to select photos</Button>
           {/* thumbnail should appear and max 5 */}
         </ModalBody>
         <ModalFooter className="modal-footer">
           <Button onClick={onClose} className="button">Cancel</Button>
-          <Button className="submit">Submit</Button>
+          <Button>Opens new window to select photos</Button>
+          <Button className="submit" onClick={() => onSubmit()}>Submit</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
