@@ -212,7 +212,7 @@ const Overview = ({ current }) => {
       <OverviewWrapper>
         <Banner>SITE-WIDE ANNOUCEMENT MESSAGE!</Banner>
         <Column1>
-          <Carousel urls={photos}/>
+          <Carousel urls={photos} thumbnails={thumbnails}/>
           <Slogan>{current.slogan}</Slogan>
           <Description>{current.description}</Description>
           <SocialButtonRow>

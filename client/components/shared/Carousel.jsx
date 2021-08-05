@@ -17,16 +17,16 @@ const SlideWrapper = styled.div`
 const LeftArrowWrapper = styled.div`
   height: 15px;
   width: 15px;
-  position: absolute;
-  top: 50%;
+  /* position: absolute;
+  top: 50%; */
 `;
 
 const RightArrowWrapper = styled.div`
   height: 15px;
   width: 15px;
-  position: absolute;
+  /* position: absolute;
   top: 50%;
-  left: calc(100% - 15px);
+  left: calc(100% - 15px); */
 `;
 
 const CarouselWrapper = styled.div`
@@ -34,6 +34,8 @@ const CarouselWrapper = styled.div`
   width: auto;
   height: ${props => props.height || '65vh'};
   border: 1px solid black;
+  display: flex;
+  align-items: center;
 `;
 
 //slide subcomponent - image itself
@@ -56,10 +58,18 @@ const Arrow = ({ direction, clickHandler}) => {
       </RightArrowWrapper>)
     );
 }
+
 /************ PRIMARY COMPONENT HERE ************/
-const Carousel = ({ urls, height }) => {
+const Carousel = ({ urls, height, thumbnails}) => {
   //state: index of images based on current item
   const [index, setIndex] = useState(0);
+  const [modComponents, setModComponents] = useState([]);
+  useEffect(() => {
+    let newThumbnails = thumbnails.map(url => (<img src={url}/>))
+    setModComponents(newThumbnails);
+
+  }, [thumbnails]);
+
 
   //event handlers to switch carousel to next/previous image
   const previousSlide = (e) => {
@@ -75,8 +85,8 @@ const Carousel = ({ urls, height }) => {
 
   return (
     <CarouselWrapper height={height}>
+      <ModularCarousel orientation="column" components={modComponents}/>
       <Arrow direction="Left" clickHandler={previousSlide}/>
-      <ModularCarousel orientation="column"/>
       <Slide url={urls[index]}/>
       <Arrow direction="Right" clickHandler={nextSlide}/>
     </CarouselWrapper>);
