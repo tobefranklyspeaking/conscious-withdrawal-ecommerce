@@ -13,14 +13,12 @@ const SlideWrapper = styled.div`
     object-fit: cover;
   }
 `;
-
 const LeftArrowWrapper = styled.div`
   height: 15px;
   width: 15px;
   /* position: absolute;
   top: 50%; */
 `;
-
 const RightArrowWrapper = styled.div`
   height: 15px;
   width: 15px;
@@ -28,7 +26,6 @@ const RightArrowWrapper = styled.div`
   top: 50%;
   left: calc(100% - 15px); */
 `;
-
 const CarouselWrapper = styled.div`
   position: relative;
   width: auto;
@@ -36,6 +33,15 @@ const CarouselWrapper = styled.div`
   border: 1px solid black;
   display: flex;
   align-items: center;
+`;
+const SideSlideWrapper = styled.div`
+  width: 7rem;
+  height: 7rem;
+  & > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 //slide subcomponent - image itself
@@ -65,7 +71,7 @@ const Carousel = ({ urls, height, thumbnails}) => {
   const [index, setIndex] = useState(0);
   const [modComponents, setModComponents] = useState([]);
   useEffect(() => {
-    let newThumbnails = thumbnails.map(url => (<img src={url}/>))
+    let newThumbnails = thumbnails.map((url,i) => (<SideSlideWrapper key={i}><img src={url}/></SideSlideWrapper>))
     setModComponents(newThumbnails);
 
   }, [thumbnails]);
