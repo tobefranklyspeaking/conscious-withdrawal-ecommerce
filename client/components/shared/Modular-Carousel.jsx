@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
 
-//higher order component: pass it an array of components to render, as well as an orientation ('row' or 'column'). It also expects a clickhandler (not for the arrows, but for the components themselves) and an optional count for number of components to display at one time.
+//higher order component: pass it an array of components to render, as well as an orientation ('row' or 'column'). It also takes an optional count for number of components to display at one time. Going back and forth on adding a clickHandler prop because I figure that can be added in the components array before you pass them in; can definitely change that if there's demand!
 
 //necessary styles
 const ArrowWrapper = styled.div`
@@ -24,7 +24,7 @@ const defaultComponents = [
 ];
 
 
-const ModularCarousel = ({ components=defaultComponents, orientation='row', clickHandler, count=3}) => {
+const ModularCarousel = ({ components=defaultComponents, orientation='row', count=3}) => {
 
   //state for which components out of the total components prop to display
   const [displayed, updateDisplayed] = useState(components.slice(0, count));
@@ -37,16 +37,31 @@ const ModularCarousel = ({ components=defaultComponents, orientation='row', clic
     justify-content: space-evenly;
   `;
 
+  //two handlers to shift which items are currently being displayed by updating state
   const decrementDisplayed = (e) => {
     let firstIndex = components.indexOf(displayed[0]);
+    if (firstIndex !== 0) {
+      let newDisplayed = components.slice(firstIndex-1, count);
+      updateDisplayed(newDisplayed);
+    }
+
   };
-  const incrementDisplayed = (e) => {};
+  const incrementDisplayed = (e) => {
+    let firstIndex = components.indexOf(displayed[0]);
+    let lastIndex = components.indexOf(displayed[displayed.length-1]);
+
+    if (lastIndex < components.length-1) {
+      let newDisplayed = components.slice(firstIndex+1, count);
+      updateDisplayed(newDisplayed);
+    }
+  };
+
   //renders right set of arrows based on orientation string value
   return (
   <CarouselWrapper>
-    <ArrowWrapper>{orientation === 'row' ? <AiOutlineArrowLeft /> : <AiOutlineArrowUp />}</ArrowWrapper>
+    <ArrowWrapper onClick={decrementDisplayed}>{orientation === 'row' ? <AiOutlineArrowLeft /> : <AiOutlineArrowUp />}</ArrowWrapper>
     {displayed}
-    <ArrowWrapper>{orientation === 'row' ? <AiOutlineArrowRight /> : <AiOutlineArrowDown />}</ArrowWrapper>
+    <ArrowWrapper onClick={incrementDisplayed}>{orientation === 'row' ? <AiOutlineArrowRight /> : <AiOutlineArrowDown />}</ArrowWrapper>
   </CarouselWrapper>);
 };
 
