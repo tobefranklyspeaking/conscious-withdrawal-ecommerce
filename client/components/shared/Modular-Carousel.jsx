@@ -9,7 +9,6 @@ const LeftArrowWrapper = styled.div`
   position: absolute;
   top: 50%;
 `;
-
 const RightArrowWrapper = styled.div`
   height: 15px;
   width: 15px;
@@ -17,14 +16,12 @@ const RightArrowWrapper = styled.div`
   top: 50%;
   left: calc(100% - 15px);
 `;
-
 const UpArrowWrapper = styled.div`
   height: 15px;
   width: 15px;
   position: absolute;
   left: 50%;
 `;
-
 const DownArrowWrapper = styled.div`
   height: 15px;
   width: 15px;
@@ -48,6 +45,9 @@ const mCarousel = ({ components=[], orientation='row'}) => {
     <LeftArrowWrapper><AiOutlineArrowLeft /></LeftArrowWrapper> :
     <UpArrowWrapper><AiOutlineArrowUp /></UpArrowWrapper>}
     {components}
+    {orientation === 'row' ?
+    <RightArrowWrapper><AiOutlineArrowRight /></RightArrowWrapper> :
+    <DownArrowWrapper><AiOutlineArrowDown /></DownArrowWrapper>}
   </CarouselWrapper>);
 };
 
