@@ -15,8 +15,9 @@ dist/
 # API Key files
 config.js
 
-# Testing snapshots
+# Testing
 __snapshots__
+coverage/
 
 # Webpack
 /public/bundle.js

@@ -31,7 +31,7 @@ function Stars({ currentRating }) {
               onClick={() => setRating(currentRating || ratingValue)}
               />
             <Star
-              className='star'
+              className='star-rating star'
               color={ratingValue <= (hover || rating) ? 'hsla(0, 0%, 30%, 1)' : 'transparent'}
             />
           </label>
