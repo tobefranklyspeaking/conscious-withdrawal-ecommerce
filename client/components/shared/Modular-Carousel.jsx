@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
 
-//higher order component: pass it an array of components to render, as well as an orientation ('row' or 'column'). It also expects a clickhandler (not for the arrows, but for the components themselves).
+//higher order component: pass it an array of components to render, as well as an orientation ('row' or 'column'). It also expects a clickhandler (not for the arrows, but for the components themselves) and an optional count for number of components to display at one time.
+
 //necessary styles
 const ArrowWrapper = styled.div`
   height: 15px;
@@ -23,10 +24,10 @@ const defaultComponents = [
 ];
 
 
-const ModularCarousel = ({ components=defaultComponents, orientation='row', clickHandler}) => {
+const ModularCarousel = ({ components=defaultComponents, orientation='row', clickHandler, count=3}) => {
 
   //state for which components out of the total components prop to display
-  const [displayed, updateDisplayed] = useState(components);
+  const [displayed, updateDisplayed] = useState(components.slice(0, count));
 
   //this style inside component to allow for passing props
   const CarouselWrapper = styled.div`
@@ -36,6 +37,10 @@ const ModularCarousel = ({ components=defaultComponents, orientation='row', clic
     justify-content: space-evenly;
   `;
 
+  const decrementDisplayed = (e) => {
+    let firstIndex = components.indexOf(displayed[0]);
+  };
+  const incrementDisplayed = (e) => {};
   //renders right set of arrows based on orientation string value
   return (
   <CarouselWrapper>
