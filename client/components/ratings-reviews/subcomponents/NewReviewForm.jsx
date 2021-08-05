@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import Stars from '../../shared/Stars.jsx';
 
 const OverallRatingWrapper = styled.div`
+display: flex;
+
 border: 1px solid black;
 `;
 const RatingOpt = styled.span`
@@ -104,6 +107,7 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
 
   let handleOverallRating = (e) => {
     setCurrentOverallRating(e.target.value);
+    console.log('does starts work', e);
   };
   let handleSummary = (e) => {
     setCurrentSummary(e.target.value);
@@ -257,33 +261,9 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
   //console.log('curr', currentOverallRating);
   return (
     <form onSubmit={handleSubmit}>
-      <OverallRatingWrapper onChange={handleOverallRating}>
+      <OverallRatingWrapper >
         <RatingOpt>
-          <p> *Overall Rating: </p>
-          <label htmlFor='oneStar'>
-            <input type='radio' id='oneStar' name='chooseStarRating' value='1' required />
-            1 star
-          </label><br></br>
-
-          <label htmlFor='twoStars'>
-            <input type='radio' id='twoStars' name='chooseStarRating' value='2' />
-            2 Stars
-          </label><br></br>
-
-          <label htmlFor='threeStars'>
-            <input type='radio' id='threeStars' name='chooseStarRating' value='3' />
-            3 Stars
-          </label><br></br>
-
-          <label htmlFor='fourStars'>
-            <input type='radio' id='fourStars' name='chooseStarRating' value='4' />
-            4 Stars
-          </label><br></br>
-
-          <label htmlFor='fiveStars'>
-            <input type='radio' id='fiveStars' name='chooseStarRating' value='5' />
-            5 Stars
-          </label>
+      <Stars setCurrentOverallRating={setCurrentOverallRating}/>
         </RatingOpt>
         <RatingDesc>
           <p>1 star = 'Poor'</p>
@@ -563,3 +543,33 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
 
 
 export default NewReviewForm;
+
+/*
+        <RatingOpt>
+          <p> *Overall Rating: </p>
+          <label htmlFor='oneStar'>
+            <input type='radio' id='oneStar' name='chooseStarRating' value='1' required />
+            1 star
+          </label><br></br>
+
+          <label htmlFor='twoStars'>
+            <input type='radio' id='twoStars' name='chooseStarRating' value='2' />
+            2 Stars
+          </label><br></br>
+
+          <label htmlFor='threeStars'>
+            <input type='radio' id='threeStars' name='chooseStarRating' value='3' />
+            3 Stars
+          </label><br></br>
+
+          <label htmlFor='fourStars'>
+            <input type='radio' id='fourStars' name='chooseStarRating' value='4' />
+            4 Stars
+          </label><br></br>
+
+          <label htmlFor='fiveStars'>
+            <input type='radio' id='fiveStars' name='chooseStarRating' value='5' />
+            5 Stars
+          </label>
+        </RatingOpt>
+*/
