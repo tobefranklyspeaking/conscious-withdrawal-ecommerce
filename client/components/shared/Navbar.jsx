@@ -26,11 +26,11 @@ const Logo = styled.span`
   text-decoration: underline;
 `;
 
-const NavBar = ({current}) => {
+const NavBar = ( { update } ) => {
   return (
     <NavStyle>
       <Logo>Logo</Logo>
-      <SearchBar updateProduct={current}/>
+      <SearchBar updateProduct={update}/>
     </NavStyle>
   );
 }

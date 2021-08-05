@@ -73,20 +73,22 @@ const loadingState = {
   const [productRating, setProductRating] = useState(0);
 
   useEffect(() => {
-    axios(`/products/${productID}`)
+    if (productID) {
+      axios(`/products/${productID}`)
       .then((response) => {
         setProductInfo(response.data)
       })
       .catch((error) => console.log(error));
-    axios(`/products/${productID}/styles`)
+      axios(`/products/${productID}/styles`)
       .then((response) => {
         setProductImage(response.data.results[0].photos[0].thumbnail_url)
       })
       .catch((error) => console.log(error));
-    axios(`/reviews/meta/?product_id=${productID}`)
+      axios(`/reviews/meta/?product_id=${productID}`)
       .then((response) => {setProductRating(getAverageRating(response.data.ratings))
       })
       .catch((error) => console.log(error));
+    }
   }, [])
 
   return (

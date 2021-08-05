@@ -7,7 +7,7 @@ const Input = styled.input`
 `;
 // If rendering Stars to display an already extant rating, pass the rating in with
 // props currentRating={3.5} (or whatever).
-function Stars({ currentRating }) {
+function Stars({ currentRating , setCurrentOverallRating }) {
   const [rating, setRating] = useState(currentRating || null);
   const [hover, setHover] = useState(currentRating || null);
 
@@ -28,7 +28,7 @@ function Stars({ currentRating }) {
               type='radio'
               name='rating'
               value={ratingValue}
-              onClick={() => setRating(currentRating || ratingValue)}
+              onClick={(e) => {setRating(currentRating || ratingValue); if(setCurrentOverallRating) {setCurrentOverallRating(ratingValue);}}}
               />
             <Star
               className='star-rating star'
