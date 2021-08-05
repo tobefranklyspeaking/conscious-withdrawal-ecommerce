@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from "styled-components";
 import Carousel from '../shared/Carousel.jsx'
 import Stars from '../shared/Stars.jsx';
@@ -148,6 +148,8 @@ const Overview = ({ current }) => {
   const [size, updateSize] = useState('');
   const [qty, updateQty] = useState(0);
 
+  const sizeRef = useRef(null);
+
   //fetches styles and sets default to first style based on current product on mount. This useEffect acts like componentDidMount
   useEffect(async () => {
     try {
@@ -204,6 +206,9 @@ const Overview = ({ current }) => {
   }
 
   const cartClickHandler = (e) => {
+    if (!size) {
+      sizeRef.current.click();
+    }
 
   }
 
@@ -246,6 +251,7 @@ const Overview = ({ current }) => {
               title={ skus.length && skus.filter(sku => (sku.quantity > 0)).length ? 'SELECT SIZE' : 'OUT OF STOCK' }
               width="60%"
               callback={sizeDropdownCallback}
+              nref={sizeRef}
             />
             <Dropdown
             options={skus.length && skus.filter(sku => (sku.size === size)).map(sku => sku.quantity).reduce((acc, quant) => {
@@ -258,7 +264,10 @@ const Overview = ({ current }) => {
             callback={qtyDropdownCallback}/>
           </ButtonRow1>
           <ButtonRow2>
-            <Button height="4rem" width="70%">ADD TO CART<FaPlus /></Button>
+            <Button height="4rem"
+              width="70%"
+              onClick={cartClickHandler}
+              >ADD TO CART<FaPlus /></Button>
             <Button height="4rem" width="3rem"><FaRegHeart/></Button>
           </ButtonRow2>
           <FeatureChecklist>

@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   z-index: 999;
 `;
 
-const Dropdown = ({ options=['#'], title, width, callback }) => {
+const Dropdown = ({ options=['#'], title, width, callback, nref }) => {
   //setting state
   const [opt, setOpt] = useState(options);
   const [isOpen, setOpen] = useState(false);
@@ -22,7 +22,7 @@ const Dropdown = ({ options=['#'], title, width, callback }) => {
   return (
     <Wrapper width={width}>
     {/*title button -> switches to choice */}
-      <Button onClick={(e) => setOpen(!isOpen)}>
+      <Button onClick={(e) => setOpen(!isOpen)} ref={nref}>
     {choice.length ? choice : title}{isOpen ? <FaAngleUp size="1rem"/> : <FaAngleDown size="1rem"/> }
     </Button>
     {/*iterates over options array and generates a button for each */}
