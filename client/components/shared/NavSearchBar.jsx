@@ -24,7 +24,6 @@ const Filtered = styled.div`
   width: auto;
   padding: 5px;
   background-color: white;
-  border: 1px solid black;
 `;
 
 const List = styled.div`
