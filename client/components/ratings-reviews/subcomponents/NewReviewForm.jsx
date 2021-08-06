@@ -6,59 +6,64 @@ import Stars from '../../shared/Stars.jsx';
 const OverallRatingWrapper = styled.div`
 display: inline-flex;
 justify-content: space-between;
-border: 1px solid black;
 `;
 const RatingOpt = styled.div`
   display: flex;
   align-items: center;
-  border: 1px solid black;
+  margin: 3rem;
 `;
 
 const RatingDesc = styled.div`
   display: flex;
 flex-direction: column;
-  border: 1px solid black;
 `;
 
 const ProductRec = styled.div`
-border: 1px solid black;
 `;
 
 const ProductChars = styled.div`
-border: 1px solid black;
 `;
 
 const CharInput = styled.input`
 display: block;
 margin: 0 auto;
-border: 1px solid black;
 `;
 
 const CharLabel = styled.label`
 display: inline-block;
-border: 1px solid black;
+margin: .15rem;
 `;
 
 const ReviewSummary = styled.div`
-border: 1px solid black;
 `;
 
 const ReviewBody = styled.div`
-border: 1px solid black;
 `;
 
 const ReviewPhotos = styled.div`
-border: 1px solid black;
 `;
 
 const ReviewName = styled.div`
-border: 1px solid black;
 `;
 
 const ReviewEmail = styled.div`
-border: 1px solid black;
 `;
 
+const CharContainer = styled.div`
+display: flex;
+flex-wrap: nowrap;
+justify-content: center;
+`;
+
+const CharTitle = styled.p`
+font-weight: bold;
+`;
+
+const ReviewForm = styled.form`
+font-weight: bold;
+font-size: 15px;
+margin-top: 3rem;
+`;
 
 const NewReviewForm = ({ charOptions, id, onClose }) => {
   //console.log('hgjvh', charOptions);
@@ -198,11 +203,8 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
 
   //console.log('curr', currentOverallRating);
   return (
-    <form onSubmit={handleSubmit}>
+    <ReviewForm onSubmit={handleSubmit}>
       <OverallRatingWrapper >
-        <RatingOpt>
-      <Stars setCurrentOverallRating={setCurrentOverallRating}/>
-        </RatingOpt>
         <RatingDesc>
           <p>1 star = 'Poor'</p>
           <p>2 stars = 'Fair'</p>
@@ -210,6 +212,9 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
           <p>4 stars = 'Good'</p>
           <p>5 stars = 'Great'</p>
         </RatingDesc>
+        <RatingOpt>
+      <Stars setCurrentOverallRating={setCurrentOverallRating}/>
+        </RatingOpt>
       </OverallRatingWrapper>
 
       <ProductRec onChange={handleRecommended}>
@@ -226,9 +231,9 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
       </ProductRec>
 
       <ProductChars>
-        <p>---Characteristics---</p>
+        <CharTitle>---Characteristics---</CharTitle>
         {sizeID &&
-          <div onChange={handleSize}>
+          <CharContainer onChange={handleSize}>
             <p> *Size: </p>
             <CharLabel >
               1<br></br>
@@ -259,11 +264,11 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
               <CharInput type='radio' name='chooseSize' value='5' />
               A size too wide
             </CharLabel>
-          </div>
+          </CharContainer>
         }
 
         {widthID &&
-          <div onChange={handleWidth}>
+          <CharContainer onChange={handleWidth}>
             <p> *Width: </p>
             <CharLabel >
               1<br></br>
@@ -294,11 +299,11 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
               <CharInput type='radio' name='chooseWidth' value='5' />
               Too wide
             </CharLabel>
-          </div>
+          </CharContainer>
         }
 
         {comfortID &&
-          <div onChange={handleComfort}>
+          <CharContainer onChange={handleComfort}>
             <p> *Comfort: </p>
             <CharLabel >
               1<br></br>
@@ -329,11 +334,11 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
               <CharInput type='radio' name='chooseComfort' value='5' />
               Perfect
             </CharLabel>
-          </div>
+          </CharContainer>
         }
 
         {qualityID &&
-          <div onChange={handleQuality}>
+          <CharContainer onChange={handleQuality}>
             <p> *Quality: </p>
             <CharLabel >
               1<br></br>
@@ -364,11 +369,11 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
               <CharInput type='radio' name='chooseQuality' value='5' />
               Perfect
             </CharLabel>
-          </div>
+          </CharContainer>
         }
 
         {lengthID &&
-          <div onChange={handleLength}>
+          <CharContainer onChange={handleLength}>
             <p> *Length: </p>
             <CharLabel >
               1<br></br>
@@ -399,11 +404,11 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
               <CharInput type='radio' name='chooseLength' value='5' />
               Runs long
             </CharLabel>
-          </div>
+          </CharContainer>
         }
 
         {fitID &&
-          <div onChange={handleFit}>
+          <CharContainer onChange={handleFit}>
             <p> *Fit: </p>
             <CharLabel >
               1<br></br>
@@ -434,7 +439,7 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
               <CharInput type='radio' name='chooseFit' value='5' />
               Runs long
             </CharLabel>
-          </div>
+          </CharContainer>
         }
 
       </ProductChars><br></br>
@@ -475,7 +480,7 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
 
 
 
-    </form>
+    </ReviewForm>
   );
 }
 

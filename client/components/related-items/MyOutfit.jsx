@@ -18,15 +18,32 @@ const MyOutfitContainer = styled.section`
 `;
 
 export default () => {
-  const [myOutfit, setMyOutfit] = useState();
+  // Set up local storage if nothing cached or if it is not an array.
+  try {
+    JSON.parse(localStorage.getItem('myOutfit'));
+    if (!Array.isArray(JSON.parse(localStorage.getItem('myOutfit')))) {
+      throw Error;
+    }
+  }
+  catch {
+    localStorage.setItem('myOutfit', JSON.stringify([]));
+  }
+
+  var outfitList = JSON.parse(localStorage.getItem('myOutfit'));
+  const [myOutfit, setMyOutfit] = useState(outfitList);
+
+  // Update localStorage every time myOutfit changes.
+  useEffect(() => {
+    outfitList = JSON.stringify(myOutfit);
+    localStorage.setItem('myOutfit', outfitList);
+  }, [myOutfit]);
 
   return (
     <MyOutfitContainer>
       <h1 className='section-title'>My Outfit</h1>
       <div className='cards-container'>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {!myOutfit && 'When you add items to your outfit, they will appear here!'}
+        {myOutfit && myOutfit.map(product => <ProductCard key={product} productID={product} />)}
       </div>
     </MyOutfitContainer>
   )
