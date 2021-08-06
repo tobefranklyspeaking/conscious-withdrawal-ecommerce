@@ -60,8 +60,6 @@ const ModularCarousel = ({ components=defaultComponents, orientation='row', coun
     e.preventDefault();
     if (start < stateComponents.length-count) {
       let newDisplayed = stateComponents.slice(start+1, (start+1)+count);
-      console.log(displayed);
-      console.log(newDisplayed);
       setStart(start+1);
       updateDisplayed(newDisplayed);
     }
