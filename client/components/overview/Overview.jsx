@@ -290,7 +290,7 @@ const Overview = ({ current }) => {
               }
               return acc;
             }, [])}
-            title="QUANTITY"
+            title={qty || "QUANTITY"}
             callback={qtyDropdownCallback}/>
           </ButtonRow1>
           <ButtonRow2>
