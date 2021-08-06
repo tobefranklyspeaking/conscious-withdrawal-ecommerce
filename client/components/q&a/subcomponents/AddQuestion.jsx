@@ -33,7 +33,7 @@ const ModalBody = styled.div`
   padding: 10px;
   height: 70%;
   border-top: 1px solid lightgray;
-  border-bottom: 18px solid lightgray;
+  border-bottom: 1px solid lightgray;
 `;
 
 const ModalFooter = styled.div`
@@ -103,7 +103,7 @@ const AddQuestion = ({current, show, onClose}) => {
           <input onChange={e => onAnswerChange(e.target.value)}></input>
           <div>*Your Nickname</div>
           <input onChange={e => onNicknameChange(e.target.value)}></input>
-          <div>*Your Email</div>
+          <div placeholder='jackson11!'>*Your Email</div>
           <input onChange={e => onEmailChange(e.target.value)} placeholder='Example: jack@email.com'></input>
           <div>For authentication reasons, you will not be emailed</div>
           {/* thumbnail should appear and max 5 */}

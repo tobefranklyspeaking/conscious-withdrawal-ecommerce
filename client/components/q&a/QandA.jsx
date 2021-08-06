@@ -29,6 +29,7 @@ const Component = styled.div`
 `;
 const QandA = ({current}) => {
   const [show, setShow] = useState(false);
+
   return (
     <>
       <QandAStyle>
@@ -36,7 +37,7 @@ const QandA = ({current}) => {
         <QuestionSearch current={current} />
         <Buttons>MORE ANSWERED QUESTIONS</Buttons>
         <Buttons onClick={() => setShow(true)} >ADD A QUESTION +</Buttons>
-        <AddQuestion onClose={() => setShow(false)} current={current} show={show}/>
+        <AddQuestion onClose={() => setShow(false)} current={current} setShow={setShow}/>
       </QandAStyle>
     </>
   );
