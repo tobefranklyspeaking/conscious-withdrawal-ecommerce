@@ -101,11 +101,11 @@ const AddQuestion = ({ current, show, onClose }) => {
           <h3 className="modal-title">About the {current.name}</h3>
         </ModalHeader>
         <ModalBody>
-        <div>*Your Answer</div>
+        <div>*Question</div>
           <input onChange={e => onAnswerChange(e.target.value)}placeholder='Enter answer to question asked here!'></input>
-          <div>*Your Nickname</div>
+          <div>*Nickname</div>
           <input onChange={e => onNicknameChange(e.target.value)} placeholder='jackson11!'></input>
-          <div >*Your Email</div>
+          <div >*Email</div>
           <input onChange={e => onEmailChange(e.target.value)} placeholder='Example: jack@email.com'></input>
           <div>For authentication reasons, you will not be emailed</div>
           {/* thumbnail should appear and max 5 */}
