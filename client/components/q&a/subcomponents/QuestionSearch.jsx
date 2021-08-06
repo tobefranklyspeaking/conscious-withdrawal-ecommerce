@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { CgSearch } from 'react-icons/cg';
 import axios from 'axios';
 import Questions from './RenderQuestions.jsx';
+import ImageModal from './ImageModal.jsx';
 
 const SearchBarStyle = styled.input`
   width: 100%;
@@ -42,12 +43,15 @@ const SearchButton = styled.div`
 `;
 
 
-const QASearch = ({ current }) => {
+const QASearch = ({ current}) => {
+
   const [search, setSearch] = useState('');
   const [allQuestions, setAllQuestions] = useState([]);
   const [filteredQuestions, setFiltered] = useState([]);
   const [selection, setSelection] = useState(null);
   const [update, setUpdate] = useState(null);
+  const [showImg, setShowImg] = useState(false);
+  const [source, setSource] = useState('');
 
   useEffect(() => {
     if (current.id !== undefined) {
@@ -79,6 +83,9 @@ const QASearch = ({ current }) => {
     setSearch(searchText.toLowerCase());
   }
 
+  //create questions section - store and render questions
+  //create answers section - store and render questions
+
   const [count, setCount] = useState(0);
   return (
     <>
@@ -92,27 +99,31 @@ const QASearch = ({ current }) => {
         <SearchButton>
           <CgSearch onClick={() => handleClick()} style={{ cursor: 'pointer' }} />
         </SearchButton>
+        <ImageModal onClose={() => setShowImg(false)} source={source} show={showImg} style={{ cursor: 'pointer' }} />
       </Search>
+      {search && (
+        allQuestions.filter(text => {
+
+          if (search.length > 2 && text !== undefined) {
+            console.log('inside if statement numero uno')
+            if (text.question_body.toLowerCase().indexOf(search) !== -1) {
+              console.log('inside filter', text)
+              return true;
+            } else {
+              return false
+            }
+          }
+        }).map((value, i) => {
+          return (
+            <div key={i}>Hello World</div>
+          )
+        })
+      )}
       <List name='dropdown'>
         <List>
-          <Questions current={allQuestions} updateData={updateData} update={update} />
+          <Questions current={allQuestions} updateData={updateData} setShowImg={setShowImg} setSource={setSource}/>
+          {/* {console.log(setShowImg, setSource)} */}
         </List>
-        {search && (
-          allQuestions.filter(text => {
-            if (search.length > 2 && text !== undefined) {
-              if (text.question_body.toLowerCase().indexOf(search) !== -1) {
-                console.log('inside filter', text)
-                return true;
-              } else {
-                return false
-              }
-            }
-          }).map((value, i) => {
-            return (
-              <div key={i}>Hello World</div>
-            )
-          })
-        )}
       </List>
     </>
   )

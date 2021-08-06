@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
+import axios from 'axios';
 import styled from 'styled-components';
 import Helpful from '/client/components/shared/Helpful.jsx';
 import Report from '/client/components/shared/Report.jsx';
@@ -107,11 +108,27 @@ const HelpfulButton = styled.span`
 
 
 
-const Answers = ({ current }) => {
-  const [moreAnswers, setMoreAnswers] = useState(true);
-  const [showImg, setShowImg] = useState(false);
-  const [answers, setAnswers] = useState(current.answers);
+const Answers = ({ current, setShowImg, setSource }) => {
 
+
+  const [moreAnswers, setMoreAnswers] = useState(true);
+  const [answers, setAnswers] = useState([]);
+
+  useEffect(() => {
+
+    if (current.question_id !== undefined) {
+      axios.get(`/qa/questions/${current.question_id}/answers`)
+        .then(response => {
+          setAnswers(response.data.results);
+        })
+        .catch(err => console.log(`Error in QuestionSearch useEffect: ${err}`));
+    }
+  }, [current.question_id])
+
+  const handleImage = (url) => {
+    setSource(url);
+    setShowImg(true);
+  }
 
   return (
     Object.keys(answers)
@@ -130,10 +147,12 @@ const Answers = ({ current }) => {
           return (
             <div key={parseInt(each)}>
               <AnswerAdditions>
+
                 <LineA>
                   <Bold> A: </Bold>
                   {current.body}
                 </LineA>
+
                 <LineB >
                   <span> by {current.answerer_name}, {moment(current.question_date).format('ll')} </span>
                   <span> | </span>
@@ -141,24 +160,26 @@ const Answers = ({ current }) => {
                     <Helpful path={'/qa/questions'} id={parseInt(each)} helpfulness={current.helpfulness} />
                     <span> | </span>
                     <Report path={'/qa/questions'} id={parseInt(each)} />
-
                   </HelpfulButton>
                 </LineB>
+
                 {Object.keys(current.photos).length > 0 && Object.keys(current.photos).length < 6
+
                   ? <LineB>
+
                     <div style={{ margin: '0.5rem' }}>Attached Photos: </div>
                     <Images>
                       {current.photos
                         ? current.photos.map((each, index) => {
                           return (
                             <span key={index}>
-                              <Img src={each} onClick={(e) => setShowImg(true)} style={{ cursor: 'pointer' }} />
-                              <ImageModal onClose={() => setShowImg(false)} current={each} show={showImg} style={{ cursor: 'pointer' }} />
+                              <Img src={each.url} onClick={() => handleImage(each.url)} style={{ cursor: 'pointer' }} />
                             </span>
                           )
                         })
                         : '#'}
                     </Images>
+
                     <div>
                       <span> by {current.answerer_name}, {moment(current.question_date).format('ll')} </span>
                       <span> | </span>
@@ -168,6 +189,7 @@ const Answers = ({ current }) => {
                         <Report path={'/qa/questions'} id={parseInt(each)} />
                       </HelpfulButton >
                     </div>
+
                   </LineB>
                   : null}
               </AnswerAdditions>

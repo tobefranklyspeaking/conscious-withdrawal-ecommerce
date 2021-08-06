@@ -135,34 +135,17 @@ const HelpfulButton = styled.span`
 
 
 
-const Questions = ({ current, updateData, update }) => {
+const Questions = ({ current, updateData, setShowImg, setSource }) => {
   const [moreQuestions, setMoreQuestions] = useState(true);
   const [show, setShow] = useState(false);
   const [hide, setHide] = useState(true);
 
 
-  useEffect(() => {
-    try {
-      updateData(current.toString())
-    }
-    catch (err) {
-      console.log(err)
-    }
-  }, [current])
-
   const Reported = ({ hide }) => {
-    console.log('inside reported component within blocks', hide)
     if (hide === true) {
       return null;
     }
     return <div>Reported</div>
-  }
-
-  const imgClickZoom = (each) => {
-    console.log(each, show);
-    return (
-      <ImageModal onClose={() => showImg(false)} current={each} show={show} style={{ cursor: 'pointer' }} />
-    )
   }
 
   const Questions = ({ current, state }) => {
@@ -187,7 +170,7 @@ const Questions = ({ current, updateData, update }) => {
               </Wrap>
             </Container>
             <AnswerContainer>
-              <Answers current={each} />
+              <Answers current={each} setShowImg={setShowImg} setSource={setSource}/>
             </AnswerContainer>
           </Accordian>
         )
@@ -197,7 +180,7 @@ const Questions = ({ current, updateData, update }) => {
   return (
     current && (
       <div>
-        <Questions current={current} />
+        <Questions current={current} setShowImg={setShowImg} setSource={setSource}/>
       </div>
     )
   )

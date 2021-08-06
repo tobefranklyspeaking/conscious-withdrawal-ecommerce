@@ -60,6 +60,7 @@ const AddAnswer = ({ current, show, onClose }) => {
   const [email, updateEmail] = useState('');
   const [imgLinks, updateImgLinks] = useState('')
   const [showImgUpload, setShowImgUpload] = useState(false);
+  const [id, setId] = useState(null);
 
   const onAnswerChange = (e) => {
     updateAnswer(e);
@@ -79,6 +80,7 @@ const AddAnswer = ({ current, show, onClose }) => {
 
   const onSubmit = (e) => {
     const id = current.question_id;
+
     axios.post(`qa/questions/${id}/answers?question_id=${id}`,
     {
       "body": answer,

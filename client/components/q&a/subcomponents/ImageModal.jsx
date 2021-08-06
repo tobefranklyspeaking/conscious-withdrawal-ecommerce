@@ -4,13 +4,13 @@ import axios from 'axios';
 
 const Modal = styled.div`
   position: fixed;
-  background-color: hsla(0, 0%, 0%, .1);
-  /* background-color: white; */
-  box-shadow: 5px, 10px;
+  background-color: hsla(0, 0%, 0%, .4);
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  width: 100vw;
+  height: 100vh;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -19,8 +19,9 @@ const Modal = styled.div`
 
 const Image = styled.img`
   display: block;
-  max-height: 80%;
-  max-width: 80%;
+  max-height: 70%;
+  max-width: 70%;
+  margin: auto;
   height: auto;
   width: auto;
 `;
@@ -36,18 +37,17 @@ const Button = styled.button`
   font-size: .7rem;
 `;
 
-const ImageModal = ({current, show, onClose}) => {
+const ImageModal = ({source, show, onClose}) => {
 
   if (!show) {
     return null;
   }
   return (
     <Modal onClick={onClose}>
-      {/* <ModalContent> */}
-          {/* <ModalBody> */}
-            <Image src={current}/>
-          {/* </ModalBody> */}
-      {/* </ModalContent> */}
+      <div>
+        {console.log(source, show, onClose)}
+            <Image src={source}/>
+      </div>
     </Modal>
   )
 }
