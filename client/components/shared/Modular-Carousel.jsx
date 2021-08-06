@@ -53,7 +53,7 @@ const ModularCarousel = ({ components=defaultComponents, orientation='row', coun
     let firstIndex = components.indexOf(displayed[0]);
     let lastIndex = components.indexOf(displayed[displayed.length-1]);
 
-    if (lastIndex < components.length-1) {
+    if (lastIndex !== components.length-1) {
       let newDisplayed = components.slice(firstIndex+1, count);
       updateDisplayed(newDisplayed);
     }
@@ -63,7 +63,7 @@ const ModularCarousel = ({ components=defaultComponents, orientation='row', coun
   return (
   <CarouselWrapper orientation={orientation}>
     <ArrowWrapper onClick={decrementDisplayed}>{orientation === 'row' ? <AiOutlineArrowLeft /> : <AiOutlineArrowUp />}</ArrowWrapper>
-    {displayed}
+    {components.slice(0, count)}
     <ArrowWrapper onClick={incrementDisplayed}>{orientation === 'row' ? <AiOutlineArrowRight /> : <AiOutlineArrowDown />}</ArrowWrapper>
   </CarouselWrapper>);
 };

@@ -109,7 +109,8 @@ const Carousel = ({ urls, height, thumbnails}) => {
 
   useEffect(() => {
     const handler = (e) => {
-      //need to setIndex to correct component; should be index of thata component in modComponents
+      let newIndex = thumbnails.indexOf(event.target.src);
+      setIndex(newIndex);
     };
     let newThumbnails = thumbnails.map((url,i) => (<SideSlideWrapper key={i} onClick={handler}><img src={url}/></SideSlideWrapper>))
     setModComponents(newThumbnails);
