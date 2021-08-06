@@ -54,6 +54,7 @@ const CharContainer = styled.div`
 display: flex;
 flex-wrap: nowrap;
 justify-content: center;
+margin: 2rem 0;
 `;
 
 const CharTitle = styled.p`
