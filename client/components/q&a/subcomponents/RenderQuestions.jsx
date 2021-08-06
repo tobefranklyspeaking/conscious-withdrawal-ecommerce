@@ -131,11 +131,11 @@ const RenderQuestions = ({ current, updateData, setShowImg, setSource, countQ })
 
 
   const Questions = () => {
+    console.log('blahhhhhh', countQ, current, finalDisplay)
     return (
       finalDisplay.map(each => {
         return (
           <div key={each.question_id}>
-            {console.log('blahhhhhh', countQ, current, finalDisplay)}
             <Container >
               <Bold>
                 Q: {each.question_body}
