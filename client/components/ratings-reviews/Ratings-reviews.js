@@ -292,7 +292,7 @@ const Ratings = ({ current }) => {
         <Wrapper>
           <Title id="reviews" className='Title' ><p>RATINGS & REVIEWS</p></Title>
           <Rating className='Rating'>
-            <Summary id={current.id} setIsFiltered={setIsFiltered} />
+            <Summary id={current.id} setIsFiltered={setIsFiltered} handleMoreReviews={handleMoreReviews}/>
           </Rating>
           <Review className='Review'>
             <SortContainer>
