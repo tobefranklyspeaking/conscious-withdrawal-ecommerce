@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import Stars from '../shared/Stars.jsx';
 import Star from '../shared/Star.jsx';
+import ToggleOutfit from './ToggleOutfit.jsx';
 import axios from 'axios';
 import getAverageRating from '../shared/getAverageRating.js';
 
@@ -79,11 +80,13 @@ const loadingState = {
         setProductInfo(response.data)
       })
       .catch((error) => console.log(error));
+
       axios(`/products/${productID}/styles`)
       .then((response) => {
         setProductImage(response.data.results[0].photos[0].thumbnail_url)
       })
       .catch((error) => console.log(error));
+
       axios(`/reviews/meta/?product_id=${productID}`)
       .then((response) => {setProductRating(getAverageRating(response.data.ratings))
       })
@@ -94,7 +97,7 @@ const loadingState = {
   return (
     <Card className='card' img={productImage}>
       <div className='image'>
-        <div className='add-to-outfit'><Star color='hsla(0, 0%, 100%, .6)'/></div>
+        <div className='add-to-outfit'><ToggleOutfit productID={productID} /></div>
         {productImage === ''
           ? 'Loading...'
           : productImage === null

@@ -21,7 +21,7 @@ app.all('/*', (req, res) => {
       res.status(200).send(response.data);
     }).catch(err => {
       let temp = err.config;
-      console.log('failure with backend query\n URL;', temp.url,'\n Method: ', temp.method,'\n Data: ', temp.data);
+      console.log('failure with backend query\n URL:', temp.url,'\n Method: ', temp.method,'\n Data: ', temp.data,'\n Error: ', err.response.data);
       res.status(400).send(err);
     });
 })
