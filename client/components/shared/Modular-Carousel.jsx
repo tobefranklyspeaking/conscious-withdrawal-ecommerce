@@ -23,6 +23,12 @@ const defaultComponents = [
   <SampleCard />
 ];
 
+const CarouselWrapper = styled.div`
+  display: flex;
+  flex-direction: ${props => props.orientation};
+  align-items: center;
+  justify-content: space-evenly;
+`;
 
 const ModularCarousel = ({ components=defaultComponents, orientation='row', count=3}) => {
 
@@ -33,13 +39,6 @@ const ModularCarousel = ({ components=defaultComponents, orientation='row', coun
     updateDisplayed(components.slice(0, count));
   }, [components])
 
-  //this style inside component to allow for passing props
-  const CarouselWrapper = styled.div`
-    display: flex;
-    flex-direction: ${orientation};
-    align-items: center;
-    justify-content: space-evenly;
-  `;
 
   //two handlers to shift which items are currently being displayed by updating state
   const decrementDisplayed = (e) => {
@@ -62,7 +61,7 @@ const ModularCarousel = ({ components=defaultComponents, orientation='row', coun
 
   //renders right set of arrows based on orientation string value
   return (
-  <CarouselWrapper>
+  <CarouselWrapper orientation={orientation}>
     <ArrowWrapper onClick={decrementDisplayed}>{orientation === 'row' ? <AiOutlineArrowLeft /> : <AiOutlineArrowUp />}</ArrowWrapper>
     {displayed}
     <ArrowWrapper onClick={incrementDisplayed}>{orientation === 'row' ? <AiOutlineArrowRight /> : <AiOutlineArrowDown />}</ArrowWrapper>
