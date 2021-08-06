@@ -105,7 +105,7 @@ const AddQuestion = ({ current, show, onClose }) => {
           <input onChange={e => onAnswerChange(e.target.value)}placeholder='Enter answer to question asked here!'></input>
           <div>*Your Nickname</div>
           <input onChange={e => onNicknameChange(e.target.value)} placeholder='jackson11!'></input>
-          <div placeholder='jackson11!'>*Your Email</div>
+          <div >*Your Email</div>
           <input onChange={e => onEmailChange(e.target.value)} placeholder='Example: jack@email.com'></input>
           <div>For authentication reasons, you will not be emailed</div>
           {/* thumbnail should appear and max 5 */}
