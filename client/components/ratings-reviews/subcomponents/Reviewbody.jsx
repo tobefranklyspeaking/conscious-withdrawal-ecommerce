@@ -45,7 +45,11 @@ const Reviewbody = ({body, photos}) => {
   const [bodyDisplay, setBodyDisplay] = useState("");
   const [photoDisplay, setPhotoDisplay] = useState([photos]);
   const [showMore, setShowMore] = useState(false);
-  const [show, setShow] = useState(false);
+  const [show1, setShow1] = useState(false);
+  const [show2, setShow2] = useState(false);
+  const [show3, setShow3] = useState(false);
+  const [show4, setShow4] = useState(false);
+  const [show5, setShow5] = useState(false);
 
 
 
@@ -79,7 +83,7 @@ let handleImgClick = () => {
 };
 
 //console.log('reviewbody: ', bodyDisplay);
-console.log('review photos', photos);
+//console.log('review photos', photos);
 
   return (
     //
@@ -91,8 +95,12 @@ console.log('review photos', photos);
       }
     </ReviewBodyWrapper>
     <ImageContainer>
-    {photos ? photos.map((pho, index) => (<><Image key={index} src={pho.url} alt="Review Image"/></>))  : '#'}
-      </ImageContainer>
+    {(photos[0]) && <><Image  src={photos[0].url} alt="Review Image" onClick={() => setShow1(true)}/><ReviewPhotos onClose={() => setShow1(false)} current={photos[0]} show={show1}/></>}
+    {(photos[1]) && <><Image src={photos[1].url} alt="Review Image" onClick={() => setShow2(true)}/><ReviewPhotos onClose={() => setShow2(false)} current={photos[1]} show={show2}/></>}
+    {(photos[2]) && <><Image  src={photos[2].url} alt="Review Image" onClick={() => setShow3(true)}/><ReviewPhotos onClose={() => setShow3(false)} current={photos[2]} show={show3}/></>}
+    {(photos[3]) && <><Image  src={photos[3].url} alt="Review Image" onClick={() => setShow4(true)}/><ReviewPhotos onClose={() => setShow4(false)} current={photos[3]} show={show4}/></>}
+    {(photos[4]) && <><Image  src={photos[4].url} alt="Review Image" onClick={() => setShow5(true)}/><ReviewPhotos onClose={() => setShow5(false)} current={photos[4]} show={show5}/></>}
+    </ImageContainer>
     </>
   );
 }
@@ -114,9 +122,11 @@ export default Reviewbody;
     </ImageContainer>
     }
 
-
+onClose={() => setShow(false)} current={current} show={show}
 
          {photos ? photos.map((pho, index) => (<><Image key={index} src={pho.url} alt="Review Image" onClick={() => setShow(true)}/></>))  : '#'}
+
+         {photos ? photos.map((pho, index) => (<><Image key={index} src={pho.url} alt="Review Image"/></>))  : '#'}
 
 
 */

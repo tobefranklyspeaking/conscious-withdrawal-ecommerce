@@ -22,28 +22,23 @@ const ModalContent = styled.div`
   border: 1px solid black;
 `;
 
-const ModalHeader = styled.div`
-  padding: 10px;
-  border: 1px solid black;
-`;
-
-const ModalTitle = styled.div`
-  margin: 0;
-  border: 1px solid black;
-`;
 
 const ModalBody = styled.div`
-  padding: 10px;
-  height: 50vh;
+  padding: 3px;
+  height: 60vh;
+  width: 80vh;
   border-top: 1px solid #eee;
   border bottom: 1px solid #eee;
   overflow: auto;
-  border: 1px solid black;
 `;
 
 const ModalFooter = styled.div`
-  padding: 10px;
-  border: 1px solid black;
+`;
+
+const ModalImg = styled.img`
+max-width: 80vh;
+max-height: 60vh;
+object-fit: cover;
 `;
 
 const ReviewPhotos = ({current, show, index, onClose}) => {
@@ -54,18 +49,15 @@ const ReviewPhotos = ({current, show, index, onClose}) => {
   }, [index])
 
 
-console.log('the piccc:', current, "--index: ", index);
+//console.log('the piccc:', current, "--index: ", index);
   if (!show) {
     return null;
   }
   return (
     <Modal onClick={onClose}>
       <ModalContent onClick={e => e.stopPropagation()}>
-        <ModalHeader>
-          <h4 className="modal-title">Write Your Review</h4>
-        </ModalHeader>
         <ModalBody>
-          About the {index}
+          <ModalImg src={current.url} alt="Review Image"/>
         </ModalBody>
         <ModalFooter className="modal-footer">
           <button onClick={() => {onClose(); setCurrentIndex(null)}} className="button">Close</button>
