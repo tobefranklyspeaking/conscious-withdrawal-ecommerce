@@ -34,27 +34,35 @@ const ModularCarousel = ({ components=defaultComponents, orientation='row', coun
 
   //state for which components out of the total components prop to display
   const [displayed, updateDisplayed] = useState(components.slice(0, count));
+  const [start, setStart] = useState(0);
+  const [stateComponents, updateStateComponents] = useState(components);
+  useEffect(() => {
+    updateStateComponents(components);
+
+  }, [components]);
 
   useEffect(() => {
-    updateDisplayed(components.slice(0, count));
-  }, [components])
+    updateDisplayed(stateComponents.slice(start, start+count));
+  }, [stateComponents]);
 
 
   //two handlers to shift which items are currently being displayed by updating state
   const decrementDisplayed = (e) => {
-    let firstIndex = components.indexOf(displayed[0]);
-    if (firstIndex !== 0) {
-      let newDisplayed = components.slice(firstIndex-1, count);
+    e.preventDefault();
+    if (start !== 0) {
+      let newDisplayed = stateComponents.slice(start-1, (start-1)+count);
+      setStart(start-1);
       updateDisplayed(newDisplayed);
     }
 
   };
   const incrementDisplayed = (e) => {
-    let firstIndex = components.indexOf(displayed[0]);
-    let lastIndex = components.indexOf(displayed[displayed.length-1]);
-
-    if (lastIndex !== components.length-1) {
-      let newDisplayed = components.slice(firstIndex+1, count);
+    e.preventDefault();
+    if (start < stateComponents.length-count) {
+      let newDisplayed = stateComponents.slice(start+1, (start+1)+count);
+      console.log(displayed);
+      console.log(newDisplayed);
+      setStart(start+1);
       updateDisplayed(newDisplayed);
     }
   };
@@ -63,7 +71,7 @@ const ModularCarousel = ({ components=defaultComponents, orientation='row', coun
   return (
   <CarouselWrapper orientation={orientation}>
     <ArrowWrapper onClick={decrementDisplayed}>{orientation === 'row' ? <AiOutlineArrowLeft /> : <AiOutlineArrowUp />}</ArrowWrapper>
-    {components.slice(0, count)}
+    {displayed}
     <ArrowWrapper onClick={incrementDisplayed}>{orientation === 'row' ? <AiOutlineArrowRight /> : <AiOutlineArrowDown />}</ArrowWrapper>
   </CarouselWrapper>);
 };
