@@ -1,8 +1,7 @@
 import React, { useState, useEffect, IconContext } from 'react';
 import styled from 'styled-components';
 import { CgSearch } from 'react-icons/cg';
-import axios from 'axios';
-import Questions from './RenderQuestions.jsx';
+import RenderQuestions from './RenderQuestions.jsx';
 import ImageModal from './ImageModal.jsx';
 
 const SearchBarStyle = styled.input`
@@ -43,25 +42,19 @@ const SearchButton = styled.div`
 `;
 
 
-const QASearch = ({ current}) => {
+const QASearch = ({ current, countQ }) => {
+
+
 
   const [search, setSearch] = useState('');
-  const [allQuestions, setAllQuestions] = useState([]);
+
   const [filteredQuestions, setFiltered] = useState([]);
   const [selection, setSelection] = useState(null);
   const [update, setUpdate] = useState(null);
   const [showImg, setShowImg] = useState(false);
   const [source, setSource] = useState('');
 
-  useEffect(() => {
-    if (current.id !== undefined) {
-      axios.get(`/qa/questions/?product_id=${current.id}`)
-        .then(response => {
-          setAllQuestions(response.data.results);
-        })
-        .catch(err => console.log(`Error in QuestionSearch useEffect: ${err}`));
-    }
-  }, [current.id, filteredQuestions, update])
+
 
   const handleClick = async () => {
     // This will allow the user to submit search
@@ -72,21 +65,14 @@ const QASearch = ({ current}) => {
     setUpdate(props);
   }
 
-  const handleQuestion = (e) => {
-    // setSearch(e.question_);
-    // console.log(e);
-    Questions(e);
-  }
+  // const handleQuestion = (e) => {
+  //   Questions(e);
+  // }
 
   const onChange = (searchText) => {
-    // console.log(searchText);
     setSearch(searchText.toLowerCase());
   }
 
-  //create questions section - store and render questions
-  //create answers section - store and render questions
-
-  const [count, setCount] = useState(0);
   return (
     <>
       <Search>
@@ -102,7 +88,7 @@ const QASearch = ({ current}) => {
         <ImageModal onClose={() => setShowImg(false)} source={source} show={showImg} style={{ cursor: 'pointer' }} />
       </Search>
       {search && (
-        allQuestions.filter(text => {
+        current.filter(text => {
 
           if (search.length > 2 && text !== undefined) {
             console.log('inside if statement numero uno')
@@ -120,10 +106,13 @@ const QASearch = ({ current}) => {
         })
       )}
       <List name='dropdown'>
-        <List>
-          <Questions current={allQuestions} updateData={updateData} setShowImg={setShowImg} setSource={setSource}/>
-          {/* {console.log(setShowImg, setSource)} */}
-        </List>
+        <RenderQuestions
+          current={current}
+          updateData={updateData}
+          setShowImg={setShowImg}
+          setSource={setSource}
+          countQ={countQ}
+        />
       </List>
     </>
   )
