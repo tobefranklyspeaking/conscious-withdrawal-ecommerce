@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineExpand } from 'react-icons/ai';
 import ModularCarousel from './Modular-Carousel.jsx'
 //component styles
 
@@ -48,19 +48,36 @@ const SideSlideWrapper = styled.div`
   }
 `;
 const Zoomed = styled.div`
-  /*background-image: url(${props => props.url}); */
+  background-image: url(${props => props.url});
   position: absolute;
-  width: 80vh;
-  height: 80vh;
+  border-radius: 50%;
+  top: 70%;
+  width: 40vh;
+  height: 40vh;
   border: 1px solid black;
   z-index: 999;
-  background-color: coral;
+`;
+
+const Expand = styled.div`
+  width: 2rem;
+  margin-top: .5rem;
+  position: absolute;
+  left: calc(100% - 2rem);
+  align-self: start;
+  display: grid;
+  place-items: center;
+`;
+
+const Modal = styled.dialog`
+  z-index: 100000;
+  position: fixed;
+  background-color: white;
 `;
 
 //slide subcomponent - image itself
 const Slide = ({ url, onMouseEnter, onMouseLeave}) => {
   return (
-    <SlideWrapper>
+    <SlideWrapper id="crSlide">
       <img src={url} alt="photo of clothing" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}/>
     </SlideWrapper>);
 };
@@ -79,7 +96,7 @@ const Arrow = ({ direction, clickHandler}) => {
 }
 
 const ZoomedSlide = ({url}) => {
-  return (<Zoomed url={url}/>);
+  return (<Zoomed url={url} id="zoomed"/>);
 };
 
 /************ PRIMARY COMPONENT HERE ************/
@@ -88,13 +105,28 @@ const Carousel = ({ urls, height, thumbnails}) => {
   const [index, setIndex] = useState(0);
   const [modComponents, setModComponents] = useState([]);
   const [showZoom, setShowZoom] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    let newThumbnails = thumbnails.map((url,i) => (<SideSlideWrapper key={i}><img src={url}/></SideSlideWrapper>))
+    const handler = (e) => {
+      let newIndex = thumbnails.indexOf(event.target.src);
+      setIndex(newIndex);
+    };
+    let newThumbnails = thumbnails.map((url,i) => (<SideSlideWrapper key={i} onClick={handler}><img src={url}/></SideSlideWrapper>))
     setModComponents(newThumbnails);
 
   }, [thumbnails]);
 
+  useEffect(() => {
+    if(showZoom) {
+      const elt = document.querySelector("#zoomed");
+      const crSlide = document.querySelector("#crSlide")
+      crSlide.addEventListener("mousemove", (e) => {
+        elt.style.backgroundPositionX = -e.offsetX + "px";
+        elt.style.backgroundPositionY = -e.offsetY + "px";
+      });
+    }
+  }, [showZoom])
 
   //event handlers to switch carousel to next/previous image
   const previousSlide = (e) => {
@@ -108,10 +140,15 @@ const Carousel = ({ urls, height, thumbnails}) => {
     }
   };
 
-
   return (
-    <>
+    <div>
     <CarouselWrapper height={height}>
+    {showModal && <Modal
+    url={urls[index]}
+    open
+    onClick={() => {setShowModal(false)}}><img src={urls[index]}/></Modal>}
+      <Expand onClick={() => {setShowModal(true)}}><AiOutlineExpand/></Expand>
+      {showZoom && (<ZoomedSlide url={urls[index]}/>)}
       <ModularCarousel orientation="column" components={modComponents}/>
       <Arrow direction="Left" clickHandler={previousSlide}/>
       <Slide
@@ -121,8 +158,7 @@ const Carousel = ({ urls, height, thumbnails}) => {
       />
       <Arrow direction="Right" clickHandler={nextSlide}/>
     </CarouselWrapper>
-    {/* {showZoom && (<ZoomedSlide />)} */}
-    </>
+    </div>
     );
 
 

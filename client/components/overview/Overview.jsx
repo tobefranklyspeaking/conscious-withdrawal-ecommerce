@@ -184,7 +184,7 @@ const Overview = ({ current }) => {
       updateThumbnails(newThumbnails);
       updateSkus(Object.values(currentStyle.skus));
     }
-  }, [currentStyle]);
+  }, [currentStyle.photos]);
 
 //click handlers for *all* the buttons
   const styleClickHandler = (e) => {
@@ -247,7 +247,7 @@ const Overview = ({ current }) => {
       <OverviewWrapper>
         <Banner>SITE-WIDE ANNOUCEMENT MESSAGE!</Banner>
         <Column1>
-          <Carousel urls={photos} thumbnails={thumbnails}/>
+          <Carousel urls={photos} thumbnails={thumbnails} />
           <Slogan>{current.slogan}</Slogan>
           <Description>{current.description}</Description>
           <SocialButtonRow>
@@ -290,7 +290,7 @@ const Overview = ({ current }) => {
               }
               return acc;
             }, [])}
-            title="QUANTITY"
+            title={qty || "QUANTITY"}
             callback={qtyDropdownCallback}/>
           </ButtonRow1>
           <ButtonRow2>
