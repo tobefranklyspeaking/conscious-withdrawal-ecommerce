@@ -53,6 +53,7 @@ const ReviewContainer = styled.div`
 height:440px;
 height: 550px;
 overflow: auto;
+z-index: -1;
 `;
 
 const TotalReviews = styled.div`
