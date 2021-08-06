@@ -264,7 +264,7 @@ const Overview = ({ current }) => {
           <Category>{current.category}</Category>
           <Name>{current.name}</Name>
           <Price style={currentStyle.sale_price ? {color: 'red'} : {}} >{'$' + (currentStyle.sale_price || currentStyle.original_price)}</Price>
-          <StyleHeader> <h4>STYLE ></h4> SELECTED STYLE</StyleHeader>
+          <StyleHeader> <h4>STYLE ></h4>{ ' ' + currentStyle.name || 'SELECTED STYLE'}</StyleHeader>
           <StyleSelector>
             {styles.length && currentStyle.photos && styles.map(style => style.photos[0].thumbnail_url).map((nail, i) => (
             <StyleContainer key={i}>
