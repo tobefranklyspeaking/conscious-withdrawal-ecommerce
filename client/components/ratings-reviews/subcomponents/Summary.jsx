@@ -33,7 +33,7 @@ margin-left: 5px;
 font-size: 14px;
 `;
 
-const Summary = ({ id, setIsFiltered }) => {
+const Summary = ({ id, setIsFiltered, handleMoreReviews }) => {
   //console.log('id in summary', id);
 
   const [metaData, setMetaData] = useState({});
@@ -154,7 +154,15 @@ const Summary = ({ id, setIsFiltered }) => {
     //console.log('total rec', percent);
     return percent;
   };
+
   let percentRecommended = percentRec();
+
+  if(isNaN(percentRecommended)) {
+    percentRecommended = 0;
+  }
+
+
+
 
   // const handleFilterChange = (newVal) => {
   //   setFil(newVal);
@@ -172,7 +180,7 @@ const Summary = ({ id, setIsFiltered }) => {
     <RecommendDiv>{percentRecommended}% of reviews recommend this product</RecommendDiv>
     </SummaryWrapper>
     <BreakdownWrapper className='BreakdownWrapper'>
-    <RatingBreakdown ratings={ratings} numRatings={totalRatings()} setIsFiltered={setIsFiltered} characteristics={characteristics}/>
+    <RatingBreakdown ratings={ratings} numRatings={totalRatings()} setIsFiltered={setIsFiltered} characteristics={characteristics} handleMoreReviews={handleMoreReviews}/>
     </BreakdownWrapper>
     </>
   );

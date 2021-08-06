@@ -15,23 +15,21 @@ const Modal = styled.div`
   align-items: center;
   justify-content: center;
   border: 1px solid black;
+  z-index: 5;
 `;
 
 const ModalContent = styled.div`
-  width: 80vh;
+  width: 90vh;
   height: 70vh;
   background-color: white;
-  border: 1px solid black;
 `;
 
 const ModalHeader = styled.div`
   padding: 10px;
-  border: 1px solid black;
 `;
 
 const ModalTitle = styled.div`
   margin: 0;
-  border: 1px solid black;
 `;
 
 const ModalBody = styled.div`
@@ -41,6 +39,8 @@ const ModalBody = styled.div`
   border bottom: 1px solid #eee;
   overflow: auto;
   border: 1px solid black;
+  font-weight: bold;
+  font-size: 25px;
 `;
 
 const ModalFooter = styled.div`

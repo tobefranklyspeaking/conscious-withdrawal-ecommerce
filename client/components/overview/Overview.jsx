@@ -161,8 +161,6 @@ const Overview = ({ current }) => {
           updateStyles(arr.results);
           updateCurrentStyle(arr.results[0]);
           updateFeatures(current.features);
-          console.log('current obj here!', current);
-          console.log('current Style here!', arr.results[0]);
 
           let newMeta = await fetch(`/reviews/meta?product_id=${current.id}`).then(data => data.json());
           let avg = getAverageRating(newMeta.ratings);
@@ -186,7 +184,7 @@ const Overview = ({ current }) => {
       updateThumbnails(newThumbnails);
       updateSkus(Object.values(currentStyle.skus));
     }
-  }, [currentStyle]);
+  }, [currentStyle.photos]);
 
 //click handlers for *all* the buttons
   const styleClickHandler = (e) => {
@@ -240,7 +238,6 @@ const Overview = ({ current }) => {
   const reviewScroller = (e) => {
     e.preventDefault();
     let elt = document.getElementById('reviews');
-    console.log(elt);
     elt.scrollIntoView();
   };
 
@@ -250,7 +247,7 @@ const Overview = ({ current }) => {
       <OverviewWrapper>
         <Banner>SITE-WIDE ANNOUCEMENT MESSAGE!</Banner>
         <Column1>
-          <Carousel urls={photos}/>
+          <Carousel urls={photos} thumbnails={thumbnails} />
           <Slogan>{current.slogan}</Slogan>
           <Description>{current.description}</Description>
           <SocialButtonRow>
@@ -267,7 +264,7 @@ const Overview = ({ current }) => {
           <Category>{current.category}</Category>
           <Name>{current.name}</Name>
           <Price style={currentStyle.sale_price ? {color: 'red'} : {}} >{'$' + (currentStyle.sale_price || currentStyle.original_price)}</Price>
-          <StyleHeader> <h4>STYLE ></h4> SELECTED STYLE</StyleHeader>
+          <StyleHeader> <h4>STYLE ></h4>{ ' ' + currentStyle.name || 'SELECTED STYLE'}</StyleHeader>
           <StyleSelector>
             {styles.length && currentStyle.photos && styles.map(style => style.photos[0].thumbnail_url).map((nail, i) => (
             <StyleContainer key={i}>
@@ -293,7 +290,7 @@ const Overview = ({ current }) => {
               }
               return acc;
             }, [])}
-            title="QUANTITY"
+            title={qty || "QUANTITY"}
             callback={qtyDropdownCallback}/>
           </ButtonRow1>
           <ButtonRow2>

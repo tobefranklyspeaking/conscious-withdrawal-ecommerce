@@ -1,8 +1,8 @@
 import React, { useState, useEffect, IconContext } from 'react';
 import styled from 'styled-components';
 import { CgSearch } from 'react-icons/cg';
-import axios from 'axios';
-import Blocks from './Blocks.jsx';
+import RenderQuestions from './RenderQuestions.jsx';
+import ImageModal from './ImageModal.jsx';
 
 const SearchBarStyle = styled.input`
   width: 100%;
@@ -31,6 +31,7 @@ const List = styled.div`
   height: auto;
   max-height: 50vh;
   overflow-y: scroll;
+  border: hsla(0 0% 0% 1);
 `;
 
 const SearchButton = styled.div`
@@ -41,45 +42,47 @@ const SearchButton = styled.div`
   height: 18px;
 `;
 
+const Quest = styled.div`
+  height: auto;
+  max-height: 50vh;
+  overflow-y: scroll;
+  border: hsla(0 0% 0% 1);
+`;
 
-const QASearch = ({ current }) => {
-  const [search, setSearch] = useState('');
-  const [allQuestions, setAllQuestions] = useState([]);
+
+const QASearch = ({ current, countQ }) => {
+
+  //current is all products
   const [filteredQuestions, setFiltered] = useState([]);
   const [selection, setSelection] = useState(null);
+
+  const [search, setSearch] = useState('');
+
   const [update, setUpdate] = useState(null);
+  const [showImg, setShowImg] = useState(false);
+  const [source, setSource] = useState('');
 
-  useEffect(() => {
-    if (current.id !== undefined) {
-      axios.get(`/qa/questions/?product_id=${current.id}`)
-        .then(response => {
-          setAllQuestions(response.data.results);
-        })
-        .catch(err => console.log(`Error in QuestionSearch useEffect: ${err}`));
-    }
-  }, [current.id, filteredQuestions, update])
 
+  /* will use to update click functionality */
   const handleClick = async () => {
     // This will allow the user to submit search
     console.log('handleClick clicked')
   }
 
   const updateData = (props) => {
+    console.log(current);
     setUpdate(props);
   }
+  /* will use to update click functionality */
 
-  const handleQuestion = (e) => {
-    // setSearch(e.question_);
-    // console.log(e);
-    Blocks(e);
-  }
+  // const handleQuestion = (e) => {
+  //   Questions(e);
+  // }
 
   const onChange = (searchText) => {
-    // console.log(searchText);
     setSearch(searchText.toLowerCase());
   }
 
-  const [count, setCount] = useState(0);
   return (
     <>
       <Search>
@@ -92,27 +95,34 @@ const QASearch = ({ current }) => {
         <SearchButton>
           <CgSearch onClick={() => handleClick()} style={{ cursor: 'pointer' }} />
         </SearchButton>
+        <ImageModal onClose={() => setShowImg(false)} source={source} show={showImg} style={{ cursor: 'pointer' }} />
       </Search>
-      <List name='dropdown'>
-        <List>
-          <Blocks current={allQuestions} updateData={updateData} update={update} />
-        </List>
-        {search && (
-          allQuestions.filter(text => {
-            if (search.length > 2 && text !== undefined) {
-              if (text.question_body.toLowerCase().indexOf(search) !== -1) {
-                console.log('inside filter', text)
-                return true;
-              } else {
-                return false
-              }
+      {search && (
+        current.filter(text => {
+
+          if (search.length > 2 && text !== undefined) {
+            console.log('inside if statement numero uno')
+            if (text.question_body.toLowerCase().indexOf(search) !== -1) {
+              console.log('inside filter', text)
+              return true;
+            } else {
+              return false
             }
-          }).map((value, i) => {
-            return (
-              <div key={i}>Hello World</div>
-            )
-          })
-        )}
+          }
+        }).map((value, i) => {
+          return (
+            <Quest key={i}>{value.question_body}</Quest>
+          )
+        })
+      )}
+      <List name='dropdown'>
+        <RenderQuestions
+          current={current}
+          updateData={updateData}
+          setShowImg={setShowImg}
+          setSource={setSource}
+          countQ={countQ}
+        />
       </List>
     </>
   )
