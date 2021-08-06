@@ -4,7 +4,8 @@ import axios from 'axios';
 
 const Modal = styled.div`
   position: fixed;
-  background-color: hsla(0, 0%, 0%, .4);
+  /* background-color: hsla(0, 0%, 0%, .4); */
+  background-color: black;
   top: 0;
   right: 0;
   bottom: 0;
@@ -37,7 +38,7 @@ const Button = styled.button`
   font-size: .7rem;
 `;
 
-const ImageModal = ({source, show, onClose}) => {
+const ImageModal = ({ source, show, onClose }) => {
 
   if (!show) {
     return null;
@@ -45,8 +46,7 @@ const ImageModal = ({source, show, onClose}) => {
   return (
     <Modal onClick={onClose}>
       <div>
-        {console.log(source, show, onClose)}
-            <Image src={source}/>
+        <Image src={source} />
       </div>
     </Modal>
   )

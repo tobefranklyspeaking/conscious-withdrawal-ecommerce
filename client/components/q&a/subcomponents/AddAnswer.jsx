@@ -5,42 +5,44 @@ import UploadImg from './UploadImg.jsx';
 
 const Modal = styled.div`
   position: fixed;
-  background-color: hsla(0, 0%, 0%, 0.5);
-  box-shadow: 5px, 10px;
+  background-color: hsla(0, 0%, 0%, .8);
+  box-shadow: 10px, 20px;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const ModalContent = styled.div`
-  display: relative;
   width: 80%;
   height: 70%;
   background-color: white;
 `;
 
 const ModalHeader = styled.div`
-  display: flex;
-  height: auto;
   padding: 10px;
 `;
 
 const ModalBody = styled.div`
-  display: flex;
   padding: 10px;
-  height: 70%;
-  border-top: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
+  height: 50vh;
+  border-top: 1px solid #eee;
+  border bottom: 1px solid #eee;
+  overflow: auto;
+  font-weight: bold;
+  font-size: 25px;
+
+  input {
+    width: 80%;
+    height: 15%;
+  }
 `;
 
 const ModalFooter = styled.div`
-  display: flex;
   padding: 10px;
-  height: auto;
 `;
 
 const Button = styled.button`
@@ -107,12 +109,12 @@ const AddAnswer = ({ current, show, onClose }) => {
         </ModalHeader>
         <ModalBody>
           <div>*Your Answer</div>
-          <input onChange={e => onAnswerChange(e.target.value)}></input>
+          <input onChange={e => onAnswerChange(e.target.value)}placeholder='Enter answer to question asked here!'></input>
           <div>*Your Nickname</div>
-          <input onChange={e => onNicknameChange(e.target.value)}></input>
-          <div><div>*Photo Upload</div></div>
+          <input onChange={e => onNicknameChange(e.target.value)} placeholder='jackson11!'></input>
+          <div>*Photo Upload</div>
           <input onChange={e => onImgChange(e.target.value)} placeholder='Insert up to 5 comma separated links'></input>
-          <div placeholder='jackson11!'>*Your Email</div>
+          <div >*Your Email</div>
           <input onChange={e => onEmailChange(e.target.value)} placeholder='Example: jack@email.com'></input>
           <div>For authentication reasons, you will not be emailed</div>
           {/* thumbnail should appear and max 5 */}
@@ -121,7 +123,7 @@ const AddAnswer = ({ current, show, onClose }) => {
           <Button onClick={onClose} className="button">Cancel</Button>
           {/* <Button style={{ cursor: 'pointer' }} onClick={() => setShowImgUpload(true)}><u>Add Photos</u></Button> */}
           <Button className="submit" onClick={() => onSubmit()}>Submit</Button>
-          <div>Page will close if successful submit occurs</div>
+          <div>Will close on successful submit</div>
         </ModalFooter>
       </ModalContent>
     </Modal>

@@ -57,10 +57,6 @@ const LineB = styled.div`
   div {
     margin: 1vh 0 0 2vh;
   }
-
-  button {
-
-  }
 `;
 
 const Images = styled.span`
@@ -108,21 +104,21 @@ const HelpfulButton = styled.span`
 
 
 
-const Answers = ({ current, setShowImg, setSource }) => {
+const RenderAnswers = ({ current, setShowImg, setSource, setAnswersLength, countA }) => {
 
 
   const [moreAnswers, setMoreAnswers] = useState(true);
   const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
-
-    if (current.question_id !== undefined) {
-      axios.get(`/qa/questions/${current.question_id}/answers`)
+      if (current.question_id) {
+        axios.get(`/qa/questions/${current.question_id}/answers`)
         .then(response => {
           setAnswers(response.data.results);
         })
-        .catch(err => console.log(`Error in QuestionSearch useEffect: ${err}`));
-    }
+        .catch(err => console.log(`Error in answers query: ${err}`));
+
+      }
   }, [current.question_id])
 
   const handleImage = (url) => {
@@ -130,11 +126,23 @@ const Answers = ({ current, setShowImg, setSource }) => {
     setShowImg(true);
   }
 
+  const display = (answers, countA) => {
+    let displayedAnswers = answers.slice();
+    if (answers.length > 2) {
+      displayedAnswers = displayedAnswers.slice(0, countA);
+      return displayedAnswers;
+    } else {
+      return displayedAnswers;
+    }
+  }
+
+  let finalDisplay = display(answers, countA);
+
   return (
-    Object.keys(answers)
+    finalDisplay
       .sort((each, next) => {
-        let a = answers[each].helpfulness;
-        let b = answers[next].helpfulness;
+        let a = each.helpfulness;
+        let b = next.helpfulness;
         if (a > b) {
           return -1;
         } else if (b < a) {
@@ -142,35 +150,29 @@ const Answers = ({ current, setShowImg, setSource }) => {
         } else return 0;
       })
       .map(each => {
-        let current = answers[each];
-        if (current.body !== undefined) {
+        if (each.body !== undefined) {
           return (
-            <div key={parseInt(each)}>
+            <div key={each.answer_id}>
               <AnswerAdditions>
-
                 <LineA>
                   <Bold> A: </Bold>
-                  {current.body}
+                  {each.body}
                 </LineA>
-
                 <LineB >
-                  <span> by {current.answerer_name}, {moment(current.question_date).format('ll')} </span>
+                  <span> by {each.answerer_name}, {moment(each.question_date).format('ll')} </span>
                   <span> | </span>
                   <HelpfulButton>
-                    <Helpful path={'/qa/questions'} id={parseInt(each)} helpfulness={current.helpfulness} />
+                    <Helpful path={'/qa/questions'} id={each.answer_id} helpfulness={each.helpfulness} />
                     <span> | </span>
-                    <Report path={'/qa/questions'} id={parseInt(each)} />
+                    <Report path={'/qa/questions'} id={each.answer_id} />
                   </HelpfulButton>
                 </LineB>
-
-                {Object.keys(current.photos).length > 0 && Object.keys(current.photos).length < 6
-
+                {Object.keys(each.photos).length > 0 && Object.keys(each.photos).length < 6
                   ? <LineB>
-
                     <div style={{ margin: '0.5rem' }}>Attached Photos: </div>
                     <Images>
-                      {current.photos
-                        ? current.photos.map((each, index) => {
+                      {each.photos
+                        ? each.photos.map((each, index) => {
                           return (
                             <span key={index}>
                               <Img src={each.url} onClick={() => handleImage(each.url)} style={{ cursor: 'pointer' }} />
@@ -179,17 +181,15 @@ const Answers = ({ current, setShowImg, setSource }) => {
                         })
                         : '#'}
                     </Images>
-
                     <div>
-                      <span> by {current.answerer_name}, {moment(current.question_date).format('ll')} </span>
+                      <span> by {each.answerer_name}, {moment(each.question_date).format('ll')} </span>
                       <span> | </span>
                       <HelpfulButton >
-                        <Helpful path={'/qa/questions'} id={parseInt(each)} helpfulness={current.helpfulness} />
+                        <Helpful path={'/qa/questions'} id={each.answer_id} helpfulness={each.helpfulness} />
                         <span> | </span>
-                        <Report path={'/qa/questions'} id={parseInt(each)} />
+                        <Report path={'/qa/questions'} id={each.answer_id} />
                       </HelpfulButton >
                     </div>
-
                   </LineB>
                   : null}
               </AnswerAdditions>
@@ -208,4 +208,4 @@ const Answers = ({ current, setShowImg, setSource }) => {
   )
 }
 
-export default Answers;
+export default RenderAnswers;

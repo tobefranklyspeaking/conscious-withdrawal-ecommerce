@@ -5,10 +5,8 @@ import styled from 'styled-components';
 import Helpful from '/client/components/shared/Helpful.jsx';
 import Report from '/client/components/shared/Report.jsx';
 import ImageModal from './ImageModal.jsx';
-import Answers from './RenderAnswers.jsx';
+import RenderAnswers from './RenderAnswers.jsx';
 
-const Accordian = styled.div`
-`;
 
 const Container = styled.div`
   margin-bottom: 10px;
@@ -39,11 +37,6 @@ const QuestionAdditions = styled.div`
   margin-bottom: 5px;
 `;
 
-const LineA = styled.div`
-  margin-top: 5px;
-  margin-bottom: 5px;
-`;
-
 const LineB = styled.div`
   font-size: 8px;
   margin-top: 5px;
@@ -61,22 +54,13 @@ const LineB = styled.div`
   div {
     margin: 1vh 0 0 2vh;
   }
-
-  button {
-
-  }
 `;
 
-const Images = styled.span`
-
-`;
-
-const Img = styled.img`
-  max-width: 200px;
-  max-height: 150px;
-  width: auto;
-  height: auto;
-  margin-right: 1rem;
+const Button = styled.button`
+  font-size: 10;
+  margin-left: 2%;
+  background-color: white;
+  border: none;
 `;
 
 const Wrapper = styled.div`
@@ -103,42 +87,23 @@ const Wrapper = styled.div`
   }
 `;
 
-const HelpfulButton = styled.span`
-  .helpfulButton {
-    text-decoration: underline;
-    margin-left: 1rem;
-    font-weight: lighter;
-    color: gray;
-    background-color: white;
-    border: none;
-    font-size: 10px;
-    cursor: pointer;
-    &:hover.helpfulButton {
-      color: blue;
-    }
-  }
-
-  .reportButton {
-    background-color: white;
-    border: none;
-    margin: 5px 0 1rem 1rem;
-    color: gray;
-    font-weight: lighter;
-    font-size: 10px;
-    cursor: pointer;
-
-    &:hover.helpfulButton {
-      color: blue;
-    }
-  }
+const List = styled.div`
+  height: auto;
+  max-height: 50vh;
+  overflow-y: scroll;
+  border: black;
+  box-shadow: 5px;
 `;
 
 
 
-const Questions = ({ current, updateData, setShowImg, setSource }) => {
-  const [moreQuestions, setMoreQuestions] = useState(true);
+
+const RenderQuestions = ({ current, updateData, setShowImg, setSource, countQ }) => {
+  const [countA, setCountA] = useState(2);
+  const [answersLength, setAnswersLength] = useState('');
   const [show, setShow] = useState(false);
   const [hide, setHide] = useState(true);
+
 
 
   const Reported = ({ hide }) => {
@@ -148,31 +113,55 @@ const Questions = ({ current, updateData, setShowImg, setSource }) => {
     return <div>Reported</div>
   }
 
-  const Questions = ({ current, state }) => {
+
+  let display = (current, countQ) => {
+    let displayedQuestions = current.slice();
+
+    if (current.length > 2) {
+      displayedQuestions = displayedQuestions.slice(0, countQ);
+
+      return displayedQuestions;
+    } else {
+      return displayedQuestions;
+    }
+
+  }
+
+  let finalDisplay = display(current, countQ);
+
+
+  const Questions = () => {
     return (
-      current.map(each => {
+      finalDisplay.map(each => {
         return (
-          <Accordian key={each.question_id}>
+          <div key={each.question_id}>
+            {console.log('blahhhhhh', countQ, current, finalDisplay)}
             <Container >
-              <Wrap>
-                <Bold>
-                  Q: {each.question_body}
-                </Bold>
-                <SpaceQ>
-                  <SpaceQ style={{ cursor: 'pointer' }} onClick={() => setShow(true)} pass={() => setShow(true)}><u>Add Answer</u>
-                  </SpaceQ>
-                  <SpaceQ>|</SpaceQ>
-                  <Wrapper>
-                    <Helpful path={'/qa/questions'} id={each.question_id} helpfulness={each.question_helpfulness} />
-                  </Wrapper>
-                  <AddAnswer onClose={() => setShow(false)} current={each} show={show} style={{ cursor: 'pointer' }} />
+              <Bold>
+                Q: {each.question_body}
+              </Bold>
+              <SpaceQ>
+                <SpaceQ style={{ cursor: 'pointer' }} onClick={() => setShow(true)} pass={() => setShow(true)}><u>Add Answer</u>
                 </SpaceQ>
-              </Wrap>
+                <SpaceQ>|</SpaceQ>
+                <Wrapper>
+                  <Helpful path={'/qa/questions'} id={each.question_id} helpfulness={each.question_helpfulness} />
+                </Wrapper>
+                <AddAnswer onClose={() => setShow(false)} current={each} show={show} style={{ cursor: 'pointer' }} />
+              </SpaceQ>
             </Container>
             <AnswerContainer>
-              <Answers current={each} setShowImg={setShowImg} setSource={setSource}/>
+              <RenderAnswers current={each} setShowImg={setShowImg} setSource={setSource} setAnswersLength={setAnswersLength} countA={countA} />
+              {console.log('length', answersLength.length, 'count', countA)}
+              <Button
+                onClick={() => countA <= answersLength.length
+                  ? setCountA(countA + 2)
+                  : setCountA(2)}
+                >
+                {countA <= answersLength ? 'MORE ANSWERS' : 'COLLAPSE'}
+              </Button>
             </AnswerContainer>
-          </Accordian>
+          </div>
         )
       })
     )
@@ -180,10 +169,10 @@ const Questions = ({ current, updateData, setShowImg, setSource }) => {
   return (
     current && (
       <div>
-        <Questions current={current} setShowImg={setShowImg} setSource={setSource}/>
+        <Questions current={current} setShowImg={setShowImg} setSource={setSource} />
       </div>
     )
   )
 }
 
-export default Questions;
+export default RenderQuestions;
