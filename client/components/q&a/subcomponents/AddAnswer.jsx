@@ -121,7 +121,7 @@ const AddAnswer = ({ current, show, onClose }) => {
           <Button onClick={onClose} className="button">Cancel</Button>
           {/* <Button style={{ cursor: 'pointer' }} onClick={() => setShowImgUpload(true)}><u>Add Photos</u></Button> */}
           <Button className="submit" onClick={() => onSubmit()}>Submit</Button>
-          <div>Page will close if successful submit occurs</div>
+          <div>Will close on successful submit</div>
         </ModalFooter>
       </ModalContent>
     </Modal>

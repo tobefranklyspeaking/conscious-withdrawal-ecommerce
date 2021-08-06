@@ -111,34 +111,24 @@ const RenderAnswers = ({ current, setShowImg, setSource, setAnswersLength, count
   const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
-    if (current.question_id) {
-      getAnswers();
-    }
-  }, [])
+      if (current.question_id) {
+        axios.get(`/qa/questions/${current.question_id}/answers`)
+        .then(response => {
+          setAnswers(response.data.results);
+        })
+        .catch(err => console.log(`Error in answers query: ${err}`));
 
-  const getAnswers = () => {
-    axios.get(`/qa/questions/${current.question_id}/answers`)
-    .then(response => {
-      let temp = response.data.results;
-      setAnswers(temp);
-    })
-    .catch(err => console.log(`Error in answers query: ${err}`));
-  }
-
-  // useEffect(() => {
-  //   answers ?
-  //   setAnswersLength(answers.length):
-  //   console.log()
-  // })
+      }
+  }, [current.question_id])
 
   const handleImage = (url) => {
     setSource(url);
     setShowImg(true);
   }
 
-  const display = (current, countA) => {
-    let displayedAnswers = current.slice();
-    if (current.length > 2) {
+  const display = (answers, countA) => {
+    let displayedAnswers = answers.slice();
+    if (answers.length > 2) {
       displayedAnswers = displayedAnswers.slice(0, countA);
       return displayedAnswers;
     } else {

@@ -59,7 +59,7 @@ const LineB = styled.div`
 const Button = styled.button`
   font-size: 10;
   margin-left: 2%;
-  background-color: hsla(0 0% 0% .3);
+  background-color: white;
   border: none;
 `;
 
@@ -87,6 +87,14 @@ const Wrapper = styled.div`
   }
 `;
 
+const List = styled.div`
+  height: auto;
+  max-height: 50vh;
+  overflow-y: scroll;
+  border: black;
+  box-shadow: 5px;
+`;
+
 
 
 
@@ -95,6 +103,7 @@ const RenderQuestions = ({ current, updateData, setShowImg, setSource, countQ })
   const [answersLength, setAnswersLength] = useState('');
   const [show, setShow] = useState(false);
   const [hide, setHide] = useState(true);
+
 
 
   const Reported = ({ hide }) => {
@@ -110,6 +119,7 @@ const RenderQuestions = ({ current, updateData, setShowImg, setSource, countQ })
 
     if (current.length > 2) {
       displayedQuestions = displayedQuestions.slice(0, countQ);
+
       return displayedQuestions;
     } else {
       return displayedQuestions;
@@ -120,11 +130,12 @@ const RenderQuestions = ({ current, updateData, setShowImg, setSource, countQ })
   let finalDisplay = display(current, countQ);
 
 
-  const Questions = ({ state }) => {
+  const Questions = () => {
     return (
       finalDisplay.map(each => {
         return (
           <div key={each.question_id}>
+            {console.log('blahhhhhh', countQ, current, finalDisplay)}
             <Container >
               <Bold>
                 Q: {each.question_body}
@@ -140,13 +151,13 @@ const RenderQuestions = ({ current, updateData, setShowImg, setSource, countQ })
               </SpaceQ>
             </Container>
             <AnswerContainer>
-              <RenderAnswers current={each} setShowImg={setShowImg} setSource={setSource} setAnswersLength={setAnswersLength} countA={countA}/>
-              {/* {console.log(answersLength.length)} */}
+              <RenderAnswers current={each} setShowImg={setShowImg} setSource={setSource} setAnswersLength={setAnswersLength} countA={countA} />
+              {console.log('length', answersLength.length, 'count', countA)}
               <Button
-                onClick={() =>
-                  countA > 2 && countA <= answersLength && countA
+                onClick={() => countA <= answersLength.length
                   ? setCountA(countA + 2)
-                  : setCountA(2)}>
+                  : setCountA(2)}
+                >
                 {countA <= answersLength ? 'MORE ANSWERS' : 'COLLAPSE'}
               </Button>
             </AnswerContainer>

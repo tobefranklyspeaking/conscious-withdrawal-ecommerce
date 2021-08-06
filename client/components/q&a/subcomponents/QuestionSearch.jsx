@@ -31,6 +31,7 @@ const List = styled.div`
   height: auto;
   max-height: 50vh;
   overflow-y: scroll;
+  border: hsla(0 0% 0% 1);
 `;
 
 const SearchButton = styled.div`
@@ -62,6 +63,7 @@ const QASearch = ({ current, countQ }) => {
   }
 
   const updateData = (props) => {
+    console.log(current);
     setUpdate(props);
   }
 
@@ -70,6 +72,7 @@ const QASearch = ({ current, countQ }) => {
   // }
 
   const onChange = (searchText) => {
+    searchText.prevent.default()
     setSearch(searchText.toLowerCase());
   }
 

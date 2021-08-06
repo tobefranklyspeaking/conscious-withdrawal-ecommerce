@@ -111,7 +111,7 @@ const AddQuestion = ({current, show, onClose}) => {
         <ModalFooter className="modal-footer">
           <Button onClick={onClose} className="button">Cancel</Button>
           <Button className="submit" onClick={() => onSubmit()}>Submit</Button>
-          <div>Page will close if successful submit occurs</div>
+          <div>Will close on successful submit</div>
         </ModalFooter>
       </ModalContent>
     </Modal>
