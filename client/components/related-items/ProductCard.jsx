@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import Stars from '../shared/Stars.jsx';
 import Star from '../shared/Star.jsx';
 import axios from 'axios';
+import getAverageRating from '../shared/getAverageRating.js';
 
 const Card = styled.div`
   border: 1px solid black;
@@ -59,16 +60,6 @@ const Card = styled.div`
   }
 `;
 
-const getAverageRating = (ratings) => {
-  var totalNumberRatings = 0;
-  var sum = 0;
-  for (var key in ratings) {
-    totalNumberRatings += Number(ratings[key]);
-    sum += ratings[key] * key;
-  }
-  return sum / totalNumberRatings;
-}
-
 export default ({ productID }) => {
 
 const loadingState = {
@@ -82,20 +73,22 @@ const loadingState = {
   const [productRating, setProductRating] = useState(0);
 
   useEffect(() => {
-    axios(`/products/${productID}`)
+    if (productID) {
+      axios(`/products/${productID}`)
       .then((response) => {
         setProductInfo(response.data)
       })
       .catch((error) => console.log(error));
-    axios(`/products/${productID}/styles`)
+      axios(`/products/${productID}/styles`)
       .then((response) => {
         setProductImage(response.data.results[0].photos[0].thumbnail_url)
       })
       .catch((error) => console.log(error));
-    axios(`/reviews/meta/?product_id=${productID}`)
+      axios(`/reviews/meta/?product_id=${productID}`)
       .then((response) => {setProductRating(getAverageRating(response.data.ratings))
       })
       .catch((error) => console.log(error));
+    }
   }, [])
 
   return (

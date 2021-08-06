@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from "styled-components";
 import Carousel from '../shared/Carousel.jsx'
 import Stars from '../shared/Stars.jsx';
+import getAverageRating from '../shared/getAverageRating.js';
 import Dropdown from '../shared/Dropdown.jsx';
 import Button from '../shared/Button.jsx';
-import { FaRegHeart, FaCheck, FaPlus } from 'react-icons/fa'
+import { FaRegHeart, FaCheck, FaPlus, FaFacebook, FaTwitter, FaPinterest } from 'react-icons/fa';
+import { IconContext } from 'react-icons';
 //component styles
 const OverviewWrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr minmax(150px, 40%);
   margin-bottom: 1rem;
@@ -118,24 +120,60 @@ const Column2 = styled.div`
   flex-flow: column nowrap;
   padding-left: 1rem;
 `;
+const SocialButtonRow = styled.div`
+  display: flex;
+  margin-top: 1rem;
+  align-items: center;
+  justify-content: space-evenly;
+  & > * {
+    color: inherit;
+  }
+`
 
 const Overview = ({ current }) => {
+  //set state: have isolated photos/thumbnails and sku/sale for easier useEffect logic
   const [styles, updateStyles] = useState([]);
   const [currentStyle, updateCurrentStyle] = useState({});
-  const [photos, updatePhotos] = useState([]);
+  const [features, updateFeatures] = useState([]);
   const [thumbnails, updateThumbnails] = useState([]);
-  //fetches styles and sets default to first style based on current product on mount
+  const [meta, updateMeta] = useState({});
+  const [numReviews, updateNumReviews] = useState(0);
+
+  //state which depends on the currentStyle/is updated in the second useEffect hook
+  const [avgRating, updateAvg] = useState(0);
+  const [photos, updatePhotos] = useState([]);
+  const [skus, updateSkus] = useState([]);
+
+  //state which depends on user interaction with dropdowns + is useful for cart
+  const [size, updateSize] = useState('');
+  const [qty, updateQty] = useState(0);
+
+  //ref to access size dropdown
+  const sizeRef = useRef(null);
+
+  //fetches styles and sets default to first style based on current product on mount. This useEffect acts like componentDidMount
   useEffect(async () => {
     try {
         if(current.id) {
           let res = await fetch(`/products/${current.id}/styles`);
           let arr = await res.json();
-          console.log('arr.results here', arr.results);
+
           updateStyles(arr.results);
           updateCurrentStyle(arr.results[0]);
+          updateFeatures(current.features);
+          console.log('current obj here!', current);
+          console.log('current Style here!', arr.results[0]);
+
+          let newMeta = await fetch(`/reviews/meta?product_id=${current.id}`).then(data => data.json());
+          let avg = getAverageRating(newMeta.ratings);
+          updateAvg(avg);
+          updateMeta(newMeta);
+
+          let reviews = await fetch(`/reviews?product_id=${current.id}&count=1000`).then(data => data.json());
+          updateNumReviews(reviews.results.length);
         }
     } catch (err) {
-      console.error('err fetching styles', err);
+      console.error('err fetching styles or metadata', err);
     }
   },[current]);
 
@@ -146,8 +184,66 @@ const Overview = ({ current }) => {
       let newThumbnails = currentStyle.photos.map(photo => photo.thumbnail_url);
       updatePhotos(newPhotos);
       updateThumbnails(newThumbnails);
+      updateSkus(Object.values(currentStyle.skus));
     }
   }, [currentStyle]);
+
+//click handlers for *all* the buttons
+  const styleClickHandler = (e) => {
+    const thumb = e.target.src;
+    let newStyle = styles.filter(style => style.photos[0].thumbnail_url === thumb)[0];
+    updateCurrentStyle(newStyle);
+  };
+
+  const sizeDropdownCallback = (option) => {
+    updateSize(option);
+  };
+
+  const qtyDropdownCallback = (option) => {
+    updateQty(option);
+  }
+
+  const cartClickHandler = (e) => {
+    //edge cases: size not selected or sku not in stock
+    if (!size) {
+      sizeRef.current.click();
+      alert('Please select size.')
+      return;
+    }
+    let currentSku = skus.filter(sku => (sku.size === size))
+    let inStock = currentSku[0].quantity;
+    if(!inStock) {
+      document.getElementById('cartButton').remove();
+      return;
+    }
+    //most requests should fall through to here
+    let body = {
+      sku_id: Object.keys(currentStyle.skus).find(key => currentStyle.skus[key] === currentSku[0]),
+      count: qty
+    }
+    fetch('/cart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    }).then((res) => {
+      if(res.status === (200 || 201)) {
+        alert('successfully added to cart!');
+      } else {
+        console.error('err posting to cart', res);
+      }
+    }).catch((err) => {
+      console.error('err posting to cart', err);
+    });
+  }
+  const reviewScroller = (e) => {
+    e.preventDefault();
+    let elt = document.getElementById('reviews');
+    console.log(elt);
+    elt.scrollIntoView();
+  };
+
 
   return (
     <>
@@ -157,36 +253,65 @@ const Overview = ({ current }) => {
           <Carousel urls={photos}/>
           <Slogan>{current.slogan}</Slogan>
           <Description>{current.description}</Description>
+          <SocialButtonRow>
+            <a href="http://facebook.com"><FaFacebook size="2em" /></a>
+            <a href="http://twitter.com"><FaTwitter size="2em"/></a>
+            <a href="http://pinterest.com"><FaPinterest size="2em"/></a>
+          </SocialButtonRow>
         </Column1>
         <Column2>
         <StarsWrapper>
-          <Stars />
-          <a href="#" style={{color: 'grey'}}>Read all reviews</a>
+          <Stars currentRating={avgRating}/>
+          {(numReviews > 0) && <a href="#" onClick={reviewScroller} style={{color: 'grey'}}>Read all {numReviews} reviews</a> }
         </StarsWrapper>
           <Category>{current.category}</Category>
           <Name>{current.name}</Name>
-          <Price>{'$' + current.default_price}</Price>
+          <Price style={currentStyle.sale_price ? {color: 'red'} : {}} >{'$' + (currentStyle.sale_price || currentStyle.original_price)}</Price>
           <StyleHeader> <h4>STYLE ></h4> SELECTED STYLE</StyleHeader>
           <StyleSelector>
-            {thumbnails.map((nail, i) => (
+            {styles.length && currentStyle.photos && styles.map(style => style.photos[0].thumbnail_url).map((nail, i) => (
             <StyleContainer key={i}>
-              <img src={nail}/>
+              {(nail === currentStyle.photos[0].thumbnail_url) && (<IconContext.Provider value={{ style: { position: 'absolute' } }}>
+                <FaCheck />
+              </IconContext.Provider>)}
+              <img src={nail} onClick={styleClickHandler}/>
             </StyleContainer>
             ))}
           </StyleSelector>
           <ButtonRow1>
-            <Dropdown options={['#']} title="SELECT SIZE" width="60%"/>
-            <Dropdown options={['#']} title="1"/>
+            <Dropdown
+              options={ skus.length && skus.filter(sku => (sku.quantity > 0)).map(sku => sku.size)}
+              title={ skus.length && skus.filter(sku => (sku.quantity > 0)).length ? 'SELECT SIZE' : 'OUT OF STOCK' }
+              width="60%"
+              callback={sizeDropdownCallback}
+              nref={sizeRef}
+            />
+            <Dropdown
+            options={skus.length && skus.filter(sku => (sku.size === size)).map(sku => sku.quantity).reduce((acc, quant) => {
+              for(var x = 1; x < (quant > 15 ? 15 : quant); x++) {
+                acc.push(x);
+              }
+              return acc;
+            }, [])}
+            title="QUANTITY"
+            callback={qtyDropdownCallback}/>
           </ButtonRow1>
           <ButtonRow2>
-            <Button height="4rem" width="70%">ADD TO BAG<FaPlus /></Button>
+            <Button
+              height="4rem"
+              width="70%"
+              onClick={cartClickHandler}
+              id="cartButton"
+              >ADD TO CART<FaPlus />
+            </Button>
             <Button height="4rem" width="3rem"><FaRegHeart/></Button>
           </ButtonRow2>
           <FeatureChecklist>
-            <div><FaCheck /> GMO and Pesticide-free</div>
-            <div><FaCheck /> Where can I find this in the product data?</div>
-            <div><FaCheck /> I have no clue</div>
-            <div><FaCheck /> CSS why</div>
+              {features.map((feature, i) => {
+                return (<div key={i}>
+                  <FaCheck /> {`${feature.feature}`}
+                </div>);
+                  })}
           </FeatureChecklist>
         </Column2>
       </OverviewWrapper>

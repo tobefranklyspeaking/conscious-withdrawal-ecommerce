@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import axios from 'axios';
 
-const Button = styled.button`
-  background-color: Transparent;
-  outline: none;
-  border: none;
-  text-decoration: underline;
-  &:hover.reportButton {
-    color: blue;
-  }
-`;
+// const Button = styled.button`
+//   background-color: Transparent;
+//   outline: none;
+//   border: none;
+//   text-decoration: underline;
+//   &:hover.reportButton {
+//     color: blue;
+//   }
+//   border: 1px solid black;
+// `;
 
 
 const Report = ({path, id}) => {
@@ -35,7 +36,7 @@ const Report = ({path, id}) => {
 
   return (
     <>
-    <Button className="reportButton" onClick={() => (isClicked ? console.log('already clicked') : setIsReported(true))}>Report</Button>
+    <button className="reportButton" onClick={() => (isClicked ? console.log('already clicked') : setIsReported(true))}>{isClicked ? "Reported" : "Report"}</button>
     </>
   )
 

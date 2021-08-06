@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
-  background: transparent;
+  background: white;
   border: 1.5px solid black;
   display: flex;
   height: ${props => props.height || 'inherit'};
