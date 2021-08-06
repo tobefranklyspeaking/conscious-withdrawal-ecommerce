@@ -42,21 +42,28 @@ const SearchButton = styled.div`
   height: 18px;
 `;
 
+const Quest = styled.div`
+  height: auto;
+  max-height: 50vh;
+  overflow-y: scroll;
+  border: hsla(0 0% 0% 1);
+`;
+
 
 const QASearch = ({ current, countQ }) => {
 
-
+  //current is all products
+  const [filteredQuestions, setFiltered] = useState([]);
+  const [selection, setSelection] = useState(null);
 
   const [search, setSearch] = useState('');
 
-  const [filteredQuestions, setFiltered] = useState([]);
-  const [selection, setSelection] = useState(null);
   const [update, setUpdate] = useState(null);
   const [showImg, setShowImg] = useState(false);
   const [source, setSource] = useState('');
 
 
-
+  /* will use to update click functionality */
   const handleClick = async () => {
     // This will allow the user to submit search
     console.log('handleClick clicked')
@@ -66,6 +73,7 @@ const QASearch = ({ current, countQ }) => {
     console.log(current);
     setUpdate(props);
   }
+  /* will use to update click functionality */
 
   // const handleQuestion = (e) => {
   //   Questions(e);
@@ -103,7 +111,7 @@ const QASearch = ({ current, countQ }) => {
           }
         }).map((value, i) => {
           return (
-            <div key={i}>Hello World</div>
+            <Quest key={i}>{value.question_body}</Quest>
           )
         })
       )}
