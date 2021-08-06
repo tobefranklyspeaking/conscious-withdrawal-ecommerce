@@ -72,7 +72,6 @@ const QASearch = ({ current, countQ }) => {
   // }
 
   const onChange = (searchText) => {
-    searchText.prevent.default()
     setSearch(searchText.toLowerCase());
   }
 
