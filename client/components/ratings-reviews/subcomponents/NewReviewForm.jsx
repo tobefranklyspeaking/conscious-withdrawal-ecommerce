@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Stars from '../../shared/Stars.jsx';
+import AddImage from '../AddImg.jsx';
 
 const OverallRatingWrapper = styled.div`
 display: inline-flex;
@@ -86,6 +87,7 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
   const [currentPhotos, setCurrentPhotos] = useState("");
   const [currentName, setCurrentName] = useState("");
   const [currentEmail, setCurrentEmail] = useState("");
+  const [showImg, setShowImg] = useState(false);
 
   useEffect(() => {
     if (charOptions.Size) {
@@ -460,6 +462,8 @@ const NewReviewForm = ({ charOptions, id, onClose }) => {
         <label>
           Enter Photo Url: <br></br>
           <input type='text' name='reviewphoto' />
+          {/* <button onClick={() => setShowImg(true)}>Add Photos</button>
+          <AddImage onClose={() => setShowImg(false)} setPhoto={handlePhotos} showImg={showImg}/> */}
         </label>
       </ReviewPhotos><br></br>
       <ReviewName onChange={handleName}>

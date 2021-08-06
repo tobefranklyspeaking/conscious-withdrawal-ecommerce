@@ -15,6 +15,7 @@ const Modal = styled.div`
   align-items: center;
   justify-content: center;
   border: 1px solid black;
+  z-index: 5;
 `;
 
 const ModalContent = styled.div`
