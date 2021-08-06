@@ -48,19 +48,20 @@ const SideSlideWrapper = styled.div`
   }
 `;
 const Zoomed = styled.div`
-  /*background-image: url(${props => props.url}); */
+  background-image: url(${props => props.url});
   position: absolute;
-  width: 80vh;
-  height: 80vh;
+  border-radius: 50%;
+  top: 70%;
+  width: 40vh;
+  height: 40vh;
   border: 1px solid black;
   z-index: 999;
-  background-color: coral;
 `;
 
 //slide subcomponent - image itself
 const Slide = ({ url, onMouseEnter, onMouseLeave}) => {
   return (
-    <SlideWrapper>
+    <SlideWrapper id="crSlide">
       <img src={url} alt="photo of clothing" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}/>
     </SlideWrapper>);
 };
@@ -79,7 +80,7 @@ const Arrow = ({ direction, clickHandler}) => {
 }
 
 const ZoomedSlide = ({url}) => {
-  return (<Zoomed url={url}/>);
+  return (<Zoomed url={url} id="zoomed"/>);
 };
 
 /************ PRIMARY COMPONENT HERE ************/
@@ -95,6 +96,16 @@ const Carousel = ({ urls, height, thumbnails}) => {
 
   }, [thumbnails]);
 
+  useEffect(() => {
+    if(showZoom) {
+      const elt = document.querySelector("#zoomed");
+      const crSlide = document.querySelector("#crSlide")
+      crSlide.addEventListener("mousemove", (e) => {
+        elt.style.backgroundPositionX = -e.offsetX + "px";
+        elt.style.backgroundPositionY = -e.offsetY + "px";
+      });
+    }
+  }, [showZoom])
 
   //event handlers to switch carousel to next/previous image
   const previousSlide = (e) => {
@@ -112,6 +123,7 @@ const Carousel = ({ urls, height, thumbnails}) => {
   return (
     <>
     <CarouselWrapper height={height}>
+      {showZoom && (<ZoomedSlide url={urls[index]}/>)}
       <ModularCarousel orientation="column" components={modComponents}/>
       <Arrow direction="Left" clickHandler={previousSlide}/>
       <Slide
@@ -121,7 +133,6 @@ const Carousel = ({ urls, height, thumbnails}) => {
       />
       <Arrow direction="Right" clickHandler={nextSlide}/>
     </CarouselWrapper>
-    {/* {showZoom && (<ZoomedSlide />)} */}
     </>
     );
 
