@@ -1,61 +1,53 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Modal = styled.div`
   position: fixed;
-  background-color: rgba(0,0,0,1)
-  box-shadow: 5px, 10px;
+  background-color: hsla(0, 0%, 0%, .4);
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  display: flex;
+  width: 100vw;
+  height: 100vh;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  z-index: 1;
 `;
 
-const ModalContent = styled.div`
-  width: 80vh;
-  height: 70vh;
-  background-color: white;
+const Image = styled.img`
+  display: block;
+  max-height: 70%;
+  max-width: 70%;
+  margin: auto;
+  height: auto;
+  width: auto;
 `;
 
-const ModalHeader = styled.div`
-  padding: 10px;
+const Button = styled.button`
+  cursor: pointer;
+  background: white;
+  height: auto;
+  width: auto;
+  border: 1px solid black;
+  margin-right: 1rem;
+  padding: 1rem;
+  font-size: .7rem;
 `;
 
-const ModalTitle = styled.div`
-  margin: 0;
-`;
+const ImageModal = ({source, show, onClose}) => {
 
-const ModalBody = styled.div`
-  padding: 10px;
-  height: 50vh;
-  border-top: 1px solid #eee;
-  border bottom: 1px solid #eee;
-`;
-
-const ModalFooter = styled.div`
-  padding: 10px;
-`;
-const ImageModal = ({question, show, onClose}) => {
   if (!show) {
     return null;
   }
   return (
     <Modal onClick={onClose}>
-      <ModalContent onClick={e => e.stopPropagation()}>
-        <ModalHeader>
-          <h4 className="modal-title">Add Answer</h4>
-        </ModalHeader>
-        <ModalBody>
-          Image
-        </ModalBody>
-        <ModalFooter className="modal-footer">
-          <button onClick={onClose} className="button">Cancel</button>
-          <button className="submit">Submit</button>
-        </ModalFooter>
-      </ModalContent>
+      <div>
+        {console.log(source, show, onClose)}
+            <Image src={source}/>
+      </div>
     </Modal>
   )
 }
