@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineExpand } from 'react-icons/ai';
 import ModularCarousel from './Modular-Carousel.jsx'
 //component styles
 
@@ -58,6 +58,22 @@ const Zoomed = styled.div`
   z-index: 999;
 `;
 
+const Expand = styled.div`
+  width: 2rem;
+  margin-top: .5rem;
+  position: absolute;
+  left: calc(100% - 2rem);
+  align-self: start;
+  display: grid;
+  place-items: center;
+`;
+
+const Modal = styled.dialog`
+  z-index: 100000;
+  position: fixed;
+  background-color: white;
+`;
+
 //slide subcomponent - image itself
 const Slide = ({ url, onMouseEnter, onMouseLeave}) => {
   return (
@@ -89,6 +105,7 @@ const Carousel = ({ urls, height, thumbnails}) => {
   const [index, setIndex] = useState(0);
   const [modComponents, setModComponents] = useState([]);
   const [showZoom, setShowZoom] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const handler = (e) => {
@@ -123,8 +140,13 @@ const Carousel = ({ urls, height, thumbnails}) => {
   };
 
   return (
-    <>
+    <div>
     <CarouselWrapper height={height}>
+    {showModal && <Modal
+    url={urls[index]}
+    open
+    onClick={() => {setShowModal(false)}}><img src={urls[index]}/></Modal>}
+      <Expand onClick={() => {setShowModal(true)}}><AiOutlineExpand/></Expand>
       {showZoom && (<ZoomedSlide url={urls[index]}/>)}
       <ModularCarousel orientation="column" components={modComponents}/>
       <Arrow direction="Left" clickHandler={previousSlide}/>
@@ -135,7 +157,7 @@ const Carousel = ({ urls, height, thumbnails}) => {
       />
       <Arrow direction="Right" clickHandler={nextSlide}/>
     </CarouselWrapper>
-    </>
+    </div>
     );
 
 
