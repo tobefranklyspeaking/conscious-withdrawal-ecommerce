@@ -1,8 +1,16 @@
 
 [Overview](#shopoli)
+
+
 [Create Shopoli from Source Code](#creating-shopoli-app-from-source-code)
+
+
 [Usage](#usage)
+
+
 [Contribute](#contributing)
+
+
 
 
 
