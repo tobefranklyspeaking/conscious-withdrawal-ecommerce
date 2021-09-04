@@ -6,7 +6,7 @@
 
 
 
-# <p align="center"> Shopoli </p>  <p align="center"><img src="https://ibb.co/gyVfpMw"  width="100"  height="auto"></p>
+# <p align="center"> Shopoli </p>  <p align="center"><img src="https://i.imgur.com/6uNfTbL.png"  width="100"  height="auto"></p>
 
 
 An online retail shopping hub.
