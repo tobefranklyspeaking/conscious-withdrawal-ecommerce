@@ -70,3 +70,6 @@ Contact Frank by navigating to https://github.com/tobefranklyspeaking
 ## License
 
 unlicensed
+
+Contributors:
+Frank Gauss - tobefranklyspeaking
