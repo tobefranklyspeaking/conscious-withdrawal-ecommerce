@@ -73,6 +73,9 @@ unlicensed
 
 Contributors:
 Frank Gauss
+
 Sean McGovern
+
 Harshita Dandu
-Clendon Rapau
+
+Clendon DuRapau
