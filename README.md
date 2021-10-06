@@ -72,4 +72,7 @@ Contact Frank by navigating to https://github.com/tobefranklyspeaking
 unlicensed
 
 Contributors:
-Frank Gauss - tobefranklyspeaking
+Frank Gauss
+Sean McGovern
+Harshita Dandu
+Clendon Rapau
