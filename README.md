@@ -61,7 +61,7 @@ npm run build
 - [ ] Update tests as appropriate.
 
 ---
-For major changes, please open an issue first to discuss what you would like to change.
+For major changes, please open an issue to discuss what you would like to change.
 
 Contact Frank by navigating to https://github.com/tobefranklyspeaking
 
